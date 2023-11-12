@@ -20,7 +20,7 @@ name = args.name
 
 # read in pd file
 dse = setup_pb2.DSE()
-with open('./'+name+'/'+'DSE.pb', "rb") as file:
+with open('./'+name+'/'+'dse.pb', "rb") as file:
     dse.ParseFromString(file.read())
 
 
@@ -35,12 +35,11 @@ for kernel in dse.dataflow_graph.kernels:
     dict[kernel.id] = pydot_node
     graph.add_node(pydot_node)
 
-for buffer in dse.dataflow_graph.buffers:    
-    label = text_format.MessageToString(buffer)
-    pydot_edge = pydot.Edge(dict[buffer.startIdx], dict[buffer.endIdx], label=label)
+for buffer in dse.dataflow_graph.connections:    
+    pydot_edge = pydot.Edge(dict[buffer.startIdx], dict[buffer.endIdx])
     graph.add_edge(pydot_edge)
 
 
-graph.write_png('./'+name+'/'+name+'.png') 
+graph.write_png('./'+name+'/'+'dataflow_graph.png') 
 
 

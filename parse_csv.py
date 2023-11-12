@@ -7,7 +7,7 @@ from google.protobuf import text_format
 
 # user pass in
 parser = argparse.ArgumentParser()
-parser.add_argument('--name', type=str, help='pls pass in the folder name under the current directory (named after the DL model), in that folder, there should be five csv files: 1. csv file for kernels called kernels.csv; 2. csv file for buffers called buffers.csv; 3. csv file for the architctural parameters of a single accelerator called accelerator.csv; 4. csv file for the entire multi-chip system topology called system.csv; 5. csv file for off-chip memory and network unit cost called cost.csv.', required=True)
+parser.add_argument('--name', type=str, help='pls pass in the folder name under the current directory (named after the DL model), in that folder, there should be five csv files: 1. csv file for kernels called kernels.csv; 2. csv file for connections called connections.csv; 3. csv file for the architctural parameters of a single accelerator called accelerator.csv; 4. csv file for the entire multi-chip system topology called system.csv; 5. csv file for off-chip memory and network unit cost called cost.csv.', required=True)
 args = parser.parse_args()
 name = args.name
 
@@ -31,23 +31,20 @@ with open('./'+name+'/kernels.csv', mode ='r') as file:
         kernel.K = int(fields[4])
         kernel.N = int(fields[5])
         kernel.type = int(fields[6])   
-        
-# read buffers
-with open('./'+name+'/buffers.csv', mode ='r') as file:
+        kernel.weight_tensor_size = int(fields[7])   
+        kernel.output_tensor_size = int(fields[8])
+
+# read connections
+with open('./'+name+'/connections.csv', mode ='r') as file:
     lines = list(csv.reader(file))
 
     for i in range(1, len(lines)):
-        buffer = dse.dataflow_graph.buffers.add()
+        connection = dse.dataflow_graph.connections.add()
         
         fields = lines[i][0].split(';')
         
-        buffer.name = str(fields[0])
-        buffer.id = int(fields[1])
-        buffer.tensor_size = int(fields[2])
-        buffer.startIdx = int(fields[3])
-        buffer.endIdx = int(fields[4])
-        buffer.type = int(fields[5])       
-
+        connection.startIdx = int(fields[0])
+        connection.endIdx = int(fields[1])
 
         
 
@@ -103,11 +100,11 @@ with open('./'+name+'/cost.csv', mode ='r') as file:
 
 
 # write to binary
-with open('./'+name+'/'+'DSE.pb', "wb") as file:
+with open('./'+name+'/'+'dse.pb', "wb") as file:
     file.write(dse.SerializeToString())
 
 
 # write to text file
-with open('./'+name+'/'+'DSE.txt', "w") as file:
+with open('./'+name+'/'+'dse.txt', "w") as file:
     text_format.PrintMessage(dse, file)
         

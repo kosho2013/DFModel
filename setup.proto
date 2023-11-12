@@ -8,6 +8,8 @@ message Kernel {
 	int32 K = 5;
 	int32 N = 6;
 	KernelType type = 7;
+	int32 weight_tensor_size = 8;
+	int32 output_tensor_size = 9;
 	
 	enum KernelType {
 		SYSTOLIC = 0;
@@ -15,23 +17,14 @@ message Kernel {
 	}
 }
 
-message Buffer {
-	string name = 1; 
-	int32 id = 2;
-	int32 tensor_size = 3;
-	int32 startIdx = 4;
-	int32 endIdx = 5;
-	BufferType type = 6;
-	
-	enum BufferType {
-		WEIGHT = 0;
-		INTERMEDIATE = 1;
-	}
+message Connection {
+	int32 startIdx = 1;
+	int32 endIdx = 2;
 }
 
 message Dataflow_Graph {
 	repeated Kernel kernels = 1;
-	repeated Buffer buffers = 2;
+	repeated Connection connections = 2;
 }
 
 message Accelerator {
