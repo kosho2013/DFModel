@@ -1,0 +1,76 @@
+syntax = "proto3"; 
+
+message Kernel {
+	string name = 1; 
+	int32 id = 2;
+	int32 outer = 3;
+	int32 M = 4;
+	int32 K = 5;
+	int32 N = 6;
+	KernelType type = 7;
+	
+	enum KernelType {
+		SYSTOLIC = 0;
+		SIMD = 1;
+	}
+}
+
+message Buffer {
+	string name = 1; 
+	int32 id = 2;
+	int32 tensor_size = 3;
+	int32 startIdx = 4;
+	int32 endIdx = 5;
+	BufferType type = 6;
+	
+	enum BufferType {
+		WEIGHT = 0;
+		INTERMEDIATE = 1;
+	}
+}
+
+message Dataflow_Graph {
+	repeated Kernel kernels = 1;
+	repeated Buffer buffers = 2;
+}
+
+message Accelerator {
+	string name = 1;
+	int32 core = 2;
+	int32 systolic_width = 3;
+	int32 systolic_height = 4;
+	int32 sram_cap = 5;
+	float freq = 6;
+	float dram_bw = 7;
+}
+
+message System {
+    string name = 1; 
+    Topology topo = 2;
+    int32 num_chip = 3;
+    int32 x = 4;
+    int32 y = 5;
+    int32 z = 6;
+	Accelerator accelerator = 7;
+
+	enum Topology {
+		MESH_2D = 0;
+		TORUS_2D = 1;
+		CUBE_3D = 2;
+		TORUS_3D = 3;
+		DRAGONFLY = 4;
+		DGX = 5;
+	}
+}
+
+message Cost {
+	float link_unit_price = 1;
+    float switch_unit_price = 2;
+    float dram_unit_price = 3;
+}
+
+message DSE {
+	Dataflow_Graph dataflow_graph = 1;
+	System system = 2;
+	Cost cost = 3;
+}
