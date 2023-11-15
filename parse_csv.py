@@ -1,5 +1,4 @@
 import setup_pb2
-import sys
 import csv
 import argparse
 from google.protobuf import text_format
@@ -31,8 +30,17 @@ with open('./'+name+'/kernels.csv', mode ='r') as file:
         kernel.K = int(fields[4])
         kernel.N = int(fields[5])
         kernel.type = int(fields[6])   
-        kernel.weight_tensor_size = int(fields[7])   
-        kernel.output_tensor_size = int(fields[8])
+        kernel.input_tensor_1_size = float(fields[7])   
+        kernel.input_tensor_2_size = float(fields[8])
+        kernel.weight_tensor_size = float(fields[9])   
+        kernel.output_tensor_size = float(fields[10])
+        kernel.input_tensor_1_id = int(fields[11])
+        kernel.input_tensor_2_id = int(fields[12])
+
+    
+
+
+                
 
 # read connections
 with open('./'+name+'/connections.csv', mode ='r') as file:
@@ -59,7 +67,7 @@ with open('./'+name+'/accelerator.csv', mode ='r') as file:
     dse.system.accelerator.core = int(fields[1])
     dse.system.accelerator.systolic_width = int(fields[2])
     dse.system.accelerator.systolic_height = int(fields[3])  
-    dse.system.accelerator.sram_cap = int(fields[4])  
+    dse.system.accelerator.sram_cap = float(fields[4])  
     dse.system.accelerator.freq = float(fields[5])  
     dse.system.accelerator.dram_bw = float(fields[6])  
 
@@ -73,16 +81,9 @@ with open('./'+name+'/system.csv', mode ='r') as file:
     dse.system.name = str(fields[0])
     dse.system.topo = int(fields[1])
     dse.system.num_chip = int(fields[2])
-    dse.system.x = int(fields[3])  
-    dse.system.y = int(fields[4])  
-    dse.system.z = int(fields[5]) 
-
-    if dse.system.topo == 0 or dse.system.topo == 1 or dse.system.topo == 4 or dse.system.topo == 5:
-        if dse.system.x * dse.system.y != dse.system.num_chip:
-            raise Exception('Topology set up incorrectly!')
-    else:
-        if dse.system.x * dse.system.y * dse.system.z != dse.system.num_chip:
-            raise Exception('Topology set up incorrectly!')
+    dse.system.link_bw_x = float(fields[3])  
+    dse.system.link_bw_y = float(fields[4])  
+    dse.system.link_bw_z = float(fields[5])
 
 
 # read cost
@@ -107,4 +108,13 @@ with open('./'+name+'/'+'dse.pb', "wb") as file:
 # write to text file
 with open('./'+name+'/'+'dse.txt', "w") as file:
     text_format.PrintMessage(dse, file)
-        
+
+
+
+
+
+
+# read in pd file
+dse = setup_pb2.DSE()
+with open('./'+name+'/'+'dse.pb', "rb") as file:
+    dse.ParseFromString(file.read())

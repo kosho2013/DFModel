@@ -8,18 +8,56 @@ message Kernel {
 	int32 K = 5;
 	int32 N = 6;
 	KernelType type = 7;
-	int32 weight_tensor_size = 8;
-	int32 output_tensor_size = 9;
+	float input_tensor_1_size = 8; // always map to indices outer, K, N
+	float input_tensor_2_size = 9; // always map to indices outer, M, K if weight is not present
+	float weight_tensor_size = 10; // always map to indices outer, M, K
+	float output_tensor_size = 11; // always map to indices outer, M, N
+
+	int32 input_tensor_1_id = 12;
+	int32 input_tensor_2_id = 13;
+
+	Sharding sharding = 14;
+	Communication_Type communication_type = 15;
+	float communication_size = 16;
 	
+
+
 	enum KernelType {
-		SYSTOLIC = 0;
-		SIMD = 1;
+		NO_Type = 0;
+		SYSTOLIC = 1;
+		SIMD = 2;
 	}
+
+	enum Communication_Type {
+		NO_COMMUNICATION = 0;
+		ALL_REDUCE = 1;
+		ALL_TO_ALL = 2;
+		ALL_GATHER = 3;
+	}
+
+	enum Sharding {
+		NO_DIM = 0;
+		OUTER_DIM = 1;
+		M_DIM = 2;
+		K_DIM = 3;
+		N_DIM = 4;
+	}
+
 }
 
 message Connection {
 	int32 startIdx = 1;
 	int32 endIdx = 2;
+
+	Communication_Type communication_type = 4;
+	float communication_size = 5;
+
+	enum Communication_Type {
+		NO_COMMUNICATION = 0;
+		ALL_REDUCE = 1;
+		ALL_TO_ALL = 2;
+		ALL_GATHER = 3;
+	}
 }
 
 message Dataflow_Graph {
@@ -32,7 +70,7 @@ message Accelerator {
 	int32 core = 2;
 	int32 systolic_width = 3;
 	int32 systolic_height = 4;
-	int32 sram_cap = 5;
+	float sram_cap = 5;
 	float freq = 6;
 	float dram_bw = 7;
 }
@@ -41,18 +79,19 @@ message System {
     string name = 1; 
     Topology topo = 2;
     int32 num_chip = 3;
-    int32 x = 4;
-    int32 y = 5;
-    int32 z = 6;
+	float link_bw_x = 4;
+	float link_bw_y = 5;
+	float link_bw_z = 6;
 	Accelerator accelerator = 7;
 
 	enum Topology {
-		MESH_2D = 0;
-		TORUS_2D = 1;
-		CUBE_3D = 2;
-		TORUS_3D = 3;
-		DRAGONFLY = 4;
-		DGX = 5;
+		NO_TOPOLOGY = 0;
+		MESH_2D = 1;
+		TORUS_2D = 2;
+		CUBE_3D = 3;
+		TORUS_3D = 4;
+		DRAGONFLY = 5;
+		DGX = 6;
 	}
 }
 

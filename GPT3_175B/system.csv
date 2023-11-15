@@ -1,2 +1,2 @@
-name;topo;num_chip;x;y;z
-64_Chip_SN10_RDU_TORUS_2D;1;64;8;8;-1
+name;topo;num_chip;link_bw_x;link_bw_y;link_bw_z;;;
+8_Chip_SN10_RDU_TORUS_2D;4;8;25;25;25;;;

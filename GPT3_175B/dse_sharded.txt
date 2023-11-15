@@ -13,6 +13,7 @@ dataflow_graph {
     output_tensor_size: 50331650.0
     input_tensor_1_id: -1
     input_tensor_2_id: -1
+    sharding: OUTER_DIM
   }
   kernels {
     name: "K"
@@ -28,6 +29,7 @@ dataflow_graph {
     output_tensor_size: 50331650.0
     input_tensor_1_id: -1
     input_tensor_2_id: -1
+    sharding: OUTER_DIM
   }
   kernels {
     name: "V"
@@ -43,6 +45,7 @@ dataflow_graph {
     output_tensor_size: 50331650.0
     input_tensor_1_id: -1
     input_tensor_2_id: -1
+    sharding: OUTER_DIM
   }
   kernels {
     name: "MHA_GEMM_1"
@@ -58,6 +61,7 @@ dataflow_graph {
     output_tensor_size: 805306400.0
     input_tensor_1_id: 1
     input_tensor_2_id: 2
+    sharding: OUTER_DIM
   }
   kernels {
     name: "SOFTMAX"
@@ -73,6 +77,7 @@ dataflow_graph {
     output_tensor_size: 805306400.0
     input_tensor_1_id: 4
     input_tensor_2_id: -1
+    sharding: OUTER_DIM
   }
   kernels {
     name: "MHA_GEMM_2"
@@ -88,6 +93,7 @@ dataflow_graph {
     output_tensor_size: 50331650.0
     input_tensor_1_id: 3
     input_tensor_2_id: 5
+    sharding: OUTER_DIM
   }
   kernels {
     name: "PROJ_GEMM"
@@ -103,6 +109,9 @@ dataflow_graph {
     output_tensor_size: 50331650.0
     input_tensor_1_id: 6
     input_tensor_2_id: -1
+    sharding: K_DIM
+    communication_type: ALL_REDUCE
+    communication_size: 50331650.0
   }
   kernels {
     name: "FFN0"
@@ -118,6 +127,7 @@ dataflow_graph {
     output_tensor_size: 201326600.0
     input_tensor_1_id: 7
     input_tensor_2_id: -1
+    sharding: M_DIM
   }
   kernels {
     name: "FFN1"
@@ -133,6 +143,9 @@ dataflow_graph {
     output_tensor_size: 50331650.0
     input_tensor_1_id: 8
     input_tensor_2_id: -1
+    sharding: K_DIM
+    communication_type: ALL_REDUCE
+    communication_size: 50331650.0
   }
   connections {
     startIdx: 1
@@ -161,6 +174,7 @@ dataflow_graph {
   connections {
     startIdx: 7
     endIdx: 8
+    communication_size: -0.0
   }
   connections {
     startIdx: 8

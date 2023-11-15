@@ -1,13 +1,8 @@
 import setup_pb2
-import sys
-import csv
 import argparse
 from google.protobuf import text_format
-import yaml
-import pandas as pd
 import pydot
-import pprint
-import numpy as np
+
 
 # user pass in
 parser = argparse.ArgumentParser()
@@ -35,8 +30,9 @@ for kernel in dse.dataflow_graph.kernels:
     dict[kernel.id] = pydot_node
     graph.add_node(pydot_node)
 
-for buffer in dse.dataflow_graph.connections:    
-    pydot_edge = pydot.Edge(dict[buffer.startIdx], dict[buffer.endIdx])
+for connection in dse.dataflow_graph.connections:
+    label = text_format.MessageToString(connection)
+    pydot_edge = pydot.Edge(dict[connection.startIdx], dict[connection.endIdx], label=label)
     graph.add_edge(pydot_edge)
 
 
