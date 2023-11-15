@@ -6,7 +6,7 @@ from google.protobuf import text_format
 
 # user pass in
 parser = argparse.ArgumentParser()
-parser.add_argument('--name', type=str, help='pls pass in the folder name under the current directory (named after the DL model), in that folder, there should be five csv files: 1. csv file for kernels called kernels.csv; 2. csv file for connections called connections.csv; 3. csv file for the architctural parameters of a single accelerator called accelerator.csv; 4. csv file for the entire multi-chip system topology called system.csv; 5. csv file for off-chip memory and network unit cost called cost.csv.', required=True)
+parser.add_argument('--name', type=str, help='pls pass in the folder name under the current directory (named after the DL model), in that folder, there should be five csv files: 1. csv file for kernels called kernels.csv; 2. csv file for connections called connections.csv; 3. csv file for the architctural parameters of a single accelerator called accelerator.csv; 4. csv file for the entire multi-chip system topology called topology.csv; 5. csv file for off-chip memory and network unit cost called cost.csv.', required=True)
 args = parser.parse_args()
 name = args.name
 
@@ -73,7 +73,7 @@ with open('./'+name+'/accelerator.csv', mode ='r') as file:
 
 
 # read system
-with open('./'+name+'/system.csv', mode ='r') as file:
+with open('./'+name+'/topology.csv', mode ='r') as file:
     lines = list(csv.reader(file))
     
     fields = lines[1][0].split(';')
