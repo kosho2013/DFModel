@@ -3,6 +3,5 @@ This repo contains DFModel to model DL performance on modern accelerators.
 How to use:
 1. Set up your csv file for in a folder in the current directory (name the folder after the DL model name).
 2. Run "protoc --python_out=. setup.proto" to generate protobuf file (setup_pb2.py).
-3. Run "python parse_csv.py --name=your_model_name" to generate protobuf binary (dse.pb) and text file in that folder (dse.txt).
-4. Run "python visualize_dataflow_graph.py --name=your_model_name" to generate pydot graph file in that folder (dataflow_graph.png).
-5. Run "python inter_chip.py --name=your_model_name" to generate sharded pydot graph in that folder (dataflow_graph_sharded.png) as well as bookkeeping pb files (dse_sharded.pb and dse_sharded.txt).
+3. Run "python parse_csv.py --name=your_model_name" to generate protobuf binary (dse.pb), text file in that folder (dse.txt), and a pydot dataflow graph for visualization (dataflow_graph.png).
+4. Run "python inter_chip.py --name=your_model_name" to generate sharded pydot graph in that folder (dataflow_graph_sharded.png) as well as bookkeeping pb files (dse_sharded.pb and dse_sharded.txt).
