@@ -17,7 +17,7 @@ name = args.name
 
 # read in pd file
 dse = setup_pb2.DSE()
-with open('./'+name+'/'+'dse.pb', "rb") as file:
+with open('./'+name+'/'+'dse_sharded.pb', "rb") as file:
     dse.ParseFromString(file.read())
     
     
@@ -37,17 +37,17 @@ for kernel in dse.dataflow_graph.kernels:
 
 output_tensor_size = []
 for kernel in dse.dataflow_graph.kernels:
-    output_tensor_size.append(kernel.batch_gemm.output_tensor_size)
+    output_tensor_size.append(kernel.output_tensor_size)
 
 
 kernel_type = []
 for kernel in dse.dataflow_graph.kernels:
-    kernel_type.append(kernel.batch_gemm.type)
+    kernel_type.append(kernel.type)
 
 
 outer = []
 for kernel in dse.dataflow_graph.kernels:
-    outer.append(kernel.batch_gemm.outer)
+    outer.append(kernel.outer)
 
 
 startIdx = []
@@ -75,8 +75,8 @@ num_edge = len(edge_dict)
 input_tensor_1_id = []
 input_tensor_2_id = []
 for kernel in dse.dataflow_graph.kernels:
-    input_tensor_1_id.append(kernel.batch_gemm.input_tensor_1_id)
-    input_tensor_2_id.append(kernel.batch_gemm.input_tensor_2_id)
+    input_tensor_1_id.append(kernel.input_tensor_1_id)
+    input_tensor_2_id.append(kernel.input_tensor_2_id)
 
 
 
@@ -89,7 +89,11 @@ print(edge_dict)
 print(num_edge)
 
 
-
+model = gp.Model()
+model.params.NonConvex = 2
+model.Params.Threads = 10
+model.params.MIPGap = 0.1    # 10%
+model.params.TimeLimit = 300  # 5 minutes
 
 
 class Communication(Enum):
@@ -99,12 +103,18 @@ class Communication(Enum):
     ALL_GATHER = 3
 
 
-model = gp.Model()
-model.params.NonConvex = 2
-model.Params.Threads = 10
-model.params.MIPGap = 0.1    # 10%
-model.params.TimeLimit = 300  # 5 minutes
 
+
+
+x = model.addVar(name='x', vtype=gp.GRB.INTEGER, lb=0) # TP, xy for 3D topology
+y = model.addVar(name='y', vtype=gp.GRB.INTEGER, lb=0) # PP
+
+if dse.system.topo == 3 or dse.system.topo == 4:
+    model.addConstr(x >= 4)
+else:
+    model.addConstr(x >= 2)
+model.addConstr(y >= 2)
+model.addConstr(dse.system.num_chip == x * y)
 
 sharding = model.addMVar((num_kernel, 4), name='sharding', vtype=gp.GRB.BINARY)
 communication_type = model.addMVar((num_kernel), name='communication_type', vtype=gp.GRB.INTEGER, lb=Communication.NO_COMMUNICATION.value, ub=Communication.ALL_GATHER.value)
@@ -136,49 +146,51 @@ for i in range(num_kernel):
         model.addConstr((sharding[i, 2] == 0) >> (communication_size[i] == 0))
 
 
-# RR, RS, SR
-output_tensor = model.addMVar((num_kernel, 3), name='output_tensor', vtype=gp.GRB.BINARY) # (outer,M),N
+# SRR, RSR, RRS, RRR
+output_tensor = model.addMVar((num_kernel, 4), name='output_tensor', vtype=gp.GRB.BINARY) # outer,M,N
 for i in range(num_kernel):
-    model.addConstr(np.ones((3)) @ output_tensor[i, :] == 1)
+    model.addConstr(np.ones((4)) @ output_tensor[i, :] == 1)
 
-    model.addConstr((sharding[i, 0] == 1) >> (output_tensor[i, 2] == 1)) # shard outer
-    model.addConstr((sharding[i, 1] == 1) >> (output_tensor[i, 2] == 1)) # shard M
-    model.addConstr((sharding[i, 2] == 1) >> (output_tensor[i, 0] == 1)) # shard K
-    model.addConstr((sharding[i, 3] == 1) >> (output_tensor[i, 1] == 1)) # shard N
+    model.addConstr((sharding[i, 0] == 1) >> (output_tensor[i, 0] == 1)) # shard outer
+    model.addConstr((sharding[i, 1] == 1) >> (output_tensor[i, 1] == 1)) # shard M
+    model.addConstr((sharding[i, 2] == 1) >> (output_tensor[i, 3] == 1)) # shard K
+    model.addConstr((sharding[i, 3] == 1) >> (output_tensor[i, 2] == 1)) # shard N
 
 
-# RR, RS, SR
-input_tensor_1 = model.addMVar((num_kernel, 3), name='input_tensor_1', vtype=gp.GRB.BINARY) # outer,K,N
+# SRR, RSR, RRS, RRR
+input_tensor_1 = model.addMVar((num_kernel, 4), name='input_tensor_1', vtype=gp.GRB.BINARY) # outer,K,N
 for i in range(num_kernel):
-    model.addConstr(np.ones((3)) @ input_tensor_1[i, :] == 1)
+    model.addConstr(np.ones((4)) @ input_tensor_1[i, :] == 1)
 
-    model.addConstr((sharding[i, 0] == 1) >> (input_tensor_1[i, 2] == 1)) # shard outer
-    model.addConstr((sharding[i, 1] == 1) >> (input_tensor_1[i, 0] == 1)) # shard M
-    model.addConstr((sharding[i, 2] == 1) >> (input_tensor_1[i, 2] == 1)) # shard K
-    model.addConstr((sharding[i, 3] == 1) >> (input_tensor_1[i, 1] == 1)) # shard N
+    model.addConstr((sharding[i, 0] == 1) >> (input_tensor_1[i, 0] == 1)) # shard outer
+    model.addConstr((sharding[i, 1] == 1) >> (input_tensor_1[i, 3] == 1)) # shard M
+    model.addConstr((sharding[i, 2] == 1) >> (input_tensor_1[i, 1] == 1)) # shard K
+    model.addConstr((sharding[i, 3] == 1) >> (input_tensor_1[i, 2] == 1)) # shard N
 
 
 
-# RR, RS, SR
-input_tensor_2 = model.addMVar((num_kernel, 3), name='input_tensor_2', vtype=gp.GRB.BINARY) # outer,M,K
+# SRR, RSR, RRS, RRR
+input_tensor_2 = model.addMVar((num_kernel, 4), name='input_tensor_2', vtype=gp.GRB.BINARY) # outer,M,K
 for i in range(num_kernel):
-    model.addConstr(np.ones((3)) @ input_tensor_2[i, :] == 1)
+    model.addConstr(np.ones((4)) @ input_tensor_2[i, :] == 1)
 
-    model.addConstr((sharding[i, 0] == 1) >> (input_tensor_2[i, 2] == 1)) # shard outer
-    model.addConstr((sharding[i, 1] == 1) >> (input_tensor_2[i, 2] == 1)) # shard M
-    model.addConstr((sharding[i, 2] == 1) >> (input_tensor_2[i, 1] == 1)) # shard K
-    model.addConstr((sharding[i, 3] == 1) >> (input_tensor_2[i, 0] == 1)) # shard N
-
-
+    model.addConstr((sharding[i, 0] == 1) >> (input_tensor_2[i, 0] == 1)) # shard outer
+    model.addConstr((sharding[i, 1] == 1) >> (input_tensor_2[i, 1] == 1)) # shard M
+    model.addConstr((sharding[i, 2] == 1) >> (input_tensor_2[i, 2] == 1)) # shard K
+    model.addConstr((sharding[i, 3] == 1) >> (input_tensor_2[i, 3] == 1)) # shard N
 
 
-matrix_commu_type = [[0, 0, 0],
-          [Communication.ALL_GATHER.value, 0, Communication.ALL_TO_ALL.value], 
-          [Communication.ALL_GATHER.value, Communication.ALL_TO_ALL.value, 0]];
 
-matrix_commu_size = [[0, 0, 0],
-          [1, 0, 1], 
-          [1, 1, 0]];
+
+matrix_commu_type = [[0, 0, Communication.ALL_TO_ALL.value, Communication.ALL_GATHER.value],
+          [Communication.ALL_TO_ALL.value, 0, Communication.ALL_TO_ALL.value, Communication.ALL_GATHER.value], 
+          [Communication.ALL_TO_ALL.value, Communication.ALL_TO_ALL.value, 0, Communication.ALL_GATHER.value], 
+          [0, 0, 0, 0]];
+
+matrix_commu_size = [[0, 0, 1, 1],
+          [1, 0, 1, 1], 
+          [1, 1, 0, 1], 
+          [0, 0, 0, 0]];
 
 
 matrix_commu_type = np.array(matrix_commu_type)
@@ -237,20 +249,22 @@ for v in model.getVars():
 
 
 
+
+
 # update kernels
 i = 0
 for kernel in dse.dataflow_graph.kernels:
     if sharding[i*4+0] == 1:
-        kernel.batch_gemm.sharding = 1
+        kernel.sharding = 1
     elif sharding[i*4+1] == 1:
-        kernel.batch_gemm.sharding = 2
+        kernel.sharding = 2
     elif sharding[i*4+2] == 1:
-        kernel.batch_gemm.sharding = 3
+        kernel.sharding = 3
     else:
-        kernel.batch_gemm.sharding = 4
+        kernel.sharding = 4
     
-    kernel.batch_gemm.communication_size = float(communication_size[i])
-    kernel.batch_gemm.communication_type = int(communication_type[i])
+    kernel.communication_size = float(communication_size[i])
+    kernel.communication_type = int(communication_type[i])
     i += 1
 
 

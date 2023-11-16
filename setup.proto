@@ -3,24 +3,30 @@ syntax = "proto3";
 message Kernel {
 	string name = 1; 
 	int32 id = 2;
-	int32 outer = 3;
-	int32 M = 4;
-	int32 K = 5;
-	int32 N = 6;
-	KernelType type = 7;
-	float input_tensor_1_size = 8; // always map to indices outer, K, N
-	float input_tensor_2_size = 9; // always map to indices outer, M, K if weight is not present
-	float weight_tensor_size = 10; // always map to indices outer, M, K
-	float output_tensor_size = 11; // always map to indices outer, M, N
-
-	int32 input_tensor_1_id = 12;
-	int32 input_tensor_2_id = 13;
-
-	Sharding sharding = 14;
-	Communication_Type communication_type = 15;
-	float communication_size = 16;
 	
+	oneof kernel_variant {
+		Batch_GEMM batch_gemm = 3;
+		GEMM gemm = 4;
+	}
+}
 
+message Batch_GEMM {
+	int32 outer = 1;
+	int32 M = 2;
+	int32 K = 3;
+	int32 N = 4;
+	KernelType type = 5;
+	float input_tensor_1_size = 6; // always map to indices outer, K, N
+	float input_tensor_2_size = 7; // always map to indices outer, M, K if weight is not present
+	float weight_tensor_size = 8; // always map to indices outer, M, K
+	float output_tensor_size = 9; // always map to indices outer, M, N
+
+	int32 input_tensor_1_id = 10;
+	int32 input_tensor_2_id = 11;
+
+	Sharding sharding = 12;
+	Communication_Type communication_type = 13;
+	float communication_size = 14;
 
 	enum KernelType {
 		NO_Type = 0;
@@ -42,8 +48,48 @@ message Kernel {
 		K_DIM = 3;
 		N_DIM = 4;
 	}
-
 }
+
+
+message GEMM {
+	int32 M = 2;
+	int32 K = 3;
+	int32 N = 4;
+	KernelType type = 5;
+	float input_tensor_1_size = 6; // always map to indices K, N
+	float input_tensor_2_size = 7; // always map to indices M, K if weight is not present
+	float weight_tensor_size = 8; // always map to indices M, K
+	float output_tensor_size = 9; // always map to indices M, N
+
+	int32 input_tensor_1_id = 10;
+	int32 input_tensor_2_id = 11;
+
+	Sharding sharding = 12;
+	Communication_Type communication_type = 13;
+	float communication_size = 14;
+
+	enum KernelType {
+		NO_Type = 0;
+		SYSTOLIC = 1;
+		SIMD = 2;
+	}
+
+	enum Communication_Type {
+		NO_COMMUNICATION = 0;
+		ALL_REDUCE = 1;
+		ALL_TO_ALL = 2;
+		ALL_GATHER = 3;
+	}
+
+	enum Sharding {
+		NO_DIM = 0;
+		M_DIM = 2;
+		K_DIM = 3;
+		N_DIM = 4;
+	}
+}
+
+
 
 message Connection {
 	int32 startIdx = 1;

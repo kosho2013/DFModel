@@ -2,150 +2,169 @@ dataflow_graph {
   kernels {
     name: "Q"
     id: 1
-    outer: 96
-    M: 128
-    K: 12288
-    N: 2048
-    type: SYSTOLIC
-    input_tensor_1_size: 4831838000.0
-    input_tensor_2_size: -1.0
-    weight_tensor_size: 301989900.0
-    output_tensor_size: 50331650.0
-    input_tensor_1_id: -1
-    input_tensor_2_id: -1
-    sharding: OUTER_DIM
+    batch_gemm {
+      outer: 96
+      M: 128
+      K: 12288
+      N: 2048
+      type: SYSTOLIC
+      input_tensor_1_size: 4831838000.0
+      input_tensor_2_size: -1.0
+      weight_tensor_size: 301989900.0
+      output_tensor_size: 50331650.0
+      input_tensor_1_id: -1
+      input_tensor_2_id: -1
+      sharding: OUTER_DIM
+    }
   }
   kernels {
     name: "K"
     id: 2
-    outer: 96
-    M: 128
-    K: 12288
-    N: 2048
-    type: SYSTOLIC
-    input_tensor_1_size: 4831838000.0
-    input_tensor_2_size: -1.0
-    weight_tensor_size: 301989900.0
-    output_tensor_size: 50331650.0
-    input_tensor_1_id: -1
-    input_tensor_2_id: -1
-    sharding: OUTER_DIM
+    batch_gemm {
+      outer: 96
+      M: 128
+      K: 12288
+      N: 2048
+      type: SYSTOLIC
+      input_tensor_1_size: 4831838000.0
+      input_tensor_2_size: -1.0
+      weight_tensor_size: 301989900.0
+      output_tensor_size: 50331650.0
+      input_tensor_1_id: -1
+      input_tensor_2_id: -1
+      sharding: OUTER_DIM
+    }
   }
   kernels {
     name: "V"
     id: 3
-    outer: 96
-    M: 128
-    K: 12288
-    N: 2048
-    type: SYSTOLIC
-    input_tensor_1_size: 4831838000.0
-    input_tensor_2_size: -1.0
-    weight_tensor_size: 301989900.0
-    output_tensor_size: 50331650.0
-    input_tensor_1_id: -1
-    input_tensor_2_id: -1
-    sharding: OUTER_DIM
+    batch_gemm {
+      outer: 96
+      M: 128
+      K: 12288
+      N: 2048
+      type: SYSTOLIC
+      input_tensor_1_size: 4831838000.0
+      input_tensor_2_size: -1.0
+      weight_tensor_size: 301989900.0
+      output_tensor_size: 50331650.0
+      input_tensor_1_id: -1
+      input_tensor_2_id: -1
+      sharding: OUTER_DIM
+    }
   }
   kernels {
     name: "MHA_GEMM_1"
     id: 4
-    outer: 96
-    M: 2048
-    K: 128
-    N: 2048
-    type: SYSTOLIC
-    input_tensor_1_size: 50331650.0
-    input_tensor_2_size: 50331650.0
-    weight_tensor_size: -1.0
-    output_tensor_size: 805306400.0
-    input_tensor_1_id: 1
-    input_tensor_2_id: 2
-    sharding: OUTER_DIM
+    batch_gemm {
+      outer: 96
+      M: 2048
+      K: 128
+      N: 2048
+      type: SYSTOLIC
+      input_tensor_1_size: 50331650.0
+      input_tensor_2_size: 50331650.0
+      weight_tensor_size: -1.0
+      output_tensor_size: 805306400.0
+      input_tensor_1_id: 1
+      input_tensor_2_id: 2
+      sharding: OUTER_DIM
+    }
   }
   kernels {
     name: "SOFTMAX"
     id: 5
-    outer: 96
-    M: 2048
-    K: 1
-    N: 2048
-    type: SIMD
-    input_tensor_1_size: 805306400.0
-    input_tensor_2_size: -1.0
-    weight_tensor_size: -1.0
-    output_tensor_size: 805306400.0
-    input_tensor_1_id: 4
-    input_tensor_2_id: -1
-    sharding: OUTER_DIM
+    batch_gemm {
+      outer: 96
+      M: 2048
+      K: 1
+      N: 2048
+      type: SIMD
+      input_tensor_1_size: 805306400.0
+      input_tensor_2_size: -1.0
+      weight_tensor_size: -1.0
+      output_tensor_size: 805306400.0
+      input_tensor_1_id: 4
+      input_tensor_2_id: -1
+      sharding: OUTER_DIM
+    }
   }
   kernels {
     name: "MHA_GEMM_2"
     id: 6
-    outer: 96
-    M: 128
-    K: 2048
-    N: 2048
-    type: SYSTOLIC
-    input_tensor_1_size: 50331650.0
-    input_tensor_2_size: 805306400.0
-    weight_tensor_size: -1.0
-    output_tensor_size: 50331650.0
-    input_tensor_1_id: 3
-    input_tensor_2_id: 5
-    sharding: OUTER_DIM
+    batch_gemm {
+      outer: 96
+      M: 128
+      K: 2048
+      N: 2048
+      type: SYSTOLIC
+      input_tensor_1_size: 50331650.0
+      input_tensor_2_size: 805306400.0
+      weight_tensor_size: -1.0
+      output_tensor_size: 50331650.0
+      input_tensor_1_id: 3
+      input_tensor_2_id: 5
+      sharding: OUTER_DIM
+    }
   }
   kernels {
     name: "PROJ_GEMM"
     id: 7
-    outer: 1
-    M: 12288
-    K: 12288
-    N: 2048
-    type: SYSTOLIC
-    input_tensor_1_size: 50331650.0
-    input_tensor_2_size: -1.0
-    weight_tensor_size: 301989900.0
-    output_tensor_size: 50331650.0
-    input_tensor_1_id: 6
-    input_tensor_2_id: -1
-    sharding: K_DIM
-    communication_type: ALL_REDUCE
-    communication_size: 50331650.0
+    batch_gemm {
+      outer: 1
+      M: 12288
+      K: 12288
+      N: 2048
+      type: SYSTOLIC
+      input_tensor_1_size: 50331650.0
+      input_tensor_2_size: -1.0
+      weight_tensor_size: 301989900.0
+      output_tensor_size: 50331650.0
+      input_tensor_1_id: 6
+      input_tensor_2_id: -1
+      sharding: K_DIM
+      communication_type: ALL_REDUCE
+      communication_size: 50331650.0
+    }
   }
   kernels {
     name: "FFN0"
     id: 8
-    outer: 1
-    M: 49152
-    K: 12288
-    N: 2048
-    type: SYSTOLIC
-    input_tensor_1_size: 50331650.0
-    input_tensor_2_size: -1.0
-    weight_tensor_size: 1207959600.0
-    output_tensor_size: 201326600.0
-    input_tensor_1_id: 7
-    input_tensor_2_id: -1
-    sharding: M_DIM
+    batch_gemm {
+      outer: 1
+      M: 49152
+      K: 12288
+      N: 2048
+      type: SYSTOLIC
+      input_tensor_1_size: 50331650.0
+      input_tensor_2_size: -1.0
+      weight_tensor_size: 1207959600.0
+      output_tensor_size: 201326600.0
+      input_tensor_1_id: 7
+      input_tensor_2_id: -1
+      sharding: M_DIM
+      communication_size: -0.0
+    }
   }
   kernels {
     name: "FFN1"
     id: 9
-    outer: 1
-    M: 12288
-    K: 49152
-    N: 2048
-    type: SYSTOLIC
-    input_tensor_1_size: 201326600.0
-    input_tensor_2_size: -1.0
-    weight_tensor_size: 1207959600.0
-    output_tensor_size: 50331650.0
-    input_tensor_1_id: 8
-    input_tensor_2_id: -1
-    sharding: K_DIM
-    communication_type: ALL_REDUCE
-    communication_size: 50331650.0
+    batch_gemm {
+      outer: 1
+      M: 12288
+      K: 49152
+      N: 2048
+      type: SYSTOLIC
+      input_tensor_1_size: 201326600.0
+      input_tensor_2_size: -1.0
+      weight_tensor_size: 1207959600.0
+      output_tensor_size: 50331650.0
+      input_tensor_1_id: 8
+      input_tensor_2_id: -1
+      sharding: K_DIM
+      communication_type: ALL_REDUCE
+      communication_size: 50331650.0
+    }
   }
   connections {
     startIdx: 1
@@ -179,10 +198,11 @@ dataflow_graph {
   connections {
     startIdx: 8
     endIdx: 9
+    communication_size: -0.0
   }
 }
 system {
-  name: "8_Chip_SN10_RDU_TORUS_2D"
+  name: "8_Chip_SN10_RDU_TORUS_3D"
   topo: TORUS_3D
   num_chip: 8
   link_bw_x: 25.0
