@@ -1,16 +1,17 @@
 syntax = "proto3"; 
 
 message Kernel {
-	string name = 1; 
+	string name = 1;
 	int32 id = 2;
 	
 	oneof kernel_variant {
-		Batch_GEMM batch_gemm = 3;
-		GEMM gemm = 4;
+		Batch_GEMM_ELEMENTWISE_OUTER_M_K_N batch_gemm_elementwise_outer_m_k_m = 3;
 	}
+
+	int32 topological_number = 5;
 }
 
-message Batch_GEMM {
+message Batch_GEMM_ELEMENTWISE_OUTER_M_K_N {
 	int32 outer = 1;
 	int32 M = 2;
 	int32 K = 3;
@@ -51,45 +52,6 @@ message Batch_GEMM {
 }
 
 
-message GEMM {
-	int32 M = 2;
-	int32 K = 3;
-	int32 N = 4;
-	KernelType type = 5;
-	float input_tensor_1_size = 6; // always map to indices K, N
-	float input_tensor_2_size = 7; // always map to indices M, K if weight is not present
-	float weight_tensor_size = 8; // always map to indices M, K
-	float output_tensor_size = 9; // always map to indices M, N
-
-	int32 input_tensor_1_id = 10;
-	int32 input_tensor_2_id = 11;
-
-	Sharding sharding = 12;
-	Communication_Type communication_type = 13;
-	float communication_size = 14;
-
-	enum KernelType {
-		NO_Type = 0;
-		SYSTOLIC = 1;
-		SIMD = 2;
-	}
-
-	enum Communication_Type {
-		NO_COMMUNICATION = 0;
-		ALL_REDUCE = 1;
-		ALL_TO_ALL = 2;
-		ALL_GATHER = 3;
-	}
-
-	enum Sharding {
-		NO_DIM = 0;
-		M_DIM = 2;
-		K_DIM = 3;
-		N_DIM = 4;
-	}
-}
-
-
 
 message Connection {
 	int32 startIdx = 1;
@@ -104,7 +66,11 @@ message Connection {
 		ALL_TO_ALL = 2;
 		ALL_GATHER = 3;
 	}
+
+	int32 buffer_depth = 6;
+	float tensor_size = 7;
 }
+
 
 message Dataflow_Graph {
 	repeated Kernel kernels = 1;
@@ -119,6 +85,7 @@ message Accelerator {
 	float sram_cap = 5;
 	float freq = 6;
 	float dram_bw = 7;
+	float dram_cap = 8;
 }
 
 message System {
@@ -132,12 +99,11 @@ message System {
 
 	enum Topology {
 		NO_TOPOLOGY = 0;
-		MESH_2D = 1;
-		TORUS_2D = 2;
-		CUBE_3D = 3;
-		TORUS_3D = 4;
-		DRAGONFLY = 5;
-		DGX = 6;
+		TORUS_2D = 1;
+		DRAGONFLY = 2;
+		DGX_1 = 3;
+		DGX_2 = 4;
+		TORUS_3D = 5;
 	}
 }
 
@@ -147,8 +113,22 @@ message Cost {
     float dram_unit_price = 3;
 }
 
+message Training {
+	int32 micro_batch_size = 1;
+	Optimization optimization = 2;
+
+	enum Optimization {
+		NO_OPTIMIZATION = 0;
+		FLASHATTENTION = 1;
+		KERNEL_BY_KERNEL = 2;
+	}
+
+	int32 seq_len = 4;
+}
+
 message DSE {
 	Dataflow_Graph dataflow_graph = 1;
 	System system = 2;
 	Cost cost = 3;
+	Training training = 4;
 }

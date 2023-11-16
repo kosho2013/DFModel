@@ -2,7 +2,7 @@ dataflow_graph {
   kernels {
     name: "Q"
     id: 1
-    batch_gemm {
+    batch_gemm_elementwise_outer_m_k_m {
       outer: 96
       M: 128
       K: 12288
@@ -20,7 +20,7 @@ dataflow_graph {
   kernels {
     name: "K"
     id: 2
-    batch_gemm {
+    batch_gemm_elementwise_outer_m_k_m {
       outer: 96
       M: 128
       K: 12288
@@ -38,7 +38,7 @@ dataflow_graph {
   kernels {
     name: "V"
     id: 3
-    batch_gemm {
+    batch_gemm_elementwise_outer_m_k_m {
       outer: 96
       M: 128
       K: 12288
@@ -56,7 +56,7 @@ dataflow_graph {
   kernels {
     name: "MHA_GEMM_1"
     id: 4
-    batch_gemm {
+    batch_gemm_elementwise_outer_m_k_m {
       outer: 96
       M: 2048
       K: 128
@@ -70,11 +70,12 @@ dataflow_graph {
       input_tensor_2_id: 2
       sharding: OUTER_DIM
     }
+    topological_number: 1
   }
   kernels {
     name: "SOFTMAX"
     id: 5
-    batch_gemm {
+    batch_gemm_elementwise_outer_m_k_m {
       outer: 96
       M: 2048
       K: 1
@@ -88,11 +89,12 @@ dataflow_graph {
       input_tensor_2_id: -1
       sharding: OUTER_DIM
     }
+    topological_number: 2
   }
   kernels {
     name: "MHA_GEMM_2"
     id: 6
-    batch_gemm {
+    batch_gemm_elementwise_outer_m_k_m {
       outer: 96
       M: 128
       K: 2048
@@ -106,11 +108,12 @@ dataflow_graph {
       input_tensor_2_id: 5
       sharding: OUTER_DIM
     }
+    topological_number: 3
   }
   kernels {
     name: "PROJ_GEMM"
     id: 7
-    batch_gemm {
+    batch_gemm_elementwise_outer_m_k_m {
       outer: 1
       M: 12288
       K: 12288
@@ -126,11 +129,12 @@ dataflow_graph {
       communication_type: ALL_REDUCE
       communication_size: 50331650.0
     }
+    topological_number: 4
   }
   kernels {
     name: "FFN0"
     id: 8
-    batch_gemm {
+    batch_gemm_elementwise_outer_m_k_m {
       outer: 1
       M: 49152
       K: 12288
@@ -145,11 +149,12 @@ dataflow_graph {
       sharding: M_DIM
       communication_size: -0.0
     }
+    topological_number: 5
   }
   kernels {
     name: "FFN1"
     id: 9
-    batch_gemm {
+    batch_gemm_elementwise_outer_m_k_m {
       outer: 1
       M: 12288
       K: 49152
@@ -165,49 +170,65 @@ dataflow_graph {
       communication_type: ALL_REDUCE
       communication_size: 50331650.0
     }
+    topological_number: 6
   }
   connections {
     startIdx: 1
     endIdx: 4
+    buffer_depth: 2
+    tensor_size: 50331650.0
   }
   connections {
     startIdx: 2
     endIdx: 4
+    buffer_depth: 2
+    tensor_size: 50331650.0
   }
   connections {
     startIdx: 3
     endIdx: 6
+    buffer_depth: 4
+    tensor_size: 50331650.0
   }
   connections {
     startIdx: 4
     endIdx: 5
+    buffer_depth: 2
+    tensor_size: 805306400.0
   }
   connections {
     startIdx: 5
     endIdx: 6
+    buffer_depth: 2
+    tensor_size: 805306400.0
   }
   connections {
     startIdx: 6
     endIdx: 7
+    buffer_depth: 2
+    tensor_size: 50331650.0
   }
   connections {
     startIdx: 7
     endIdx: 8
     communication_size: -0.0
+    buffer_depth: 2
+    tensor_size: 50331650.0
   }
   connections {
     startIdx: 8
     endIdx: 9
     communication_size: -0.0
+    buffer_depth: 2
+    tensor_size: 201326600.0
   }
 }
 system {
-  name: "8_Chip_SN10_RDU_TORUS_3D"
-  topo: TORUS_3D
+  name: "8_Chip_SN10_RDU"
+  topo: TORUS_2D
   num_chip: 8
   link_bw_x: 25.0
   link_bw_y: 25.0
-  link_bw_z: 25.0
   accelerator {
     name: "SN10_RDU"
     core: 640
@@ -216,10 +237,16 @@ system {
     sram_cap: 335544320.0
     freq: 1.25
     dram_bw: 100.0
+    dram_cap: 1099511600000.0
   }
 }
 cost {
   link_unit_price: 2.0
   switch_unit_price: 24.0
   dram_unit_price: 1.0
+}
+training {
+  micro_batch_size: 16
+  optimization: FLASHATTENTION
+  seq_len: 2048
 }
