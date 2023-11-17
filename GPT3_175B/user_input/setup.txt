@@ -2,7 +2,7 @@ dataflow_graph {
   kernels {
     name: "Q"
     id: 1
-    batch_gemm_elementwise_outer_m_k_m {
+    batch_gemm_elementwise_outer_m_k_n {
       outer: 96
       M: 128
       K: 12288
@@ -19,7 +19,7 @@ dataflow_graph {
   kernels {
     name: "K"
     id: 2
-    batch_gemm_elementwise_outer_m_k_m {
+    batch_gemm_elementwise_outer_m_k_n {
       outer: 96
       M: 128
       K: 12288
@@ -36,7 +36,7 @@ dataflow_graph {
   kernels {
     name: "V"
     id: 3
-    batch_gemm_elementwise_outer_m_k_m {
+    batch_gemm_elementwise_outer_m_k_n {
       outer: 96
       M: 128
       K: 12288
@@ -53,7 +53,7 @@ dataflow_graph {
   kernels {
     name: "MHA_GEMM_1"
     id: 4
-    batch_gemm_elementwise_outer_m_k_m {
+    batch_gemm_elementwise_outer_m_k_n {
       outer: 96
       M: 2048
       K: 128
@@ -70,7 +70,7 @@ dataflow_graph {
   kernels {
     name: "SOFTMAX"
     id: 5
-    batch_gemm_elementwise_outer_m_k_m {
+    batch_gemm_elementwise_outer_m_k_n {
       outer: 96
       M: 2048
       K: 1
@@ -87,7 +87,7 @@ dataflow_graph {
   kernels {
     name: "MHA_GEMM_2"
     id: 6
-    batch_gemm_elementwise_outer_m_k_m {
+    batch_gemm_elementwise_outer_m_k_n {
       outer: 96
       M: 128
       K: 2048
@@ -104,7 +104,7 @@ dataflow_graph {
   kernels {
     name: "PROJ_GEMM"
     id: 7
-    batch_gemm_elementwise_outer_m_k_m {
+    batch_gemm_elementwise_outer_m_k_n {
       outer: 1
       M: 12288
       K: 12288
@@ -121,7 +121,7 @@ dataflow_graph {
   kernels {
     name: "FFN0"
     id: 8
-    batch_gemm_elementwise_outer_m_k_m {
+    batch_gemm_elementwise_outer_m_k_n {
       outer: 1
       M: 49152
       K: 12288
@@ -138,7 +138,7 @@ dataflow_graph {
   kernels {
     name: "FFN1"
     id: 9
-    batch_gemm_elementwise_outer_m_k_m {
+    batch_gemm_elementwise_outer_m_k_n {
       outer: 1
       M: 12288
       K: 49152
@@ -192,6 +192,9 @@ system {
   link_bw_x: 25.0
   link_bw_y: 25.0
   link_bw_z: 0.0
+  x: 8
+  y: 1
+  z: 1
   accelerator {
     name: "SN10_RDU"
     core: 640
@@ -209,7 +212,7 @@ cost {
   dram_unit_price: 1.0
 }
 training {
-  micro_batch_size: 16
   optimization: 1
   seq_len: 2048
+  num_layer: 96
 }

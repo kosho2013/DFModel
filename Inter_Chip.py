@@ -36,17 +36,17 @@ for kernel in dse.dataflow_graph.kernels:
 
 output_tensor_size = []
 for kernel in dse.dataflow_graph.kernels:
-    output_tensor_size.append(kernel.batch_gemm_elementwise_outer_m_k_m.output_tensor_size)
+    output_tensor_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size)
 
 
 kernel_type = []
 for kernel in dse.dataflow_graph.kernels:
-    kernel_type.append(kernel.batch_gemm_elementwise_outer_m_k_m.type)
+    kernel_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.type)
 
 
 outer = []
 for kernel in dse.dataflow_graph.kernels:
-    outer.append(kernel.batch_gemm_elementwise_outer_m_k_m.outer)
+    outer.append(kernel.batch_gemm_elementwise_outer_m_k_n.outer)
 
 
 startIdx = []
@@ -74,8 +74,8 @@ num_edge = len(edge_dict)
 input_tensor_1_id = []
 input_tensor_2_id = []
 for kernel in dse.dataflow_graph.kernels:
-    input_tensor_1_id.append(kernel.batch_gemm_elementwise_outer_m_k_m.input_tensor_1_id)
-    input_tensor_2_id.append(kernel.batch_gemm_elementwise_outer_m_k_m.input_tensor_2_id)
+    input_tensor_1_id.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id)
+    input_tensor_2_id.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id)
 
 
 
@@ -283,16 +283,16 @@ for v in model.getVars():
 i = 0
 for kernel in dse.dataflow_graph.kernels:
     if sharding[i*4+0] == 1:
-        kernel.batch_gemm_elementwise_outer_m_k_m.sharding = 1
+        kernel.batch_gemm_elementwise_outer_m_k_n.sharding = 1
     elif sharding[i*4+1] == 1:
-        kernel.batch_gemm_elementwise_outer_m_k_m.sharding = 2
+        kernel.batch_gemm_elementwise_outer_m_k_n.sharding = 2
     elif sharding[i*4+2] == 1:
-        kernel.batch_gemm_elementwise_outer_m_k_m.sharding = 3
+        kernel.batch_gemm_elementwise_outer_m_k_n.sharding = 3
     else:
-        kernel.batch_gemm_elementwise_outer_m_k_m.sharding = 4
+        kernel.batch_gemm_elementwise_outer_m_k_n.sharding = 4
     
-    kernel.batch_gemm_elementwise_outer_m_k_m.communication_size = float(communication_size[i])
-    kernel.batch_gemm_elementwise_outer_m_k_m.communication_type = int(communication_type[i])
+    kernel.batch_gemm_elementwise_outer_m_k_n.communication_size = float(communication_size[i])
+    kernel.batch_gemm_elementwise_outer_m_k_n.communication_type = int(communication_type[i])
     i += 1
 
 

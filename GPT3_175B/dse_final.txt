@@ -15,6 +15,10 @@ dataflow_graph {
       input_tensor_1_id: -1
       input_tensor_2_id: -1
       sharding: OUTER_DIM
+      shard_weight_size: 37748736.0
+      shard_outer_M: 1536
+      shard_K: 12288
+      shard_N: 32
     }
   }
   kernels {
@@ -33,6 +37,10 @@ dataflow_graph {
       input_tensor_1_id: -1
       input_tensor_2_id: -1
       sharding: OUTER_DIM
+      shard_weight_size: 37748736.0
+      shard_outer_M: 1536
+      shard_K: 12288
+      shard_N: 32
     }
   }
   kernels {
@@ -51,6 +59,10 @@ dataflow_graph {
       input_tensor_1_id: -1
       input_tensor_2_id: -1
       sharding: OUTER_DIM
+      shard_weight_size: 37748736.0
+      shard_outer_M: 1536
+      shard_K: 12288
+      shard_N: 32
     }
   }
   kernels {
@@ -69,6 +81,9 @@ dataflow_graph {
       input_tensor_1_id: 1
       input_tensor_2_id: 2
       sharding: OUTER_DIM
+      shard_outer_M: 24576
+      shard_K: 128
+      shard_N: 32
     }
     topological_number: 1
   }
@@ -88,6 +103,9 @@ dataflow_graph {
       input_tensor_1_id: 4
       input_tensor_2_id: -1
       sharding: OUTER_DIM
+      shard_outer_M: 24576
+      shard_K: 1
+      shard_N: 32
     }
     topological_number: 2
   }
@@ -107,6 +125,9 @@ dataflow_graph {
       input_tensor_1_id: 3
       input_tensor_2_id: 5
       sharding: OUTER_DIM
+      shard_outer_M: 1536
+      shard_K: 2048
+      shard_N: 32
     }
     topological_number: 3
   }
@@ -128,6 +149,10 @@ dataflow_graph {
       sharding: K_DIM
       communication_type: ALL_REDUCE
       communication_size: 50331650.0
+      shard_weight_size: 37748736.0
+      shard_outer_M: 12288
+      shard_K: 1536
+      shard_N: 32
     }
     topological_number: 4
   }
@@ -148,6 +173,10 @@ dataflow_graph {
       input_tensor_2_id: -1
       sharding: M_DIM
       communication_size: -0.0
+      shard_weight_size: 150994940.0
+      shard_outer_M: 6144
+      shard_K: 12288
+      shard_N: 32
     }
     topological_number: 5
   }
@@ -169,6 +198,10 @@ dataflow_graph {
       sharding: K_DIM
       communication_type: ALL_REDUCE
       communication_size: 50331650.0
+      shard_weight_size: 150994940.0
+      shard_outer_M: 12288
+      shard_K: 6144
+      shard_N: 32
     }
     topological_number: 6
   }
@@ -177,36 +210,42 @@ dataflow_graph {
     endIdx: 4
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 98304.0
   }
   connections {
     startIdx: 2
     endIdx: 4
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 98304.0
   }
   connections {
     startIdx: 3
     endIdx: 6
     buffer_depth: 4
     tensor_size: 50331650.0
+    shard_tensor_size: 98304.0
   }
   connections {
     startIdx: 4
     endIdx: 5
     buffer_depth: 2
     tensor_size: 805306400.0
+    shard_tensor_size: 1572864.0
   }
   connections {
     startIdx: 5
     endIdx: 6
     buffer_depth: 2
     tensor_size: 805306400.0
+    shard_tensor_size: 1572864.0
   }
   connections {
     startIdx: 6
     endIdx: 7
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 98304.0
   }
   connections {
     startIdx: 7
@@ -214,6 +253,7 @@ dataflow_graph {
     communication_size: -0.0
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 786432.0
   }
   connections {
     startIdx: 8
@@ -221,6 +261,7 @@ dataflow_graph {
     communication_size: -0.0
     buffer_depth: 2
     tensor_size: 201326600.0
+    shard_tensor_size: 393216.0
   }
 }
 system {

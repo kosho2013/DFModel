@@ -5,7 +5,7 @@ message Kernel {
 	int32 id = 2;
 	
 	oneof kernel_variant {
-		Batch_GEMM_ELEMENTWISE_OUTER_M_K_N batch_gemm_elementwise_outer_m_k_m = 3;
+		Batch_GEMM_ELEMENTWISE_OUTER_M_K_N batch_gemm_elementwise_outer_m_k_n = 3;
 	}
 
 	int32 topological_number = 5;
@@ -28,6 +28,11 @@ message Batch_GEMM_ELEMENTWISE_OUTER_M_K_N {
 	Sharding sharding = 12;
 	Communication_Type communication_type = 13;
 	float communication_size = 14;
+
+	float shard_weight_size = 15;
+	int32 shard_outer_M = 16;
+	int32 shard_K = 17;
+	int32 shard_N = 18;
 
 	enum KernelType {
 		NO_Type = 0;
@@ -69,6 +74,7 @@ message Connection {
 
 	int32 buffer_depth = 6;
 	float tensor_size = 7;
+	float shard_tensor_size = 8;
 }
 
 
@@ -97,6 +103,10 @@ message System {
 	float link_bw_z = 6;
 	Accelerator accelerator = 7;
 
+	int32 x = 8;
+	int32 y = 9;
+	int32 z = 10;
+
 	enum Topology {
 		NO_TOPOLOGY = 0;
 		TORUS_2D = 1;
@@ -124,6 +134,7 @@ message Training {
 	}
 
 	int32 seq_len = 4;
+	int32 num_layer = 5;
 }
 
 message DSE {
