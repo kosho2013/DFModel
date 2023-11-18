@@ -231,9 +231,9 @@ C = num_kernel
 
 model = gp.Model()
 model.params.NonConvex = 2
-model.Params.Threads = 10
-model.params.MIPGap = 0.1    # 10%
-model.params.TimeLimit = 300  # 5 minutes
+model.Params.Threads = 128
+model.params.MIPGap = 0.05    # 5%
+model.params.TimeLimit = 36000  # 10 hours
 model.optimize()
 
 
@@ -382,7 +382,7 @@ Ad = model.addMVar((num_weight, C), name='Ad', vtype=gp.GRB.BINARY)
 # model.addConstr(Config[7] == 2)
 # model.addConstr(Config[8] == 3)
 
-model.addConstr(tile_size == 32)
+# model.addConstr(tile_size == 32)
 
 
 
