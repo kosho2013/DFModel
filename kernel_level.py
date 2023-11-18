@@ -99,8 +99,7 @@ for kernel in dse.dataflow_graph.kernels:
 node_communication_size = []
 for kernel in dse.dataflow_graph.kernels:
     node_communication_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.communication_size)
-
-
+        
 node_dict = {}
 i = 0
 for kernel in dse.dataflow_graph.kernels:
@@ -303,6 +302,8 @@ model.addConstr((aaa == 1) >> (intermediate == 0))
 model.addConstr((aaa == 0) >> (intermediate == Intermediate))
 
 
+
+
 # sharding/tiling kernel
 tile_size = model.addVar(name='tile_size', vtype=gp.GRB.INTEGER, lb=1)
 num_tile = model.addVar(name='num_tile', vtype=gp.GRB.INTEGER, lb=0)
@@ -316,11 +317,10 @@ for i in range(num_kernel):
     if sharding[i] == Dim.OUTER_DIM.value or sharding[i] == Dim.M_DIM.value:
         model.addConstr(shard_M[i] * TP >= M[i])
         model.addConstr(shard_K[i] == K[i])
-        model.addConstr(shard_N[i] == tile_size)
     elif sharding[i] == Dim.K_DIM.value:
         model.addConstr(shard_M[i] == M[i])
         model.addConstr(shard_K[i] * TP >= K[i])
-        model.addConstr(shard_N[i] == tile_size)
+    model.addConstr(shard_N[i] == tile_size)
 
 
 
@@ -342,7 +342,7 @@ for i in range(num_weight):
 shard_node_communication_size = model.addMVar(num_kernel, name='shard_node_communication_size', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(num_kernel):
     if node_communication_size[i] > 0:
-        model.addConstr(shard_node_communication_size[i] * num_tile == node_communication_size[i])
+        model.addConstr(shard_node_communication_size[i] == shard_M[i] * shard_N[i] * word)
     else:
         model.addConstr(shard_node_communication_size[i] == 0)
 
@@ -382,9 +382,8 @@ model.addConstr(tile_size == 32)
 
 
 # kernel assignment   
-t1 = np.ones((C))
 for i in range(num_kernel):
-    model.addConstr(Ac[i, :] @ t1 == 1)
+    model.addConstr(Ac[i, :] @ np.ones((C)) == 1)
     
     
 t2 = np.zeros((C))
@@ -403,6 +402,7 @@ if opt == Optimization.KERNEL_BY_KERNEL.value:
     t3 = np.ones((num_kernel))
     for i in range(C):
         model.addConstr(t3 @ Ac[:, i] >= 1)
+    model.addConstr(tile_size == seq_len)
 
 
 
@@ -416,7 +416,6 @@ for i in range(num_kernel):
     model.addConstr(Par_lane[i] * Par_stage[i] == Par_total[i])
 for i in range(C):
     model.addConstr(Par_total @ Ac[:, i] <= Core)        
-
 
 
 
@@ -482,12 +481,16 @@ Micro_Batch_Size = model.addVar(name='Micro_Batch_Size', vtype=gp.GRB.INTEGER, l
 dram_bytes_per_config_intermediate = model.addMVar(C, name='dram_bytes_per_config_intermediate', vtype=gp.GRB.CONTINUOUS, lb=0)
 dram_bytes_per_config_initiation = model.addMVar(C, name='dram_bytes_per_config_initiation', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
-    model.addConstr(dram_bytes_per_config_intermediate[i] == shard_intermediate_buffer_size @ Ab_dram[:, i])
+    aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    model.addConstr(aaa == (shard_intermediate_buffer_size @ Ab_dram[:, i]))
+    model.addConstr(dram_bytes_per_config_intermediate[i] == aaa * num_tile)
     model.addConstr(dram_bytes_per_config_initiation[i] == shard_initiation_buffer_size @ Ad[:, i])
 
-dram_bytes_per_batch_1 = model.addVar(name='dram_bytes_per_batch_1', vtype=gp.GRB.CONTINUOUS, lb=1)
-model.addConstr(dram_bytes_per_batch_1 == (np.ones((C)) @ dram_bytes_per_config_intermediate + np.ones((C)) @ dram_bytes_per_config_initiation) * layers_per_stage)
-model.addConstr(dram_bytes_per_batch_1 * Micro_Batch_Size <= DRAM_Cap)
+dram_bytes_initiation = model.addVar(name='dram_bytes_initiation', vtype=gp.GRB.CONTINUOUS, lb=0)
+dram_bytes_intermediate = model.addVar(name='dram_bytes_intermediate', vtype=gp.GRB.CONTINUOUS, lb=0)
+model.addConstr(dram_bytes_initiation == (np.ones((C)) @ dram_bytes_per_config_initiation) * layers_per_stage)
+model.addConstr(dram_bytes_intermediate == (np.ones((C)) @ dram_bytes_per_config_intermediate) * layers_per_stage)
+model.addConstr(dram_bytes_initiation + dram_bytes_intermediate * Micro_Batch_Size <= DRAM_Cap)
 
 
 

@@ -34,6 +34,9 @@ message Batch_GEMM_ELEMENTWISE_OUTER_M_K_N {
 	int32 shard_K = 17;
 	int32 shard_N = 18;
 
+
+	int32 weight_tiling = 19;
+
 	enum KernelType {
 		NO_Type = 0;
 		SYSTOLIC = 1;

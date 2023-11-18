@@ -81,7 +81,7 @@ dataflow_graph {
       input_tensor_1_id: 1
       input_tensor_2_id: 2
       sharding: OUTER_DIM
-      shard_outer_M: 24576
+      shard_outer_M: 25024
       shard_K: 128
       shard_N: 32
     }
@@ -231,7 +231,7 @@ dataflow_graph {
     endIdx: 5
     buffer_depth: 2
     tensor_size: 805306400.0
-    shard_tensor_size: 1572864.0
+    shard_tensor_size: 1601536.0
   }
   connections {
     startIdx: 5

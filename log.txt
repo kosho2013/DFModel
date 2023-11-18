@@ -21,18 +21,18 @@ Presolve: All rows and columns removed
 Iteration    Objective       Primal Inf.    Dual Inf.      Time
        0    0.0000000e+00   0.000000e+00   0.000000e+00      0s
 
-Solved in 0 iterations and 0.00 seconds (0.00 work units)
+Solved in 0 iterations and 0.01 seconds (0.00 work units)
 Optimal objective  0.000000000e+00
 Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (linux64)
 
 CPU model: 12th Gen Intel(R) Core(TM) i7-1255U, instruction set [SSE2|AVX|AVX2]
 Thread count: 6 physical cores, 12 logical processors, using up to 10 threads
 
-Optimize a model with 180 rows, 924 columns and 455 nonzeros
-Model fingerprint: 0x2713065b
-Model has 256 quadratic constraints
+Optimize a model with 180 rows, 934 columns and 455 nonzeros
+Model fingerprint: 0x74d5f15e
+Model has 266 quadratic constraints
 Model has 634 general constraints
-Variable types: 147 continuous, 777 integer (568 binary)
+Variable types: 157 continuous, 777 integer (568 binary)
 Coefficient statistics:
   Matrix range     [1e+00, 8e+00]
   QMatrix range    [8e-01, 2e+06]
@@ -46,52 +46,55 @@ Coefficient statistics:
 Warning: Model contains large rhs on quadratic constraints
          Consider reformulating model or setting NumericFocus parameter
          to avoid numerical issues.
-Presolve removed 76 rows and 680 columns
+Presolve removed 77 rows and 689 columns
 Presolve time: 0.00s
-Presolved: 292 rows, 264 columns, 821 nonzeros
-Presolved model has 75 SOS constraint(s)
+Presolved: 297 rows, 266 columns, 835 nonzeros
+Presolved model has 76 SOS constraint(s)
 Presolved model has 10 quadratic constraint(s)
-Presolved model has 50 bilinear constraint(s)
-Variable types: 106 continuous, 158 integer (77 binary)
+Presolved model has 51 bilinear constraint(s)
+Variable types: 108 continuous, 158 integer (76 binary)
 
-Root relaxation: objective 8.103801e-01, 54 iterations, 0.00 seconds (0.00 work units)
+Root relaxation: objective 8.327952e-01, 54 iterations, 0.00 seconds (0.00 work units)
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-     0     0    0.81038    0   12          -    0.81038      -     -    0s
-     0     0    0.55508    0   29          -    0.55508      -     -    0s
-     0     0    0.55508    0   20          -    0.55508      -     -    0s
-     0     0    0.55508    0   17          -    0.55508      -     -    0s
-     0     0    0.55508    0   17          -    0.55508      -     -    0s
-     0     0    0.55508    0   21          -    0.55508      -     -    0s
-     0     0    0.55508    0   20          -    0.55508      -     -    0s
-     0     0    0.50925    0   20          -    0.50925      -     -    0s
-     0     0    0.50925    0   20          -    0.50925      -     -    0s
-     0     0    0.50925    0   20          -    0.50925      -     -    0s
-     0     0    0.50925    0   23          -    0.50925      -     -    0s
-     0     0    0.50925    0   23          -    0.50925      -     -    0s
-     0     0    0.50925    0   23          -    0.50925      -     -    0s
-     0     0    0.50925    0   23          -    0.50925      -     -    0s
-     0     0    0.50925    0   23          -    0.50925      -     -    0s
-     0     2    0.50925    0   23          -    0.50925      -     -    0s
-H   38    40                       0.0870307    0.50925   485%   3.5    0s
-H 1728  1666                       0.4616012    0.50925  10.3%   1.8    0s
+     0     0    0.83280    0   13          -    0.83280      -     -    0s
+     0     0    0.56551    0   34          -    0.56551      -     -    0s
+     0     0    0.56551    0   31          -    0.56551      -     -    0s
+     0     0    0.54551    0   31          -    0.54551      -     -    0s
+     0     0    0.51801    0   24          -    0.51801      -     -    0s
+     0     0    0.51801    0   23          -    0.51801      -     -    0s
+     0     0    0.51801    0   23          -    0.51801      -     -    0s
+     0     0    0.51801    0   23          -    0.51801      -     -    0s
+     0     0    0.51801    0   23          -    0.51801      -     -    0s
+     0     0    0.51801    0   23          -    0.51801      -     -    0s
+     0     0    0.51801    0   23          -    0.51801      -     -    0s
+     0     0    0.51801    0   23          -    0.51801      -     -    0s
+     0     0    0.51801    0   23          -    0.51801      -     -    0s
+     0     0    0.51801    0   23          -    0.51801      -     -    0s
+     0     0    0.51801    0   23          -    0.51801      -     -    0s
+     0     0    0.51801    0   23          -    0.51801      -     -    0s
+     0     0    0.51801    0   23          -    0.51801      -     -    0s
+     0     2    0.51801    0   23          -    0.51801      -     -    0s
+H   36    40                       0.3396824    0.51801  52.5%   3.3    0s
+H  467   296                       0.3590469    0.51801  44.3%   3.5    0s
+H  472   285                       0.4281096    0.50717  18.5%   3.4    0s
+H  473   270                       0.4687884    0.50717  8.19%   3.4    0s
 
 Cutting planes:
-  Gomory: 3
-  Implied bound: 2
-  MIR: 11
-  RLT: 14
+  Gomory: 1
+  MIR: 10
+  RLT: 8
   Relax-and-lift: 1
 
-Explored 2628 nodes (5567 simplex iterations) in 0.20 seconds (0.08 work units)
+Explored 473 nodes (1987 simplex iterations) in 0.18 seconds (0.06 work units)
 Thread count was 10 (of 12 available processors)
 
-Solution count 2: 0.461601 0.0870307 
+Solution count 4: 0.468788 0.42811 0.359047 0.339682 
 
 Optimal solution found (tolerance 1.00e-01)
-Best objective 4.616012116379e-01, best bound 4.965158189477e-01, gap 7.5638%
+Best objective 4.687883969528e-01, best bound 5.050867304566e-01, gap 7.7430%
 X 8.0
 Y 1.0
 TP 8.0
@@ -107,7 +110,7 @@ num_tile 64.0
 shard_M[0] 1536.0
 shard_M[1] 1536.0
 shard_M[2] 1536.0
-shard_M[3] 24576.0
+shard_M[3] 25024.0
 shard_M[4] 24576.0
 shard_M[5] 1536.0
 shard_M[6] 12288.0
@@ -134,7 +137,7 @@ shard_N[8] 32.0
 shard_intermediate_buffer_size[0] 98304.0
 shard_intermediate_buffer_size[1] 98304.0
 shard_intermediate_buffer_size[2] 98304.0
-shard_intermediate_buffer_size[3] 1572864.0
+shard_intermediate_buffer_size[3] 1601536.0
 shard_intermediate_buffer_size[4] 1572864.0
 shard_intermediate_buffer_size[5] 98304.0
 shard_intermediate_buffer_size[6] 786432.0
@@ -451,32 +454,32 @@ Ad[5,6] 0.0
 Ad[5,7] 0.0
 Ad[5,8] 0.0
 Par_lane[0] 48.0
-Par_lane[1] 50.0
-Par_lane[2] 48.0
-Par_lane[3] 86.0
-Par_lane[4] 384.0
+Par_lane[1] 48.0
+Par_lane[2] 53.0
+Par_lane[3] 23.0
+Par_lane[4] 1.0
 Par_lane[5] 48.0
-Par_lane[6] 20.0
-Par_lane[7] 213.0
-Par_lane[8] 640.0
-Par_stage[0] 4.0
-Par_stage[1] 6.0
+Par_lane[6] 384.0
+Par_lane[7] 192.0
+Par_lane[8] 106.0
+Par_stage[0] 3.0
+Par_stage[1] 7.0
 Par_stage[2] 3.0
 Par_stage[3] 1.0
 Par_stage[4] 1.0
 Par_stage[5] 1.0
-Par_stage[6] 6.0
+Par_stage[6] 1.0
 Par_stage[7] 3.0
-Par_stage[8] 1.0
-Par_total[0] 192.0
-Par_total[1] 300.0
-Par_total[2] 144.0
-Par_total[3] 86.0
-Par_total[4] 384.0
+Par_stage[8] 6.0
+Par_total[0] 144.0
+Par_total[1] 336.0
+Par_total[2] 159.0
+Par_total[3] 23.0
+Par_total[4] 1.0
 Par_total[5] 48.0
-Par_total[6] 120.0
-Par_total[7] 639.0
-Par_total[8] 640.0
+Par_total[6] 384.0
+Par_total[7] 576.0
+Par_total[8] 636.0
 C385 0.0
 C386 1.0
 C387 1.0
@@ -768,7 +771,7 @@ C672 0.0
 shard_intermediate_buffer_size_depth_original[0] 196608.0
 shard_intermediate_buffer_size_depth_original[1] 196608.0
 shard_intermediate_buffer_size_depth_original[2] 393216.0
-shard_intermediate_buffer_size_depth_original[3] 3145728.0
+shard_intermediate_buffer_size_depth_original[3] 3203072.0
 shard_intermediate_buffer_size_depth_original[4] 3145728.0
 shard_intermediate_buffer_size_depth_original[5] 196608.0
 shard_intermediate_buffer_size_depth_original[6] 1572864.0
@@ -776,7 +779,7 @@ shard_intermediate_buffer_size_depth_original[7] 786432.0
 shard_intermediate_buffer_size_depth_two[0] 221904896.0
 shard_intermediate_buffer_size_depth_two[1] 196608.0
 shard_intermediate_buffer_size_depth_two[2] 196608.0
-shard_intermediate_buffer_size_depth_two[3] 3145728.0
+shard_intermediate_buffer_size_depth_two[3] 3203072.0
 shard_intermediate_buffer_size_depth_two[4] 3145728.0
 shard_intermediate_buffer_size_depth_two[5] 196608.0
 shard_intermediate_buffer_size_depth_two[6] 1572864.0
@@ -784,14 +787,14 @@ shard_intermediate_buffer_size_depth_two[7] 786432.0
 shard_initiation_buffer_size_depth_one[0] 37748736.0
 shard_initiation_buffer_size_depth_one[1] 37748736.0
 shard_initiation_buffer_size_depth_one[2] 37748736.0
-shard_initiation_buffer_size_depth_one[3] 105185280.0
+shard_initiation_buffer_size_depth_one[3] 105127936.0
 shard_initiation_buffer_size_depth_one[4] 333185024.0
 shard_initiation_buffer_size_depth_one[5] 334757888.0
-Micro_Batch_Size 25.0
-dram_bytes_per_config_intermediate[0] 294912.0
-dram_bytes_per_config_intermediate[1] 1081344.0
-dram_bytes_per_config_intermediate[2] 1179648.0
-dram_bytes_per_config_intermediate[3] 393216.0
+Micro_Batch_Size 58.0
+dram_bytes_per_config_intermediate[0] 18874368.0
+dram_bytes_per_config_intermediate[1] 69206016.0
+dram_bytes_per_config_intermediate[2] 75497472.0
+dram_bytes_per_config_intermediate[3] 25165824.0
 dram_bytes_per_config_intermediate[4] 0.0
 dram_bytes_per_config_intermediate[5] 0.0
 dram_bytes_per_config_intermediate[6] 0.0
@@ -806,81 +809,81 @@ dram_bytes_per_config_initiation[5] 0.0
 dram_bytes_per_config_initiation[6] 0.0
 dram_bytes_per_config_initiation[7] 0.0
 dram_bytes_per_config_initiation[8] 0.0
-dram_bytes_per_batch_1 43769659392.0
-Cycle[0] 24576.000000369968
+C714 294912.0
+C715 1081344.0
+C716 1179648.0
+C717 393216.0
+C718 0.0
+C719 0.0
+C720 0.0
+C721 0.0
+C722 0.0
+dram_bytes_initiation 43486543872.0
+dram_bytes_intermediate 18119393280.0
+Cycle[0] 24576.0
 Cycle[1] 12288.0
 Cycle[2] 24576.0
-Cycle[3] 39168.0
-Cycle[4] 64.0
-Cycle[5] 20480.0
-Cycle[6] 30720.0
+Cycle[3] 26112.0
+Cycle[4] 24576.0
+Cycle[5] 24576.0
+Cycle[6] 9216.0
 Cycle[7] 24576.0
-Cycle[8] 36864.0
+Cycle[8] 24576.0
 m_factor[0] 1.0
 m_factor[1] 1.0
 m_factor[2] 1.0
-m_factor[3] 9.0
-m_factor[4] 2.0
+m_factor[3] 34.0
+m_factor[4] 768.0
 m_factor[5] 1.0
-m_factor[6] 20.0
+m_factor[6] 1.0
 m_factor[7] 1.0
-m_factor[8] 1.0
-n_factor[0] 2.000000000030108
+m_factor[8] 4.0
+n_factor[0] 2.0
 n_factor[1] 1.0
 n_factor[2] 2.0
-n_factor[3] 34.0
+n_factor[3] 6.0
 n_factor[4] 1.0
-n_factor[5] 10.0
-n_factor[6] 1.0
+n_factor[5] 12.0
+n_factor[6] 6.0
 n_factor[7] 2.0
-n_factor[8] 6.0
-C742 2.000000000030108
-C743 1.0
-C744 2.0
-C745 306.0
-C746 10.0
-C747 20.0
-C748 2.0
-C749 6.0
-Compute_Latency[0] 1258291.2000189424
-Compute_Latency[1] 2005401.6
+n_factor[8] 1.0
+C752 2.0
+C753 1.0
+C754 2.0
+C755 204.0
+C756 12.0
+C757 6.0
+C758 2.0
+C759 4.0
+Compute_Latency[0] 1258291.2000000002
+Compute_Latency[1] 1336934.3999999962
 Compute_Latency[2] 1258291.2000000002
-Compute_Latency[3] 1887436.8
+Compute_Latency[3] 1258291.2000000002
 Compute_Latency[4] 0.0
 Compute_Latency[5] 0.0
 Compute_Latency[6] 0.0
 Compute_Latency[7] 0.0
 Compute_Latency[8] 0.0
-C759 24576.000000369968
-C760 12288.0
-C761 24576.0
-C762 0.0
-C763 0.0
-C764 0.0
-C765 0.0
-C766 0.0
-C767 0.0
-C768 24576.000000369968
-C769 0.0
-C770 0.0
-C771 0.0
-C772 39168.0
-C773 64.0
-C774 20480.0
-C775 30720.0
+C769 24576.0
+C770 12288.0
+C771 24576.0
+C772 0.0
+C773 0.0
+C774 0.0
+C775 0.0
 C776 0.0
 C777 0.0
-C778 39168.0
+C778 24576.0
 C779 0.0
 C780 0.0
 C781 0.0
-C782 0.0
-C783 0.0
-C784 0.0
-C785 0.0
-C786 24576.0
+C782 26112.0
+C783 24576.0
+C784 24576.0
+C785 9216.0
+C786 0.0
 C787 0.0
-C788 24576.0
+C788 26111.999999999924
 C789 0.0
 C790 0.0
 C791 0.0
@@ -888,9 +891,9 @@ C792 0.0
 C793 0.0
 C794 0.0
 C795 0.0
-C796 0.0
-C797 36864.0
-C798 36864.0
+C796 24576.0
+C797 0.0
+C798 24576.0
 C799 0.0
 C800 0.0
 C801 0.0
@@ -899,8 +902,8 @@ C803 0.0
 C804 0.0
 C805 0.0
 C806 0.0
-C807 0.0
-C808 0.0
+C807 24576.0
+C808 24576.0
 C809 0.0
 C810 0.0
 C811 0.0
@@ -941,6 +944,16 @@ C845 0.0
 C846 0.0
 C847 0.0
 C848 0.0
+C849 0.0
+C850 0.0
+C851 0.0
+C852 0.0
+C853 0.0
+C854 0.0
+C855 0.0
+C856 0.0
+C857 0.0
+C858 0.0
 DRAM_Latency[0] 188743.68
 DRAM_Latency[1] 692060.16
 DRAM_Latency[2] 754974.72
@@ -950,15 +963,15 @@ DRAM_Latency[5] 0.0
 DRAM_Latency[6] 0.0
 DRAM_Latency[7] 0.0
 DRAM_Latency[8] 0.0
-C858 294912.0
-C859 1081344.0
-C860 1179648.0
-C861 393216.0
-C862 0.0
-C863 0.0
-C864 0.0
-C865 0.0
-C866 0.0
+C868 294912.0
+C869 1081344.0
+C870 1179648.0
+C871 393216.0
+C872 0.0
+C873 0.0
+C874 0.0
+C875 0.0
+C876 0.0
 Network_Latency[0] 0.0
 Network_Latency[1] 2013265.92
 Network_Latency[2] 0.0
@@ -968,53 +981,53 @@ Network_Latency[5] 0.0
 Network_Latency[6] 0.0
 Network_Latency[7] 0.0
 Network_Latency[8] 0.0
-C876 0.0
-C877 786432.0
-C878 0.0
-C879 786432.0
-C880 0.0
-C881 0.0
-C882 0.0
-C883 0.0
-C884 0.0
-Latency_wo_setup[0] 1258291.2000189424
+C886 0.0
+C887 786432.0
+C888 0.0
+C889 786432.0
+C890 0.0
+C891 0.0
+C892 0.0
+C893 0.0
+C894 0.0
+Latency_wo_setup[0] 1258291.1999999902
 Latency_wo_setup[1] 2013265.92
 Latency_wo_setup[2] 1258291.2000000002
-Latency_wo_setup[3] 2013265.9199999995
+Latency_wo_setup[3] 2013265.92
 Latency_wo_setup[4] 0.0
 Latency_wo_setup[5] 0.0
 Latency_wo_setup[6] 0.0
 Latency_wo_setup[7] 0.0
 Latency_wo_setup[8] 0.0
-Setup_Latency[0] 45298.4832
-Setup_Latency[1] 15099.4944
-Setup_Latency[2] 60397.9776
-Setup_Latency[3] 60397.9776
+Setup_Latency[0] 19525.208275862067
+Setup_Latency[1] 6508.402758620689
+Setup_Latency[2] 26033.611034482758
+Setup_Latency[3] 26033.611034482758
 Setup_Latency[4] 0.0
 Setup_Latency[5] 0.0
 Setup_Latency[6] 0.0
 Setup_Latency[7] 0.0
 Setup_Latency[8] 0.0
-C903 2500.0
-C904 2500.0
-C905 2500.0
-C906 2500.0
-C907 2500.0
-C908 2500.0
-C909 2500.0
-C910 2500.0
-C911 2500.0
-Per_Config_II[0] 1303589.6832189425
-Per_Config_II[1] 2028365.4143999997
-Per_Config_II[2] 1318689.1776
-Per_Config_II[3] 2073663.8975999996
+C913 5800.0
+C914 5800.0
+C915 5800.0
+C916 5800.0
+C917 5800.0
+C918 5800.0
+C919 5800.0
+C920 5800.0
+C921 5800.0
+Per_Config_II[0] 1277816.4082758473
+Per_Config_II[1] 2019774.3227586206
+Per_Config_II[2] 1284324.811034483
+Per_Config_II[3] 2039299.5310344822
 Per_Config_II[4] 0.0
 Per_Config_II[5] 0.0
 Per_Config_II[6] 0.0
 Per_Config_II[7] 0.0
 Per_Config_II[8] 0.0
 p2p_latency 0.0
-II 645533584.5906185
-util 0.46160121163792117
+II 635636647.0179287
+util 0.46878839695281954
 GFLOPS 307200.0
 FLOP 732313398804480.0
