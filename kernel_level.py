@@ -367,15 +367,15 @@ Ad = model.addMVar((num_weight, C), name='Ad', vtype=gp.GRB.BINARY)
 
 
 
-model.addConstr(Config[0] == 0)
-model.addConstr(Config[1] == 0)
-model.addConstr(Config[2] == 0)
-model.addConstr(Config[3] == 1)
-model.addConstr(Config[4] == 1)
-model.addConstr(Config[5] == 1)
-model.addConstr(Config[6] == 1)
-model.addConstr(Config[7] == 2)
-model.addConstr(Config[8] == 3)
+# model.addConstr(Config[0] == 0)
+# model.addConstr(Config[1] == 0)
+# model.addConstr(Config[2] == 0)
+# model.addConstr(Config[3] == 1)
+# model.addConstr(Config[4] == 1)
+# model.addConstr(Config[5] == 1)
+# model.addConstr(Config[6] == 1)
+# model.addConstr(Config[7] == 2)
+# model.addConstr(Config[8] == 3)
 
 model.addConstr(tile_size == 32)
 
