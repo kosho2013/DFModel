@@ -38,6 +38,7 @@ class Dim(Enum):
     M_DIM = 2
     K_DIM = 3
     N_DIM = 4
+    NO_SHARDING = 5
 
 class KernelType(Enum):
     NO_Type = 0
@@ -303,7 +304,6 @@ model.addConstr((aaa == 0) >> (intermediate == Intermediate))
 
 
 
-
 # sharding/tiling kernel
 tile_size = model.addVar(name='tile_size', vtype=gp.GRB.INTEGER, lb=1)
 num_tile = model.addVar(name='num_tile', vtype=gp.GRB.INTEGER, lb=0)
@@ -320,6 +320,11 @@ for i in range(num_kernel):
     elif sharding[i] == Dim.K_DIM.value:
         model.addConstr(shard_M[i] == M[i])
         model.addConstr(shard_K[i] * TP >= K[i])
+    elif sharding[i] == Dim.NO_SHARDING.value:
+        model.addConstr(shard_M[i] == M[i])
+        model.addConstr(shard_K[i] == K[i])
+    else:
+        raise Exception('Wrong!')
     model.addConstr(shard_N[i] == tile_size)
 
 
@@ -566,9 +571,6 @@ model.addConstr(II == np.ones((C)) @ Per_Config_II * layers_per_stage + p2p_late
 util = model.addVar(name='util', vtype=gp.GRB.CONTINUOUS, lb=0)
 model.addConstr(util * II * GFLOPS * num_chip == FLOP)
 
-
-# sample_per_sec = model.addMVar(1, name='sample_per_sec', vtype=gp.GRB.CONTINUOUS, lb=0)
-# model.addConstr(sample_per_sec[0] * II[0] == 1e9 * micro_batch_size)
 
 
 model.setObjective(util, gp.GRB.MAXIMIZE)
