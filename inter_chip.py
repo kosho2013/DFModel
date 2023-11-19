@@ -36,17 +36,20 @@ for kernel in dse.dataflow_graph.kernels:
 
 output_tensor_size = []
 for kernel in dse.dataflow_graph.kernels:
-    output_tensor_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        output_tensor_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size)
 
 
 kernel_type = []
 for kernel in dse.dataflow_graph.kernels:
-    kernel_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.type)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        kernel_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.type)
 
 
 outer = []
 for kernel in dse.dataflow_graph.kernels:
-    outer.append(kernel.batch_gemm_elementwise_outer_m_k_n.outer)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        outer.append(kernel.batch_gemm_elementwise_outer_m_k_n.outer)
 
 
 startIdx = []
@@ -74,25 +77,29 @@ num_edge = len(edge_dict)
 input_tensor_1_id = []
 input_tensor_2_id = []
 for kernel in dse.dataflow_graph.kernels:
-    input_tensor_1_id.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id)
-    input_tensor_2_id.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        input_tensor_1_id.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id)
+        input_tensor_2_id.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id)
 
 
 
 
 weight_tensor_size = []
 for kernel in dse.dataflow_graph.kernels:
-    weight_tensor_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        weight_tensor_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size)
 
 
 input_tensor_1_size = []
 for kernel in dse.dataflow_graph.kernels:
-    input_tensor_1_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        input_tensor_1_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size)
 
 
 input_tensor_2_size = []
 for kernel in dse.dataflow_graph.kernels:
-    input_tensor_2_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        input_tensor_2_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size)
 
 tensor_size = []
 for connection in dse.dataflow_graph.connections:
@@ -169,9 +176,8 @@ class Communication(Enum):
 
 model = gp.Model()
 model.params.NonConvex = 2
-model.Params.Threads = 10
-model.params.MIPGap = 0.1    # 10%
-model.params.TimeLimit = 300  # 5 minutes
+model.Params.Threads = 128
+model.params.TimeLimit = 36000  # 10 hours
 
 
 sharding = model.addMVar((num_kernel, 5), name='sharding', vtype=gp.GRB.BINARY) # outer,M,K,N,no sharding
@@ -230,7 +236,6 @@ for i in range(num_edge):
 
     else:
         if weight_tensor_size[downstream_node_idx] != -1: # weight is present, this edge represents outer,K,N
-            print(i)
             model.addConstr((sharding[downstream_node_idx, 0] == 1) >> (downstream_sharding[i, 2] == 1)) # shard outer
             model.addConstr((sharding[downstream_node_idx, 1] == 1) >> (downstream_sharding[i, 0] == 1)) # shard M
             model.addConstr((sharding[downstream_node_idx, 2] == 1) >> (downstream_sharding[i, 2] == 1)) # shard K
@@ -287,7 +292,6 @@ model.optimize()
 
 
 
-
 # get variable values from gurobi program
 sharding = []
 communication_size = []
@@ -313,20 +317,21 @@ for v in model.getVars():
 # update kernels
 i = 0
 for kernel in dse.dataflow_graph.kernels:
-    if sharding[i*5+0] == 1:
-        kernel.batch_gemm_elementwise_outer_m_k_n.sharding = 1
-    elif sharding[i*5+1] == 1:
-        kernel.batch_gemm_elementwise_outer_m_k_n.sharding = 2
-    elif sharding[i*5+2] == 1:
-        kernel.batch_gemm_elementwise_outer_m_k_n.sharding = 3
-    elif sharding[i*5+3] == 1:
-        kernel.batch_gemm_elementwise_outer_m_k_n.sharding = 4
-    else:
-        kernel.batch_gemm_elementwise_outer_m_k_n.sharding = 5
-        
-    kernel.batch_gemm_elementwise_outer_m_k_n.communication_size = float(communication_size[i])
-    kernel.batch_gemm_elementwise_outer_m_k_n.communication_type = int(communication_type[i])
-    i += 1
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        if sharding[i*5+0] == 1:
+            kernel.batch_gemm_elementwise_outer_m_k_n.sharding = 1
+        elif sharding[i*5+1] == 1:
+            kernel.batch_gemm_elementwise_outer_m_k_n.sharding = 2
+        elif sharding[i*5+2] == 1:
+            kernel.batch_gemm_elementwise_outer_m_k_n.sharding = 3
+        elif sharding[i*5+3] == 1:
+            kernel.batch_gemm_elementwise_outer_m_k_n.sharding = 4
+        else:
+            kernel.batch_gemm_elementwise_outer_m_k_n.sharding = 5
+            
+        kernel.batch_gemm_elementwise_outer_m_k_n.communication_size = float(communication_size[i])
+        kernel.batch_gemm_elementwise_outer_m_k_n.communication_type = int(communication_type[i])
+        i += 1
 
 
 

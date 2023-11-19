@@ -306,109 +306,109 @@ dataflow_graph {
     }
   }
   connections {
-    id: 1
     startIdx: 1
     endIdx: 2
+    id: 1
   }
   connections {
-    id: 2
     startIdx: 2
     endIdx: 3
+    id: 2
   }
   connections {
-    id: 3
     startIdx: 2
     endIdx: 4
+    id: 3
   }
   connections {
-    id: 4
     startIdx: 2
     endIdx: 5
+    id: 4
   }
   connections {
-    id: 5
     startIdx: 3
     endIdx: 6
+    id: 5
   }
   connections {
-    id: 6
     startIdx: 4
     endIdx: 6
+    id: 6
   }
   connections {
-    id: 7
     startIdx: 6
     endIdx: 7
+    id: 7
   }
   connections {
-    id: 8
     startIdx: 7
     endIdx: 8
+    id: 8
   }
   connections {
-    id: 9
     startIdx: 5
     endIdx: 9
+    id: 9
   }
   connections {
-    id: 10
     startIdx: 8
     endIdx: 9
+    id: 10
   }
   connections {
-    id: 11
     startIdx: 9
     endIdx: 10
+    id: 11
   }
   connections {
-    id: 12
     startIdx: 10
     endIdx: 11
+    id: 12
   }
   connections {
-    id: 13
     startIdx: 11
     endIdx: 12
+    id: 13
   }
   connections {
-    id: 14
     startIdx: 1
     endIdx: 12
+    id: 14
   }
   connections {
-    id: 15
     startIdx: 12
     endIdx: 13
+    id: 15
   }
   connections {
-    id: 16
     startIdx: 13
     endIdx: 14
+    id: 16
   }
   connections {
-    id: 17
     startIdx: 14
     endIdx: 15
+    id: 17
   }
   connections {
-    id: 18
     startIdx: 15
     endIdx: 16
+    id: 18
   }
   connections {
-    id: 19
     startIdx: 16
     endIdx: 17
+    id: 19
   }
   connections {
-    id: 20
     startIdx: 17
     endIdx: 18
+    id: 20
   }
   connections {
-    id: 21
     startIdx: 12
     endIdx: 18
+    id: 21
   }
 }
 system {
@@ -417,10 +417,6 @@ system {
   num_chip: 8
   link_bw_x: 25.0
   link_bw_y: 25.0
-  link_bw_z: 0.0
-  x: 8
-  y: 1
-  z: 1
   accelerator {
     name: "SN10_RDU"
     core: 640
@@ -429,8 +425,11 @@ system {
     sram_cap: 335544320.0
     freq: 1.25
     dram_bw: 100.0
-    dram_cap: 1099511627776.0
+    dram_cap: 1099511600000.0
   }
+  x: 8
+  y: 1
+  z: 1
 }
 cost {
   link_unit_price: 2.0
@@ -438,7 +437,7 @@ cost {
   dram_unit_price: 1.0
 }
 training {
-  optimization: 1
+  optimization: FLASHATTENTION
   seq_len: 2048
   num_layer: 96
 }

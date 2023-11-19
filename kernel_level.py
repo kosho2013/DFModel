@@ -57,49 +57,61 @@ class Optimization(Enum):
     KERNEL_BY_KERNEL = 2
 
 kernel_name = []
+i = 0
 for kernel in dse.dataflow_graph.kernels:
     kernel_name.append(kernel.name)
-
+    print(kernel.name, i)
+    i += 1
+    
 kernel_type = []
 for kernel in dse.dataflow_graph.kernels:
-    kernel_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.type)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        kernel_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.type)
 
 outer = []
 for kernel in dse.dataflow_graph.kernels:
-    outer.append(kernel.batch_gemm_elementwise_outer_m_k_n.outer)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        outer.append(kernel.batch_gemm_elementwise_outer_m_k_n.outer)
 
 M = []
 for kernel in dse.dataflow_graph.kernels:
-    M.append(kernel.batch_gemm_elementwise_outer_m_k_n.M)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        M.append(kernel.batch_gemm_elementwise_outer_m_k_n.M)
 
 for i in range(len(M)):
     M[i] *= outer[i]
 
 K = []
 for kernel in dse.dataflow_graph.kernels:
-    K.append(kernel.batch_gemm_elementwise_outer_m_k_n.K)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        K.append(kernel.batch_gemm_elementwise_outer_m_k_n.K)
 
 N = []
 for kernel in dse.dataflow_graph.kernels:
-    N.append(kernel.batch_gemm_elementwise_outer_m_k_n.N)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        N.append(kernel.batch_gemm_elementwise_outer_m_k_n.N)
 
 sharding = []
 for kernel in dse.dataflow_graph.kernels:
-    sharding.append(kernel.batch_gemm_elementwise_outer_m_k_n.sharding)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        sharding.append(kernel.batch_gemm_elementwise_outer_m_k_n.sharding)
 
 
 kernel_type = []
 for kernel in dse.dataflow_graph.kernels:
-    kernel_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.type)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        kernel_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.type)
 
 node_communication_type = []
 for kernel in dse.dataflow_graph.kernels:
-    node_communication_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.communication_type)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        node_communication_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.communication_type)
 
 
 node_communication_size = []
 for kernel in dse.dataflow_graph.kernels:
-    node_communication_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.communication_size)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        node_communication_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.communication_size)
         
 node_dict = {}
 i = 0
@@ -130,16 +142,6 @@ tensor_size = []
 for connection in dse.dataflow_graph.connections:
     tensor_size.append(connection.tensor_size)
 
-
-edge_communication_type = []
-for connection in dse.dataflow_graph.connections:
-    edge_communication_type.append(connection.communication_type)
-
-
-edge_communication_size = []
-for connection in dse.dataflow_graph.connections:
-    edge_communication_size.append(connection.communication_size)
-
 num_edge = len(startIdx)
     
 
@@ -150,9 +152,10 @@ weights = []
 i = 0
 for kernel in dse.dataflow_graph.kernels:
     if kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size != -1:
-        weights.append(kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size)
-        weight_dict[i] = kernel.id
-        i += 1
+        if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+            weights.append(kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size)
+            weight_dict[i] = kernel.id
+            i += 1
 
 num_weight = len(weights)
 
@@ -215,6 +218,7 @@ else: # 3D Torus
 
 
 
+
 FLOP = 0.0
 for i in range(len(M)):
     if kernel_type[i] == KernelType.SIMD.value:
@@ -225,16 +229,14 @@ FLOP *= num_layer
 
 
 
-C = num_kernel
+
 
 
 
 model = gp.Model()
 model.params.NonConvex = 2
 model.Params.Threads = 128
-model.params.MIPGap = 0.05    # 5%
 model.params.TimeLimit = 36000  # 10 hours
-model.optimize()
 
 
 
@@ -352,17 +354,11 @@ for i in range(num_kernel):
         model.addConstr(shard_node_communication_size[i] == 0)
 
 
-# sharding edge communication
-shard_edge_communication_size = model.addMVar(num_edge, name='shard_edge_communication_size', vtype=gp.GRB.CONTINUOUS, lb=0)
-for i in range(num_edge):
-    if edge_communication_size[i] > 0:
-        model.addConstr(shard_edge_communication_size[i] == shard_intermediate_buffer_size[i])
-    else:
-        model.addConstr(shard_edge_communication_size[i] == 0)
 
 
 
 
+C = 4
 
 Config = model.addMVar(num_kernel, name='Config', vtype=gp.GRB.INTEGER, lb=0)
 Ab_onchip = model.addMVar((num_edge, C), name='Ab_onchip', vtype=gp.GRB.BINARY) # on-chip
@@ -372,17 +368,19 @@ Ad = model.addMVar((num_weight, C), name='Ad', vtype=gp.GRB.BINARY)
 
 
 
-# model.addConstr(Config[0] == 0)
-# model.addConstr(Config[1] == 0)
-# model.addConstr(Config[2] == 0)
-# model.addConstr(Config[3] == 1)
-# model.addConstr(Config[4] == 1)
-# model.addConstr(Config[5] == 1)
-# model.addConstr(Config[6] == 1)
-# model.addConstr(Config[7] == 2)
-# model.addConstr(Config[8] == 3)
+model.addConstr(Config[0] == 0) # Q
+model.addConstr(Config[1] == 0) # K
+model.addConstr(Config[2] == 0) # V
 
-# model.addConstr(tile_size == 32)
+# model.addConstr(Config[5] == 1) # MHA1
+# model.addConstr(Config[8] == 1) # MHA2
+# model.addConstr(Config[9] == 1) # Proj GEM
+
+# model.addConstr(Config[13] == 2) # FFN0
+# model.addConstr(Config[15] == 3) # FFN1
+
+
+model.addConstr(tile_size == 32)
 
 
 
@@ -402,11 +400,16 @@ for i in range(num_edge):
     model.addConstr(Config[node_dict[startIdx[i]]] <= Config[node_dict[endIdx[i]]])
 
 
-# for kernel-by-kernel
+
+# every config must have a kernel (not needed)
+for i in range(C):
+    model.addConstr(np.ones((num_kernel)) @ Ac[:, i] >= 1)
+
+
+# for kernel-by-kernel or flashattention
 if opt == Optimization.KERNEL_BY_KERNEL.value:
-    t3 = np.ones((num_kernel))
     for i in range(C):
-        model.addConstr(t3 @ Ac[:, i] >= 1)
+        model.addConstr(np.ones((num_kernel)) @ Ac[:, i] >= 1)
     model.addConstr(tile_size == seq_len)
 
 
@@ -532,18 +535,46 @@ for i in range(C):
     model.addConstr(t2 == gp.max_(t1[j] for j in range(num_kernel)))
     model.addConstr(Compute_Latency[i] == t2 * num_tile / Freq)
 
+
+DRAM_bytes = model.addMVar(C, name='DRAM_bytes', vtype=gp.GRB.CONTINUOUS, lb=0)
 DRAM_Latency = model.addMVar(num_kernel, name='DRAM_Latency', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
     t1 = model.addVar(vtype=gp.GRB.CONTINUOUS)
     model.addConstr(t1 == shard_intermediate_buffer_size @ Ab_dram[:, i])
     model.addConstr(DRAM_Latency[i] * DRAM_BW == t1 * num_tile)
+    model.addConstr(DRAM_bytes[i] == t1 * num_tile)
+    
+aaa = model.addVar(vtype=gp.GRB.CONTINUOUS) 
+model.addConstr(aaa == np.ones((C)) @ DRAM_bytes)
+total_DRAM_bytes = model.addVar(name='total_DRAM_bytes', vtype=gp.GRB.CONTINUOUS)  
+model.addConstr(total_DRAM_bytes == aaa * layers_per_stage)
 
-allreduce_ratio = 1
+
+
+
+allreduce_ratio = model.addVar(name='allreduce_ratio', vtype=gp.GRB.CONTINUOUS) 
+if len(topology) == 2:
+    model.addConstr(allreduce_ratio * TP == TP - 1)
+else:
+    a = 1
+    
+Network_bytes = model.addMVar(C, name='Network_bytes', vtype=gp.GRB.CONTINUOUS, lb=0)
 Network_Latency = model.addMVar(num_kernel, name='Network_Latency', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
     t1 = model.addVar(vtype=gp.GRB.CONTINUOUS)
     model.addConstr(t1 == Ac[:, i] @ shard_node_communication_size)
-    model.addConstr(Network_Latency[i] * Link_BW_X == t1 * allreduce_ratio * num_tile)
+    t2 = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    model.addConstr(t2 == allreduce_ratio * num_tile)
+    model.addConstr(Network_Latency[i] * Link_BW_X == t1 * t2)
+    model.addConstr(Network_bytes[i] == t1 * t2)
+
+aaa = model.addVar(vtype=gp.GRB.CONTINUOUS) 
+model.addConstr(aaa == np.ones((C)) @ Network_bytes)
+total_Network_bytes = model.addVar(name='total_Network_bytes', vtype=gp.GRB.CONTINUOUS)  
+model.addConstr(total_Network_bytes == aaa * layers_per_stage)
+
+
+
 
 Latency_wo_setup = model.addMVar(C, name='Latency_wo_setup', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
@@ -583,6 +614,7 @@ shard_K = []
 shard_N = []
 shard_intermediate_buffer_size = []
 shard_initiation_buffer_size = []
+Config = []
 for v in model.getVars():
     print(v.varName, v.X)
     
@@ -598,20 +630,34 @@ for v in model.getVars():
         shard_initiation_buffer_size.append(v.X)
     if v.varName.startswith('II'):
         II = v.X
-
+    if v.varName.startswith('util'):
+        util = v.X
+    if v.varName.startswith('total_DRAM_bytes'):
+        total_DRAM_bytes = v.X
+    if v.varName.startswith('total_Network_bytes'):
+        total_Network_bytes = v.X
+    if v.varName.startswith('Config'):
+        Config.append(v.X)
+        
 
 print('GFLOPS', GFLOPS)
-print('FLOP', FLOP)
+print('FLOP', FLOP / num_chip)
+print('util', util)
+print('OI Memory', FLOP / num_chip / total_DRAM_bytes)
+print('OI network', FLOP / num_chip / total_Network_bytes)
+
 
 
 
 # update kernels
 i = 0
 for kernel in dse.dataflow_graph.kernels:
-    kernel.batch_gemm_elementwise_outer_m_k_n.shard_outer_M = int(shard_M[i])
-    kernel.batch_gemm_elementwise_outer_m_k_n.shard_K = int(shard_K[i])
-    kernel.batch_gemm_elementwise_outer_m_k_n.shard_N = int(shard_N[i])
-    i += 1
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        kernel.batch_gemm_elementwise_outer_m_k_n.shard_outer_M = int(shard_M[i])
+        kernel.batch_gemm_elementwise_outer_m_k_n.shard_K = int(shard_K[i])
+        kernel.batch_gemm_elementwise_outer_m_k_n.shard_N = int(shard_N[i])
+        kernel.config = int(Config[i])
+        i += 1
 
 
 # update edges
@@ -624,9 +670,10 @@ for connection in dse.dataflow_graph.connections:
 # update weights
 i = 0
 for kernel in dse.dataflow_graph.kernels:
-    if kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size != -1:
-        kernel.batch_gemm_elementwise_outer_m_k_n.shard_weight_size = float(shard_initiation_buffer_size[i])
-        i += 1
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        if kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size != -1:
+            kernel.batch_gemm_elementwise_outer_m_k_n.shard_weight_size = float(shard_initiation_buffer_size[i])
+            i += 1
 
 
 

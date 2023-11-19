@@ -9,6 +9,7 @@ message Kernel {
 	}
 
 	int32 topological_number = 5;
+	int32 config = 6;
 }
 
 message Batch_GEMM_ELEMENTWISE_OUTER_M_K_N {
