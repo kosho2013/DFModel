@@ -1,0 +1,422 @@
+Set parameter Username
+Academic license - for non-commercial use only - expires 2024-11-05
+Set parameter NonConvex to value 2
+Set parameter Threads to value 128
+Set parameter TimeLimit to value 36000
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (linux64)
+
+CPU model: Intel(R) Xeon(R) CPU E7-8890 v3 @ 2.50GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 72 physical cores, 144 logical processors, using up to 128 threads
+
+Optimize a model with 128 rows, 295 columns and 323 nonzeros
+Model fingerprint: 0x2c72a2e4
+Model has 42 quadratic constraints
+Model has 242 general constraints
+Variable types: 61 continuous, 234 integer (216 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [2e+00, 8e+08]
+  QLMatrix range   [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 3e+00]
+  RHS range        [1e+00, 1e+00]
+  GenCon rhs range [1e+00, 8e+08]
+  GenCon coe range [1e+00, 1e+00]
+Warning: Quadratic constraints contain large coefficients
+         Consider reformulating model or setting NumericFocus parameter
+         to avoid numerical issues.
+Presolve removed 102 rows and 227 columns
+Presolve time: 0.01s
+Presolved: 110 rows, 89 columns, 253 nonzeros
+Presolved model has 16 SOS constraint(s)
+Variable types: 8 continuous, 81 integer (52 binary)
+Found heuristic solution: objective 1.962934e+09
+Found heuristic solution: objective 1.107296e+09
+
+Root relaxation: objective 0.000000e+00, 6 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00000    0    5 1.1073e+09    0.00000   100%     -    0s
+H    0     0                    2.516582e+08    0.00000   100%     -    0s
+     0     0 5.0332e+07    0    1 2.5166e+08 5.0332e+07  80.0%     -    0s
+H    0     0                    1.006633e+08 5.0332e+07  50.0%     -    0s
+     0     0 5.0332e+07    0    1 1.0066e+08 5.0332e+07  50.0%     -    0s
+
+Cutting planes:
+  Implied bound: 2
+
+Explored 1 nodes (13 simplex iterations) in 0.12 seconds (0.00 work units)
+Thread count was 128 (of 144 available processors)
+
+Solution count 4: 1.00663e+08 2.51658e+08 1.1073e+09 1.96293e+09 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.006632960000e+08, best bound 1.006632960000e+08, gap 0.0000%
+sharding[0,0] 0.0
+sharding[0,1] 0.0
+sharding[0,2] 0.0
+sharding[0,3] 0.0
+sharding[0,4] 1.0
+sharding[1,0] 0.0
+sharding[1,1] 1.0
+sharding[1,2] 0.0
+sharding[1,3] 0.0
+sharding[1,4] 0.0
+sharding[2,0] 1.0
+sharding[2,1] 0.0
+sharding[2,2] 0.0
+sharding[2,3] 0.0
+sharding[2,4] 0.0
+sharding[3,0] 1.0
+sharding[3,1] 0.0
+sharding[3,2] 0.0
+sharding[3,3] 0.0
+sharding[3,4] 0.0
+sharding[4,0] 1.0
+sharding[4,1] 0.0
+sharding[4,2] 0.0
+sharding[4,3] 0.0
+sharding[4,4] 0.0
+sharding[5,0] 1.0
+sharding[5,1] 0.0
+sharding[5,2] -0.0
+sharding[5,3] 0.0
+sharding[5,4] 0.0
+sharding[6,0] 1.0
+sharding[6,1] 0.0
+sharding[6,2] 0.0
+sharding[6,3] 0.0
+sharding[6,4] 0.0
+sharding[7,0] 1.0
+sharding[7,1] 0.0
+sharding[7,2] 0.0
+sharding[7,3] 0.0
+sharding[7,4] 0.0
+sharding[8,0] 1.0
+sharding[8,1] 0.0
+sharding[8,2] -0.0
+sharding[8,3] 0.0
+sharding[8,4] 0.0
+sharding[9,0] 0.0
+sharding[9,1] 0.0
+sharding[9,2] 1.0
+sharding[9,3] 0.0
+sharding[9,4] 0.0
+sharding[10,0] 0.0
+sharding[10,1] 0.0
+sharding[10,2] 0.0
+sharding[10,3] 0.0
+sharding[10,4] 1.0
+sharding[11,0] 0.0
+sharding[11,1] 0.0
+sharding[11,2] 0.0
+sharding[11,3] 0.0
+sharding[11,4] 1.0
+sharding[12,0] 0.0
+sharding[12,1] 0.0
+sharding[12,2] 0.0
+sharding[12,3] 0.0
+sharding[12,4] 1.0
+sharding[13,0] 0.0
+sharding[13,1] 1.0
+sharding[13,2] -0.0
+sharding[13,3] 0.0
+sharding[13,4] 0.0
+sharding[14,0] 0.0
+sharding[14,1] 1.0
+sharding[14,2] 0.0
+sharding[14,3] 0.0
+sharding[14,4] 0.0
+sharding[15,0] 0.0
+sharding[15,1] 0.0
+sharding[15,2] 1.0
+sharding[15,3] 0.0
+sharding[15,4] 0.0
+sharding[16,0] 0.0
+sharding[16,1] 1.0
+sharding[16,2] 0.0
+sharding[16,3] 0.0
+sharding[16,4] 0.0
+sharding[17,0] 0.0
+sharding[17,1] 1.0
+sharding[17,2] 0.0
+sharding[17,3] 0.0
+sharding[17,4] 0.0
+communication_type[0] -0.0
+communication_type[1] -0.0
+communication_type[2] 0.0
+communication_type[3] 0.0
+communication_type[4] 0.0
+communication_type[5] 0.0
+communication_type[6] -0.0
+communication_type[7] -0.0
+communication_type[8] 0.0
+communication_type[9] 1.0
+communication_type[10] -0.0
+communication_type[11] -0.0
+communication_type[12] -0.0
+communication_type[13] 0.0
+communication_type[14] -0.0
+communication_type[15] 1.0
+communication_type[16] -0.0
+communication_type[17] -0.0
+communication_size[0] -0.0
+communication_size[1] -0.0
+communication_size[2] 0.0
+communication_size[3] 0.0
+communication_size[4] 0.0
+communication_size[5] -0.0
+communication_size[6] -0.0
+communication_size[7] -0.0
+communication_size[8] -0.0
+communication_size[9] 50331648.0
+communication_size[10] -0.0
+communication_size[11] -0.0
+communication_size[12] -0.0
+communication_size[13] -0.0
+communication_size[14] -0.0
+communication_size[15] 50331648.0
+communication_size[16] -0.0
+communication_size[17] -0.0
+upstream_sharding[0,0] 1.0
+upstream_sharding[0,1] 0.0
+upstream_sharding[0,2] 0.0
+upstream_sharding[1,0] 0.0
+upstream_sharding[1,1] 0.0
+upstream_sharding[1,2] 1.0
+upstream_sharding[2,0] 0.0
+upstream_sharding[2,1] 0.0
+upstream_sharding[2,2] 1.0
+upstream_sharding[3,0] 0.0
+upstream_sharding[3,1] 0.0
+upstream_sharding[3,2] 1.0
+upstream_sharding[4,0] 0.0
+upstream_sharding[4,1] 0.0
+upstream_sharding[4,2] 1.0
+upstream_sharding[5,0] 0.0
+upstream_sharding[5,1] 0.0
+upstream_sharding[5,2] 1.0
+upstream_sharding[6,0] 0.0
+upstream_sharding[6,1] 0.0
+upstream_sharding[6,2] 1.0
+upstream_sharding[7,0] 0.0
+upstream_sharding[7,1] 0.0
+upstream_sharding[7,2] 1.0
+upstream_sharding[8,0] 0.0
+upstream_sharding[8,1] 0.0
+upstream_sharding[8,2] 1.0
+upstream_sharding[9,0] 0.0
+upstream_sharding[9,1] 0.0
+upstream_sharding[9,2] 1.0
+upstream_sharding[10,0] 0.0
+upstream_sharding[10,1] 0.0
+upstream_sharding[10,2] 1.0
+upstream_sharding[11,0] 1.0
+upstream_sharding[11,1] 0.0
+upstream_sharding[11,2] 0.0
+upstream_sharding[12,0] 1.0
+upstream_sharding[12,1] 0.0
+upstream_sharding[12,2] 0.0
+upstream_sharding[13,0] 1.0
+upstream_sharding[13,1] 0.0
+upstream_sharding[13,2] 0.0
+upstream_sharding[14,0] 1.0
+upstream_sharding[14,1] 0.0
+upstream_sharding[14,2] 0.0
+upstream_sharding[15,0] 1.0
+upstream_sharding[15,1] 0.0
+upstream_sharding[15,2] 0.0
+upstream_sharding[16,0] 0.0
+upstream_sharding[16,1] 0.0
+upstream_sharding[16,2] 1.0
+upstream_sharding[17,0] 0.0
+upstream_sharding[17,1] 0.0
+upstream_sharding[17,2] 1.0
+upstream_sharding[18,0] 1.0
+upstream_sharding[18,1] 0.0
+upstream_sharding[18,2] 0.0
+upstream_sharding[19,0] 0.0
+upstream_sharding[19,1] 0.0
+upstream_sharding[19,2] 1.0
+upstream_sharding[20,0] 1.0
+upstream_sharding[20,1] 0.0
+upstream_sharding[20,2] 0.0
+downstream_sharding[0,0] 0.0
+downstream_sharding[0,1] 0.0
+downstream_sharding[0,2] 1.0
+downstream_sharding[1,0] 0.0
+downstream_sharding[1,1] 0.0
+downstream_sharding[1,2] 1.0
+downstream_sharding[2,0] 0.0
+downstream_sharding[2,1] 0.0
+downstream_sharding[2,2] 1.0
+downstream_sharding[3,0] 0.0
+downstream_sharding[3,1] 0.0
+downstream_sharding[3,2] 1.0
+downstream_sharding[4,0] 0.0
+downstream_sharding[4,1] 0.0
+downstream_sharding[4,2] 1.0
+downstream_sharding[5,0] 0.0
+downstream_sharding[5,1] 0.0
+downstream_sharding[5,2] 1.0
+downstream_sharding[6,0] -0.0
+downstream_sharding[6,1] 0.0
+downstream_sharding[6,2] 1.0
+downstream_sharding[7,0] 0.0
+downstream_sharding[7,1] 0.0
+downstream_sharding[7,2] 1.0
+downstream_sharding[8,0] 0.0
+downstream_sharding[8,1] 0.0
+downstream_sharding[8,2] 1.0
+downstream_sharding[9,0] 0.0
+downstream_sharding[9,1] 0.0
+downstream_sharding[9,2] 1.0
+downstream_sharding[10,0] 0.0
+downstream_sharding[10,1] 0.0
+downstream_sharding[10,2] 1.0
+downstream_sharding[11,0] 1.0
+downstream_sharding[11,1] 0.0
+downstream_sharding[11,2] 0.0
+downstream_sharding[12,0] 1.0
+downstream_sharding[12,1] 0.0
+downstream_sharding[12,2] 0.0
+downstream_sharding[13,0] 1.0
+downstream_sharding[13,1] 0.0
+downstream_sharding[13,2] 0.0
+downstream_sharding[14,0] 1.0
+downstream_sharding[14,1] 0.0
+downstream_sharding[14,2] 0.0
+downstream_sharding[15,0] 1.0
+downstream_sharding[15,1] 0.0
+downstream_sharding[15,2] 0.0
+downstream_sharding[16,0] 0.0
+downstream_sharding[16,1] 0.0
+downstream_sharding[16,2] 1.0
+downstream_sharding[17,0] 0.0
+downstream_sharding[17,1] 0.0
+downstream_sharding[17,2] 1.0
+downstream_sharding[18,0] 0.0
+downstream_sharding[18,1] 0.0
+downstream_sharding[18,2] 1.0
+downstream_sharding[19,0] 0.0
+downstream_sharding[19,1] 0.0
+downstream_sharding[19,2] 1.0
+downstream_sharding[20,0] 0.0
+downstream_sharding[20,1] 0.0
+downstream_sharding[20,2] 1.0
+edge_communication_type[0] 0.0
+edge_communication_type[1] 0.0
+edge_communication_type[2] 0.0
+edge_communication_type[3] 0.0
+edge_communication_type[4] 0.0
+edge_communication_type[5] 0.0
+edge_communication_type[6] 0.0
+edge_communication_type[7] 0.0
+edge_communication_type[8] 0.0
+edge_communication_type[9] 0.0
+edge_communication_type[10] 0.0
+edge_communication_type[11] 0.0
+edge_communication_type[12] 0.0
+edge_communication_type[13] 0.0
+edge_communication_type[14] 0.0
+edge_communication_type[15] 0.0
+edge_communication_type[16] 0.0
+edge_communication_type[17] 0.0
+edge_communication_type[18] 0.0
+edge_communication_type[19] 0.0
+edge_communication_type[20] 0.0
+edge_communication_size[0] 0.0
+edge_communication_size[1] 0.0
+edge_communication_size[2] 0.0
+edge_communication_size[3] 0.0
+edge_communication_size[4] 0.0
+edge_communication_size[5] 0.0
+edge_communication_size[6] 0.0
+edge_communication_size[7] -0.0
+edge_communication_size[8] 0.0
+edge_communication_size[9] 0.0
+edge_communication_size[10] 0.0
+edge_communication_size[11] 0.0
+edge_communication_size[12] 0.0
+edge_communication_size[13] 0.0
+edge_communication_size[14] 0.0
+edge_communication_size[15] 0.0
+edge_communication_size[16] 0.0
+edge_communication_size[17] 0.0
+edge_communication_size[18] 0.0
+edge_communication_size[19] 0.0
+edge_communication_size[20] 0.0
+total_communication_size 100663296.0
+Add_Prev_Layer 0
+LayerNorm_1 1
+Q 2
+K 3
+V 4
+MHA_GEMM_1 5
+SOFTMAX 6
+DropOut_1 7
+MHA_GEMM_2 8
+PROJ_GEMM 9
+DropOut_2 10
+Add_1 11
+LayerNorm_2 12
+FFN0 13
+GeLU 14
+FFN1 15
+DropOut_3 16
+Add_2 17
+Set parameter Username
+Academic license - for non-commercial use only - expires 2024-11-05
+Set parameter NonConvex to value 2
+Set parameter Threads to value 128
+Set parameter TimeLimit to value 36000
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (linux64)
+
+CPU model: Intel(R) Xeon(R) CPU E7-8890 v3 @ 2.50GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 72 physical cores, 144 logical processors, using up to 128 threads
+
+Optimize a model with 575 rows, 3616 columns and 1726 nonzeros
+Model fingerprint: 0x351e7196
+Model has 719 quadratic constraints
+Model has 2902 general constraints
+Variable types: 347 continuous, 3269 integer (2701 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  QMatrix range    [8e-01, 2e+06]
+  QLMatrix range   [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+04]
+  QRHS range       [1e+00, 7e+14]
+  GenCon rhs range [1e+00, 5e+07]
+  GenCon coe range [1e+00, 1e+00]
+Warning: Model contains large rhs on quadratic constraints
+         Consider reformulating model or setting NumericFocus parameter
+         to avoid numerical issues.
+Presolve added 3217 rows and 0 columns
+Presolve removed 0 rows and 795 columns
+Presolve time: 0.18s
+Presolved: 8410 rows, 8459 columns, 23404 nonzeros
+Presolved model has 4089 SOS constraint(s)
+Presolved model has 29 quadratic constraint(s)
+Presolved model has 129 bilinear constraint(s)
+Variable types: 779 continuous, 7680 integer (3650 binary)
+
+Root relaxation: unbounded, 144 iterations, 0.01 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  postponed    0               -          -      -     -    0s
+     0     0  postponed    0               -          -      -     -    0s
+Exploring 100 nodes in MinRel heuristic
+No solution found by MinRel heuristic
+     0     2  postponed    0               -          -      -     -    3s
+    11    14 1000000.00    5 1055          - 1000000.00      -   391    5s
+  4559  1339 1000000.00   27    0          - 1000000.00      -  43.4   17s
+Exploring 10000 nodes in MinRel heuristic
+MinRel: 14 nodes explored, relaxation 2.38e+09, total elapsed time 20s
+MinRel: 1522 nodes explored, relaxation 1.65e+09, total elapsed time 25s
+MinRel: 4571 nodes explored, relaxation 1.00e+08, total elapsed time 30s

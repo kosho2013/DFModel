@@ -1,0 +1,1640 @@
+Set parameter Username
+Academic license - for non-commercial use only - expires 2024-11-05
+Set parameter NonConvex to value 2
+Set parameter Threads to value 128
+Set parameter TimeLimit to value 36000
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (linux64)
+
+CPU model: Intel(R) Xeon(R) CPU E7-8890 v3 @ 2.50GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 72 physical cores, 144 logical processors, using up to 128 threads
+
+Optimize a model with 128 rows, 295 columns and 323 nonzeros
+Model fingerprint: 0x2c72a2e4
+Model has 42 quadratic constraints
+Model has 242 general constraints
+Variable types: 61 continuous, 234 integer (216 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [2e+00, 8e+08]
+  QLMatrix range   [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 3e+00]
+  RHS range        [1e+00, 1e+00]
+  GenCon rhs range [1e+00, 8e+08]
+  GenCon coe range [1e+00, 1e+00]
+Warning: Quadratic constraints contain large coefficients
+         Consider reformulating model or setting NumericFocus parameter
+         to avoid numerical issues.
+Presolve removed 102 rows and 227 columns
+Presolve time: 0.01s
+Presolved: 110 rows, 89 columns, 253 nonzeros
+Presolved model has 16 SOS constraint(s)
+Variable types: 8 continuous, 81 integer (52 binary)
+Found heuristic solution: objective 1.962934e+09
+Found heuristic solution: objective 1.107296e+09
+
+Root relaxation: objective 0.000000e+00, 6 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00000    0    5 1.1073e+09    0.00000   100%     -    0s
+H    0     0                    2.516582e+08    0.00000   100%     -    0s
+     0     0 5.0332e+07    0    1 2.5166e+08 5.0332e+07  80.0%     -    0s
+H    0     0                    1.006633e+08 5.0332e+07  50.0%     -    0s
+     0     0 5.0332e+07    0    1 1.0066e+08 5.0332e+07  50.0%     -    0s
+
+Cutting planes:
+  Implied bound: 2
+
+Explored 1 nodes (13 simplex iterations) in 0.18 seconds (0.00 work units)
+Thread count was 128 (of 144 available processors)
+
+Solution count 4: 1.00663e+08 2.51658e+08 1.1073e+09 1.96293e+09 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.006632960000e+08, best bound 1.006632960000e+08, gap 0.0000%
+sharding[0,0] 0.0
+sharding[0,1] 0.0
+sharding[0,2] 0.0
+sharding[0,3] 0.0
+sharding[0,4] 1.0
+sharding[1,0] 0.0
+sharding[1,1] 1.0
+sharding[1,2] 0.0
+sharding[1,3] 0.0
+sharding[1,4] 0.0
+sharding[2,0] 1.0
+sharding[2,1] 0.0
+sharding[2,2] 0.0
+sharding[2,3] 0.0
+sharding[2,4] 0.0
+sharding[3,0] 1.0
+sharding[3,1] 0.0
+sharding[3,2] 0.0
+sharding[3,3] 0.0
+sharding[3,4] 0.0
+sharding[4,0] 1.0
+sharding[4,1] 0.0
+sharding[4,2] 0.0
+sharding[4,3] 0.0
+sharding[4,4] 0.0
+sharding[5,0] 1.0
+sharding[5,1] 0.0
+sharding[5,2] -0.0
+sharding[5,3] 0.0
+sharding[5,4] 0.0
+sharding[6,0] 1.0
+sharding[6,1] 0.0
+sharding[6,2] 0.0
+sharding[6,3] 0.0
+sharding[6,4] 0.0
+sharding[7,0] 1.0
+sharding[7,1] 0.0
+sharding[7,2] 0.0
+sharding[7,3] 0.0
+sharding[7,4] 0.0
+sharding[8,0] 1.0
+sharding[8,1] 0.0
+sharding[8,2] -0.0
+sharding[8,3] 0.0
+sharding[8,4] 0.0
+sharding[9,0] 0.0
+sharding[9,1] 0.0
+sharding[9,2] 1.0
+sharding[9,3] 0.0
+sharding[9,4] 0.0
+sharding[10,0] 0.0
+sharding[10,1] 0.0
+sharding[10,2] 0.0
+sharding[10,3] 0.0
+sharding[10,4] 1.0
+sharding[11,0] 0.0
+sharding[11,1] 0.0
+sharding[11,2] 0.0
+sharding[11,3] 0.0
+sharding[11,4] 1.0
+sharding[12,0] 0.0
+sharding[12,1] 0.0
+sharding[12,2] 0.0
+sharding[12,3] 0.0
+sharding[12,4] 1.0
+sharding[13,0] 0.0
+sharding[13,1] 1.0
+sharding[13,2] -0.0
+sharding[13,3] 0.0
+sharding[13,4] 0.0
+sharding[14,0] 0.0
+sharding[14,1] 1.0
+sharding[14,2] 0.0
+sharding[14,3] 0.0
+sharding[14,4] 0.0
+sharding[15,0] 0.0
+sharding[15,1] 0.0
+sharding[15,2] 1.0
+sharding[15,3] 0.0
+sharding[15,4] 0.0
+sharding[16,0] 0.0
+sharding[16,1] 1.0
+sharding[16,2] 0.0
+sharding[16,3] 0.0
+sharding[16,4] 0.0
+sharding[17,0] 0.0
+sharding[17,1] 1.0
+sharding[17,2] 0.0
+sharding[17,3] 0.0
+sharding[17,4] 0.0
+communication_type[0] -0.0
+communication_type[1] -0.0
+communication_type[2] 0.0
+communication_type[3] 0.0
+communication_type[4] 0.0
+communication_type[5] 0.0
+communication_type[6] -0.0
+communication_type[7] -0.0
+communication_type[8] 0.0
+communication_type[9] 1.0
+communication_type[10] -0.0
+communication_type[11] -0.0
+communication_type[12] -0.0
+communication_type[13] 0.0
+communication_type[14] -0.0
+communication_type[15] 1.0
+communication_type[16] -0.0
+communication_type[17] -0.0
+communication_size[0] -0.0
+communication_size[1] -0.0
+communication_size[2] 0.0
+communication_size[3] 0.0
+communication_size[4] 0.0
+communication_size[5] -0.0
+communication_size[6] -0.0
+communication_size[7] -0.0
+communication_size[8] -0.0
+communication_size[9] 50331648.0
+communication_size[10] -0.0
+communication_size[11] -0.0
+communication_size[12] -0.0
+communication_size[13] -0.0
+communication_size[14] -0.0
+communication_size[15] 50331648.0
+communication_size[16] -0.0
+communication_size[17] -0.0
+upstream_sharding[0,0] 1.0
+upstream_sharding[0,1] 0.0
+upstream_sharding[0,2] 0.0
+upstream_sharding[1,0] 0.0
+upstream_sharding[1,1] 0.0
+upstream_sharding[1,2] 1.0
+upstream_sharding[2,0] 0.0
+upstream_sharding[2,1] 0.0
+upstream_sharding[2,2] 1.0
+upstream_sharding[3,0] 0.0
+upstream_sharding[3,1] 0.0
+upstream_sharding[3,2] 1.0
+upstream_sharding[4,0] 0.0
+upstream_sharding[4,1] 0.0
+upstream_sharding[4,2] 1.0
+upstream_sharding[5,0] 0.0
+upstream_sharding[5,1] 0.0
+upstream_sharding[5,2] 1.0
+upstream_sharding[6,0] 0.0
+upstream_sharding[6,1] 0.0
+upstream_sharding[6,2] 1.0
+upstream_sharding[7,0] 0.0
+upstream_sharding[7,1] 0.0
+upstream_sharding[7,2] 1.0
+upstream_sharding[8,0] 0.0
+upstream_sharding[8,1] 0.0
+upstream_sharding[8,2] 1.0
+upstream_sharding[9,0] 0.0
+upstream_sharding[9,1] 0.0
+upstream_sharding[9,2] 1.0
+upstream_sharding[10,0] 0.0
+upstream_sharding[10,1] 0.0
+upstream_sharding[10,2] 1.0
+upstream_sharding[11,0] 1.0
+upstream_sharding[11,1] 0.0
+upstream_sharding[11,2] 0.0
+upstream_sharding[12,0] 1.0
+upstream_sharding[12,1] 0.0
+upstream_sharding[12,2] 0.0
+upstream_sharding[13,0] 1.0
+upstream_sharding[13,1] 0.0
+upstream_sharding[13,2] 0.0
+upstream_sharding[14,0] 1.0
+upstream_sharding[14,1] 0.0
+upstream_sharding[14,2] 0.0
+upstream_sharding[15,0] 1.0
+upstream_sharding[15,1] 0.0
+upstream_sharding[15,2] 0.0
+upstream_sharding[16,0] 0.0
+upstream_sharding[16,1] 0.0
+upstream_sharding[16,2] 1.0
+upstream_sharding[17,0] 0.0
+upstream_sharding[17,1] 0.0
+upstream_sharding[17,2] 1.0
+upstream_sharding[18,0] 1.0
+upstream_sharding[18,1] 0.0
+upstream_sharding[18,2] 0.0
+upstream_sharding[19,0] 0.0
+upstream_sharding[19,1] 0.0
+upstream_sharding[19,2] 1.0
+upstream_sharding[20,0] 1.0
+upstream_sharding[20,1] 0.0
+upstream_sharding[20,2] 0.0
+downstream_sharding[0,0] 0.0
+downstream_sharding[0,1] 0.0
+downstream_sharding[0,2] 1.0
+downstream_sharding[1,0] 0.0
+downstream_sharding[1,1] 0.0
+downstream_sharding[1,2] 1.0
+downstream_sharding[2,0] 0.0
+downstream_sharding[2,1] 0.0
+downstream_sharding[2,2] 1.0
+downstream_sharding[3,0] 0.0
+downstream_sharding[3,1] 0.0
+downstream_sharding[3,2] 1.0
+downstream_sharding[4,0] 0.0
+downstream_sharding[4,1] 0.0
+downstream_sharding[4,2] 1.0
+downstream_sharding[5,0] 0.0
+downstream_sharding[5,1] 0.0
+downstream_sharding[5,2] 1.0
+downstream_sharding[6,0] -0.0
+downstream_sharding[6,1] 0.0
+downstream_sharding[6,2] 1.0
+downstream_sharding[7,0] 0.0
+downstream_sharding[7,1] 0.0
+downstream_sharding[7,2] 1.0
+downstream_sharding[8,0] 0.0
+downstream_sharding[8,1] 0.0
+downstream_sharding[8,2] 1.0
+downstream_sharding[9,0] 0.0
+downstream_sharding[9,1] 0.0
+downstream_sharding[9,2] 1.0
+downstream_sharding[10,0] 0.0
+downstream_sharding[10,1] 0.0
+downstream_sharding[10,2] 1.0
+downstream_sharding[11,0] 1.0
+downstream_sharding[11,1] 0.0
+downstream_sharding[11,2] 0.0
+downstream_sharding[12,0] 1.0
+downstream_sharding[12,1] 0.0
+downstream_sharding[12,2] 0.0
+downstream_sharding[13,0] 1.0
+downstream_sharding[13,1] 0.0
+downstream_sharding[13,2] 0.0
+downstream_sharding[14,0] 1.0
+downstream_sharding[14,1] 0.0
+downstream_sharding[14,2] 0.0
+downstream_sharding[15,0] 1.0
+downstream_sharding[15,1] 0.0
+downstream_sharding[15,2] 0.0
+downstream_sharding[16,0] 0.0
+downstream_sharding[16,1] 0.0
+downstream_sharding[16,2] 1.0
+downstream_sharding[17,0] 0.0
+downstream_sharding[17,1] 0.0
+downstream_sharding[17,2] 1.0
+downstream_sharding[18,0] 0.0
+downstream_sharding[18,1] 0.0
+downstream_sharding[18,2] 1.0
+downstream_sharding[19,0] 0.0
+downstream_sharding[19,1] 0.0
+downstream_sharding[19,2] 1.0
+downstream_sharding[20,0] 0.0
+downstream_sharding[20,1] 0.0
+downstream_sharding[20,2] 1.0
+edge_communication_type[0] 0.0
+edge_communication_type[1] 0.0
+edge_communication_type[2] 0.0
+edge_communication_type[3] 0.0
+edge_communication_type[4] 0.0
+edge_communication_type[5] 0.0
+edge_communication_type[6] 0.0
+edge_communication_type[7] 0.0
+edge_communication_type[8] 0.0
+edge_communication_type[9] 0.0
+edge_communication_type[10] 0.0
+edge_communication_type[11] 0.0
+edge_communication_type[12] 0.0
+edge_communication_type[13] 0.0
+edge_communication_type[14] 0.0
+edge_communication_type[15] 0.0
+edge_communication_type[16] 0.0
+edge_communication_type[17] 0.0
+edge_communication_type[18] 0.0
+edge_communication_type[19] 0.0
+edge_communication_type[20] 0.0
+edge_communication_size[0] 0.0
+edge_communication_size[1] 0.0
+edge_communication_size[2] 0.0
+edge_communication_size[3] 0.0
+edge_communication_size[4] 0.0
+edge_communication_size[5] 0.0
+edge_communication_size[6] 0.0
+edge_communication_size[7] -0.0
+edge_communication_size[8] 0.0
+edge_communication_size[9] 0.0
+edge_communication_size[10] 0.0
+edge_communication_size[11] 0.0
+edge_communication_size[12] 0.0
+edge_communication_size[13] 0.0
+edge_communication_size[14] 0.0
+edge_communication_size[15] 0.0
+edge_communication_size[16] 0.0
+edge_communication_size[17] 0.0
+edge_communication_size[18] 0.0
+edge_communication_size[19] 0.0
+edge_communication_size[20] 0.0
+total_communication_size 100663296.0
+Add_Prev_Layer 0
+LayerNorm_1 1
+Q 2
+K 3
+V 4
+MHA_GEMM_1 5
+SOFTMAX 6
+DropOut_1 7
+MHA_GEMM_2 8
+PROJ_GEMM 9
+DropOut_2 10
+Add_1 11
+LayerNorm_2 12
+FFN0 13
+GeLU 14
+FFN1 15
+DropOut_3 16
+Add_2 17
+Set parameter Username
+Academic license - for non-commercial use only - expires 2024-11-05
+Set parameter NonConvex to value 2
+Set parameter Threads to value 128
+Set parameter TimeLimit to value 36000
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (linux64)
+
+CPU model: Intel(R) Xeon(R) CPU E7-8890 v3 @ 2.50GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 72 physical cores, 144 logical processors, using up to 128 threads
+
+Optimize a model with 277 rows, 1096 columns and 574 nonzeros
+Model fingerprint: 0x62517842
+Model has 257 quadratic constraints
+Model has 648 general constraints
+Variable types: 179 continuous, 917 integer (601 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  QMatrix range    [8e-01, 2e+06]
+  QLMatrix range   [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+04]
+  QRHS range       [1e+00, 7e+14]
+  GenCon rhs range [1e+00, 5e+07]
+  GenCon coe range [1e+00, 1e+00]
+Warning: Model contains large rhs on quadratic constraints
+         Consider reformulating model or setting NumericFocus parameter
+         to avoid numerical issues.
+Presolve removed 197 rows and 880 columns
+Presolve time: 0.01s
+Presolved: 343 rows, 308 columns, 980 nonzeros
+Presolved model has 77 SOS constraint(s)
+Presolved model has 15 quadratic constraint(s)
+Presolved model has 51 bilinear constraint(s)
+Variable types: 74 continuous, 234 integer (57 binary)
+
+Root relaxation: objective 7.124958e-01, 98 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.71250    0   22          -    0.71250      -     -    0s
+     0     0    0.71250    0   36          -    0.71250      -     -    0s
+     0     0    0.71250    0   67          -    0.71250      -     -    0s
+     0     0    0.71250    0   66          -    0.71250      -     -    0s
+     0     0    0.71222    0   52          -    0.71222      -     -    0s
+     0     0    0.71222    0   52          -    0.71222      -     -    0s
+     0     0    0.71194    0   57          -    0.71194      -     -    0s
+     0     0    0.71194    0   57          -    0.71194      -     -    0s
+     0     0    0.71164    0   56          -    0.71164      -     -    0s
+     0     0    0.71164    0   56          -    0.71164      -     -    0s
+     0     0    0.71133    0   55          -    0.71133      -     -    0s
+     0     0    0.71133    0   50          -    0.71133      -     -    0s
+     0     0    0.71100    0   49          -    0.71100      -     -    0s
+     0     0    0.71100    0   47          -    0.71100      -     -    0s
+     0     0    0.71100    0   52          -    0.71100      -     -    0s
+     0     0    0.71100    0   54          -    0.71100      -     -    0s
+     0     0    0.71100    0   49          -    0.71100      -     -    0s
+     0     0    0.71100    0   51          -    0.71100      -     -    0s
+     0     0    0.71100    0   51          -    0.71100      -     -    0s
+     0     0    0.71100    0   49          -    0.71100      -     -    0s
+     0     0    0.71100    0   41          -    0.71100      -     -    0s
+     0     0    0.71100    0   41          -    0.71100      -     -    0s
+     0     0    0.71100    0   41          -    0.71100      -     -    0s
+     0     2    0.71100    0   41          -    0.71100      -     -    0s
+H14703 10435                       0.0863828    0.71100   723%   3.2    1s
+H15101 10074                       0.4220544    0.71100  68.5%   3.2    1s
+H15487  9728                       0.4877133    0.71100  45.8%   3.2    1s
+H19642 14385                       0.5273013    0.71100  34.8%   3.0    1s
+*20520 14167             117       0.5416346    0.71100  31.3%   3.0    1s
+H21708 14147                       0.6026418    0.71100  18.0%   3.0    1s
+H28299 22211                       0.6034095    0.71100  17.8%   3.0    2s
+*29151 22204             158       0.6075772    0.71100  17.0%   3.0    2s
+*29507 22065             121       0.6091399    0.71100  16.7%   3.0    2s
+ 159772 64797    0.62849   47   45    0.60914    0.62925  3.30%   6.3    5s
+ 385832 148213    0.61115   74   10    0.60914    0.62855  3.19%   6.9   10s
+ 602476 221975 infeasible   58         0.60914    0.62841  3.16%   7.1   15s
+ 855936 311442    0.61115   93    5    0.60914    0.62805  3.10%   6.8   20s
+ 1061669 373361     cutoff   42         0.60914    0.62466  2.55%   7.1   25s
+ 1242012 415533    0.62239  147    5    0.60914    0.62239  2.18%   7.2   30s
+ 1448261 425928 infeasible   81         0.60914    0.62239  2.18%   7.1   35s
+ 1645324 430620 infeasible   78         0.60914    0.62239  2.18%   7.1   40s
+ 1824318 433395 infeasible  121         0.60914    0.62239  2.18%   7.0   45s
+ 2041919 435459    0.61406  172    6    0.60914    0.62239  2.18%   7.0   50s
+ 2238578 437299 infeasible  153         0.60914    0.62239  2.18%   6.9   55s
+ 2437058 438903    0.61896  177    3    0.60914    0.62239  2.18%   7.0   60s
+ 2636358 439356     cutoff  135         0.60914    0.62239  2.18%   6.9   65s
+ 2835295 442006    0.61896  131    3    0.60914    0.62239  2.18%   6.9   70s
+ 3053073 443398    0.61691  147    9    0.60914    0.62239  2.18%   6.8   75s
+ 3291829 445905 infeasible  119         0.60914    0.62239  2.18%   6.7   80s
+ 3504328 456376    0.61896  161    3    0.60914    0.62239  2.18%   6.7   85s
+ 3718973 459804 infeasible  176         0.60914    0.62239  2.18%   6.9   90s
+ 3932885 460859 infeasible  140         0.60914    0.62239  2.18%   7.2   95s
+ 4131949 461885    0.62239  156    4    0.60914    0.62239  2.18%   7.4  100s
+ 4303960 465548    0.62239  134    5    0.60914    0.62239  2.18%   7.5  105s
+ 4504885 468594    0.62239  201   10    0.60914    0.62239  2.18%   7.7  110s
+ 4740976 470497 infeasible  151         0.60914    0.62239  2.18%   7.9  115s
+ 4934924 472119 infeasible  168         0.60914    0.62239  2.18%   8.0  120s
+ 5133994 473290 infeasible  117         0.60914    0.62239  2.18%   8.1  125s
+ 5328974 474065    0.61896  199    3    0.60914    0.62239  2.18%   8.3  130s
+ 5541968 477035    0.61691  156    9    0.60914    0.62239  2.18%   8.4  135s
+ 5761923 480539 infeasible   99         0.60914    0.62239  2.18%   8.5  140s
+ 5997392 482516 infeasible  179         0.60914    0.62239  2.18%   8.7  145s
+ 6175305 484155 infeasible  156         0.60914    0.62239  2.18%   8.8  150s
+ 6372946 485633 infeasible  127         0.60914    0.62239  2.18%   8.8  155s
+ 6551193 486475 infeasible  138         0.60914    0.62239  2.18%   8.9  160s
+ 6746677 487431 infeasible  127         0.60914    0.62239  2.18%   8.9  165s
+ 6925663 489605 infeasible  174         0.60914    0.62239  2.18%   8.9  170s
+ 7123481 492595    0.62239  106    3    0.60914    0.62239  2.18%   8.9  175s
+ 7301978 497781 infeasible   88         0.60914    0.62239  2.18%   8.9  180s
+ 7496850 500066    0.61896  112    3    0.60914    0.62239  2.18%   8.9  185s
+ 7671898 503465    0.62239  170    5    0.60914    0.62239  2.18%   9.0  190s
+ 7851461 505548 infeasible   99         0.60914    0.62239  2.18%   9.1  195s
+ 8048516 506709    0.62239  121    3    0.60914    0.62239  2.18%   9.2  200s
+ 8224950 509187 infeasible  154         0.60914    0.62239  2.18%   9.2  205s
+ 8424247 511885     cutoff  199         0.60914    0.62239  2.18%   9.3  210s
+ 8621032 514388 infeasible  138         0.60914    0.62239  2.18%   9.3  215s
+ 8838413 517063    0.62239  130    5    0.60914    0.62239  2.18%   9.4  220s
+ 9078917 519627 infeasible  106         0.60914    0.62239  2.18%   9.3  225s
+ 9297730 522988 infeasible   69         0.60914    0.62239  2.18%   9.3  230s
+ 9496801 525167 infeasible   77         0.60914    0.62239  2.18%   9.2  235s
+ 9696608 528653    0.61896  138    3    0.60914    0.62239  2.18%   9.1  240s
+ 9936212 531815    0.62239  165    3    0.60914    0.62239  2.18%   9.0  245s
+ 10175727 536758    0.62239  133    4    0.60914    0.62239  2.18%   8.9  250s
+ 10431896 544115    0.62239  104    4    0.60914    0.62239  2.18%   8.8  255s
+ 10669257 550214    0.62239  136   11    0.60914    0.62239  2.18%   8.7  260s
+ 10910681 555768    0.62239   60   10    0.60914    0.62239  2.18%   8.6  265s
+ 11149957 562263    0.61406   82    7    0.60914    0.62239  2.18%   8.5  270s
+ 11408839 565179 infeasible   63         0.60914    0.62239  2.18%   8.4  275s
+ 11666979 566728    0.62239  100    3    0.60914    0.62239  2.18%   8.3  280s
+ 11905164 567324 infeasible  113         0.60914    0.62239  2.18%   8.2  285s
+ 12166263 572570 infeasible  145         0.60914    0.62239  2.18%   8.1  290s
+ 12423834 571835    0.62239   75    5    0.60914    0.62239  2.18%   8.0  295s
+ 12662772 576675    0.62239  194    3    0.60914    0.62239  2.18%   7.9  300s
+ 12920998 577688    0.62239  143    3    0.60914    0.62239  2.18%   7.8  305s
+ 13179762 578885 infeasible   70         0.60914    0.62239  2.18%   7.7  310s
+ 13437771 580159 infeasible  127         0.60914    0.62239  2.18%   7.7  315s
+ 13675999 582030 infeasible  111         0.60914    0.62239  2.18%   7.6  320s
+ 13934666 585080 infeasible  135         0.60914    0.62239  2.18%   7.5  325s
+ 14171628 587042    0.62239   69    5    0.60914    0.62239  2.18%   7.5  330s
+ 14409650 588620 infeasible  143         0.60914    0.62239  2.18%   7.4  335s
+ 14647393 588234    0.62239  150    4    0.60914    0.62239  2.18%   7.4  340s
+ 14895583 597401 infeasible  127         0.60914    0.62239  2.18%   7.3  345s
+ 15088111 609091 infeasible   99         0.60914    0.62239  2.18%   7.5  350s
+ 15265552 614673    0.61896  128    3    0.60914    0.62239  2.18%   7.6  355s
+ 15461074 615833     cutoff   77         0.60914    0.62239  2.18%   7.7  360s
+ 15656767 616889 infeasible  112         0.60914    0.62239  2.18%   7.8  365s
+ 15853189 618121    0.61608  184   10    0.60914    0.62239  2.18%   7.9  370s
+
+Cutting planes:
+  Gomory: 15
+  Implied bound: 30
+  Clique: 3
+  MIR: 96
+  StrongCG: 3
+  Flow cover: 6
+  Inf proof: 8
+  Mod-K: 1
+  RLT: 120
+  Relax-and-lift: 3
+
+Explored 15872407 nodes (126255769 simplex iterations) in 370.25 seconds (77.58 work units)
+Thread count was 128 (of 144 available processors)
+
+Solution count 9: 0.60914 0.607577 0.60341 ... 0.0863828
+
+Solve interrupted
+Best objective 6.091399016204e-01, best bound 6.223922654289e-01, gap 2.1756%
+X 8.0
+Y 1.0
+TP 8.0
+PP 1.0
+Link_BW_X 25.0
+Link_BW_Y 25.0
+DRAM_BW 100.0
+layers_per_stage 96.0
+C8 1.0
+intermediate 0.0
+tile_size 32.0
+num_tile 64.0
+shard_M[0] 12288.0
+shard_M[1] 1536.0
+shard_M[2] 1535.999999999999
+shard_M[3] 1536.0
+shard_M[4] 1536.0
+shard_M[5] 24576.0
+shard_M[6] 24576.0
+shard_M[7] 24576.0
+shard_M[8] 1536.0
+shard_M[9] 12288.0
+shard_M[10] 12288.0
+shard_M[11] 12288.0
+shard_M[12] 12288.0
+shard_M[13] 6144.0
+shard_M[14] 6144.0
+shard_M[15] 12288.0
+shard_M[16] 1536.0
+shard_M[17] 1536.0
+shard_K[0] 1.0
+shard_K[1] 1.0
+shard_K[2] 12288.0
+shard_K[3] 12288.0
+shard_K[4] 12288.0
+shard_K[5] 128.0
+shard_K[6] 1.0
+shard_K[7] 1.0
+shard_K[8] 2048.0
+shard_K[9] 1536.0
+shard_K[10] 1.0
+shard_K[11] 1.0
+shard_K[12] 1.0
+shard_K[13] 12288.0
+shard_K[14] 1.0
+shard_K[15] 6144.0
+shard_K[16] 1.0
+shard_K[17] 1.0
+shard_N[0] 32.0
+shard_N[1] 32.0
+shard_N[2] 32.0
+shard_N[3] 32.0
+shard_N[4] 32.0
+shard_N[5] 32.0
+shard_N[6] 32.0
+shard_N[7] 32.0
+shard_N[8] 32.0
+shard_N[9] 32.0
+shard_N[10] 32.0
+shard_N[11] 32.0
+shard_N[12] 32.0
+shard_N[13] 32.0
+shard_N[14] 32.0
+shard_N[15] 32.0
+shard_N[16] 32.0
+shard_N[17] 32.0
+shard_intermediate_buffer_size[0] 786432.0
+shard_intermediate_buffer_size[1] 98304.0
+shard_intermediate_buffer_size[2] 98304.0
+shard_intermediate_buffer_size[3] 98304.0
+shard_intermediate_buffer_size[4] 98303.99999999994
+shard_intermediate_buffer_size[5] 98304.0
+shard_intermediate_buffer_size[6] 1572864.0
+shard_intermediate_buffer_size[7] 1572864.0
+shard_intermediate_buffer_size[8] 98304.0
+shard_intermediate_buffer_size[9] 1572864.0
+shard_intermediate_buffer_size[10] 98304.0
+shard_intermediate_buffer_size[11] 786432.0
+shard_intermediate_buffer_size[12] 786432.0
+shard_intermediate_buffer_size[13] 786432.0
+shard_intermediate_buffer_size[14] 786432.0
+shard_intermediate_buffer_size[15] 786432.0
+shard_intermediate_buffer_size[16] 393216.0
+shard_intermediate_buffer_size[17] 393216.0
+shard_intermediate_buffer_size[18] 786432.0
+shard_intermediate_buffer_size[19] 98304.0
+shard_intermediate_buffer_size[20] 786432.0
+shard_initiation_buffer_size[0] 37748735.99999998
+shard_initiation_buffer_size[1] 37748736.0
+shard_initiation_buffer_size[2] 37748736.0
+shard_initiation_buffer_size[3] 37748736.0
+shard_initiation_buffer_size[4] 150994944.0
+shard_initiation_buffer_size[5] 150994944.0
+shard_node_communication_size[0] 0.0
+shard_node_communication_size[1] 0.0
+shard_node_communication_size[2] 0.0
+shard_node_communication_size[3] 0.0
+shard_node_communication_size[4] 0.0
+shard_node_communication_size[5] 0.0
+shard_node_communication_size[6] 0.0
+shard_node_communication_size[7] 0.0
+shard_node_communication_size[8] 0.0
+shard_node_communication_size[9] 786432.0
+shard_node_communication_size[10] 0.0
+shard_node_communication_size[11] 0.0
+shard_node_communication_size[12] 0.0
+shard_node_communication_size[13] 0.0
+shard_node_communication_size[14] 0.0
+shard_node_communication_size[15] 786432.0
+shard_node_communication_size[16] 0.0
+shard_node_communication_size[17] 0.0
+Config[0] -0.0
+Config[1] -0.0
+Config[2] -0.0
+Config[3] 1.0
+Config[4] 0.0
+Config[5] 1.0
+Config[6] 1.0
+Config[7] 1.0
+Config[8] 1.0
+Config[9] 2.0
+Config[10] 2.0
+Config[11] 2.0
+Config[12] 2.0
+Config[13] 2.0
+Config[14] 3.0
+Config[15] 3.0
+Config[16] 3.0
+Config[17] 3.0
+Ab_onchip[0,0] 1.0
+Ab_onchip[0,1] 0.0
+Ab_onchip[0,2] 0.0
+Ab_onchip[0,3] 0.0
+Ab_onchip[1,0] 1.0
+Ab_onchip[1,1] 0.0
+Ab_onchip[1,2] 0.0
+Ab_onchip[1,3] 0.0
+Ab_onchip[2,0] 0.0
+Ab_onchip[2,1] 0.0
+Ab_onchip[2,2] 0.0
+Ab_onchip[2,3] 0.0
+Ab_onchip[3,0] 1.0
+Ab_onchip[3,1] 0.0
+Ab_onchip[3,2] 0.0
+Ab_onchip[3,3] 0.0
+Ab_onchip[4,0] 0.0
+Ab_onchip[4,1] 0.0
+Ab_onchip[4,2] 0.0
+Ab_onchip[4,3] 0.0
+Ab_onchip[5,0] 0.0
+Ab_onchip[5,1] 1.0
+Ab_onchip[5,2] 0.0
+Ab_onchip[5,3] 0.0
+Ab_onchip[6,0] 0.0
+Ab_onchip[6,1] 1.0
+Ab_onchip[6,2] 0.0
+Ab_onchip[6,3] 0.0
+Ab_onchip[7,0] 0.0
+Ab_onchip[7,1] 1.0
+Ab_onchip[7,2] 0.0
+Ab_onchip[7,3] 0.0
+Ab_onchip[8,0] 0.0
+Ab_onchip[8,1] 0.0
+Ab_onchip[8,2] 0.0
+Ab_onchip[8,3] 0.0
+Ab_onchip[9,0] 0.0
+Ab_onchip[9,1] 1.0
+Ab_onchip[9,2] 0.0
+Ab_onchip[9,3] 0.0
+Ab_onchip[10,0] 0.0
+Ab_onchip[10,1] 0.0
+Ab_onchip[10,2] 0.0
+Ab_onchip[10,3] 0.0
+Ab_onchip[11,0] 0.0
+Ab_onchip[11,1] 0.0
+Ab_onchip[11,2] 1.0
+Ab_onchip[11,3] 0.0
+Ab_onchip[12,0] 0.0
+Ab_onchip[12,1] 0.0
+Ab_onchip[12,2] 1.0
+Ab_onchip[12,3] 0.0
+Ab_onchip[13,0] 0.0
+Ab_onchip[13,1] 0.0
+Ab_onchip[13,2] 0.0
+Ab_onchip[13,3] 0.0
+Ab_onchip[14,0] 0.0
+Ab_onchip[14,1] 0.0
+Ab_onchip[14,2] 1.0
+Ab_onchip[14,3] 0.0
+Ab_onchip[15,0] 0.0
+Ab_onchip[15,1] 0.0
+Ab_onchip[15,2] 1.0
+Ab_onchip[15,3] 0.0
+Ab_onchip[16,0] 0.0
+Ab_onchip[16,1] 0.0
+Ab_onchip[16,2] 0.0
+Ab_onchip[16,3] 0.0
+Ab_onchip[17,0] 0.0
+Ab_onchip[17,1] 0.0
+Ab_onchip[17,2] 0.0
+Ab_onchip[17,3] 1.0
+Ab_onchip[18,0] 0.0
+Ab_onchip[18,1] 0.0
+Ab_onchip[18,2] 0.0
+Ab_onchip[18,3] 1.0
+Ab_onchip[19,0] 0.0
+Ab_onchip[19,1] 0.0
+Ab_onchip[19,2] 0.0
+Ab_onchip[19,3] 1.0
+Ab_onchip[20,0] 0.0
+Ab_onchip[20,1] 0.0
+Ab_onchip[20,2] 0.0
+Ab_onchip[20,3] 0.0
+Ab_dram[0,0] 0.0
+Ab_dram[0,1] 0.0
+Ab_dram[0,2] 0.0
+Ab_dram[0,3] 0.0
+Ab_dram[1,0] 0.0
+Ab_dram[1,1] 0.0
+Ab_dram[1,2] 0.0
+Ab_dram[1,3] 0.0
+Ab_dram[2,0] 1.0
+Ab_dram[2,1] 1.0
+Ab_dram[2,2] 0.0
+Ab_dram[2,3] 0.0
+Ab_dram[3,0] 0.0
+Ab_dram[3,1] 0.0
+Ab_dram[3,2] 0.0
+Ab_dram[3,3] 0.0
+Ab_dram[4,0] 1.0
+Ab_dram[4,1] 1.0
+Ab_dram[4,2] 0.0
+Ab_dram[4,3] 0.0
+Ab_dram[5,0] 0.0
+Ab_dram[5,1] 0.0
+Ab_dram[5,2] 0.0
+Ab_dram[5,3] 0.0
+Ab_dram[6,0] 0.0
+Ab_dram[6,1] 0.0
+Ab_dram[6,2] 0.0
+Ab_dram[6,3] 0.0
+Ab_dram[7,0] 0.0
+Ab_dram[7,1] 0.0
+Ab_dram[7,2] 0.0
+Ab_dram[7,3] 0.0
+Ab_dram[8,0] 1.0
+Ab_dram[8,1] 1.0
+Ab_dram[8,2] 0.0
+Ab_dram[8,3] 0.0
+Ab_dram[9,0] 0.0
+Ab_dram[9,1] 0.0
+Ab_dram[9,2] 0.0
+Ab_dram[9,3] 0.0
+Ab_dram[10,0] 0.0
+Ab_dram[10,1] 1.0
+Ab_dram[10,2] 1.0
+Ab_dram[10,3] 0.0
+Ab_dram[11,0] 0.0
+Ab_dram[11,1] 0.0
+Ab_dram[11,2] 0.0
+Ab_dram[11,3] 0.0
+Ab_dram[12,0] 0.0
+Ab_dram[12,1] 0.0
+Ab_dram[12,2] 0.0
+Ab_dram[12,3] 0.0
+Ab_dram[13,0] 1.0
+Ab_dram[13,1] 0.0
+Ab_dram[13,2] 1.0
+Ab_dram[13,3] 0.0
+Ab_dram[14,0] 0.0
+Ab_dram[14,1] 0.0
+Ab_dram[14,2] 0.0
+Ab_dram[14,3] 0.0
+Ab_dram[15,0] 0.0
+Ab_dram[15,1] 0.0
+Ab_dram[15,2] 0.0
+Ab_dram[15,3] 0.0
+Ab_dram[16,0] 0.0
+Ab_dram[16,1] 0.0
+Ab_dram[16,2] 1.0
+Ab_dram[16,3] 1.0
+Ab_dram[17,0] 0.0
+Ab_dram[17,1] 0.0
+Ab_dram[17,2] 0.0
+Ab_dram[17,3] 0.0
+Ab_dram[18,0] 0.0
+Ab_dram[18,1] 0.0
+Ab_dram[18,2] 0.0
+Ab_dram[18,3] 0.0
+Ab_dram[19,0] 0.0
+Ab_dram[19,1] 0.0
+Ab_dram[19,2] 0.0
+Ab_dram[19,3] 0.0
+Ab_dram[20,0] 0.0
+Ab_dram[20,1] 0.0
+Ab_dram[20,2] 1.0
+Ab_dram[20,3] 1.0
+Ac[0,0] 1.0
+Ac[0,1] 0.0
+Ac[0,2] 0.0
+Ac[0,3] 0.0
+Ac[1,0] 1.0
+Ac[1,1] 0.0
+Ac[1,2] 0.0
+Ac[1,3] 0.0
+Ac[2,0] 1.0
+Ac[2,1] 0.0
+Ac[2,2] 0.0
+Ac[2,3] 0.0
+Ac[3,0] 0.0
+Ac[3,1] 1.0
+Ac[3,2] 0.0
+Ac[3,3] 0.0
+Ac[4,0] 1.0
+Ac[4,1] 0.0
+Ac[4,2] 0.0
+Ac[4,3] 0.0
+Ac[5,0] 0.0
+Ac[5,1] 1.0
+Ac[5,2] 0.0
+Ac[5,3] 0.0
+Ac[6,0] 0.0
+Ac[6,1] 1.0
+Ac[6,2] 0.0
+Ac[6,3] 0.0
+Ac[7,0] 0.0
+Ac[7,1] 1.0
+Ac[7,2] 0.0
+Ac[7,3] 0.0
+Ac[8,0] 0.0
+Ac[8,1] 1.0
+Ac[8,2] 0.0
+Ac[8,3] 0.0
+Ac[9,0] 0.0
+Ac[9,1] 0.0
+Ac[9,2] 1.0
+Ac[9,3] 0.0
+Ac[10,0] 0.0
+Ac[10,1] 0.0
+Ac[10,2] 1.0
+Ac[10,3] 0.0
+Ac[11,0] 0.0
+Ac[11,1] 0.0
+Ac[11,2] 1.0
+Ac[11,3] 0.0
+Ac[12,0] 0.0
+Ac[12,1] 0.0
+Ac[12,2] 1.0
+Ac[12,3] 0.0
+Ac[13,0] 0.0
+Ac[13,1] 0.0
+Ac[13,2] 1.0
+Ac[13,3] 0.0
+Ac[14,0] 0.0
+Ac[14,1] 0.0
+Ac[14,2] 0.0
+Ac[14,3] 1.0
+Ac[15,0] 0.0
+Ac[15,1] 0.0
+Ac[15,2] 0.0
+Ac[15,3] 1.0
+Ac[16,0] 0.0
+Ac[16,1] 0.0
+Ac[16,2] 0.0
+Ac[16,3] 1.0
+Ac[17,0] 0.0
+Ac[17,1] 0.0
+Ac[17,2] 0.0
+Ac[17,3] 1.0
+Ad[0,0] 1.0
+Ad[0,1] 0.0
+Ad[0,2] 0.0
+Ad[0,3] 0.0
+Ad[1,0] 0.0
+Ad[1,1] 1.0
+Ad[1,2] 0.0
+Ad[1,3] 0.0
+Ad[2,0] 1.0
+Ad[2,1] 0.0
+Ad[2,2] 0.0
+Ad[2,3] 0.0
+Ad[3,0] 0.0
+Ad[3,1] 0.0
+Ad[3,2] 1.0
+Ad[3,3] 0.0
+Ad[4,0] 0.0
+Ad[4,1] 0.0
+Ad[4,2] 1.0
+Ad[4,3] 0.0
+Ad[5,0] 0.0
+Ad[5,1] 0.0
+Ad[5,2] 0.0
+Ad[5,3] 1.0
+Par_lane[0] 1.0
+Par_lane[1] 1.0
+Par_lane[2] 47.99999999999997
+Par_lane[3] 47.99999999999999
+Par_lane[4] 50.0
+Par_lane[5] 24.0
+Par_lane[6] 8.0
+Par_lane[7] 19.0
+Par_lane[8] 47.999999999999936
+Par_lane[9] 16.0
+Par_lane[10] 1.0
+Par_lane[11] 1.0
+Par_lane[12] 1.0
+Par_lane[13] 203.0
+Par_lane[14] 1.0
+Par_lane[15] 77.0
+Par_lane[16] 16.0
+Par_lane[17] 1.0
+Par_stage[0] 1.0
+Par_stage[1] 1.0
+Par_stage[2] 6.0
+Par_stage[3] 6.0
+Par_stage[4] 7.0
+Par_stage[5] 2.0
+Par_stage[6] 1.0
+Par_stage[7] 1.0
+Par_stage[8] 1.0
+Par_stage[9] 6.0
+Par_stage[10] 1.0
+Par_stage[11] 1.0
+Par_stage[12] 1.0
+Par_stage[13] 2.0
+Par_stage[14] 1.0
+Par_stage[15] 8.0
+Par_stage[16] 1.0
+Par_stage[17] 1.0
+Par_total[0] 1.0
+Par_total[1] 1.0
+Par_total[2] 287.99999999999983
+Par_total[3] 288.0
+Par_total[4] 350.0
+Par_total[5] 48.0
+Par_total[6] 8.0
+Par_total[7] 19.0
+Par_total[8] 47.999999999999936
+Par_total[9] 96.0
+Par_total[10] 1.0
+Par_total[11] 1.0
+Par_total[12] 1.0
+Par_total[13] 406.0
+Par_total[14] 1.0
+Par_total[15] 616.0
+Par_total[16] 16.0
+Par_total[17] 1.0
+C447 1.0
+C448 1.0
+C449 0.0
+C450 0.0
+C451 0.0
+C452 0.0
+C453 1.0
+C454 0.0
+C455 0.0
+C456 0.0
+C457 1.0
+C458 0.0
+C459 0.0
+C460 0.0
+C461 1.0
+C462 0.0
+C463 1.0
+C464 1.0
+C465 0.0
+C466 0.0
+C467 0.0
+C468 0.0
+C469 1.0
+C470 0.0
+C471 0.0
+C472 0.0
+C473 1.0
+C474 0.0
+C475 0.0
+C476 0.0
+C477 1.0
+C478 0.0
+C479 0.0
+C480 1.0
+C481 1.0
+C482 1.0
+C483 0.0
+C484 1.0
+C485 1.0
+C486 1.0
+C487 0.0
+C488 0.0
+C489 1.0
+C490 0.0
+C491 0.0
+C492 0.0
+C493 1.0
+C494 0.0
+C495 1.0
+C496 1.0
+C497 0.0
+C498 0.0
+C499 0.0
+C500 0.0
+C501 1.0
+C502 0.0
+C503 0.0
+C504 0.0
+C505 1.0
+C506 0.0
+C507 0.0
+C508 0.0
+C509 1.0
+C510 0.0
+C511 0.0
+C512 1.0
+C513 1.0
+C514 1.0
+C515 0.0
+C516 1.0
+C517 1.0
+C518 1.0
+C519 0.0
+C520 0.0
+C521 1.0
+C522 0.0
+C523 0.0
+C524 0.0
+C525 1.0
+C526 0.0
+C527 0.0
+C528 0.0
+C529 1.0
+C530 -0.0
+C531 1.0
+C532 1.0
+C533 0.0
+C534 0.0
+C535 0.0
+C536 0.0
+C537 1.0
+C538 0.0
+C539 0.0
+C540 0.0
+C541 1.0
+C542 0.0
+C543 0.0
+C544 0.0
+C545 1.0
+C546 0.0
+C547 1.0
+C548 1.0
+C549 0.0
+C550 0.0
+C551 0.0
+C552 0.0
+C553 1.0
+C554 0.0
+C555 0.0
+C556 0.0
+C557 1.0
+C558 0.0
+C559 0.0
+C560 0.0
+C561 1.0
+C562 0.0
+C563 1.0
+C564 1.0
+C565 0.0
+C566 0.0
+C567 0.0
+C568 0.0
+C569 1.0
+C570 0.0
+C571 0.0
+C572 0.0
+C573 1.0
+C574 0.0
+C575 0.0
+C576 1.0
+C577 1.0
+C578 1.0
+C579 0.0
+C580 1.0
+C581 1.0
+C582 1.0
+C583 0.0
+C584 0.0
+C585 1.0
+C586 0.0
+C587 0.0
+C588 0.0
+C589 1.0
+C590 0.0
+C591 0.0
+C592 0.0
+C593 1.0
+C594 0.0
+C595 1.0
+C596 1.0
+C597 0.0
+C598 0.0
+C599 0.0
+C600 0.0
+C601 1.0
+C602 0.0
+C603 0.0
+C604 0.0
+C605 1.0
+C606 0.0
+C607 0.0
+C608 0.0
+C609 1.0
+C610 0.0
+C611 0.0
+C612 1.0
+C613 1.0
+C614 1.0
+C615 0.0
+C616 1.0
+C617 1.0
+C618 1.0
+C619 0.0
+C620 0.0
+C621 1.0
+C622 0.0
+C623 0.0
+C624 0.0
+C625 1.0
+C626 0.0
+C627 0.0
+C628 0.0
+C629 1.0
+C630 0.0
+C631 1.0
+C632 1.0
+C633 0.0
+C634 0.0
+C635 0.0
+C636 0.0
+C637 1.0
+C638 0.0
+C639 0.0
+C640 0.0
+C641 1.0
+C642 0.0
+C643 0.0
+C644 0.0
+C645 1.0
+C646 0.0
+C647 1.0
+C648 1.0
+C649 0.0
+C650 0.0
+C651 0.0
+C652 0.0
+C653 1.0
+C654 0.0
+C655 0.0
+C656 1.0
+C657 1.0
+C658 1.0
+C659 0.0
+C660 0.0
+C661 1.0
+C662 0.0
+C663 0.0
+C664 1.0
+C665 1.0
+C666 1.0
+C667 0.0
+C668 0.0
+C669 1.0
+C670 0.0
+C671 0.0
+C672 0.0
+C673 1.0
+C674 0.0
+C675 0.0
+C676 0.0
+C677 1.0
+C678 0.0
+C679 1.0
+C680 1.0
+C681 0.0
+C682 0.0
+C683 0.0
+C684 0.0
+C685 1.0
+C686 0.0
+C687 0.0
+C688 0.0
+C689 1.0
+C690 0.0
+C691 0.0
+C692 0.0
+C693 1.0
+C694 0.0
+C695 1.0
+C696 1.0
+C697 0.0
+C698 0.0
+C699 0.0
+C700 0.0
+C701 1.0
+C702 0.0
+C703 0.0
+C704 0.0
+C705 1.0
+C706 0.0
+C707 0.0
+C708 0.0
+C709 1.0
+C710 0.0
+C711 0.0
+C712 1.0
+C713 1.0
+C714 1.0
+C715 0.0
+C716 1.0
+C717 1.0
+C718 1.0
+C719 0.0
+C720 0.0
+C721 1.0
+C722 0.0
+C723 0.0
+C724 0.0
+C725 1.0
+C726 0.0
+C727 0.0
+C728 0.0
+C729 1.0
+C730 0.0
+C731 1.0
+C732 1.0
+C733 0.0
+C734 0.0
+C735 0.0
+C736 0.0
+C737 1.0
+C738 0.0
+C739 0.0
+C740 0.0
+C741 1.0
+C742 0.0
+C743 0.0
+C744 0.0
+C745 1.0
+C746 0.0
+C747 1.0
+C748 1.0
+C749 0.0
+C750 0.0
+C751 0.0
+C752 0.0
+C753 1.0
+C754 0.0
+C755 0.0
+C756 0.0
+C757 1.0
+C758 0.0
+C759 0.0
+C760 0.0
+C761 1.0
+C762 0.0
+C763 1.0
+C764 1.0
+C765 0.0
+C766 0.0
+C767 0.0
+C768 0.0
+C769 1.0
+C770 0.0
+C771 0.0
+C772 0.0
+C773 1.0
+C774 0.0
+C775 0.0
+C776 1.0
+C777 1.0
+C778 1.0
+C779 0.0
+C780 1.0
+C781 1.0
+C782 1.0
+shard_intermediate_buffer_size_depth_original[0] 1572864.0
+shard_intermediate_buffer_size_depth_original[1] 196608.0
+shard_intermediate_buffer_size_depth_original[2] 196608.0
+shard_intermediate_buffer_size_depth_original[3] 196608.0
+shard_intermediate_buffer_size_depth_original[4] 196607.99999999988
+shard_intermediate_buffer_size_depth_original[5] 196608.0
+shard_intermediate_buffer_size_depth_original[6] 3145728.0
+shard_intermediate_buffer_size_depth_original[7] 3145728.0
+shard_intermediate_buffer_size_depth_original[8] 491520.0
+shard_intermediate_buffer_size_depth_original[9] 3145728.0
+shard_intermediate_buffer_size_depth_original[10] 196608.0
+shard_intermediate_buffer_size_depth_original[11] 1572864.0
+shard_intermediate_buffer_size_depth_original[12] 1572864.0
+shard_intermediate_buffer_size_depth_original[13] 7864320.0
+shard_intermediate_buffer_size_depth_original[14] 1572864.0
+shard_intermediate_buffer_size_depth_original[15] 1572864.0
+shard_intermediate_buffer_size_depth_original[16] 786432.0
+shard_intermediate_buffer_size_depth_original[17] 786432.0
+shard_intermediate_buffer_size_depth_original[18] 1572864.0
+shard_intermediate_buffer_size_depth_original[19] 196608.0
+shard_intermediate_buffer_size_depth_original[20] 5505024.0
+shard_intermediate_buffer_size_depth_two[0] 1572864.0
+shard_intermediate_buffer_size_depth_two[1] 196608.0
+shard_intermediate_buffer_size_depth_two[2] 196608.0
+shard_intermediate_buffer_size_depth_two[3] 196608.0
+shard_intermediate_buffer_size_depth_two[4] 196607.99999999988
+shard_intermediate_buffer_size_depth_two[5] 196608.0
+shard_intermediate_buffer_size_depth_two[6] 3145728.0
+shard_intermediate_buffer_size_depth_two[7] 3145728.0
+shard_intermediate_buffer_size_depth_two[8] 196608.0
+shard_intermediate_buffer_size_depth_two[9] 3145728.0
+shard_intermediate_buffer_size_depth_two[10] 196608.0
+shard_intermediate_buffer_size_depth_two[11] 1572864.0
+shard_intermediate_buffer_size_depth_two[12] 1572864.0
+shard_intermediate_buffer_size_depth_two[13] 1572864.0
+shard_intermediate_buffer_size_depth_two[14] 1572864.0
+shard_intermediate_buffer_size_depth_two[15] 1572864.0
+shard_intermediate_buffer_size_depth_two[16] 786432.0
+shard_intermediate_buffer_size_depth_two[17] 786432.0
+shard_intermediate_buffer_size_depth_two[18] 1572864.0
+shard_intermediate_buffer_size_depth_two[19] 196608.0
+shard_intermediate_buffer_size_depth_two[20] 1572864.0
+shard_initiation_buffer_size_depth_one[0] 37748735.99999998
+shard_initiation_buffer_size_depth_one[1] 37748736.0
+shard_initiation_buffer_size_depth_one[2] 37748736.0
+shard_initiation_buffer_size_depth_one[3] 37748736.0
+shard_initiation_buffer_size_depth_one[4] 150994944.0
+shard_initiation_buffer_size_depth_one[5] 150994944.0
+Micro_Batch_Size 36.0
+dram_bytes_per_config_intermediate[0] 69206016.0
+dram_bytes_per_config_intermediate[1] 25165824.0
+dram_bytes_per_config_intermediate[2] 132120576.0
+dram_bytes_per_config_intermediate[3] 75497472.0
+dram_bytes_per_config_initiation[0] 75497471.99999958
+dram_bytes_per_config_initiation[1] 37748736.000000395
+dram_bytes_per_config_initiation[2] 188743680.0
+dram_bytes_per_config_initiation[3] 150994944.0
+C840 1081344.0
+C841 393216.0
+C842 2064384.0
+C843 1179648.0
+dram_bytes_initiation 43486543872.0
+dram_bytes_intermediate 28991029248.0
+Cycle[0] 13440.0
+Cycle[1] 13440.0
+Cycle[2] 12288.0
+Cycle[3] 12288.0
+Cycle[4] 12288.0
+Cycle[5] 12288.0
+Cycle[6] 3072.0
+Cycle[7] 1312.0
+Cycle[8] 12288.0
+Cycle[9] 36864.00000000002
+Cycle[10] 12288.0
+Cycle[11] 12288.0
+Cycle[12] 12288.0
+Cycle[13] 36864.00000000002
+Cycle[14] 6144.0
+Cycle[15] 30720.000000000004
+Cycle[16] 96.0
+Cycle[17] 1536.0
+m_factor[0] 420.0
+m_factor[1] 420.0
+m_factor[2] 1.0
+m_factor[3] 1.0
+m_factor[4] 1.0
+m_factor[5] 32.0
+m_factor[6] 96.0
+m_factor[7] 41.0
+m_factor[8] 1.0
+m_factor[9] 24.0
+m_factor[10] 384.0
+m_factor[11] 384.0
+m_factor[12] 384.0
+m_factor[13] 1.0
+m_factor[14] 192.0
+m_factor[15] 5.0
+m_factor[16] 3.0
+m_factor[17] 48.0
+n_factor[0] 1.0
+n_factor[1] 1.0
+n_factor[2] 1.0
+n_factor[3] 1.0
+n_factor[4] 1.0
+n_factor[5] 3.0
+n_factor[6] 1.0
+n_factor[7] 1.0
+n_factor[8] 6.0
+n_factor[9] 1.0
+n_factor[10] 1.0
+n_factor[11] 1.0
+n_factor[12] 1.0
+n_factor[13] 3.0000000000000018
+n_factor[14] 1.0
+n_factor[15] 1.0
+n_factor[16] 1.0
+n_factor[17] 1.0
+C900 1.0
+C901 1.0
+C902 1.0
+C903 96.0
+C904 6.0
+C905 24.000000000000014
+C906 3.0000000000000018
+C907 5.000000000000001
+Compute_Latency[0] 688128.0
+Compute_Latency[1] 629145.6000000001
+Compute_Latency[2] 1887436.8000000012
+Compute_Latency[3] 1572864.0000000002
+Compute_Latency[4] 0.0
+Compute_Latency[5] 0.0
+Compute_Latency[6] 0.0
+Compute_Latency[7] 0.0
+Compute_Latency[8] 0.0
+Compute_Latency[9] 0.0
+Compute_Latency[10] 0.0
+Compute_Latency[11] 0.0
+Compute_Latency[12] 0.0
+Compute_Latency[13] 0.0
+Compute_Latency[14] 0.0
+Compute_Latency[15] 0.0
+Compute_Latency[16] 0.0
+Compute_Latency[17] 0.0
+C926 13440.0
+C927 13440.0
+C928 12288.0
+C929 -0.0
+C930 12288.0
+C931 0.0
+C932 0.0
+C933 0.0
+C934 0.0
+C935 0.0
+C936 0.0
+C937 0.0
+C938 0.0
+C939 0.0
+C940 0.0
+C941 0.0
+C942 0.0
+C943 0.0
+C944 13440.0
+C945 0.0
+C946 0.0
+C947 0.0
+C948 12288.0
+C949 0.0
+C950 12288.0
+C951 3072.0
+C952 1312.0
+C953 12288.0
+C954 0.0
+C955 0.0
+C956 0.0
+C957 0.0
+C958 0.0
+C959 0.0
+C960 0.0
+C961 0.0
+C962 0.0
+C963 12288.0
+C964 0.0
+C965 0.0
+C966 0.0
+C967 0.0
+C968 0.0
+C969 0.0
+C970 0.0
+C971 0.0
+C972 0.0
+C973 36864.00000000002
+C974 12288.0
+C975 12288.0
+C976 12288.0
+C977 36864.00000000002
+C978 0.0
+C979 0.0
+C980 0.0
+C981 0.0
+C982 36864.00000000002
+C983 0.0
+C984 0.0
+C985 0.0
+C986 0.0
+C987 0.0
+C988 0.0
+C989 0.0
+C990 0.0
+C991 0.0
+C992 0.0
+C993 0.0
+C994 0.0
+C995 0.0
+C996 0.0
+C997 6144.0
+C998 30720.000000000004
+C999 96.0
+C1000 1536.0
+C1001 30720.000000000004
+DRAM_bytes[0] 69206016.0
+DRAM_bytes[1] 25165824.0
+DRAM_bytes[2] 132120576.0
+DRAM_bytes[3] 75497472.0
+DRAM_Latency[0] 692060.16
+DRAM_Latency[1] 251658.24
+DRAM_Latency[2] 1321205.76
+DRAM_Latency[3] 754974.72
+DRAM_Latency[4] 0.0
+DRAM_Latency[5] 0.0
+DRAM_Latency[6] 0.0
+DRAM_Latency[7] 0.0
+DRAM_Latency[8] 0.0
+DRAM_Latency[9] 0.0
+DRAM_Latency[10] 0.0
+DRAM_Latency[11] 0.0
+DRAM_Latency[12] 0.0
+DRAM_Latency[13] 0.0
+DRAM_Latency[14] 0.0
+DRAM_Latency[15] 0.0
+DRAM_Latency[16] 0.0
+DRAM_Latency[17] 0.0
+C1024 1081344.0
+C1025 393216.0
+C1026 2064384.0
+C1027 1179648.0
+C1028 301989888.0
+total_DRAM_bytes 28991029248.0
+allreduce_ratio 0.875
+Network_bytes[0] 0.0
+Network_bytes[1] 0.0
+Network_bytes[2] 44040192.0
+Network_bytes[3] 44040192.0
+Network_Latency[0] 0.0
+Network_Latency[1] 0.0
+Network_Latency[2] 1761607.68
+Network_Latency[3] 1761607.68
+Network_Latency[4] 0.0
+Network_Latency[5] 0.0
+Network_Latency[6] 0.0
+Network_Latency[7] 0.0
+Network_Latency[8] 0.0
+Network_Latency[9] 0.0
+Network_Latency[10] 0.0
+Network_Latency[11] 0.0
+Network_Latency[12] 0.0
+Network_Latency[13] 0.0
+Network_Latency[14] 0.0
+Network_Latency[15] 0.0
+Network_Latency[16] 0.0
+Network_Latency[17] 0.0
+C1053 0.0
+C1054 56.0
+C1055 0.0
+C1056 56.0
+C1057 786432.0
+C1058 56.0
+C1059 786432.0
+C1060 56.0
+C1061 88080384.0
+total_Network_bytes 8455716864.0
+Latency_wo_setup[0] 692060.16
+Latency_wo_setup[1] 629145.6000000001
+Latency_wo_setup[2] 1887436.8
+Latency_wo_setup[3] 1761607.68
+Setup_Latency[0] 20971.519999999884
+Setup_Latency[1] 10485.76000000011
+Setup_Latency[2] 52428.8
+Setup_Latency[3] 41943.04
+Setup_Latency[4] 0.0
+Setup_Latency[5] 0.0
+Setup_Latency[6] 0.0
+Setup_Latency[7] 0.0
+Setup_Latency[8] 0.0
+Setup_Latency[9] 0.0
+Setup_Latency[10] 0.0
+Setup_Latency[11] 0.0
+Setup_Latency[12] 0.0
+Setup_Latency[13] 0.0
+Setup_Latency[14] 0.0
+Setup_Latency[15] 0.0
+Setup_Latency[16] 0.0
+Setup_Latency[17] 0.0
+C1085 3600.0
+C1086 3600.0
+C1087 3600.0
+C1088 3600.0
+Per_Config_II[0] 713031.6799999999
+Per_Config_II[1] 639631.3600000002
+Per_Config_II[2] 1939865.6
+Per_Config_II[3] 1803550.72
+p2p_latency 0.0
+II 489223618.56
+util 0.6091399016203703
+GFLOPS 307200.0
+FLOP 91547328577536.0
+util 0.6091399016203703
+OI Memory 3157.78125
+OI network 10826.67857142857
+
+Interrupt request received

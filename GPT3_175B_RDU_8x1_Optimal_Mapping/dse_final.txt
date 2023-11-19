@@ -16,6 +16,9 @@ dataflow_graph {
       input_tensor_2_id: -1
       sharding: NO_SHARDING
       communication_size: -0.0
+      shard_outer_M: 12288
+      shard_K: 1
+      shard_N: 32
     }
   }
   kernels {
@@ -35,6 +38,9 @@ dataflow_graph {
       input_tensor_2_id: -1
       sharding: M_DIM
       communication_size: -0.0
+      shard_outer_M: 1536
+      shard_K: 1
+      shard_N: 32
     }
     topological_number: 1
   }
@@ -54,6 +60,10 @@ dataflow_graph {
       input_tensor_1_id: 2
       input_tensor_2_id: -1
       sharding: OUTER_DIM
+      shard_weight_size: 37748736.0
+      shard_outer_M: 1535
+      shard_K: 12288
+      shard_N: 32
     }
     topological_number: 2
   }
@@ -73,8 +83,13 @@ dataflow_graph {
       input_tensor_1_id: 2
       input_tensor_2_id: -1
       sharding: OUTER_DIM
+      shard_weight_size: 37748736.0
+      shard_outer_M: 1536
+      shard_K: 12288
+      shard_N: 32
     }
     topological_number: 2
+    config: 1
   }
   kernels {
     name: "V"
@@ -92,6 +107,10 @@ dataflow_graph {
       input_tensor_1_id: 2
       input_tensor_2_id: -1
       sharding: OUTER_DIM
+      shard_weight_size: 37748736.0
+      shard_outer_M: 1536
+      shard_K: 12288
+      shard_N: 32
     }
     topological_number: 2
   }
@@ -112,8 +131,12 @@ dataflow_graph {
       input_tensor_2_id: 4
       sharding: OUTER_DIM
       communication_size: -0.0
+      shard_outer_M: 24576
+      shard_K: 128
+      shard_N: 32
     }
     topological_number: 3
+    config: 1
   }
   kernels {
     name: "SOFTMAX"
@@ -132,8 +155,12 @@ dataflow_graph {
       input_tensor_2_id: -1
       sharding: OUTER_DIM
       communication_size: -0.0
+      shard_outer_M: 24576
+      shard_K: 1
+      shard_N: 32
     }
     topological_number: 4
+    config: 1
   }
   kernels {
     name: "DropOut_1"
@@ -152,8 +179,12 @@ dataflow_graph {
       input_tensor_2_id: -1
       sharding: OUTER_DIM
       communication_size: -0.0
+      shard_outer_M: 24576
+      shard_K: 1
+      shard_N: 32
     }
     topological_number: 5
+    config: 1
   }
   kernels {
     name: "MHA_GEMM_2"
@@ -172,8 +203,12 @@ dataflow_graph {
       input_tensor_2_id: 8
       sharding: OUTER_DIM
       communication_size: -0.0
+      shard_outer_M: 1536
+      shard_K: 2048
+      shard_N: 32
     }
     topological_number: 6
+    config: 1
   }
   kernels {
     name: "PROJ_GEMM"
@@ -193,8 +228,13 @@ dataflow_graph {
       sharding: K_DIM
       communication_type: ALL_REDUCE
       communication_size: 50331650.0
+      shard_weight_size: 37748736.0
+      shard_outer_M: 12288
+      shard_K: 1536
+      shard_N: 32
     }
     topological_number: 7
+    config: 2
   }
   kernels {
     name: "DropOut_2"
@@ -213,8 +253,12 @@ dataflow_graph {
       input_tensor_2_id: -1
       sharding: NO_SHARDING
       communication_size: -0.0
+      shard_outer_M: 12288
+      shard_K: 1
+      shard_N: 32
     }
     topological_number: 8
+    config: 2
   }
   kernels {
     name: "Add_1"
@@ -233,8 +277,12 @@ dataflow_graph {
       input_tensor_2_id: 11
       sharding: NO_SHARDING
       communication_size: -0.0
+      shard_outer_M: 12288
+      shard_K: 1
+      shard_N: 32
     }
     topological_number: 9
+    config: 2
   }
   kernels {
     name: "LayerNorm_2"
@@ -253,8 +301,12 @@ dataflow_graph {
       input_tensor_2_id: -1
       sharding: NO_SHARDING
       communication_size: -0.0
+      shard_outer_M: 12288
+      shard_K: 1
+      shard_N: 32
     }
     topological_number: 10
+    config: 2
   }
   kernels {
     name: "FFN0"
@@ -273,8 +325,13 @@ dataflow_graph {
       input_tensor_2_id: -1
       sharding: M_DIM
       communication_size: -0.0
+      shard_weight_size: 150994940.0
+      shard_outer_M: 6144
+      shard_K: 12288
+      shard_N: 32
     }
     topological_number: 11
+    config: 2
   }
   kernels {
     name: "GeLU"
@@ -293,8 +350,12 @@ dataflow_graph {
       input_tensor_2_id: -1
       sharding: M_DIM
       communication_size: -0.0
+      shard_outer_M: 6144
+      shard_K: 1
+      shard_N: 32
     }
     topological_number: 12
+    config: 3
   }
   kernels {
     name: "FFN1"
@@ -314,8 +375,13 @@ dataflow_graph {
       sharding: K_DIM
       communication_type: ALL_REDUCE
       communication_size: 50331650.0
+      shard_weight_size: 150994940.0
+      shard_outer_M: 12288
+      shard_K: 6144
+      shard_N: 32
     }
     topological_number: 13
+    config: 3
   }
   kernels {
     name: "DropOut_3"
@@ -334,8 +400,12 @@ dataflow_graph {
       input_tensor_2_id: -1
       sharding: M_DIM
       communication_size: -0.0
+      shard_outer_M: 1536
+      shard_K: 1
+      shard_N: 32
     }
     topological_number: 14
+    config: 3
   }
   kernels {
     name: "Add_2"
@@ -354,14 +424,19 @@ dataflow_graph {
       input_tensor_2_id: 17
       sharding: M_DIM
       communication_size: -0.0
+      shard_outer_M: 1536
+      shard_K: 1
+      shard_N: 32
     }
     topological_number: 15
+    config: 3
   }
   connections {
     startIdx: 1
     endIdx: 2
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 786432.0
     id: 1
   }
   connections {
@@ -369,6 +444,7 @@ dataflow_graph {
     endIdx: 3
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 98304.0
     id: 2
   }
   connections {
@@ -376,6 +452,7 @@ dataflow_graph {
     endIdx: 4
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 98304.0
     id: 3
   }
   connections {
@@ -383,6 +460,7 @@ dataflow_graph {
     endIdx: 5
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 98304.0
     id: 4
   }
   connections {
@@ -390,6 +468,7 @@ dataflow_graph {
     endIdx: 6
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 98304.0
     id: 5
   }
   connections {
@@ -397,6 +476,7 @@ dataflow_graph {
     endIdx: 6
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 98304.0
     id: 6
   }
   connections {
@@ -404,6 +484,7 @@ dataflow_graph {
     endIdx: 7
     buffer_depth: 2
     tensor_size: 805306400.0
+    shard_tensor_size: 1572864.0
     id: 7
   }
   connections {
@@ -412,6 +493,7 @@ dataflow_graph {
     communication_size: -0.0
     buffer_depth: 2
     tensor_size: 805306400.0
+    shard_tensor_size: 1572864.0
     id: 8
   }
   connections {
@@ -419,6 +501,7 @@ dataflow_graph {
     endIdx: 9
     buffer_depth: 5
     tensor_size: 50331650.0
+    shard_tensor_size: 98304.0
     id: 9
   }
   connections {
@@ -426,6 +509,7 @@ dataflow_graph {
     endIdx: 9
     buffer_depth: 2
     tensor_size: 805306400.0
+    shard_tensor_size: 1572864.0
     id: 10
   }
   connections {
@@ -433,6 +517,7 @@ dataflow_graph {
     endIdx: 10
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 98304.0
     id: 11
   }
   connections {
@@ -440,6 +525,7 @@ dataflow_graph {
     endIdx: 11
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 786432.0
     id: 12
   }
   connections {
@@ -447,6 +533,7 @@ dataflow_graph {
     endIdx: 12
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 786432.0
     id: 13
   }
   connections {
@@ -454,6 +541,7 @@ dataflow_graph {
     endIdx: 12
     buffer_depth: 10
     tensor_size: 50331650.0
+    shard_tensor_size: 786432.0
     id: 14
   }
   connections {
@@ -461,6 +549,7 @@ dataflow_graph {
     endIdx: 13
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 786432.0
     id: 15
   }
   connections {
@@ -468,6 +557,7 @@ dataflow_graph {
     endIdx: 14
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 786432.0
     id: 16
   }
   connections {
@@ -475,6 +565,7 @@ dataflow_graph {
     endIdx: 15
     buffer_depth: 2
     tensor_size: 201326600.0
+    shard_tensor_size: 393216.0
     id: 17
   }
   connections {
@@ -482,6 +573,7 @@ dataflow_graph {
     endIdx: 16
     buffer_depth: 2
     tensor_size: 201326600.0
+    shard_tensor_size: 393216.0
     id: 18
   }
   connections {
@@ -489,6 +581,7 @@ dataflow_graph {
     endIdx: 17
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 786432.0
     id: 19
   }
   connections {
@@ -496,6 +589,7 @@ dataflow_graph {
     endIdx: 18
     buffer_depth: 2
     tensor_size: 50331650.0
+    shard_tensor_size: 98304.0
     id: 20
   }
   connections {
@@ -503,6 +597,7 @@ dataflow_graph {
     endIdx: 18
     buffer_depth: 7
     tensor_size: 50331650.0
+    shard_tensor_size: 786432.0
     id: 21
   }
 }

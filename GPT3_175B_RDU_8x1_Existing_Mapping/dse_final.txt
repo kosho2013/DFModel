@@ -89,6 +89,7 @@ dataflow_graph {
       shard_N: 32
     }
     topological_number: 2
+    config: 1
   }
   kernels {
     name: "V"
@@ -233,7 +234,7 @@ dataflow_graph {
       shard_N: 32
     }
     topological_number: 7
-    config: 2
+    config: 1
   }
   kernels {
     name: "DropOut_2"
@@ -257,7 +258,7 @@ dataflow_graph {
       shard_N: 32
     }
     topological_number: 8
-    config: 2
+    config: 1
   }
   kernels {
     name: "Add_1"
@@ -281,7 +282,7 @@ dataflow_graph {
       shard_N: 32
     }
     topological_number: 9
-    config: 2
+    config: 1
   }
   kernels {
     name: "LayerNorm_2"
@@ -354,7 +355,7 @@ dataflow_graph {
       shard_N: 32
     }
     topological_number: 12
-    config: 3
+    config: 2
   }
   kernels {
     name: "FFN1"
@@ -606,6 +607,7 @@ system {
   num_chip: 8
   link_bw_x: 25.0
   link_bw_y: 25.0
+  link_bw_z: -1.0
   accelerator {
     name: "SN10_RDU"
     core: 640

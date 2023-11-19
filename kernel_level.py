@@ -216,9 +216,6 @@ else: # 3D Torus
 
 
 
-
-
-
 FLOP = 0.0
 for i in range(len(M)):
     if kernel_type[i] == KernelType.SIMD.value:
@@ -247,20 +244,29 @@ model.params.TimeLimit = 36000  # 10 hours
 if len(topology) == 2:
     X = model.addVar(name='X', vtype=gp.GRB.INTEGER)
     Y = model.addVar(name='Y', vtype=gp.GRB.INTEGER)
+    
+    if shape[0] == 0 and shape[1] == 0: # DSE on topology dimensions
+        pass
+    else:
+        model.addConstr(X == shape[0])
+        model.addConstr(Y == shape[1])
     model.addConstr(X * Y == num_chip)
 
-    model.addConstr(X == shape[0])
-    model.addConstr(Y == shape[1])
-
+    
     TP = model.addVar(name='TP', vtype=gp.GRB.INTEGER)
     PP = model.addVar(name='PP', vtype=gp.GRB.INTEGER)
     model.addConstr(TP == X)
     model.addConstr(PP == Y)
-
+    
+    
     Link_BW_X = model.addVar(name='Link_BW_X', vtype=gp.GRB.CONTINUOUS, lb=0)
     Link_BW_Y = model.addVar(name='Link_BW_Y', vtype=gp.GRB.CONTINUOUS, lb=0)
-    model.addConstr(Link_BW_X == link_bw[0])
-    model.addConstr(Link_BW_Y == link_bw[1])
+    if link_bw[0] == 0 and link_bw[1] == 0: # DSE
+        pass
+    else:
+        model.addConstr(Link_BW_X == link_bw[0])
+        model.addConstr(Link_BW_Y == link_bw[1])
+    
 
 else:
     X = model.addVar(name='X', vtype=gp.GRB.INTEGER)
@@ -269,27 +275,43 @@ else:
     XY = model.addVar(name='XY', vtype=gp.GRB.INTEGER)
     model.addConstr(XY == X * Y)
     model.addConstr(num_chip = XY * Z)
+    
+    if shape[0] == 0 and shape[1] == 0 and shape[2] == 0: # DSE on topology dimensions
+        pass
+    else:
+        model.addConstr(X == shape[0])
+        model.addConstr(Y == shape[1])
+        model.addConstr(Z == shape[2])
 
-    model.addConstr(X == shape[0])
-    model.addConstr(Y == shape[1])
-    model.addConstr(Z == shape[2])
 
     TP = model.addVar(name='TP', vtype=gp.GRB.INTEGER)
     PP = model.addVar(name='PP', vtype=gp.GRB.INTEGER)
     model.addConstr(TP == XY)
     model.addConstr(PP = Z)
 
+
     Link_BW_X = model.addVar(name='Link_BW_X', vtype=gp.GRB.CONTINUOUS, lb=0)
     Link_BW_Y = model.addVar(name='Link_BW_Y', vtype=gp.GRB.CONTINUOUS, lb=0)
     Link_BW_Z = model.addVar(name='Link_BW_Z', vtype=gp.GRB.CONTINUOUS, lb=0)
-    model.addConstr(Link_BW_X == link_bw[0])
-    model.addConstr(Link_BW_Y == link_bw[1])
-    model.addConstr(Link_BW_Z == link_bw[2])
+    if link_bw[0] == 0 and link_bw[1] == 0 and link_bw[2] == 0: # DSE
+        pass
+    else:
+        model.addConstr(Link_BW_X == link_bw[0])
+        model.addConstr(Link_BW_Y == link_bw[1])
+        model.addConstr(Link_BW_Z == link_bw[2])
+    
 
 
-# system variables
+
 DRAM_BW = model.addVar(name='DRAM_BW', vtype=gp.GRB.CONTINUOUS, lb=0)
-model.addConstr(DRAM_BW == dram_bw)
+if dram_bw == 0: # DSE
+    pass
+else:
+    model.addConstr(DRAM_BW == dram_bw)
+
+
+
+
 
 
 
@@ -358,7 +380,7 @@ for i in range(num_kernel):
 
 
 
-C = 4
+C = num_kernel
 
 Config = model.addMVar(num_kernel, name='Config', vtype=gp.GRB.INTEGER, lb=0)
 Ab_onchip = model.addMVar((num_edge, C), name='Ab_onchip', vtype=gp.GRB.BINARY) # on-chip
@@ -368,13 +390,18 @@ Ad = model.addMVar((num_weight, C), name='Ad', vtype=gp.GRB.BINARY)
 
 
 
-model.addConstr(Config[0] == 0) # Q
-model.addConstr(Config[1] == 0) # K
-model.addConstr(Config[2] == 0) # V
+# model.addConstr(X == 4)
+# model.addConstr(Y == 2)
+
+
+
+# model.addConstr(Config[0] == 0) # Q
+# model.addConstr(Config[1] == 0) # K
+# model.addConstr(Config[2] == 0) # V
 
 # model.addConstr(Config[5] == 1) # MHA1
 # model.addConstr(Config[8] == 1) # MHA2
-# model.addConstr(Config[9] == 1) # Proj GEM
+# model.addConstr(Config[9] == 2) # Proj GEM
 
 # model.addConstr(Config[13] == 2) # FFN0
 # model.addConstr(Config[15] == 3) # FFN1
@@ -402,8 +429,8 @@ for i in range(num_edge):
 
 
 # every config must have a kernel (not needed)
-for i in range(C):
-    model.addConstr(np.ones((num_kernel)) @ Ac[:, i] >= 1)
+# for i in range(C):
+    # model.addConstr(np.ones((num_kernel)) @ Ac[:, i] >= 1)
 
 
 # for kernel-by-kernel or flashattention
@@ -606,6 +633,7 @@ model.addConstr(util * II * GFLOPS * num_chip == FLOP)
 
 model.setObjective(util, gp.GRB.MAXIMIZE)
 model.optimize()
+
 
 
 # get values from gurobi
