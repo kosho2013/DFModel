@@ -379,9 +379,9 @@ dataflow_graph {
       sharding: K_DIM
       communication_type: ALL_REDUCE
       communication_size: 50331650.0
-      shard_weight_size: 328851460.0
+      shard_weight_size: 301989900.0
       shard_outer_M: 12288
-      shard_K: 13381
+      shard_K: 12288
       shard_N: 32
     }
     topological_number: 13
@@ -621,6 +621,8 @@ system {
     dram_bw: 100.0
     dram_cap: 1649267400000.0
   }
+  x: 4
+  y: 2
 }
 cost {
   link_unit_price: 2.0
@@ -631,4 +633,5 @@ training {
   optimization: FLASHATTENTION
   seq_len: 2048
   num_layer: 96
+  tile_size: 32
 }

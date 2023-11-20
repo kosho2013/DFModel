@@ -89,7 +89,6 @@ dataflow_graph {
       shard_N: 32
     }
     topological_number: 2
-    config: 1
   }
   kernels {
     name: "V"
@@ -306,7 +305,7 @@ dataflow_graph {
       shard_N: 32
     }
     topological_number: 10
-    config: 2
+    config: 1
   }
   kernels {
     name: "FFN0"
@@ -355,7 +354,7 @@ dataflow_graph {
       shard_N: 32
     }
     topological_number: 12
-    config: 2
+    config: 3
   }
   kernels {
     name: "FFN1"
@@ -607,7 +606,6 @@ system {
   num_chip: 8
   link_bw_x: 25.0
   link_bw_y: 25.0
-  link_bw_z: -1.0
   accelerator {
     name: "SN10_RDU"
     core: 640
@@ -620,7 +618,6 @@ system {
   }
   x: 8
   y: 1
-  z: 1
 }
 cost {
   link_unit_price: 2.0
@@ -631,4 +628,6 @@ training {
   optimization: FLASHATTENTION
   seq_len: 2048
   num_layer: 96
+  num_config: 6
+  tile_size: 32
 }

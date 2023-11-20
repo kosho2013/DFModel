@@ -17,6 +17,7 @@ dataflow_graph {
       sharding: NO_SHARDING
       communication_size: -0.0
     }
+    config: -1
   }
   kernels {
     name: "LayerNorm_1"
@@ -37,6 +38,7 @@ dataflow_graph {
       communication_size: -0.0
     }
     topological_number: 1
+    config: -1
   }
   kernels {
     name: "Q"
@@ -56,6 +58,7 @@ dataflow_graph {
       sharding: OUTER_DIM
     }
     topological_number: 2
+    config: -1
   }
   kernels {
     name: "K"
@@ -75,6 +78,7 @@ dataflow_graph {
       sharding: OUTER_DIM
     }
     topological_number: 2
+    config: -1
   }
   kernels {
     name: "V"
@@ -94,6 +98,7 @@ dataflow_graph {
       sharding: OUTER_DIM
     }
     topological_number: 2
+    config: -1
   }
   kernels {
     name: "MHA_GEMM_1"
@@ -114,6 +119,7 @@ dataflow_graph {
       communication_size: -0.0
     }
     topological_number: 3
+    config: -1
   }
   kernels {
     name: "SOFTMAX"
@@ -134,6 +140,7 @@ dataflow_graph {
       communication_size: -0.0
     }
     topological_number: 4
+    config: -1
   }
   kernels {
     name: "DropOut_1"
@@ -154,6 +161,7 @@ dataflow_graph {
       communication_size: -0.0
     }
     topological_number: 5
+    config: -1
   }
   kernels {
     name: "MHA_GEMM_2"
@@ -174,6 +182,7 @@ dataflow_graph {
       communication_size: -0.0
     }
     topological_number: 6
+    config: -1
   }
   kernels {
     name: "PROJ_GEMM"
@@ -195,6 +204,7 @@ dataflow_graph {
       communication_size: 50331650.0
     }
     topological_number: 7
+    config: -1
   }
   kernels {
     name: "DropOut_2"
@@ -215,6 +225,7 @@ dataflow_graph {
       communication_size: -0.0
     }
     topological_number: 8
+    config: -1
   }
   kernels {
     name: "Add_1"
@@ -235,6 +246,7 @@ dataflow_graph {
       communication_size: -0.0
     }
     topological_number: 9
+    config: -1
   }
   kernels {
     name: "LayerNorm_2"
@@ -255,6 +267,7 @@ dataflow_graph {
       communication_size: -0.0
     }
     topological_number: 10
+    config: -1
   }
   kernels {
     name: "FFN0"
@@ -275,6 +288,7 @@ dataflow_graph {
       communication_size: -0.0
     }
     topological_number: 11
+    config: -1
   }
   kernels {
     name: "GeLU"
@@ -295,6 +309,7 @@ dataflow_graph {
       communication_size: -0.0
     }
     topological_number: 12
+    config: -1
   }
   kernels {
     name: "FFN1"
@@ -316,6 +331,7 @@ dataflow_graph {
       communication_size: 50331650.0
     }
     topological_number: 13
+    config: -1
   }
   kernels {
     name: "DropOut_3"
@@ -336,6 +352,7 @@ dataflow_graph {
       communication_size: -0.0
     }
     topological_number: 14
+    config: -1
   }
   kernels {
     name: "Add_2"
@@ -356,6 +373,7 @@ dataflow_graph {
       communication_size: -0.0
     }
     topological_number: 15
+    config: -1
   }
   connections {
     startIdx: 1
@@ -522,6 +540,8 @@ system {
     dram_bw: 100.0
     dram_cap: 1649267400000.0
   }
+  x: 4
+  y: 2
 }
 cost {
   link_unit_price: 2.0
@@ -532,4 +552,5 @@ training {
   optimization: FLASHATTENTION
   seq_len: 2048
   num_layer: 96
+  tile_size: 32
 }

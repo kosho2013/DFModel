@@ -97,6 +97,13 @@ for kernel in dse.dataflow_graph.kernels:
         sharding.append(kernel.batch_gemm_elementwise_outer_m_k_n.sharding)
 
 
+
+configs = []
+for kernel in dse.dataflow_graph.kernels:
+    configs.append(kernel.config)
+        
+        
+
 kernel_type = []
 for kernel in dse.dataflow_graph.kernels:
     if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
@@ -379,9 +386,14 @@ for i in range(num_kernel):
 
 
 
-
-C = num_kernel
-
+if dse.training.num_config == 0:
+    C = num_kernel
+else:
+    C = dse.training.num_config
+    
+    
+    
+    
 Config = model.addMVar(num_kernel, name='Config', vtype=gp.GRB.INTEGER, lb=0)
 Ab_onchip = model.addMVar((num_edge, C), name='Ab_onchip', vtype=gp.GRB.BINARY) # on-chip
 Ab_dram = model.addMVar((num_edge, C), name='Ab_dram', vtype=gp.GRB.BINARY) # to/from DRAM
@@ -390,25 +402,18 @@ Ad = model.addMVar((num_weight, C), name='Ad', vtype=gp.GRB.BINARY)
 
 
 
-# model.addConstr(X == 4)
-# model.addConstr(Y == 2)
+
+for i in range(len(configs)):
+    if configs[i] == -1:
+        pass
+    else:
+        model.addConstr(Config[i] == configs[i])
 
 
-
-# model.addConstr(Config[0] == 0) # Q
-# model.addConstr(Config[1] == 0) # K
-# model.addConstr(Config[2] == 0) # V
-
-# model.addConstr(Config[5] == 1) # MHA1
-# model.addConstr(Config[8] == 1) # MHA2
-# model.addConstr(Config[9] == 2) # Proj GEM
-
-# model.addConstr(Config[13] == 2) # FFN0
-# model.addConstr(Config[15] == 3) # FFN1
-
-
-model.addConstr(tile_size == 32)
-
+if dse.training.tile_size == 0: # DSE
+    pass
+else:
+    model.addConstr(tile_size == dse.training.tile_size)
 
 
 # kernel assignment   
@@ -426,11 +431,6 @@ for i in range(num_kernel):
 for i in range(num_edge):
     model.addConstr(Config[node_dict[startIdx[i]]] <= Config[node_dict[endIdx[i]]])
 
-
-
-# every config must have a kernel (not needed)
-# for i in range(C):
-    # model.addConstr(np.ones((num_kernel)) @ Ac[:, i] >= 1)
 
 
 # for kernel-by-kernel or flashattention
@@ -583,7 +583,7 @@ allreduce_ratio = model.addVar(name='allreduce_ratio', vtype=gp.GRB.CONTINUOUS)
 if len(topology) == 2:
     model.addConstr(allreduce_ratio * TP == TP - 1)
 else:
-    a = 1
+    pass
     
 Network_bytes = model.addMVar(C, name='Network_bytes', vtype=gp.GRB.CONTINUOUS, lb=0)
 Network_Latency = model.addMVar(num_kernel, name='Network_Latency', vtype=gp.GRB.CONTINUOUS, lb=0)

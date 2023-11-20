@@ -138,6 +138,8 @@ message Training {
 
 	int32 seq_len = 4;
 	int32 num_layer = 5;
+	int32 num_config = 6;
+	int32 tile_size = 7;
 }
 
 message DSE {

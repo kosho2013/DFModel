@@ -15,6 +15,7 @@ dataflow_graph {
       input_tensor_1_id: -1
       input_tensor_2_id: -1
     }
+    config: -1
   }
   kernels {
     name: "LayerNorm_1"
@@ -32,6 +33,7 @@ dataflow_graph {
       input_tensor_1_id: 1
       input_tensor_2_id: -1
     }
+    config: -1
   }
   kernels {
     name: "Q"
@@ -100,6 +102,7 @@ dataflow_graph {
       input_tensor_1_id: 3
       input_tensor_2_id: 4
     }
+    config: 1
   }
   kernels {
     name: "SOFTMAX"
@@ -117,6 +120,7 @@ dataflow_graph {
       input_tensor_1_id: 6
       input_tensor_2_id: -1
     }
+    config: -1
   }
   kernels {
     name: "DropOut_1"
@@ -134,6 +138,7 @@ dataflow_graph {
       input_tensor_1_id: 7
       input_tensor_2_id: -1
     }
+    config: -1
   }
   kernels {
     name: "MHA_GEMM_2"
@@ -151,6 +156,7 @@ dataflow_graph {
       input_tensor_1_id: 5
       input_tensor_2_id: 8
     }
+    config: 1
   }
   kernels {
     name: "PROJ_GEMM"
@@ -168,6 +174,7 @@ dataflow_graph {
       input_tensor_1_id: 9
       input_tensor_2_id: -1
     }
+    config: 2
   }
   kernels {
     name: "DropOut_2"
@@ -185,6 +192,7 @@ dataflow_graph {
       input_tensor_1_id: 10
       input_tensor_2_id: -1
     }
+    config: -1
   }
   kernels {
     name: "Add_1"
@@ -202,6 +210,7 @@ dataflow_graph {
       input_tensor_1_id: 1
       input_tensor_2_id: 11
     }
+    config: -1
   }
   kernels {
     name: "LayerNorm_2"
@@ -219,6 +228,7 @@ dataflow_graph {
       input_tensor_1_id: 12
       input_tensor_2_id: -1
     }
+    config: -1
   }
   kernels {
     name: "FFN0"
@@ -236,6 +246,7 @@ dataflow_graph {
       input_tensor_1_id: 13
       input_tensor_2_id: -1
     }
+    config: 2
   }
   kernels {
     name: "GeLU"
@@ -253,6 +264,7 @@ dataflow_graph {
       input_tensor_1_id: 14
       input_tensor_2_id: -1
     }
+    config: -1
   }
   kernels {
     name: "FFN1"
@@ -270,6 +282,7 @@ dataflow_graph {
       input_tensor_1_id: 15
       input_tensor_2_id: -1
     }
+    config: 3
   }
   kernels {
     name: "DropOut_3"
@@ -287,6 +300,7 @@ dataflow_graph {
       input_tensor_1_id: 16
       input_tensor_2_id: -1
     }
+    config: -1
   }
   kernels {
     name: "Add_2"
@@ -304,6 +318,7 @@ dataflow_graph {
       input_tensor_1_id: 12
       input_tensor_2_id: 17
     }
+    config: -1
   }
   connections {
     startIdx: 1
@@ -417,7 +432,6 @@ system {
   num_chip: 8
   link_bw_x: 25.0
   link_bw_y: 25.0
-  link_bw_z: -1.0
   accelerator {
     name: "SN10_RDU"
     core: 640
@@ -430,7 +444,6 @@ system {
   }
   x: 8
   y: 1
-  z: 1
 }
 cost {
   link_unit_price: 2.0
@@ -441,4 +454,6 @@ training {
   optimization: FLASHATTENTION
   seq_len: 2048
   num_layer: 96
+  num_config: 6
+  tile_size: 32
 }
