@@ -58,6 +58,7 @@ dataflow_graph {
       sharding: OUTER_DIM
     }
     topological_number: 2
+    config: -1
   }
   kernels {
     name: "K"
@@ -77,6 +78,7 @@ dataflow_graph {
       sharding: OUTER_DIM
     }
     topological_number: 2
+    config: -1
   }
   kernels {
     name: "V"
@@ -96,6 +98,7 @@ dataflow_graph {
       sharding: OUTER_DIM
     }
     topological_number: 2
+    config: -1
   }
   kernels {
     name: "MHA_GEMM_1"
@@ -116,7 +119,7 @@ dataflow_graph {
       communication_size: -0.0
     }
     topological_number: 3
-    config: 1
+    config: -1
   }
   kernels {
     name: "SOFTMAX"
@@ -179,7 +182,7 @@ dataflow_graph {
       communication_size: -0.0
     }
     topological_number: 6
-    config: 1
+    config: -1
   }
   kernels {
     name: "PROJ_GEMM"
@@ -201,7 +204,7 @@ dataflow_graph {
       communication_size: 50331650.0
     }
     topological_number: 7
-    config: 2
+    config: -1
   }
   kernels {
     name: "DropOut_2"
@@ -285,7 +288,7 @@ dataflow_graph {
       communication_size: -0.0
     }
     topological_number: 11
-    config: 2
+    config: -1
   }
   kernels {
     name: "GeLU"
@@ -328,7 +331,7 @@ dataflow_graph {
       communication_size: 50331650.0
     }
     topological_number: 13
-    config: 3
+    config: -1
   }
   kernels {
     name: "DropOut_3"
@@ -537,8 +540,6 @@ system {
     dram_bw: 100.0
     dram_cap: 1649267400000.0
   }
-  x: 8
-  y: 1
 }
 cost {
   link_unit_price: 2.0
@@ -549,6 +550,5 @@ training {
   optimization: FLASHATTENTION
   seq_len: 2048
   num_layer: 96
-  num_config: 6
   tile_size: 32
 }

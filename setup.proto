@@ -117,6 +117,7 @@ message System {
 		DGX_1 = 3;
 		DGX_2 = 4;
 		TORUS_3D = 5;
+		SINGLE_CHIP = 6;
 	}
 }
 

@@ -47,7 +47,7 @@ H    0     0                    1.006633e+08 5.0332e+07  50.0%     -    0s
 Cutting planes:
   Implied bound: 2
 
-Explored 1 nodes (13 simplex iterations) in 0.09 seconds (0.00 work units)
+Explored 1 nodes (13 simplex iterations) in 0.16 seconds (0.00 work units)
 Thread count was 128 (of 144 available processors)
 
 Solution count 4: 1.00663e+08 2.51658e+08 1.1073e+09 1.96293e+09 
@@ -378,7 +378,7 @@ CPU model: Intel(R) Xeon(R) CPU E7-8890 v3 @ 2.50GHz, instruction set [SSE2|AVX|
 Thread count: 72 physical cores, 144 logical processors, using up to 128 threads
 
 Optimize a model with 321 rows, 1456 columns and 740 nonzeros
-Model fingerprint: 0x9e7d4fb7
+Model fingerprint: 0xd1a4065e
 Model has 323 quadratic constraints
 Model has 970 general constraints
 Variable types: 203 continuous, 1253 integer (901 binary)
@@ -403,61 +403,142 @@ Presolved model has 15 quadratic constraint(s)
 Presolved model has 55 bilinear constraint(s)
 Variable types: 109 continuous, 398 integer (144 binary)
 
-Root relaxation: objective 6.359876e-01, 134 iterations, 0.00 seconds (0.00 work units)
+Root relaxation: objective 6.376289e-01, 131 iterations, 0.00 seconds (0.00 work units)
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-     0     0    0.63599    0   41          -    0.63599      -     -    0s
-     0     0    0.63599    0   51          -    0.63599      -     -    0s
-     0     0    0.63599    0   75          -    0.63599      -     -    0s
-     0     0    0.63599    0   75          -    0.63599      -     -    0s
-     0     0    0.63587    0   65          -    0.63587      -     -    0s
-     0     0    0.63587    0   65          -    0.63587      -     -    0s
-     0     0    0.63575    0   69          -    0.63575      -     -    0s
-     0     0    0.63575    0   69          -    0.63575      -     -    0s
-     0     0    0.56308    0   70          -    0.56308      -     -    0s
-     0     0    0.56308    0   70          -    0.56308      -     -    0s
-     0     0    0.56297    0   66          -    0.56297      -     -    0s
-     0     0    0.56297    0   66          -    0.56297      -     -    0s
-     0     0    0.56286    0   82          -    0.56286      -     -    0s
-     0     0    0.56286    0   70          -    0.56286      -     -    0s
-     0     0    0.56274    0   76          -    0.56274      -     -    0s
-     0     0    0.56274    0   71          -    0.56274      -     -    0s
-     0     0    0.56261    0   73          -    0.56261      -     -    0s
-     0     0    0.56261    0   73          -    0.56261      -     -    0s
-     0     0    0.56248    0   74          -    0.56248      -     -    0s
-     0     0    0.56248    0   71          -    0.56248      -     -    0s
-     0     0    0.56233    0   74          -    0.56233      -     -    0s
-     0     0    0.56233    0   74          -    0.56233      -     -    0s
-     0     0    0.56233    0   74          -    0.56233      -     -    0s
+     0     0    0.63763    0   41          -    0.63763      -     -    0s
+     0     0    0.63763    0   49          -    0.63763      -     -    0s
+     0     0    0.63763    0   73          -    0.63763      -     -    0s
+     0     0    0.63763    0   72          -    0.63763      -     -    0s
+     0     0    0.63758    0   63          -    0.63758      -     -    0s
+     0     0    0.63758    0   63          -    0.63758      -     -    0s
+     0     0    0.63753    0   67          -    0.63753      -     -    0s
+     0     0    0.63753    0   67          -    0.63753      -     -    0s
+     0     0    0.56453    0   68          -    0.56453      -     -    0s
+     0     0    0.56453    0   68          -    0.56453      -     -    0s
+     0     0    0.56449    0   64          -    0.56449      -     -    0s
+     0     0    0.56449    0   64          -    0.56449      -     -    0s
+     0     0    0.56445    0   64          -    0.56445      -     -    0s
+     0     0    0.56445    0   80          -    0.56445      -     -    0s
+     0     0    0.56445    0   69          -    0.56445      -     -    0s
+     0     0    0.56440    0   75          -    0.56440      -     -    0s
+     0     0    0.56440    0   70          -    0.56440      -     -    0s
+     0     0    0.56435    0   70          -    0.56435      -     -    0s
+     0     0    0.56435    0   72          -    0.56435      -     -    0s
+     0     0    0.56435    0   72          -    0.56435      -     -    0s
+     0     0    0.56430    0   73          -    0.56430      -     -    0s
+     0     0    0.56430    0   73          -    0.56430      -     -    0s
+     0     0    0.56425    0   76          -    0.56425      -     -    0s
+     0     0    0.56425    0   73          -    0.56425      -     -    0s
+     0     0    0.56419    0   76          -    0.56419      -     -    0s
+     0     0    0.56419    0   73          -    0.56419      -     -    0s
+     0     0    0.56414    0   73          -    0.56414      -     -    0s
+     0     0    0.56414    0   73          -    0.56414      -     -    0s
+     0     0    0.56408    0   69          -    0.56408      -     -    0s
+     0     0    0.56408    0   69          -    0.56408      -     -    0s
+     0     0    0.56402    0   66          -    0.56402      -     -    0s
+     0     0    0.56402    0   66          -    0.56402      -     -    0s
+     0     0    0.56396    0   66          -    0.56396      -     -    0s
+     0     0    0.56396    0   66          -    0.56396      -     -    0s
+     0     0    0.56391    0   66          -    0.56391      -     -    0s
+     0     0    0.56387    0   66          -    0.56387      -     -    0s
+     0     0    0.56382    0   66          -    0.56382      -     -    0s
+     0     0    0.56377    0   66          -    0.56377      -     -    0s
+     0     0    0.56372    0   66          -    0.56372      -     -    0s
+     0     0    0.56367    0   66          -    0.56367      -     -    0s
+     0     0    0.56362    0   66          -    0.56362      -     -    0s
+     0     0    0.56357    0   66          -    0.56357      -     -    0s
+     0     0    0.56352    0   66          -    0.56352      -     -    0s
+     0     0    0.56346    0   66          -    0.56346      -     -    0s
+     0     0    0.56340    0   66          -    0.56340      -     -    0s
+     0     0    0.56334    0   66          -    0.56334      -     -    0s
+     0     0    0.56328    0   66          -    0.56328      -     -    0s
+     0     0    0.56321    0   66          -    0.56321      -     -    0s
+     0     0    0.56315    0   66          -    0.56315      -     -    0s
+     0     0    0.56308    0   66          -    0.56308      -     -    0s
+     0     0    0.56301    0   66          -    0.56301      -     -    0s
+     0     0    0.56293    0   66          -    0.56293      -     -    0s
+     0     0    0.56286    0   66          -    0.56286      -     -    0s
+     0     0    0.56278    0   66          -    0.56278      -     -    0s
+     0     0    0.56270    0   66          -    0.56270      -     -    0s
+     0     0    0.56261    0   66          -    0.56261      -     -    0s
+     0     0    0.56252    0   66          -    0.56252      -     -    0s
+     0     0    0.56243    0   66          -    0.56243      -     -    0s
      0     0    0.56233    0   66          -    0.56233      -     -    0s
-     0     0    0.56233    0   63          -    0.56233      -     -    0s
-     0     0    0.56233    0   63          -    0.56233      -     -    0s
-     0     0    0.56233    0   63          -    0.56233      -     -    0s
-     0     2    0.56233    0   63          -    0.56233      -     -    0s
-H10245  5246                       0.4544504    0.53097  16.8%   3.3    2s
-H11612  6068                       0.4629790    0.53097  14.7%   3.3    2s
-H12196  5717                       0.5005541    0.53097  6.08%   3.5    2s
+     0     0    0.56228    0   66          -    0.56228      -     -    0s
+     0     0    0.56223    0   66          -    0.56223      -     -    0s
+     0     0    0.56218    0   66          -    0.56218      -     -    0s
+     0     0    0.56213    0   66          -    0.56213      -     -    0s
+     0     0    0.56207    0   66          -    0.56207      -     -    0s
+     0     0    0.56202    0   66          -    0.56202      -     -    0s
+     0     0    0.56196    0   66          -    0.56196      -     -    0s
+     0     0    0.56191    0   66          -    0.56191      -     -    0s
+     0     0    0.56185    0   66          -    0.56185      -     -    0s
+     0     0    0.56179    0   66          -    0.56179      -     -    0s
+     0     0    0.56172    0   66          -    0.56172      -     -    0s
+     0     0    0.56166    0   66          -    0.56166      -     -    0s
+     0     0    0.56160    0   66          -    0.56160      -     -    0s
+     0     0    0.56153    0   66          -    0.56153      -     -    0s
+     0     0    0.56146    0   66          -    0.56146      -     -    0s
+     0     0    0.56139    0   66          -    0.56139      -     -    0s
+     0     0    0.56132    0   66          -    0.56132      -     -    0s
+     0     0    0.56125    0   66          -    0.56125      -     -    0s
+     0     0    0.56118    0   66          -    0.56118      -     -    0s
+     0     0    0.56110    0   66          -    0.56110      -     -    0s
+     0     0    0.56102    0   66          -    0.56102      -     -    0s
+     0     0    0.56094    0   66          -    0.56094      -     -    0s
+     0     0    0.56086    0   66          -    0.56086      -     -    0s
+     0     0    0.56077    0   66          -    0.56077      -     -    0s
+     0     0    0.56069    0   66          -    0.56069      -     -    0s
+     0     0    0.56060    0   66          -    0.56060      -     -    0s
+     0     0    0.56050    0   66          -    0.56050      -     -    0s
+     0     0    0.56041    0   66          -    0.56041      -     -    0s
+     0     0    0.56031    0   66          -    0.56031      -     -    0s
+     0     0    0.56021    0   66          -    0.56021      -     -    0s
+     0     0    0.56011    0   66          -    0.56011      -     -    0s
+     0     0    0.56000    0   66          -    0.56000      -     -    0s
+     0     0    0.55989    0   66          -    0.55989      -     -    0s
+     0     0    0.55978    0   66          -    0.55978      -     -    0s
+     0     0    0.55966    0   66          -    0.55966      -     -    0s
+     0     0    0.55954    0   66          -    0.55954      -     -    0s
+     0     0    0.55941    0   66          -    0.55941      -     -    0s
+     0     0    0.55929    0   66          -    0.55929      -     -    0s
+     0     0    0.55915    0   66          -    0.55915      -     -    0s
+     0     0    0.55901    0   66          -    0.55901      -     -    0s
+     0     0    0.55887    0   66          -    0.55887      -     -    0s
+     0     0    0.55872    0   66          -    0.55872      -     -    0s
+     0     0    0.55857    0   66          -    0.55857      -     -    0s
+     0     0    0.55841    0   66          -    0.55841      -     -    0s
+     0     0    0.55825    0   66          -    0.55825      -     -    0s
+     0     0    0.55807    0   66          -    0.55807      -     -    0s
+     0     0    0.55790    0   60          -    0.55790      -     -    0s
+     0     0    0.55771    0   60          -    0.55771      -     -    0s
+     0     2    0.55771    0   60          -    0.55771      -     -    0s
+H10801  4287                       0.2754820    0.55771   102%   2.1    2s
+H11776  5109                       0.5028691    0.55771  10.9%   2.2    2s
+H13082  5262                       0.5049449    0.55771  10.4%   2.8    2s
 
 Cutting planes:
-  Gomory: 14
-  Implied bound: 23
-  Clique: 16
-  MIR: 77
+  Gomory: 16
+  Implied bound: 31
+  Clique: 8
+  MIR: 100
   StrongCG: 2
   Flow cover: 4
-  RLT: 69
-  Relax-and-lift: 9
+  RLT: 90
+  Relax-and-lift: 8
+  BQP: 1
 
-Explored 23693 nodes (118751 simplex iterations) in 2.83 seconds (0.46 work units)
+Explored 23970 nodes (110567 simplex iterations) in 3.04 seconds (0.51 work units)
 Thread count was 128 (of 144 available processors)
 
-Solution count 3: 0.500554 0.462979 0.45445 
-No other solutions better than 0.500554
+Solution count 3: 0.504945 0.502869 0.275482 
+No other solutions better than 0.504945
 
 Optimal solution found (tolerance 1.00e-04)
-Best objective 5.005540930707e-01, best bound 5.005540930707e-01, gap 0.0000%
+Best objective 5.049449184485e-01, best bound 5.049449184485e-01, gap 0.0000%
 X 8.0
 Y 1.0
 TP 8.0
@@ -830,7 +911,7 @@ Ab_dram[18,5] 0.0
 Ab_dram[19,0] 0.0
 Ab_dram[19,1] 0.0
 Ab_dram[19,2] 0.0
-Ab_dram[19,3] -0.0
+Ab_dram[19,3] 0.0
 Ab_dram[19,4] 0.0
 Ab_dram[19,5] -0.0
 Ab_dram[20,0] 0.0
@@ -984,59 +1065,59 @@ Ad[5,3] 1.0
 Ad[5,4] 0.0
 Ad[5,5] 0.0
 Par_lane[0] 1.0
-Par_lane[1] 1.0
-Par_lane[2] 48.0
-Par_lane[3] 48.0
+Par_lane[1] 2.0
+Par_lane[2] 25.0
+Par_lane[3] 48.00000000000001
 Par_lane[4] 48.0
-Par_lane[5] 96.0
-Par_lane[6] 2.0
-Par_lane[7] 1.0
-Par_lane[8] 48.0
-Par_lane[9] 98.0
+Par_lane[5] 5.0
+Par_lane[6] 1.0
+Par_lane[7] 55.0
+Par_lane[8] 24.0
+Par_lane[9] 24.0
 Par_lane[10] 1.0
-Par_lane[11] 1.0
+Par_lane[11] 192.0
 Par_lane[12] 1.0
-Par_lane[13] 192.0
+Par_lane[13] 106.0
 Par_lane[14] 1.0
-Par_lane[15] 97.0
-Par_lane[16] 48.0
-Par_lane[17] 9.0
+Par_lane[15] 212.0
+Par_lane[16] 1.0
+Par_lane[17] 1.0
 Par_stage[0] 1.0
 Par_stage[1] 1.0
-Par_stage[2] 4.0
+Par_stage[2] 13.0
 Par_stage[3] 3.0
-Par_stage[4] 6.0
-Par_stage[5] 1.0
+Par_stage[4] 3.0
+Par_stage[5] 6.0
 Par_stage[6] 1.0
 Par_stage[7] 1.0
-Par_stage[8] 1.0
-Par_stage[9] 5.0
+Par_stage[8] 9.0
+Par_stage[9] 6.0
 Par_stage[10] 1.0
 Par_stage[11] 1.0
 Par_stage[12] 1.0
-Par_stage[13] 3.0
+Par_stage[13] 6.0
 Par_stage[14] 1.0
-Par_stage[15] 6.0
+Par_stage[15] 3.0
 Par_stage[16] 1.0
 Par_stage[17] 1.0
 Par_total[0] 1.0
-Par_total[1] 1.0
-Par_total[2] 192.0
-Par_total[3] 144.0
-Par_total[4] 288.0
-Par_total[5] 96.0
-Par_total[6] 2.0
-Par_total[7] 1.0
-Par_total[8] 48.0
-Par_total[9] 490.0
+Par_total[1] 2.0
+Par_total[2] 325.0
+Par_total[3] 144.00000000000003
+Par_total[4] 144.0
+Par_total[5] 30.0
+Par_total[6] 1.0
+Par_total[7] 55.0
+Par_total[8] 216.0
+Par_total[9] 144.0
 Par_total[10] 1.0
-Par_total[11] 1.0
+Par_total[11] 192.0
 Par_total[12] 1.0
-Par_total[13] 576.0
+Par_total[13] 636.0
 Par_total[14] 1.0
-Par_total[15] 582.0
-Par_total[16] 48.0
-Par_total[17] 9.0
+Par_total[15] 636.0
+Par_total[16] 1.0
+Par_total[17] 1.0
 C579 1.0
 C580 1.0
 C581 0.0
@@ -1312,7 +1393,7 @@ C850 0.0
 C851 0.0
 C852 0.0
 C853 1.0
-C854 -0.0
+C854 0.0
 C855 0.0
 C856 0.0
 C857 1.0
@@ -1358,7 +1439,7 @@ C896 1.0
 C897 1.0
 C898 1.0
 C899 0.0
-C900 -0.0
+C900 0.0
 C901 1.0
 C902 0.0
 C903 0.0
@@ -1492,7 +1573,7 @@ C1030 -0.0
 C1031 0.0
 C1032 0.0
 C1033 1.0
-C1034 -0.0
+C1034 0.0
 C1035 0.0
 C1036 0.0
 C1037 1.0
@@ -1540,7 +1621,7 @@ C1078 -0.0
 C1079 0.0
 C1080 0.0
 C1081 1.0
-C1082 -0.0
+C1082 0.0
 shard_intermediate_buffer_size_depth_original[0] 1572864.0
 shard_intermediate_buffer_size_depth_original[1] 196608.0
 shard_intermediate_buffer_size_depth_original[2] 196608.0
@@ -1589,7 +1670,7 @@ shard_initiation_buffer_size_depth_one[2] 255721472.0
 shard_initiation_buffer_size_depth_one[3] 37748736.0
 shard_initiation_buffer_size_depth_one[4] 150994944.0
 shard_initiation_buffer_size_depth_one[5] 150994944.0
-Micro_Batch_Size 28.0
+Micro_Batch_Size 42.00000000000001
 dram_bytes_per_config_intermediate[0] 69206016.0
 dram_bytes_per_config_intermediate[1] 169869312.0
 dram_bytes_per_config_intermediate[2] 75497472.0
@@ -1607,75 +1688,75 @@ C1145 2654208.0
 C1146 1179648.0
 C1147 1179648.0
 C1148 -0.0
-C1149 -0.0
+C1149 0.0
 dram_bytes_initiation 43486543872.0
 dram_bytes_intermediate 37446746112.0
-Cycle[0] 24576.0
-Cycle[1] 1536.0
+Cycle[0] 12288.0
+Cycle[1] 768.0
 Cycle[2] 24576.0
-Cycle[3] 24576.0
-Cycle[4] 12288.0
-Cycle[5] 33792.0
-Cycle[6] 12288.0
-Cycle[7] 24576.0
-Cycle[8] 12288.0
-Cycle[9] 12288.0
-Cycle[10] 33792.0
-Cycle[11] 12288.0
-Cycle[12] 12288.0
+Cycle[3] 24576.000000000007
+Cycle[4] 24576.000000000007
+Cycle[5] 19712.0
+Cycle[6] 24576.0
+Cycle[7] 448.0
+Cycle[8] 8192.0
+Cycle[9] 24576.0
+Cycle[10] 12288.0
+Cycle[11] 64.0
+Cycle[12] 24576.0
 Cycle[13] 24576.0
 Cycle[14] 24576.0
 Cycle[15] 24576.0
-Cycle[16] 32.0
-Cycle[17] 192.0
-m_factor[0] 768.0
-m_factor[1] 48.0
-m_factor[2] 1.0
+Cycle[16] 1536.0
+Cycle[17] 1536.0
+m_factor[0] 384.0
+m_factor[1] 24.0
+m_factor[2] 2.0
 m_factor[3] 1.0
 m_factor[4] 1.0
-m_factor[5] 8.0
-m_factor[6] 384.0
-m_factor[7] 768.0
-m_factor[8] 1.0
-m_factor[9] 4.0
-m_factor[10] 1056.0
-m_factor[11] 384.0
-m_factor[12] 384.0
-m_factor[13] 1.0
+m_factor[5] 154.0
+m_factor[6] 768.0
+m_factor[7] 14.0
+m_factor[8] 2.0
+m_factor[9] 16.0
+m_factor[10] 384.0
+m_factor[11] 2.0
+m_factor[12] 768.0
+m_factor[13] 2.0
 m_factor[14] 768.0
-m_factor[15] 4.0
-m_factor[16] 1.0
-m_factor[17] 6.0
+m_factor[15] 2.0
+m_factor[16] 48.0
+m_factor[17] 48.0
 n_factor[0] 1.0
 n_factor[1] 1.0
-n_factor[2] 2.0
-n_factor[3] 2.0
-n_factor[4] 1.0
-n_factor[5] 33.0
+n_factor[2] 1.0
+n_factor[3] 2.0000000000000004
+n_factor[4] 2.0
+n_factor[5] 1.0
 n_factor[6] 1.0
 n_factor[7] 1.0
-n_factor[8] 6.0
-n_factor[9] 2.0
+n_factor[8] 2.0
+n_factor[9] 1.0
 n_factor[10] 1.0
 n_factor[11] 1.0
 n_factor[12] 1.0
-n_factor[13] 2.0
+n_factor[13] 1.0
 n_factor[14] 1.0
-n_factor[15] 1.0
+n_factor[15] 2.0
 n_factor[16] 1.0
 n_factor[17] 1.0
 C1206 2.0
-C1207 2.0
-C1208 1.0
-C1209 264.0
-C1210 6.0
-C1211 8.0
+C1207 2.0000000000000004
+C1208 2.0000000000000004
+C1209 154.0
+C1210 4.0
+C1211 16.0
 C1212 2.0
 C1213 4.0
-Compute_Latency[0] 1258291.1999999923
-Compute_Latency[1] 1730150.400000005
+Compute_Latency[0] 1258291.2000000002
+Compute_Latency[1] 1258291.2000000002
 Compute_Latency[2] 1258291.1999999997
-Compute_Latency[3] 1258291.199999998
+Compute_Latency[3] 1258291.2000000002
 Compute_Latency[4] 0.0
 Compute_Latency[5] 0.0
 Compute_Latency[6] 0.0
@@ -1690,11 +1771,11 @@ Compute_Latency[14] 0.0
 Compute_Latency[15] 0.0
 Compute_Latency[16] 0.0
 Compute_Latency[17] 0.0
-C1232 24576.0
-C1233 1536.0
+C1232 12288.0
+C1233 768.0
 C1234 24576.0
-C1235 24576.0
-C1236 12288.0
+C1235 24576.000000000007
+C1236 24576.000000000007
 C1237 0.0
 C1238 0.0
 C1239 0.0
@@ -1708,26 +1789,26 @@ C1246 0.0
 C1247 0.0
 C1248 0.0
 C1249 0.0
-C1250 24575.999999999847
+C1250 24576.000000000004
 C1251 0.0
 C1252 0.0
 C1253 0.0
 C1254 0.0
 C1255 0.0
-C1256 33792.0
-C1257 12288.0
-C1258 24576.0
-C1259 12288.0
-C1260 12288.0
-C1261 33792.0
-C1262 12288.0
-C1263 12288.0
+C1256 19712.0
+C1257 24576.0
+C1258 448.0
+C1259 8192.0
+C1260 24576.0
+C1261 12288.0
+C1262 64.0
+C1263 24576.0
 C1264 0.0
 C1265 0.0
 C1266 0.0
 C1267 0.0
 C1268 0.0
-C1269 33792.000000000095
+C1269 24576.0
 C1270 0.0
 C1271 0.0
 C1272 0.0
@@ -1763,9 +1844,9 @@ C1301 0.0
 C1302 0.0
 C1303 24576.0
 C1304 24576.0
-C1305 32.0
-C1306 192.0
-C1307 24575.999999999964
+C1305 1536.0
+C1306 1536.0
+C1307 24576.0
 C1308 0.0
 C1309 0.0
 C1310 0.0
@@ -1809,7 +1890,7 @@ DRAM_bytes[1] 169869312.0
 DRAM_bytes[2] 75497472.0
 DRAM_bytes[3] 75497472.0
 DRAM_bytes[4] 0.0
-DRAM_bytes[5] 0.0
+DRAM_bytes[5] -0.0
 DRAM_Latency[0] 692060.16
 DRAM_Latency[1] 1698693.12
 DRAM_Latency[2] 754974.72
@@ -1833,7 +1914,7 @@ C1371 2654208.0
 C1372 1179648.0
 C1373 1179648.0
 C1374 0.0
-C1375 0.0
+C1375 -0.0
 C1376 390070272.0
 total_DRAM_bytes 37446746112.0
 allreduce_ratio 0.875
@@ -1875,16 +1956,16 @@ C1413 0.0
 C1414 56.0
 C1415 88080384.0
 total_Network_bytes 8455716864.0
-Latency_wo_setup[0] 1258291.1999999953
+Latency_wo_setup[0] 1258291.2000000002
 Latency_wo_setup[1] 1761607.68
 Latency_wo_setup[2] 1258291.1999999997
 Latency_wo_setup[3] 1761607.68
 Latency_wo_setup[4] 0.0
 Latency_wo_setup[5] 0.0
-Setup_Latency[0] 40445.07428571428
-Setup_Latency[1] 13481.691428571428
-Setup_Latency[2] 53926.76571428571
-Setup_Latency[3] 53926.76571428571
+Setup_Latency[0] 26963.382857142857
+Setup_Latency[1] 8987.794285714284
+Setup_Latency[2] 35951.17714285714
+Setup_Latency[3] 35951.17714285714
 Setup_Latency[4] 0.0
 Setup_Latency[5] 0.0
 Setup_Latency[6] 0.0
@@ -1899,23 +1980,23 @@ Setup_Latency[14] 0.0
 Setup_Latency[15] 0.0
 Setup_Latency[16] 0.0
 Setup_Latency[17] 0.0
-C1441 2800.0
-C1442 2800.0
-C1443 2800.0
-C1444 2800.0
-C1445 2800.0
-C1446 2800.0
-Per_Config_II[0] 1298736.2742857095
-Per_Config_II[1] 1775089.3714285714
-Per_Config_II[2] 1312217.9657142854
-Per_Config_II[3] 1815534.4457142856
+C1441 4200.000000000001
+C1442 4200.000000000001
+C1443 4200.000000000001
+C1444 4200.000000000001
+C1445 4200.000000000001
+C1446 4200.000000000001
+Per_Config_II[0] 1285254.5828571431
+Per_Config_II[1] 1770595.4742857143
+Per_Config_II[2] 1294242.3771428568
+Per_Config_II[3] 1797558.857142857
 Per_Config_II[4] 0.0
 Per_Config_II[5] 0.0
 p2p_latency 0.0
-II 595351493.4857138
-util 0.5005540930706526
+II 590174523.9771428
+util 0.5049449184484649
 GFLOPS 307200.0
 FLOP 91547328577536.0
-util 0.5005540930706526
+util 0.5049449184484649
 OI Memory 2444.733870967742
 OI network 10826.67857142857

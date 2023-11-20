@@ -445,7 +445,7 @@ system {
     sram_cap: 335544320.0
     freq: 1.25
     dram_bw: 100.0
-    dram_cap: 1099511627776.0
+    dram_cap: 1649267441664.0
   }
 }
 cost {

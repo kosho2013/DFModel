@@ -186,6 +186,7 @@ class BasicTopology(Enum):
     R = 1
     FC = 2
     SW = 3
+    SINGLE = 4
 
 
 class Topology(Enum):
@@ -195,6 +196,7 @@ class Topology(Enum):
     DGX_1 = 3
     DGX_2 = 4
     TORUS_3D = 5
+    SINGLE_CHIP = 6
 
 if dse.system.topo == Topology.TORUS_2D.value: # 2D Torus
     topology = [BasicTopology.R.value, BasicTopology.R.value]
@@ -216,11 +218,16 @@ elif dse.system.topo == Topology.DGX_2.value: # DGX-2
     link_bw = [dse.system.link_bw_x, dse.system.link_bw_y]
     shape = [dse.system.x, dse.system.y]
     
-else: # 3D Torus
+elif dse.system.topo == Topology.TORUS_3D.value: # 3D Torus
     topology = [BasicTopology.R.value, BasicTopology.R.value, BasicTopology.R.value]
     link_bw = [dse.system.link_bw_x, dse.system.link_bw_y, dse.system.link_bw_z]
     shape = [dse.system.x, dse.system.y, dse.system.z]
-
+elif dse.system.topo == Topology.SINGLE_CHIP.value: # 1 chip
+    topology = [BasicTopology.SINGLE.value]
+    link_bw = [dse.system.link_bw_x]
+    shape = [dse.system.x]
+else:
+    raise Exception('Wrong!')
 
 
 FLOP = 0.0
@@ -275,7 +282,7 @@ if len(topology) == 2:
         model.addConstr(Link_BW_Y == link_bw[1])
     
 
-else:
+elif len(topology) == 3:
     X = model.addVar(name='X', vtype=gp.GRB.INTEGER)
     Y = model.addVar(name='Y', vtype=gp.GRB.INTEGER)
     Z = model.addVar(name='Z', vtype=gp.GRB.INTEGER)
@@ -306,7 +313,26 @@ else:
         model.addConstr(Link_BW_X == link_bw[0])
         model.addConstr(Link_BW_Y == link_bw[1])
         model.addConstr(Link_BW_Z == link_bw[2])
+elif len(topology) == 1:
+    X = model.addVar(name='X', vtype=gp.GRB.INTEGER)
+    Y = model.addVar(name='Y', vtype=gp.GRB.INTEGER)
+    model.addConstr(X == 1)
+    model.addConstr(Y == 1)
+
     
+    TP = model.addVar(name='TP', vtype=gp.GRB.INTEGER)
+    PP = model.addVar(name='PP', vtype=gp.GRB.INTEGER)
+    model.addConstr(TP == X)
+    model.addConstr(PP == X)
+    
+    
+    Link_BW_X = model.addVar(name='Link_BW_X', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW_Y = model.addVar(name='Link_BW_Y', vtype=gp.GRB.CONTINUOUS, lb=0)
+    model.addConstr(Link_BW_X == 9999999999999)
+    model.addConstr(Link_BW_Y == 9999999999999)
+
+else:
+    raise Exception('Wrong!')
 
 
 
@@ -438,6 +464,7 @@ if opt == Optimization.KERNEL_BY_KERNEL.value:
     for i in range(C):
         model.addConstr(np.ones((num_kernel)) @ Ac[:, i] >= 1)
     model.addConstr(tile_size == seq_len)
+    model.addConstr(C == num_kernel)
 
 
 
@@ -670,6 +697,8 @@ for v in model.getVars():
 
 print('GFLOPS', GFLOPS)
 print('FLOP', FLOP / num_chip)
+print('II', II)
+print('Samples/s' 1e9/II)
 print('util', util)
 print('OI Memory', FLOP / num_chip / total_DRAM_bytes)
 print('OI network', FLOP / num_chip / total_Network_bytes)

@@ -1,0 +1,324 @@
+kernels {
+name: "Add_Prev_Layer"
+id: 1
+batch_gemm_elementwise_outer_m_k_n {
+outer: 1
+M: 12288
+K: 1
+N: 2048
+type: SIMD
+input_tensor_1_size: 50331650.0
+input_tensor_2_size: -1.0
+weight_tensor_size: -1.0
+output_tensor_size: 50331650.0
+input_tensor_1_id: -1
+input_tensor_2_id: -1
+}
+config: -1
+}
+kernels {
+name: "LayerNorm_1"
+id: 2
+batch_gemm_elementwise_outer_m_k_n {
+outer: 1
+M: 12288
+K: 1
+N: 2048
+type: SIMD
+input_tensor_1_size: 50331650.0
+input_tensor_2_size: -1.0
+weight_tensor_size: -1.0
+output_tensor_size: 50331650.0
+input_tensor_1_id: 1
+input_tensor_2_id: -1
+}
+config: -1
+}
+kernels {
+name: "Q"
+id: 3
+batch_gemm_elementwise_outer_m_k_n {
+outer: 96
+M: 128
+K: 12288
+N: 2048
+type: SYSTOLIC
+input_tensor_1_size: 50331650.0
+input_tensor_2_size: -1.0
+weight_tensor_size: 301989900.0
+output_tensor_size: 50331650.0
+input_tensor_1_id: 2
+input_tensor_2_id: -1
+}
+config: -1
+}
+kernels {
+name: "K"
+id: 4
+batch_gemm_elementwise_outer_m_k_n {
+outer: 96
+M: 128
+K: 12288
+N: 2048
+type: SYSTOLIC
+input_tensor_1_size: 50331650.0
+input_tensor_2_size: -1.0
+weight_tensor_size: 301989900.0
+output_tensor_size: 50331650.0
+input_tensor_1_id: 2
+input_tensor_2_id: -1
+}
+config: -1
+}
+kernels {
+name: "V"
+id: 5
+batch_gemm_elementwise_outer_m_k_n {
+outer: 96
+M: 128
+K: 12288
+N: 2048
+type: SYSTOLIC
+input_tensor_1_size: 50331650.0
+input_tensor_2_size: -1.0
+weight_tensor_size: 301989900.0
+output_tensor_size: 50331650.0
+input_tensor_1_id: 2
+input_tensor_2_id: -1
+}
+config: -1
+}
+kernels {
+name: "MHA_GEMM_1"
+id: 6
+batch_gemm_elementwise_outer_m_k_n {
+outer: 96
+M: 2048
+K: 128
+N: 2048
+type: SYSTOLIC
+input_tensor_1_size: 50331650.0
+input_tensor_2_size: 50331650.0
+weight_tensor_size: -1.0
+output_tensor_size: 805306400.0
+input_tensor_1_id: 3
+input_tensor_2_id: 4
+}
+config: -1
+}
+kernels {
+name: "SOFTMAX"
+id: 7
+batch_gemm_elementwise_outer_m_k_n {
+outer: 96
+M: 2048
+K: 1
+N: 2048
+type: SIMD
+input_tensor_1_size: 805306400.0
+input_tensor_2_size: -1.0
+weight_tensor_size: -1.0
+output_tensor_size: 805306400.0
+input_tensor_1_id: 6
+input_tensor_2_id: -1
+}
+config: -1
+}
+kernels {
+name: "DropOut_1"
+id: 8
+batch_gemm_elementwise_outer_m_k_n {
+outer: 96
+M: 2048
+K: 1
+N: 2048
+type: SIMD
+input_tensor_1_size: 805306400.0
+input_tensor_2_size: -1.0
+weight_tensor_size: -1.0
+output_tensor_size: 805306400.0
+input_tensor_1_id: 7
+input_tensor_2_id: -1
+}
+config: -1
+}
+kernels {
+name: "MHA_GEMM_2"
+id: 9
+batch_gemm_elementwise_outer_m_k_n {
+outer: 96
+M: 128
+K: 2048
+N: 2048
+type: SYSTOLIC
+input_tensor_1_size: 50331650.0
+input_tensor_2_size: 805306400.0
+weight_tensor_size: -1.0
+output_tensor_size: 50331650.0
+input_tensor_1_id: 5
+input_tensor_2_id: 8
+}
+config: -1
+}
+kernels {
+name: "PROJ_GEMM"
+id: 10
+batch_gemm_elementwise_outer_m_k_n {
+outer: 1
+M: 12288
+K: 12288
+N: 2048
+type: SYSTOLIC
+input_tensor_1_size: 50331650.0
+input_tensor_2_size: -1.0
+weight_tensor_size: 301989900.0
+output_tensor_size: 50331650.0
+input_tensor_1_id: 9
+input_tensor_2_id: -1
+}
+config: -1
+}
+kernels {
+name: "DropOut_2"
+id: 11
+batch_gemm_elementwise_outer_m_k_n {
+outer: 1
+M: 12288
+K: 1
+N: 2048
+type: SIMD
+input_tensor_1_size: 50331650.0
+input_tensor_2_size: -1.0
+weight_tensor_size: -1.0
+output_tensor_size: 50331650.0
+input_tensor_1_id: 10
+input_tensor_2_id: -1
+}
+config: -1
+}
+kernels {
+name: "Add_1"
+id: 12
+batch_gemm_elementwise_outer_m_k_n {
+outer: 1
+M: 12288
+K: 1
+N: 2048
+type: SIMD
+input_tensor_1_size: 50331650.0
+input_tensor_2_size: 50331650.0
+weight_tensor_size: -1.0
+output_tensor_size: 50331650.0
+input_tensor_1_id: 1
+input_tensor_2_id: 11
+}
+config: -1
+}
+kernels {
+name: "LayerNorm_2"
+id: 13
+batch_gemm_elementwise_outer_m_k_n {
+outer: 1
+M: 12288
+K: 1
+N: 2048
+type: SIMD
+input_tensor_1_size: 50331650.0
+input_tensor_2_size: -1.0
+weight_tensor_size: -1.0
+output_tensor_size: 50331650.0
+input_tensor_1_id: 12
+input_tensor_2_id: -1
+}
+config: -1
+}
+kernels {
+name: "FFN0"
+id: 14
+batch_gemm_elementwise_outer_m_k_n {
+outer: 1
+M: 49152
+K: 12288
+N: 2048
+type: SYSTOLIC
+input_tensor_1_size: 50331650.0
+input_tensor_2_size: -1.0
+weight_tensor_size: 1207959600.0
+output_tensor_size: 201326600.0
+input_tensor_1_id: 13
+input_tensor_2_id: -1
+}
+config: -1
+}
+kernels {
+name: "GeLU"
+id: 15
+batch_gemm_elementwise_outer_m_k_n {
+outer: 1
+M: 49152
+K: 1
+N: 2048
+type: SIMD
+input_tensor_1_size: 201326600.0
+input_tensor_2_size: -1.0
+weight_tensor_size: -1.0
+output_tensor_size: 201326600.0
+input_tensor_1_id: 14
+input_tensor_2_id: -1
+}
+config: -1
+}
+kernels {
+name: "FFN1"
+id: 16
+batch_gemm_elementwise_outer_m_k_n {
+outer: 1
+M: 12288
+K: 49152
+N: 2048
+type: SYSTOLIC
+input_tensor_1_size: 201326600.0
+input_tensor_2_size: -1.0
+weight_tensor_size: 1207959600.0
+output_tensor_size: 50331650.0
+input_tensor_1_id: 15
+input_tensor_2_id: -1
+}
+config: -1
+}
+kernels {
+name: "DropOut_3"
+id: 17
+batch_gemm_elementwise_outer_m_k_n {
+outer: 1
+M: 12288
+K: 1
+N: 2048
+type: SIMD
+input_tensor_1_size: 50331650.0
+input_tensor_2_size: -1.0
+weight_tensor_size: -1.0
+output_tensor_size: 50331650.0
+input_tensor_1_id: 16
+input_tensor_2_id: -1
+}
+config: -1
+}
+kernels {
+name: "Add_2"
+id: 18
+batch_gemm_elementwise_outer_m_k_n {
+outer: 1
+M: 12288
+K: 1
+N: 2048
+type: SIMD
+input_tensor_1_size: 50331650.0
+input_tensor_2_size: -1.0
+weight_tensor_size: -1.0
+output_tensor_size: 50331650.0
+input_tensor_1_id: 12
+input_tensor_2_id: 17
+}
+config: -1
+}
