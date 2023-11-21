@@ -7,6 +7,8 @@ from enum import Enum
 from google.protobuf import text_format
 import pydot
 import copy
+import sys
+
 
 # user pass in
 parser = argparse.ArgumentParser()
@@ -129,7 +131,6 @@ for kernel in dse.dataflow_graph.kernels:
 num_kernel = len(kernel_name)
 seq_len = dse.training.seq_len
 num_layer = dse.training.num_layer
-Micro_Batch_Size = dse.training.micro_batch_size
 opt = dse.training.optimization
 Intermediate = M[-1] * N[-1] * word
 
@@ -230,13 +231,6 @@ else:
     raise Exception('Wrong!')
 
 
-FLOP = 0.0
-for i in range(len(M)):
-    if kernel_type[i] == KernelType.SIMD.value:
-        FLOP += M[i] * K[i] * N[i]
-    else:
-        FLOP += 2 * M[i] * K[i] * N[i]
-FLOP *= num_layer
 
 
 
@@ -323,13 +317,13 @@ elif len(topology) == 1:
     TP = model.addVar(name='TP', vtype=gp.GRB.INTEGER)
     PP = model.addVar(name='PP', vtype=gp.GRB.INTEGER)
     model.addConstr(TP == X)
-    model.addConstr(PP == X)
+    model.addConstr(PP == Y)
     
     
     Link_BW_X = model.addVar(name='Link_BW_X', vtype=gp.GRB.CONTINUOUS, lb=0)
     Link_BW_Y = model.addVar(name='Link_BW_Y', vtype=gp.GRB.CONTINUOUS, lb=0)
-    model.addConstr(Link_BW_X == 9999999999999)
-    model.addConstr(Link_BW_Y == 9999999999999)
+    model.addConstr(Link_BW_X == sys.maxsize)
+    model.addConstr(Link_BW_Y == sys.maxsize)
 
 else:
     raise Exception('Wrong!')
@@ -349,9 +343,6 @@ else:
 
 
 # pipeline parallelism
-layers_per_stage = model.addVar(name='layers_per_stage', vtype=gp.GRB.INTEGER, lb=1)
-model.addConstr(layers_per_stage * PP >= num_layer)
-
 aaa = model.addVar(vtype=gp.GRB.BINARY)
 intermediate = model.addVar(name='intermediate', vtype=gp.GRB.CONTINUOUS, lb=0)
 model.addConstr((aaa == 1) >> (PP == 1))
@@ -463,9 +454,6 @@ for i in range(num_edge):
 if opt == Optimization.KERNEL_BY_KERNEL.value:
     for i in range(C):
         model.addConstr(np.ones((num_kernel)) @ Ac[:, i] >= 1)
-    model.addConstr(tile_size == seq_len)
-    model.addConstr(C == num_kernel)
-
 
 
 
@@ -518,7 +506,6 @@ for i in range(num_weight):
 
 
 
-
 # SRAM cap
 shard_intermediate_buffer_size_depth_original = model.addMVar(num_edge, name='shard_intermediate_buffer_size_depth_original', vtype=gp.GRB.INTEGER, lb=0)
 shard_intermediate_buffer_size_depth_two = model.addMVar(num_edge, name='shard_intermediate_buffer_size_depth_two', vtype=gp.GRB.INTEGER, lb=0)
@@ -532,7 +519,7 @@ for i in range(num_edge):
 for i in range(num_weight):
     model.addConstr(shard_initiation_buffer_size_depth_one[i] >= shard_initiation_buffer_size[i] * 1)
 
-for i in range(C):
+# for i in range(C):
     model.addConstr(shard_intermediate_buffer_size_depth_original @ Ab_onchip[:, i] + shard_intermediate_buffer_size_depth_two @ Ab_dram[:, i] + shard_initiation_buffer_size_depth_one @ Ad[:, i] <= SRAM_Cap)
 
 
@@ -550,9 +537,14 @@ for i in range(C):
 
 dram_bytes_initiation = model.addVar(name='dram_bytes_initiation', vtype=gp.GRB.CONTINUOUS, lb=0)
 dram_bytes_intermediate = model.addVar(name='dram_bytes_intermediate', vtype=gp.GRB.CONTINUOUS, lb=0)
-model.addConstr(dram_bytes_initiation == (np.ones((C)) @ dram_bytes_per_config_initiation) * layers_per_stage)
-model.addConstr(dram_bytes_intermediate == (np.ones((C)) @ dram_bytes_per_config_intermediate) * layers_per_stage)
+model.addConstr(dram_bytes_initiation == np.ones((C)) @ dram_bytes_per_config_initiation)
+model.addConstr(dram_bytes_intermediate == np.ones((C)) @ dram_bytes_per_config_intermediate)
 model.addConstr(dram_bytes_initiation + dram_bytes_intermediate * Micro_Batch_Size <= DRAM_Cap)
+
+
+
+
+
 
 
 
@@ -579,7 +571,6 @@ for i in range(num_kernel):
 
 
 
-
 Compute_Latency = model.addMVar(num_kernel, name='Compute_Latency', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
     t1 = model.addMVar(num_kernel, vtype=gp.GRB.INTEGER, lb=0)
@@ -598,11 +589,8 @@ for i in range(C):
     model.addConstr(DRAM_Latency[i] * DRAM_BW == t1 * num_tile)
     model.addConstr(DRAM_bytes[i] == t1 * num_tile)
     
-aaa = model.addVar(vtype=gp.GRB.CONTINUOUS) 
-model.addConstr(aaa == np.ones((C)) @ DRAM_bytes)
 total_DRAM_bytes = model.addVar(name='total_DRAM_bytes', vtype=gp.GRB.CONTINUOUS)  
-model.addConstr(total_DRAM_bytes == aaa * layers_per_stage)
-
+model.addConstr(total_DRAM_bytes == np.ones((C)) @ DRAM_bytes)
 
 
 
@@ -622,10 +610,8 @@ for i in range(C):
     model.addConstr(Network_Latency[i] * Link_BW_X == t1 * t2)
     model.addConstr(Network_bytes[i] == t1 * t2)
 
-aaa = model.addVar(vtype=gp.GRB.CONTINUOUS) 
-model.addConstr(aaa == np.ones((C)) @ Network_bytes)
-total_Network_bytes = model.addVar(name='total_Network_bytes', vtype=gp.GRB.CONTINUOUS)  
-model.addConstr(total_Network_bytes == aaa * layers_per_stage)
+total_Network_bytes = model.addVar(name='total_Network_bytes', vtype=gp.GRB.CONTINUOUS) 
+model.addConstr(total_Network_bytes == np.ones((C)) @ Network_bytes)
 
 
 
@@ -643,22 +629,19 @@ for i in range(C):
 Per_Config_II = model.addMVar(C, name='Per_Config_II', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
     model.addConstr(Per_Config_II[i] == Latency_wo_setup[i] + Setup_Latency[i])
+    
 
-p2p_latency = model.addVar(name='p2p_latency', vtype=gp.GRB.CONTINUOUS, lb=0)
+p2p_latency = model.addVar(name='p2p_latency', vtype=gp.GRB.CONTINUOUS)
 model.addConstr(p2p_latency * Link_BW_Y == intermediate)
 
 
 
-II = model.addVar(name='II', vtype=gp.GRB.CONTINUOUS, lb=0)
-model.addConstr(II == np.ones((C)) @ Per_Config_II * layers_per_stage + p2p_latency)
 
 
-util = model.addVar(name='util', vtype=gp.GRB.CONTINUOUS, lb=0)
-model.addConstr(util * II * GFLOPS * num_chip == FLOP)
+II = model.addVar(name='II', vtype=gp.GRB.CONTINUOUS)
+model.addConstr(II == np.ones((C)) @ Per_Config_II + p2p_latency)
 
-
-
-model.setObjective(util, gp.GRB.MAXIMIZE)
+model.setObjective(II, gp.GRB.MINIMIZE)
 model.optimize()
 
 
@@ -685,23 +668,44 @@ for v in model.getVars():
         shard_initiation_buffer_size.append(v.X)
     if v.varName.startswith('II'):
         II = v.X
-    if v.varName.startswith('util'):
-        util = v.X
     if v.varName.startswith('total_DRAM_bytes'):
         total_DRAM_bytes = v.X
     if v.varName.startswith('total_Network_bytes'):
         total_Network_bytes = v.X
+    if v.varName.startswith('TP'):
+        TP = v.X
+    if v.varName.startswith('PP'):
+        PP = v.X
     if v.varName.startswith('Config'):
         Config.append(v.X)
         
 
+
+
+FLOP = 0.0
+for i in range(len(M)):
+    if kernel_type[i] == KernelType.SIMD.value:
+        FLOP += M[i] * K[i] * N[i]
+    else:
+        FLOP += 2 * M[i] * K[i] * N[i]
+FLOP *= num_layer
+        
+layers_per_stage = num_layer / PP
+II *= layers_per_stage
+
+   
 print('GFLOPS', GFLOPS)
-print('FLOP', FLOP / num_chip)
 print('II', II)
-print('Samples/s' 1e9/II)
-print('util', util)
-print('OI Memory', FLOP / num_chip / total_DRAM_bytes)
-print('OI network', FLOP / num_chip / total_Network_bytes)
+print('Samples/s', 1e9/II)
+print('util', FLOP/II/GFLOPS/num_chip)
+if total_DRAM_bytes == 0:
+    print('oim infinity')
+else:
+    print('OI Memory', FLOP / num_chip / total_DRAM_bytes / layers_per_stage)
+if total_Network_bytes == 0:
+    print('oin infinity')
+else:
+    print('OI network', FLOP / num_chip / total_Network_bytes / layers_per_stage)
 
 
 
