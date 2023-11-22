@@ -18,10 +18,10 @@ message Batch_GEMM_ELEMENTWISE_OUTER_M_K_N {
 	int32 K = 3;
 	int32 N = 4;
 	KernelType type = 5;
-	float input_tensor_1_size = 6; // always map to indices outer, K, N
-	float input_tensor_2_size = 7; // always map to indices outer, M, K if weight is not present
-	float weight_tensor_size = 8; // always map to indices outer, M, K
-	float output_tensor_size = 9; // always map to indices outer, M, N
+	float input_tensor_1_size = 6;
+	float input_tensor_2_size = 7;
+	float weight_tensor_size = 8;
+	float output_tensor_size = 9;
 
 	int32 input_tensor_1_id = 10;
 	int32 input_tensor_2_id = 11;
@@ -34,27 +34,32 @@ message Batch_GEMM_ELEMENTWISE_OUTER_M_K_N {
 	int32 shard_outer_M = 16;
 	int32 shard_K = 17;
 	int32 shard_N = 18;
+	
+	int32 tiling_M = 20;
+	int32 tiling_K = 21;
+	int32 tiling_N = 22;
+	
 
 	enum KernelType {
-		NO_Type = 0;
+		KernelType_Placeholder = 0;
 		SYSTOLIC = 1;
 		SIMD = 2;
 	}
 
 	enum Communication_Type {
-		NO_COMMUNICATION = 0;
+		Communication_Type_Placeholder = 0;
 		ALL_REDUCE = 1;
 		ALL_TO_ALL = 2;
 		ALL_GATHER = 3;
 	}
 
 	enum Sharding {
-		NO_DIM = 0;
-		OUTER_DIM = 1;
-		M_DIM = 2;
-		K_DIM = 3;
-		N_DIM = 4;
-		NO_SHARDING = 5;
+		Sharding_Placeholder = 0;
+		OUTER_Sharding = 1;
+		M_Sharding = 2;
+		K_Sharding = 3;
+		N_Sharding = 4;
+		NO_Sharding = 5;
 	}
 }
 
@@ -69,7 +74,7 @@ message Connection {
 	float communication_size = 5;
 
 	enum Communication_Type {
-		NO_COMMUNICATION = 0;
+		Communication_Type_Placeholder = 0;
 		ALL_REDUCE = 1;
 		ALL_TO_ALL = 2;
 		ALL_GATHER = 3;
@@ -78,6 +83,9 @@ message Connection {
 	int32 buffer_depth = 6;
 	float tensor_size = 7;
 	float shard_tensor_size = 8;
+	
+	string startName = 11;
+	string endName = 12;
 }
 
 
@@ -111,7 +119,7 @@ message System {
 	int32 z = 10;
 
 	enum Topology {
-		NO_TOPOLOGY = 0;
+		Topology_Placeholder = 0;
 		TORUS_2D = 1;
 		DRAGONFLY = 2;
 		DGX_1 = 3;
@@ -131,7 +139,7 @@ message Training {
 	Optimization optimization = 2;
 
 	enum Optimization {
-		NO_OPTIMIZATION = 0;
+		Optimization_Placeholder = 0;
 		FLASHATTENTION = 1;
 		KERNEL_BY_KERNEL = 2;
 	}
@@ -139,7 +147,7 @@ message Training {
 	int32 seq_len = 4;
 	int32 num_layer = 5;
 	int32 num_config = 6;
-	int32 tile_size = 7;
+	int32 seq_tile_size = 7;
 }
 
 message DSE {

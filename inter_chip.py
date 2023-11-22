@@ -30,84 +30,53 @@ with open('./'+name+'/'+'dse.pb', "rb") as file:
 
 # get dataflow graph info
 kernel_name = []
-for kernel in dse.dataflow_graph.kernels:
-    kernel_name.append(kernel.name)
-
-
 output_tensor_size = []
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        output_tensor_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size)
-
-
 kernel_type = []
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        kernel_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.type)
-
-
 outer = []
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        outer.append(kernel.batch_gemm_elementwise_outer_m_k_n.outer)
-
-
-startIdx = []
-endIdx = []
-for connection in dse.dataflow_graph.connections:
-    startIdx.append(connection.startIdx)
-    endIdx.append(connection.endIdx)
-
+input_tensor_1_id = []
+input_tensor_2_id = []
+weight_tensor_size = []
+input_tensor_1_size = []
+input_tensor_2_size = []
+tiling_M = []
+tiling_K = []
+tiling_N = []
 node_dict = {}
 i = 0
 for kernel in dse.dataflow_graph.kernels:
+    kernel_name.append(kernel.name)
+    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        output_tensor_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size)
+        kernel_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.type)
+        outer.append(kernel.batch_gemm_elementwise_outer_m_k_n.outer)
+        input_tensor_1_id.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id)
+        input_tensor_2_id.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id)
+        weight_tensor_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size)
+        input_tensor_1_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size)
+        input_tensor_2_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size)
+        tiling_M.append(kernel.batch_gemm_elementwise_outer_m_k_n.tiling_M)
+        tiling_K.append(kernel.batch_gemm_elementwise_outer_m_k_n.tiling_K)
+        tiling_N.append(kernel.batch_gemm_elementwise_outer_m_k_n.tiling_N)
     node_dict[kernel.id] = i
     i += 1
 
 
+startIdx = [] # upstream node id
+endIdx = [] # upstream node id
 edge_dict = {}
 i = 0
 for connection in dse.dataflow_graph.connections:
+    startIdx.append(connection.startIdx)
+    endIdx.append(connection.endIdx)
     edge_dict[(connection.startIdx, connection.endIdx)] = i
     i += 1
-num_edge = len(edge_dict)
 
 
-
-input_tensor_1_id = []
-input_tensor_2_id = []
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        input_tensor_1_id.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id)
-        input_tensor_2_id.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id)
-
-
-
-
-weight_tensor_size = []
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        weight_tensor_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size)
-
-
-input_tensor_1_size = []
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        input_tensor_1_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size)
-
-
-input_tensor_2_size = []
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        input_tensor_2_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size)
-
+# assign edge tensor size
 tensor_size = []
 for connection in dse.dataflow_graph.connections:
     connection.tensor_size = output_tensor_size[node_dict[connection.startIdx]]
     tensor_size.append(connection.tensor_size)
-
-
-
 
 num_kernel = len(kernel_name)
 num_edge = len(startIdx)
@@ -148,15 +117,32 @@ while len(indegree.keys()) > 0:
     cnt += 1
 
 
+
+
 for kernel in dse.dataflow_graph.kernels:
     kernel.topological_number = kernel_topological_dict[kernel.id]
-
-
 
 for connection in dse.dataflow_graph.connections:
     connection.buffer_depth = kernel_topological_dict[connection.endIdx] - kernel_topological_dict[connection.startIdx] + 1
 
+startName = []
+endName = []
+i = 0
+for connection in dse.dataflow_graph.connections:
+    connection.startName = kernel_name[node_dict[startIdx[i]]]
+    connection.endName = kernel_name[node_dict[endIdx[i]]]
+    startName.append(connection.startName)
+    endName.append(connection.endName)
+    i += 1
 
+
+
+
+
+
+
+
+    
 
 
 
@@ -174,6 +160,15 @@ class Communication(Enum):
     ALL_GATHER = 3
 
 
+
+for i in range(num_kernel):
+    print(kernel_name[i], i)
+    
+for i in range(num_edge):
+    print(startName[i], endName[i], i)
+
+
+
 model = gp.Model()
 model.params.NonConvex = 2
 model.Params.Threads = 128
@@ -185,12 +180,23 @@ communication_type = model.addMVar((num_kernel), name='communication_type', vtyp
 communication_size = model.addMVar((num_kernel), name='communication_size', vtype=gp.GRB.CONTINUOUS, lb=0)
 
 for i in range(num_kernel):
-    model.addConstr(sharding[i, 3] == 0)
+    if outer[i] == 1:
+        model.addConstr(sharding[i, 0] == 0)
     model.addConstr(np.ones((5)) @ sharding[i, :] == 1)
-
+    
+    
     if kernel_type[i] == KernelType.SIMD.value:
         model.addConstr(sharding[i, 2] == 0)
+        
+    if tiling_M[i] == 1:
+        model.addConstr(sharding[i, 1] == 0)
+    if tiling_K[i] == 1:
+        model.addConstr(sharding[i, 2] == 0)
+    if tiling_N[i] == 1:
+        model.addConstr(sharding[i, 3] == 0)
+    
 
+    if weight_tensor_size[i] == -1: # no weights
         model.addConstr(communication_type[i] == Communication.NO_COMMUNICATION.value)
         model.addConstr(communication_size[i] == 0)
 
@@ -204,10 +210,7 @@ for i in range(num_kernel):
         # if K is not sharded
         model.addConstr((sharding[i, 2] == 0) >> (communication_type[i] == Communication.NO_COMMUNICATION.value))
         model.addConstr((sharding[i, 2] == 0) >> (communication_size[i] == 0))
-    
-    if outer[i] == 1:
-        model.addConstr(sharding[i, 0] == 0)
-    
+
 
 
 # RR, RS, SR

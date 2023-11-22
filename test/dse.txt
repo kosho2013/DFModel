@@ -14,6 +14,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: -1
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -32,6 +33,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 1
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -50,6 +52,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 2
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -68,6 +71,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 2
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -86,6 +90,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 2
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -104,6 +109,7 @@ dataflow_graph {
       output_tensor_size: 805306400.0
       input_tensor_1_id: 3
       input_tensor_2_id: 4
+      tiling_N: 1
     }
     config: -1
   }
@@ -122,6 +128,7 @@ dataflow_graph {
       output_tensor_size: 805306400.0
       input_tensor_1_id: 6
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -140,6 +147,7 @@ dataflow_graph {
       output_tensor_size: 805306400.0
       input_tensor_1_id: 7
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -158,6 +166,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 5
       input_tensor_2_id: 8
+      tiling_N: 1
     }
     config: -1
   }
@@ -176,6 +185,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 9
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -194,6 +204,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 10
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -212,6 +223,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 1
       input_tensor_2_id: 11
+      tiling_N: 1
     }
     config: -1
   }
@@ -230,6 +242,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 12
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -248,6 +261,7 @@ dataflow_graph {
       output_tensor_size: 201326600.0
       input_tensor_1_id: 13
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -266,6 +280,7 @@ dataflow_graph {
       output_tensor_size: 201326600.0
       input_tensor_1_id: 14
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -284,6 +299,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 15
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -302,6 +318,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 16
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -320,6 +337,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 12
       input_tensor_2_id: 17
+      tiling_N: 1
     }
     config: -1
   }
@@ -338,6 +356,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: -1
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -356,12 +375,70 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 19
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
   kernels {
     name: "FFN1_bwd"
     id: 21
+    batch_gemm_elementwise_outer_m_k_n {
+      outer: 1
+      M: 49152
+      K: 12288
+      N: 2048
+      type: SYSTOLIC
+      input_tensor_1_size: 50331650.0
+      input_tensor_2_size: -1.0
+      weight_tensor_size: 1207959600.0
+      output_tensor_size: 201326600.0
+      input_tensor_1_id: 20
+      input_tensor_2_id: -1
+      tiling_N: 1
+    }
+    config: -1
+  }
+  kernels {
+    name: "FFN1_weight_update"
+    id: 22
+    batch_gemm_elementwise_outer_m_k_n {
+      outer: 1
+      M: 49152
+      K: 2048
+      N: 12288
+      type: SYSTOLIC
+      input_tensor_1_size: 50331650.0
+      input_tensor_2_size: 201326600.0
+      weight_tensor_size: -1.0
+      output_tensor_size: 1207959600.0
+      input_tensor_1_id: 20
+      input_tensor_2_id: 15
+      tiling_K: 1
+    }
+    config: -1
+  }
+  kernels {
+    name: "GeLU_bwd"
+    id: 23
+    batch_gemm_elementwise_outer_m_k_n {
+      outer: 1
+      M: 49152
+      K: 1
+      N: 2048
+      type: SIMD
+      input_tensor_1_size: 201326600.0
+      input_tensor_2_size: -1.0
+      weight_tensor_size: -1.0
+      output_tensor_size: 201326600.0
+      input_tensor_1_id: 21
+      input_tensor_2_id: -1
+      tiling_N: 1
+    }
+    config: -1
+  }
+  kernels {
+    name: "FFN0_bwd"
+    id: 24
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
       M: 12288
@@ -372,62 +449,9 @@ dataflow_graph {
       input_tensor_2_size: -1.0
       weight_tensor_size: 1207959600.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 20
-      input_tensor_2_id: -1
-    }
-    config: -1
-  }
-  kernels {
-    name: "FFN1_weight_update"
-    id: 22
-    batch_gemm_elementwise_outer_m_k_n {
-      outer: 1
-      M: 49152
-      K: 1
-      N: 2048
-      type: SYSTOLIC
-      input_tensor_1_size: 201326600.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
-      output_tensor_size: 201326600.0
-      input_tensor_1_id: 21
-      input_tensor_2_id: -1
-    }
-    config: -1
-  }
-  kernels {
-    name: "GeLU_bwd"
-    id: 23
-    batch_gemm_elementwise_outer_m_k_n {
-      outer: 1
-      M: 49152
-      K: 12288
-      N: 2048
-      type: SIMD
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: 1207959600.0
-      output_tensor_size: 201326600.0
-      input_tensor_1_id: 22
-      input_tensor_2_id: -1
-    }
-    config: -1
-  }
-  kernels {
-    name: "FFN0_bwd"
-    id: 24
-    batch_gemm_elementwise_outer_m_k_n {
-      outer: 1
-      M: 12288
-      K: 1
-      N: 2048
-      type: SYSTOLIC
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
-      output_tensor_size: 50331650.0
       input_tensor_1_id: 23
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -437,15 +461,16 @@ dataflow_graph {
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
       M: 12288
-      K: 1
-      N: 2048
+      K: 2048
+      N: 49152
       type: SYSTOLIC
-      input_tensor_1_size: 50331650.0
+      input_tensor_1_size: 201326600.0
       input_tensor_2_size: 50331650.0
       weight_tensor_size: -1.0
-      output_tensor_size: 50331650.0
-      input_tensor_1_id: 19
-      input_tensor_2_id: 24
+      output_tensor_size: 1207959600.0
+      input_tensor_1_id: 23
+      input_tensor_2_id: 13
+      tiling_K: 1
     }
     config: -1
   }
@@ -462,8 +487,9 @@ dataflow_graph {
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 25
+      input_tensor_1_id: 24
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -473,15 +499,16 @@ dataflow_graph {
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
       M: 12288
-      K: 12288
+      K: 1
       N: 2048
       type: SIMD
       input_tensor_1_size: 50331650.0
       input_tensor_2_size: -1.0
-      weight_tensor_size: 301989900.0
+      weight_tensor_size: -1.0
       output_tensor_size: 50331650.0
       input_tensor_1_id: 26
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -489,17 +516,18 @@ dataflow_graph {
     name: "PROJ_GEMM_bwd"
     id: 28
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 96
-      M: 128
-      K: 2048
+      outer: 1
+      M: 12288
+      K: 12288
       N: 2048
       type: SYSTOLIC
       input_tensor_1_size: 50331650.0
-      input_tensor_2_size: 805306400.0
-      weight_tensor_size: -1.0
+      input_tensor_2_size: -1.0
+      weight_tensor_size: 301989900.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 5
-      input_tensor_2_id: 8
+      input_tensor_1_id: 27
+      input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -507,41 +535,24 @@ dataflow_graph {
     name: "PROJ_GEMM_weight_update"
     id: 29
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 96
-      M: 2048
-      K: 1
-      N: 2048
+      outer: 1
+      M: 12288
+      K: 2048
+      N: 12288
       type: SYSTOLIC
-      input_tensor_1_size: 805306400.0
-      input_tensor_2_size: -1.0
+      input_tensor_1_size: 50331650.0
+      input_tensor_2_size: 50331650.0
       weight_tensor_size: -1.0
-      output_tensor_size: 805306400.0
-      input_tensor_1_id: 7
-      input_tensor_2_id: -1
+      output_tensor_size: 301989900.0
+      input_tensor_1_id: 27
+      input_tensor_2_id: 10
+      tiling_K: 1
     }
     config: -1
   }
   kernels {
     name: "MHA_GEMM_2_bwd1"
     id: 30
-    batch_gemm_elementwise_outer_m_k_n {
-      outer: 96
-      M: 2048
-      K: 1
-      N: 2048
-      type: SYSTOLIC
-      input_tensor_1_size: 805306400.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
-      output_tensor_size: 805306400.0
-      input_tensor_1_id: 6
-      input_tensor_2_id: -1
-    }
-    config: -1
-  }
-  kernels {
-    name: "MHA_GEMM_2_bwd2"
-    id: 31
     batch_gemm_elementwise_outer_m_k_n {
       outer: 96
       M: 2048
@@ -552,8 +563,28 @@ dataflow_graph {
       input_tensor_2_size: 50331650.0
       weight_tensor_size: -1.0
       output_tensor_size: 805306400.0
-      input_tensor_1_id: 3
-      input_tensor_2_id: 4
+      input_tensor_1_id: 28
+      input_tensor_2_id: 5
+      tiling_N: 1
+    }
+    config: -1
+  }
+  kernels {
+    name: "MHA_GEMM_2_bwd2"
+    id: 31
+    batch_gemm_elementwise_outer_m_k_n {
+      outer: 96
+      M: 128
+      K: 2048
+      N: 2048
+      type: SYSTOLIC
+      input_tensor_1_size: 50331650.0
+      input_tensor_2_size: 805306400.0
+      weight_tensor_size: -1.0
+      output_tensor_size: 50331650.0
+      input_tensor_1_id: 28
+      input_tensor_2_id: 8
+      tiling_N: 1
     }
     config: -1
   }
@@ -562,16 +593,17 @@ dataflow_graph {
     id: 32
     batch_gemm_elementwise_outer_m_k_n {
       outer: 96
-      M: 128
-      K: 12288
+      M: 12288
+      K: 128
       N: 2048
       type: SYSTOLIC
       input_tensor_1_size: 50331650.0
       input_tensor_2_size: -1.0
       weight_tensor_size: 301989900.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 2
+      input_tensor_1_id: 31
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -580,16 +612,17 @@ dataflow_graph {
     id: 33
     batch_gemm_elementwise_outer_m_k_n {
       outer: 96
-      M: 128
-      K: 12288
-      N: 2048
+      M: 12288
+      K: 2048
+      N: 128
       type: SYSTOLIC
       input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: 301989900.0
-      output_tensor_size: 50331650.0
-      input_tensor_1_id: 2
-      input_tensor_2_id: -1
+      input_tensor_2_size: 50331650.0
+      weight_tensor_size: -1.0
+      output_tensor_size: 301989900.0
+      input_tensor_1_id: 31
+      input_tensor_2_id: 2
+      tiling_K: 1
     }
     config: -1
   }
@@ -598,16 +631,17 @@ dataflow_graph {
     id: 34
     batch_gemm_elementwise_outer_m_k_n {
       outer: 96
-      M: 128
-      K: 12288
+      M: 2048
+      K: 1
       N: 2048
       type: SIMD
-      input_tensor_1_size: 50331650.0
+      input_tensor_1_size: 805306400.0
       input_tensor_2_size: -1.0
-      weight_tensor_size: 301989900.0
-      output_tensor_size: 50331650.0
-      input_tensor_1_id: 2
+      weight_tensor_size: -1.0
+      output_tensor_size: 805306400.0
+      input_tensor_1_id: 30
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -615,17 +649,18 @@ dataflow_graph {
     name: "SOFTMAX_bwd"
     id: 35
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 1
-      M: 12288
+      outer: 96
+      M: 2048
       K: 1
       N: 2048
       type: SIMD
-      input_tensor_1_size: 50331650.0
+      input_tensor_1_size: 805306400.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 50331650.0
-      input_tensor_1_id: 1
+      output_tensor_size: 805306400.0
+      input_tensor_1_id: 34
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -633,17 +668,18 @@ dataflow_graph {
     name: "MHA_GEMM_1_bwd1"
     id: 36
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 1
-      M: 12288
-      K: 1
+      outer: 96
+      M: 128
+      K: 2048
       N: 2048
       type: SYSTOLIC
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
+      input_tensor_1_size: 805306400.0
+      input_tensor_2_size: 50331650.0
       weight_tensor_size: -1.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: -1
-      input_tensor_2_id: -1
+      input_tensor_1_id: 35
+      input_tensor_2_id: 4
+      tiling_N: 1
     }
     config: -1
   }
@@ -651,17 +687,18 @@ dataflow_graph {
     name: "MHA_GEMM_1_bwd2"
     id: 37
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 1
-      M: 12288
-      K: 1
+      outer: 96
+      M: 128
+      K: 2048
       N: 2048
       type: SYSTOLIC
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
+      input_tensor_1_size: 805306400.0
+      input_tensor_2_size: 50331650.0
       weight_tensor_size: -1.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: -1
-      input_tensor_2_id: -1
+      input_tensor_1_id: 35
+      input_tensor_2_id: 3
+      tiling_N: 1
     }
     config: -1
   }
@@ -669,17 +706,18 @@ dataflow_graph {
     name: "Q_bwd"
     id: 38
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 1
+      outer: 96
       M: 12288
-      K: 1
+      K: 128
       N: 2048
       type: SYSTOLIC
       input_tensor_1_size: 50331650.0
       input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      weight_tensor_size: 301989900.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: -1
+      input_tensor_1_id: 36
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -687,17 +725,18 @@ dataflow_graph {
     name: "Q_weight_update"
     id: 39
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 1
+      outer: 96
       M: 12288
-      K: 1
-      N: 2048
+      K: 2048
+      N: 128
       type: SYSTOLIC
       input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
+      input_tensor_2_size: 50331650.0
       weight_tensor_size: -1.0
-      output_tensor_size: 50331650.0
-      input_tensor_1_id: -1
-      input_tensor_2_id: -1
+      output_tensor_size: 301989900.0
+      input_tensor_1_id: 36
+      input_tensor_2_id: 2
+      tiling_K: 1
     }
     config: -1
   }
@@ -705,17 +744,18 @@ dataflow_graph {
     name: "K_bwd"
     id: 40
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 1
+      outer: 96
       M: 12288
-      K: 1
+      K: 128
       N: 2048
       type: SYSTOLIC
       input_tensor_1_size: 50331650.0
       input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      weight_tensor_size: 301989900.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: -1
+      input_tensor_1_id: 37
       input_tensor_2_id: -1
+      tiling_N: 1
     }
     config: -1
   }
@@ -723,17 +763,18 @@ dataflow_graph {
     name: "K_weight_update"
     id: 41
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 1
+      outer: 96
       M: 12288
-      K: 1
-      N: 2048
+      K: 2048
+      N: 128
       type: SYSTOLIC
       input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
+      input_tensor_2_size: 50331650.0
       weight_tensor_size: -1.0
-      output_tensor_size: 50331650.0
-      input_tensor_1_id: -1
-      input_tensor_2_id: -1
+      output_tensor_size: 301989900.0
+      input_tensor_1_id: 37
+      input_tensor_2_id: 2
+      tiling_K: 1
     }
     config: -1
   }
@@ -982,6 +1023,26 @@ dataflow_graph {
     endIdx: 41
     id: 49
   }
+  connections {
+    startIdx: 5
+    endIdx: 30
+    id: 50
+  }
+  connections {
+    startIdx: 8
+    endIdx: 31
+    id: 51
+  }
+  connections {
+    startIdx: 4
+    endIdx: 36
+    id: 52
+  }
+  connections {
+    startIdx: 3
+    endIdx: 37
+    id: 53
+  }
 }
 system {
   name: "8_Chip_SN10_RDU"
@@ -1009,5 +1070,5 @@ training {
   optimization: FLASHATTENTION
   seq_len: 2048
   num_layer: 96
-  tile_size: 32
+  seq_tile_size: 32
 }
