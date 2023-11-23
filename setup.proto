@@ -34,11 +34,6 @@ message Batch_GEMM_ELEMENTWISE_OUTER_M_K_N {
 	int32 shard_outer_M = 16;
 	int32 shard_K = 17;
 	int32 shard_N = 18;
-	
-	int32 tiling_M = 20;
-	int32 tiling_K = 21;
-	int32 tiling_N = 22;
-	
 
 	enum KernelType {
 		KernelType_Placeholder = 0;
@@ -54,12 +49,12 @@ message Batch_GEMM_ELEMENTWISE_OUTER_M_K_N {
 	}
 
 	enum Sharding {
-		Sharding_Placeholder = 0;
-		OUTER_Sharding = 1;
-		M_Sharding = 2;
-		K_Sharding = 3;
-		N_Sharding = 4;
-		NO_Sharding = 5;
+		SHARDING_Placeholder = 0;
+		OUTER_SHARDING = 1;
+		M_SHARDING = 2;
+		K_SHARDING = 3;
+		N_SHARDING = 4;
+		NO_SHARDING = 5;
 	}
 }
 
@@ -136,18 +131,21 @@ message Cost {
 }
 
 message Training {
-	Optimization optimization = 2;
-
 	enum Optimization {
 		Optimization_Placeholder = 0;
 		FLASHATTENTION = 1;
 		KERNEL_BY_KERNEL = 2;
 	}
-
+	
+	int32 hidden_dim = 10;
+	int32 head_dim = 11;
+	int32 num_head = 12;
 	int32 seq_len = 4;
 	int32 num_layer = 5;
-	int32 num_config = 6;
+	
+	int32 num_config = 20;
 	int32 seq_tile_size = 7;
+	Optimization optimization = 2;
 }
 
 message DSE {

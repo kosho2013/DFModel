@@ -27,12 +27,6 @@ with open('./'+name+'/'+'dse_sharded.pb', "rb") as file:
     
 
 
-
-
-
-
-
-
 # get kernels
 class Dim(Enum):
     NO_DIM = 0
@@ -58,70 +52,31 @@ class Optimization(Enum):
     FLASHATTENTION = 1
     KERNEL_BY_KERNEL = 2
 
-kernel_name = []
-i = 0
-for kernel in dse.dataflow_graph.kernels:
-    kernel_name.append(kernel.name)
-    print(kernel.name, i)
-    i += 1
-    
-kernel_type = []
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        kernel_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.type)
 
+kernel_name = []   
+kernel_type = []
 outer = []
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        outer.append(kernel.batch_gemm_elementwise_outer_m_k_n.outer)
-
 M = []
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        M.append(kernel.batch_gemm_elementwise_outer_m_k_n.M)
-
-for i in range(len(M)):
-    M[i] *= outer[i]
-
 K = []
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        K.append(kernel.batch_gemm_elementwise_outer_m_k_n.K)
-
 N = []
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        N.append(kernel.batch_gemm_elementwise_outer_m_k_n.N)
-
 sharding = []
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        sharding.append(kernel.batch_gemm_elementwise_outer_m_k_n.sharding)
-
-
-
 configs = []
-for kernel in dse.dataflow_graph.kernels:
-    configs.append(kernel.config)
-        
-        
-
-kernel_type = []
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        kernel_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.type)
-
 node_communication_type = []
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        node_communication_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.communication_type)
-
-
 node_communication_size = []
 for kernel in dse.dataflow_graph.kernels:
     if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+        kernel_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.type)
+        outer.append(kernel.batch_gemm_elementwise_outer_m_k_n.outer)
+        M.append(kernel.batch_gemm_elementwise_outer_m_k_n.M * kernel.batch_gemm_elementwise_outer_m_k_n.outer)
+        K.append(kernel.batch_gemm_elementwise_outer_m_k_n.K)
+        N.append(kernel.batch_gemm_elementwise_outer_m_k_n.N)
+        sharding.append(kernel.batch_gemm_elementwise_outer_m_k_n.sharding)
+        node_communication_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.communication_type)
         node_communication_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.communication_size)
-        
+    configs.append(kernel.config)
+    kernel_name.append(kernel.name)
+
+   
 node_dict = {}
 i = 0
 for kernel in dse.dataflow_graph.kernels:
@@ -129,25 +84,32 @@ for kernel in dse.dataflow_graph.kernels:
     i += 1
 
 num_kernel = len(kernel_name)
+hidden_dim = dse.training.hidden_dim
+head_dim = dse.training.head_dim
+num_head = dse.training.num_head
 seq_len = dse.training.seq_len
 num_layer = dse.training.num_layer
+num_config = dse.training.num_config
+seq_tile_size = dse.training.seq_tile_size
 opt = dse.training.optimization
-Intermediate = M[-1] * N[-1] * word
+Intermediate = hidden_dim * seq_len * word
+
+
+
+if num_head * head_dim != hidden_dim:
+    raise Exception('Wrong!')
+
 
 
 # get edges
 startIdx = []
 endIdx = []
+depth = []
+tensor_size = []
 for connection in dse.dataflow_graph.connections:
     startIdx.append(connection.startIdx)
     endIdx.append(connection.endIdx)
-
-depth = []
-for connection in dse.dataflow_graph.connections:
     depth.append(connection.buffer_depth)
-
-tensor_size = []
-for connection in dse.dataflow_graph.connections:
     tensor_size.append(connection.tensor_size)
 
 num_edge = len(startIdx)
@@ -403,10 +365,10 @@ for i in range(num_kernel):
 
 
 
-if dse.training.num_config == 0:
+if num_config == 0: # not specified
     C = num_kernel
 else:
-    C = dse.training.num_config
+    C = num_config
     
     
     
@@ -421,16 +383,16 @@ Ad = model.addMVar((num_weight, C), name='Ad', vtype=gp.GRB.BINARY)
 
 
 for i in range(len(configs)):
-    if configs[i] == -1:
+    if configs[i] == -1: # not specified
         pass
     else:
         model.addConstr(Config[i] == configs[i])
 
 
-if dse.training.tile_size == 0: # DSE
+if seq_tile_size == 0: # DSE
     pass
 else:
-    model.addConstr(tile_size == dse.training.tile_size)
+    model.addConstr(tile_size == dse.training.seq_tile_size)
 
 
 # kernel assignment   
@@ -519,7 +481,7 @@ for i in range(num_edge):
 for i in range(num_weight):
     model.addConstr(shard_initiation_buffer_size_depth_one[i] >= shard_initiation_buffer_size[i] * 1)
 
-# for i in range(C):
+for i in range(C):
     model.addConstr(shard_intermediate_buffer_size_depth_original @ Ab_onchip[:, i] + shard_intermediate_buffer_size_depth_two @ Ab_dram[:, i] + shard_initiation_buffer_size_depth_one @ Ad[:, i] <= SRAM_Cap)
 
 
@@ -637,9 +599,12 @@ model.addConstr(p2p_latency * Link_BW_Y == intermediate)
 
 
 
-
+aaa = model.addVar(name='II', vtype=gp.GRB.CONTINUOUS)
 II = model.addVar(name='II', vtype=gp.GRB.CONTINUOUS)
-model.addConstr(II == np.ones((C)) @ Per_Config_II + p2p_latency)
+model.addConstr(aaa == np.ones((C)) @ Per_Config_II)
+model.addConstr(II == gp.max_(aaa, p2p_latency))
+
+
 
 model.setObjective(II, gp.GRB.MINIMIZE)
 model.optimize()
