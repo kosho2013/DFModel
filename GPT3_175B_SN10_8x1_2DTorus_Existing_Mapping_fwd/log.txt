@@ -65,7 +65,7 @@ Warning: Quadratic constraints contain large coefficients
          Consider reformulating model or setting NumericFocus parameter
          to avoid numerical issues.
 Presolve removed 71 rows and 218 columns
-Presolve time: 0.01s
+Presolve time: 0.00s
 Presolved: 122 rows, 99 columns, 294 nonzeros
 Presolved model has 16 SOS constraint(s)
 Variable types: 8 continuous, 91 integer (61 binary)
@@ -89,7 +89,7 @@ H    0     0                    1.006633e+08 5.0332e+07  50.0%     -    0s
 Cutting planes:
   Implied bound: 6
 
-Explored 1 nodes (31 simplex iterations) in 0.59 seconds (0.00 work units)
+Explored 1 nodes (31 simplex iterations) in 0.11 seconds (0.00 work units)
 Thread count was 128 (of 144 available processors)
 
 Solution count 7: 1.00663e+08 1.50995e+08 2.01327e+08 ... 1.30862e+09
@@ -456,16 +456,15 @@ Root relaxation: objective 4.844421e+06, 106 iterations, 0.00 seconds (0.00 work
      0     0 5473908.12    0   73          - 5473908.12      -     -    0s
      0     0 5473908.12    0   73          - 5473908.12      -     -    0s
      0     2 5473908.12    0   71          - 5473908.12      -     -    0s
- 12296     4 7299098.52  577   32          - 6040808.22      -   0.4    5s
-H13885   984                    1.660944e+07 6040869.41  63.6%   0.5    6s
-H13907   984                    8936488.9600 6040869.41  32.4%   0.5    6s
-*16096  2297             865    8557762.8459 6040869.41  29.4%   1.0    7s
-*16580  2297             866    8557676.9230 6040869.41  29.4%   1.1    7s
-*17360  2679             863    8557535.6081 6040869.41  29.4%   1.1    7s
-H18309  4067                    7928306.6924 6040869.41  23.8%   1.1    7s
-H18431  4067                    6041018.7673 6040869.41  0.00%   1.1    7s
-H18863  4067                    6040914.4967 6040869.41  0.00%   1.1    7s
-H19687  4067                    6040869.8924 6040869.41  0.00%   1.1    7s
+H13885   984                    1.660944e+07 6040869.41  63.6%   0.5    2s
+H13907   984                    8936488.9600 6040869.41  32.4%   0.5    2s
+*16096  2297             865    8557762.8459 6040869.41  29.4%   1.0    2s
+*16580  2297             866    8557676.9230 6040869.41  29.4%   1.1    2s
+*17360  2679             863    8557535.6081 6040869.41  29.4%   1.1    2s
+H18309  4067                    7928306.6924 6040869.41  23.8%   1.1    2s
+H18431  4067                    6041018.7673 6040869.41  0.00%   1.1    2s
+H18863  4067                    6040914.4967 6040869.41  0.00%   1.1    2s
+H19687  4067                    6040869.8924 6040869.41  0.00%   1.1    2s
 
 Cutting planes:
   Gomory: 6
@@ -476,7 +475,7 @@ Cutting planes:
   RLT: 12
   Relax-and-lift: 5
 
-Explored 19817 nodes (22804 simplex iterations) in 7.57 seconds (0.33 work units)
+Explored 19817 nodes (22804 simplex iterations) in 2.78 seconds (0.33 work units)
 Thread count was 128 (of 144 available processors)
 
 Solution count 9: 6.04087e+06 6.04091e+06 6.04102e+06 ... 1.66094e+07

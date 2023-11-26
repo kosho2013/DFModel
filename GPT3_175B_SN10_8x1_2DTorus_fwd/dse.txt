@@ -14,6 +14,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: -1
       input_tensor_2_id: -1
+      fwd_bwd: FWD
     }
     config: -1
   }
@@ -32,6 +33,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 1
       input_tensor_2_id: -1
+      fwd_bwd: FWD
     }
     config: -1
   }
@@ -50,7 +52,9 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 2
       input_tensor_2_id: -1
+      fwd_bwd: FWD
     }
+    config: -1
   }
   kernels {
     name: "K"
@@ -67,7 +71,9 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 2
       input_tensor_2_id: -1
+      fwd_bwd: FWD
     }
+    config: -1
   }
   kernels {
     name: "V"
@@ -84,7 +90,9 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 2
       input_tensor_2_id: -1
+      fwd_bwd: FWD
     }
+    config: -1
   }
   kernels {
     name: "MHA_GEMM_1"
@@ -101,8 +109,9 @@ dataflow_graph {
       output_tensor_size: 805306400.0
       input_tensor_1_id: 3
       input_tensor_2_id: 4
+      fwd_bwd: FWD
     }
-    config: 1
+    config: -1
   }
   kernels {
     name: "SOFTMAX"
@@ -119,6 +128,7 @@ dataflow_graph {
       output_tensor_size: 805306400.0
       input_tensor_1_id: 6
       input_tensor_2_id: -1
+      fwd_bwd: FWD
     }
     config: -1
   }
@@ -137,6 +147,7 @@ dataflow_graph {
       output_tensor_size: 805306400.0
       input_tensor_1_id: 7
       input_tensor_2_id: -1
+      fwd_bwd: FWD
     }
     config: -1
   }
@@ -155,8 +166,9 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 5
       input_tensor_2_id: 8
+      fwd_bwd: FWD
     }
-    config: 1
+    config: -1
   }
   kernels {
     name: "PROJ_GEMM"
@@ -173,8 +185,9 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 9
       input_tensor_2_id: -1
+      fwd_bwd: FWD
     }
-    config: 2
+    config: -1
   }
   kernels {
     name: "DropOut_2"
@@ -191,6 +204,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 10
       input_tensor_2_id: -1
+      fwd_bwd: FWD
     }
     config: -1
   }
@@ -209,6 +223,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 1
       input_tensor_2_id: 11
+      fwd_bwd: FWD
     }
     config: -1
   }
@@ -227,6 +242,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 12
       input_tensor_2_id: -1
+      fwd_bwd: FWD
     }
     config: -1
   }
@@ -245,8 +261,9 @@ dataflow_graph {
       output_tensor_size: 201326600.0
       input_tensor_1_id: 13
       input_tensor_2_id: -1
+      fwd_bwd: FWD
     }
-    config: 2
+    config: -1
   }
   kernels {
     name: "GeLU"
@@ -263,6 +280,7 @@ dataflow_graph {
       output_tensor_size: 201326600.0
       input_tensor_1_id: 14
       input_tensor_2_id: -1
+      fwd_bwd: FWD
     }
     config: -1
   }
@@ -281,8 +299,9 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 15
       input_tensor_2_id: -1
+      fwd_bwd: FWD
     }
-    config: 3
+    config: -1
   }
   kernels {
     name: "DropOut_3"
@@ -299,6 +318,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 16
       input_tensor_2_id: -1
+      fwd_bwd: FWD
     }
     config: -1
   }
@@ -317,6 +337,7 @@ dataflow_graph {
       output_tensor_size: 50331650.0
       input_tensor_1_id: 12
       input_tensor_2_id: 17
+      fwd_bwd: FWD
     }
     config: -1
   }

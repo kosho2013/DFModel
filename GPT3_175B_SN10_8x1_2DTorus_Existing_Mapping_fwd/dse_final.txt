@@ -18,6 +18,7 @@ dataflow_graph {
       shard_outer_M: 12288
       shard_K: 1
       shard_N: 32
+      fwd_bwd: FWD
     }
   }
   kernels {
@@ -39,6 +40,7 @@ dataflow_graph {
       shard_outer_M: 1536
       shard_K: 1
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 1
   }
@@ -63,6 +65,7 @@ dataflow_graph {
       shard_outer_M: 1536
       shard_K: 12288
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 2
   }
@@ -87,6 +90,7 @@ dataflow_graph {
       shard_outer_M: 1536
       shard_K: 12288
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 2
   }
@@ -111,6 +115,7 @@ dataflow_graph {
       shard_outer_M: 1537
       shard_K: 12288
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 2
   }
@@ -134,6 +139,7 @@ dataflow_graph {
       shard_outer_M: 24576
       shard_K: 128
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 3
     config: 1
@@ -157,6 +163,7 @@ dataflow_graph {
       shard_outer_M: 24576
       shard_K: 1
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 4
     config: 1
@@ -180,6 +187,7 @@ dataflow_graph {
       shard_outer_M: 24576
       shard_K: 1
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 5
     config: 1
@@ -204,6 +212,7 @@ dataflow_graph {
       shard_outer_M: 1536
       shard_K: 2048
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 6
     config: 1
@@ -230,6 +239,7 @@ dataflow_graph {
       shard_outer_M: 12288
       shard_K: 1537
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 7
     config: 1
@@ -253,6 +263,7 @@ dataflow_graph {
       shard_outer_M: 12288
       shard_K: 1
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 8
     config: 1
@@ -276,6 +287,7 @@ dataflow_graph {
       shard_outer_M: 12288
       shard_K: 1
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 9
     config: 1
@@ -299,6 +311,7 @@ dataflow_graph {
       shard_outer_M: 12288
       shard_K: 1
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 10
     config: 1
@@ -324,6 +337,7 @@ dataflow_graph {
       shard_outer_M: 6145
       shard_K: 12288
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 11
     config: 2
@@ -347,6 +361,7 @@ dataflow_graph {
       shard_outer_M: 6144
       shard_K: 1
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 12
     config: 2
@@ -373,6 +388,7 @@ dataflow_graph {
       shard_outer_M: 12288
       shard_K: 6145
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 13
     config: 3
@@ -396,6 +412,7 @@ dataflow_graph {
       shard_outer_M: 1536
       shard_K: 1
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 14
     config: 3
@@ -419,6 +436,7 @@ dataflow_graph {
       shard_outer_M: 1536
       shard_K: 1
       shard_N: 32
+      fwd_bwd: FWD
     }
     topological_number: 15
     config: 3

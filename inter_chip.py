@@ -179,7 +179,7 @@ for i in range(num_edge):
 model = gp.Model()
 model.params.NonConvex = 2
 model.Params.Threads = 128
-model.params.TimeLimit = 36000  # 10 hours
+model.params.MIPGap = 1e-10
 
 
 sharding = model.addMVar((num_kernel, 5), name='sharding', vtype=gp.GRB.BINARY) # outer,M,K,N,no sharding
@@ -202,8 +202,6 @@ for i in range(num_kernel):
     
 
     if weight_tensor_size[i] == -1: # no weights
-        # model.addConstr(communication_type[i] == Communication.NO_COMMUNICATION.value)
-        # model.addConstr(communication_size[i] == 0)
         pass
     else:
         model.addConstr(sharding[i, Dim.NO_SHARDING.value] == 0)
@@ -217,6 +215,9 @@ for i in range(num_kernel):
     # if K is not sharded
     model.addConstr((sharding[i, Dim.K.value] == 0) >> (communication_type[i] == Communication.NO_COMMUNICATION.value))
     model.addConstr((sharding[i, Dim.K.value] == 0) >> (communication_size[i] == 0))
+
+    if outer[i] > 1:
+        model.addConstr(sharding[i, Dim.OUTER.value] == 1)
 
 
 

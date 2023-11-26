@@ -10,6 +10,9 @@ message Kernel {
 
 	int32 topological_number = 5;
 	int32 config = 6;
+	
+	
+	
 }
 
 message Batch_GEMM_ELEMENTWISE_OUTER_M_K_N {
@@ -34,7 +37,12 @@ message Batch_GEMM_ELEMENTWISE_OUTER_M_K_N {
 	int32 shard_outer_M = 16;
 	int32 shard_K = 17;
 	int32 shard_N = 18;
-
+	
+	
+	FWD_BWD fwd_bwd = 19;
+	
+	
+	
 	enum KernelType {
 		KernelType_Placeholder = 0;
 		SYSTOLIC = 1;
@@ -56,6 +64,13 @@ message Batch_GEMM_ELEMENTWISE_OUTER_M_K_N {
 		N_SHARDING = 4;
 		NO_SHARDING = 5;
 	}
+	
+	enum FWD_BWD {
+		FWD_BWD_Placeholder = 0;
+		FWD = 1;
+		BWD = 2;
+	}
+	
 }
 
 
@@ -116,11 +131,13 @@ message System {
 	enum Topology {
 		Topology_Placeholder = 0;
 		TORUS_2D = 1;
-		DRAGONFLY = 2;
-		DGX_1 = 3;
-		DGX_2 = 4;
+		DRAGONFLY_2D = 2;
+		DGX_1_2D = 3;
+		DGX_2_2D = 4;
 		TORUS_3D = 5;
 		SINGLE_CHIP = 6;
+		FC_1D = 7;
+		RING_1D = 8;
 	}
 }
 

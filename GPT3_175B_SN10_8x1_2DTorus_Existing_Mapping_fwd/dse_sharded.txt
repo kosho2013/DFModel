@@ -15,6 +15,7 @@ dataflow_graph {
       input_tensor_1_id: -1
       input_tensor_2_id: -1
       sharding: NO_SHARDING
+      fwd_bwd: FWD
     }
     config: -1
   }
@@ -34,6 +35,7 @@ dataflow_graph {
       input_tensor_1_id: 1
       input_tensor_2_id: -1
       sharding: M_SHARDING
+      fwd_bwd: FWD
     }
     topological_number: 1
     config: -1
@@ -55,6 +57,7 @@ dataflow_graph {
       input_tensor_2_id: -1
       sharding: OUTER_SHARDING
       communication_size: -0.0
+      fwd_bwd: FWD
     }
     topological_number: 2
   }
@@ -75,6 +78,7 @@ dataflow_graph {
       input_tensor_2_id: -1
       sharding: OUTER_SHARDING
       communication_size: -0.0
+      fwd_bwd: FWD
     }
     topological_number: 2
   }
@@ -95,6 +99,7 @@ dataflow_graph {
       input_tensor_2_id: -1
       sharding: OUTER_SHARDING
       communication_size: -0.0
+      fwd_bwd: FWD
     }
     topological_number: 2
   }
@@ -115,6 +120,7 @@ dataflow_graph {
       input_tensor_2_id: 4
       sharding: OUTER_SHARDING
       communication_size: -0.0
+      fwd_bwd: FWD
     }
     topological_number: 3
     config: 1
@@ -135,6 +141,7 @@ dataflow_graph {
       input_tensor_1_id: 6
       input_tensor_2_id: -1
       sharding: OUTER_SHARDING
+      fwd_bwd: FWD
     }
     topological_number: 4
     config: -1
@@ -155,6 +162,7 @@ dataflow_graph {
       input_tensor_1_id: 7
       input_tensor_2_id: -1
       sharding: OUTER_SHARDING
+      fwd_bwd: FWD
     }
     topological_number: 5
     config: -1
@@ -176,6 +184,7 @@ dataflow_graph {
       input_tensor_2_id: 8
       sharding: OUTER_SHARDING
       communication_size: -0.0
+      fwd_bwd: FWD
     }
     topological_number: 6
     config: 1
@@ -198,6 +207,7 @@ dataflow_graph {
       sharding: K_SHARDING
       communication_type: ALL_REDUCE
       communication_size: 50331650.0
+      fwd_bwd: FWD
     }
     topological_number: 7
     config: 1
@@ -218,6 +228,7 @@ dataflow_graph {
       input_tensor_1_id: 10
       input_tensor_2_id: -1
       sharding: NO_SHARDING
+      fwd_bwd: FWD
     }
     topological_number: 8
     config: -1
@@ -238,6 +249,7 @@ dataflow_graph {
       input_tensor_1_id: 1
       input_tensor_2_id: 11
       sharding: NO_SHARDING
+      fwd_bwd: FWD
     }
     topological_number: 9
     config: -1
@@ -258,6 +270,7 @@ dataflow_graph {
       input_tensor_1_id: 12
       input_tensor_2_id: -1
       sharding: NO_SHARDING
+      fwd_bwd: FWD
     }
     topological_number: 10
     config: -1
@@ -279,6 +292,7 @@ dataflow_graph {
       input_tensor_2_id: -1
       sharding: M_SHARDING
       communication_size: -0.0
+      fwd_bwd: FWD
     }
     topological_number: 11
     config: 2
@@ -299,6 +313,7 @@ dataflow_graph {
       input_tensor_1_id: 14
       input_tensor_2_id: -1
       sharding: M_SHARDING
+      fwd_bwd: FWD
     }
     topological_number: 12
     config: -1
@@ -321,6 +336,7 @@ dataflow_graph {
       sharding: K_SHARDING
       communication_type: ALL_REDUCE
       communication_size: 50331650.0
+      fwd_bwd: FWD
     }
     topological_number: 13
     config: 3
@@ -341,6 +357,7 @@ dataflow_graph {
       input_tensor_1_id: 16
       input_tensor_2_id: -1
       sharding: M_SHARDING
+      fwd_bwd: FWD
     }
     topological_number: 14
     config: -1
@@ -361,6 +378,7 @@ dataflow_graph {
       input_tensor_1_id: 12
       input_tensor_2_id: 17
       sharding: M_SHARDING
+      fwd_bwd: FWD
     }
     topological_number: 15
     config: -1

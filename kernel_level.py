@@ -53,6 +53,14 @@ class Optimization(Enum):
     KERNEL_BY_KERNEL = 2
 
 
+class FWD_BWD(Enum):
+    Placeholder = 0
+    FWD = 1
+    BWD = 2
+
+
+
+
 kernel_name = []   
 kernel_type = []
 outer = []
@@ -63,6 +71,7 @@ sharding = []
 configs = []
 node_communication_type = []
 node_communication_size = []
+fwd_bwd = []
 for kernel in dse.dataflow_graph.kernels:
     if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
         kernel_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.type)
@@ -73,10 +82,12 @@ for kernel in dse.dataflow_graph.kernels:
         sharding.append(kernel.batch_gemm_elementwise_outer_m_k_n.sharding)
         node_communication_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.communication_type)
         node_communication_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.communication_size)
+        fwd_bwd.append(kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd)
     configs.append(kernel.config)
     kernel_name.append(kernel.name)
 
-   
+
+
 node_dict = {}
 i = 0
 for kernel in dse.dataflow_graph.kernels:
@@ -93,6 +104,22 @@ num_config = dse.training.num_config
 seq_tile_size = dse.training.seq_tile_size
 opt = dse.training.optimization
 Intermediate = hidden_dim * seq_len * word
+
+
+
+
+last_fwd_kernel = -1
+first_bwd_kernel = -1
+for i in range(num_kernel):
+    if fwd_bwd[i] == FWD_BWD.FWD.value:
+        last_fwd_kernel = i
+
+for i in range(num_kernel):       
+    if fwd_bwd[i] == FWD_BWD.BWD.value:
+        first_bwd_kernel = i
+        break
+
+
 
 
 
@@ -149,34 +176,37 @@ class BasicTopology(Enum):
     R = 1
     FC = 2
     SW = 3
-    SINGLE = 4
 
 
 class Topology(Enum):
     NO_TOPOLOGY = 0
     TORUS_2D = 1
-    DRAGONFLY = 2
-    DGX_1 = 3
-    DGX_2 = 4
+    DRAGONFLY_2D = 2
+    DGX_1_2D = 3
+    DGX_2_2D = 4
     TORUS_3D = 5
     SINGLE_CHIP = 6
+    FC_1D = 7
+    RING_1D = 8
+    
+    
 
 if dse.system.topo == Topology.TORUS_2D.value: # 2D Torus
     topology = [BasicTopology.R.value, BasicTopology.R.value]
     link_bw = [dse.system.link_bw_x, dse.system.link_bw_y]
     shape = [dse.system.x, dse.system.y]
 
-elif dse.system.topo == Topology.DRAGONFLY.value: # Dragonfly
+elif dse.system.topo == Topology.DRAGONFLY.value: # 2D Dragonfly
     topology = [BasicTopology.FC.value, BasicTopology.FC.value]
     link_bw = [dse.system.link_bw_x, dse.system.link_bw_y]
     shape = [dse.system.x, dse.system.y]
 
-elif dse.system.topo == Topology.DGX_1.value: # DGX-1
+elif dse.system.topo == Topology.DGX_1.value: # 2D DGX-1
     topology = [BasicTopology.FC.value, BasicTopology.SW.value]
     link_bw = [dse.system.link_bw_x, dse.system.link_bw_y]
     shape = [dse.system.x, dse.system.y]
     
-elif dse.system.topo == Topology.DGX_2.value: # DGX-2
+elif dse.system.topo == Topology.DGX_2.value: # 2D DGX-2
     topology = [BasicTopology.SW.value, BasicTopology.SW.value]
     link_bw = [dse.system.link_bw_x, dse.system.link_bw_y]
     shape = [dse.system.x, dse.system.y]
@@ -185,10 +215,22 @@ elif dse.system.topo == Topology.TORUS_3D.value: # 3D Torus
     topology = [BasicTopology.R.value, BasicTopology.R.value, BasicTopology.R.value]
     link_bw = [dse.system.link_bw_x, dse.system.link_bw_y, dse.system.link_bw_z]
     shape = [dse.system.x, dse.system.y, dse.system.z]
-elif dse.system.topo == Topology.SINGLE_CHIP.value: # 1 chip
-    topology = [BasicTopology.SINGLE.value]
+    
+elif dse.system.topo == Topology.SINGLE_CHIP.value: # single chip
+    topology = []
+    link_bw = []
+    shape = []
+    
+elif dse.system.topo == Topology.FC_1D.value: # 1D FC
+    topology = [BasicTopology.FC.value]
     link_bw = [dse.system.link_bw_x]
     shape = [dse.system.x]
+  
+elif dse.system.topo == Topology.RING_1D.value: # 1D Ring
+    topology = [BasicTopology.R.value]
+    link_bw = [dse.system.link_bw_x]
+    shape = [dse.system.x]
+
 else:
     raise Exception('Wrong!')
 
@@ -203,7 +245,8 @@ else:
 model = gp.Model()
 model.params.NonConvex = 2
 model.Params.Threads = 128
-model.params.TimeLimit = 36000  # 10 hours
+model.params.MIPGap = 1e-10
+model.params.TimeLimit = 2200
 
 
 
@@ -211,7 +254,7 @@ model.params.TimeLimit = 36000  # 10 hours
 
 
 # topology and TP/PP
-if len(topology) == 2:
+if len(topology) == 2: # 2D
     X = model.addVar(name='X', vtype=gp.GRB.INTEGER)
     Y = model.addVar(name='Y', vtype=gp.GRB.INTEGER)
     
@@ -236,9 +279,8 @@ if len(topology) == 2:
     else:
         model.addConstr(Link_BW_X == link_bw[0])
         model.addConstr(Link_BW_Y == link_bw[1])
-    
 
-elif len(topology) == 3:
+elif len(topology) == 3: # 3D
     X = model.addVar(name='X', vtype=gp.GRB.INTEGER)
     Y = model.addVar(name='Y', vtype=gp.GRB.INTEGER)
     Z = model.addVar(name='Z', vtype=gp.GRB.INTEGER)
@@ -269,7 +311,31 @@ elif len(topology) == 3:
         model.addConstr(Link_BW_X == link_bw[0])
         model.addConstr(Link_BW_Y == link_bw[1])
         model.addConstr(Link_BW_Z == link_bw[2])
-elif len(topology) == 1:
+        
+elif len(topology) == 1: # 1D
+    X = model.addVar(name='X', vtype=gp.GRB.INTEGER)
+    Y = model.addVar(name='Y', vtype=gp.GRB.INTEGER)
+    
+    model.addConstr(X == num_chip)
+    model.addConstr(Y == 1)
+
+    
+    TP = model.addVar(name='TP', vtype=gp.GRB.INTEGER)
+    PP = model.addVar(name='PP', vtype=gp.GRB.INTEGER)
+    model.addConstr(TP == X)
+    model.addConstr(PP == Y)
+    
+    
+    Link_BW_X = model.addVar(name='Link_BW_X', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW_Y = model.addVar(name='Link_BW_Y', vtype=gp.GRB.CONTINUOUS, lb=0)
+    if link_bw[0] == 0: # DSE
+        pass
+    else:
+        model.addConstr(Link_BW_X == link_bw[0])
+    
+    model.addConstr(Link_BW_Y == sys.maxsize)
+        
+elif len(topology) == 0: # single chip
     X = model.addVar(name='X', vtype=gp.GRB.INTEGER)
     Y = model.addVar(name='Y', vtype=gp.GRB.INTEGER)
     model.addConstr(X == 1)
@@ -289,6 +355,8 @@ elif len(topology) == 1:
 
 else:
     raise Exception('Wrong!')
+
+
 
 
 
@@ -410,6 +478,13 @@ for i in range(num_kernel):
 for i in range(num_edge):
     model.addConstr(Config[node_dict[startIdx[i]]] <= Config[node_dict[endIdx[i]]])
 
+
+
+# fwd and bwd not in the same config
+if first_bwd_kernel == -1:
+    pass
+else:
+    model.addConstr(Config[first_bwd_kernel] - Config[last_fwd_kernel] >= 1)
 
 
 # for kernel-by-kernel or flashattention
@@ -599,7 +674,7 @@ model.addConstr(p2p_latency * Link_BW_Y == intermediate)
 
 
 
-aaa = model.addVar(name='II', vtype=gp.GRB.CONTINUOUS)
+aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
 II = model.addVar(name='II', vtype=gp.GRB.CONTINUOUS)
 model.addConstr(aaa == np.ones((C)) @ Per_Config_II)
 model.addConstr(II == gp.max_(aaa, p2p_latency))
