@@ -888,7 +888,7 @@ system {
     systolic_height: 16
     sram_cap: 88080384.0
     freq: 1.41
-    dram_bw: 2039.0
+    dram_bw: 1555.0
     dram_cap: 85899345920.0
   }
 }
@@ -905,6 +905,6 @@ training {
   num_layer: 80
   
   seq_tile_size: 32
-  optimization: 1
+  optimization: 2
   num_config: 35
 }

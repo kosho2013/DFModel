@@ -883,7 +883,7 @@ system {
     systolic_height: 16
     sram_cap: 88080380.0
     freq: 1.41
-    dram_bw: 2039.0
+    dram_bw: 1555.0
     dram_cap: 85899350000.0
   }
   x: 8

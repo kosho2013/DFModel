@@ -68,7 +68,7 @@ dataflow_graph {
       fwd_bwd: FWD
     }
     topological_number: 2
-    config: 1
+    config: 2
   }
   kernels {
     name: "K"
@@ -93,7 +93,7 @@ dataflow_graph {
       fwd_bwd: FWD
     }
     topological_number: 2
-    config: 1
+    config: 3
   }
   kernels {
     name: "V"
@@ -118,7 +118,7 @@ dataflow_graph {
       fwd_bwd: FWD
     }
     topological_number: 2
-    config: 1
+    config: 6
   }
   kernels {
     name: "MHA_GEMM_1"
@@ -166,7 +166,7 @@ dataflow_graph {
       fwd_bwd: FWD
     }
     topological_number: 4
-    config: 4
+    config: 5
   }
   kernels {
     name: "DropOut_1"
@@ -190,7 +190,7 @@ dataflow_graph {
       fwd_bwd: FWD
     }
     topological_number: 5
-    config: 4
+    config: 7
   }
   kernels {
     name: "MHA_GEMM_2"
@@ -214,7 +214,7 @@ dataflow_graph {
       fwd_bwd: FWD
     }
     topological_number: 6
-    config: 4
+    config: 8
   }
   kernels {
     name: "PROJ_GEMM"
@@ -241,7 +241,7 @@ dataflow_graph {
       fwd_bwd: FWD
     }
     topological_number: 7
-    config: 4
+    config: 9
   }
   kernels {
     name: "DropOut_2"
@@ -265,7 +265,7 @@ dataflow_graph {
       fwd_bwd: FWD
     }
     topological_number: 8
-    config: 4
+    config: 10
   }
   kernels {
     name: "Add_1"
@@ -289,7 +289,7 @@ dataflow_graph {
       fwd_bwd: FWD
     }
     topological_number: 9
-    config: 4
+    config: 11
   }
   kernels {
     name: "LayerNorm_2"
@@ -313,7 +313,7 @@ dataflow_graph {
       fwd_bwd: FWD
     }
     topological_number: 10
-    config: 4
+    config: 12
   }
   kernels {
     name: "FFN0"
@@ -339,7 +339,7 @@ dataflow_graph {
       fwd_bwd: FWD
     }
     topological_number: 11
-    config: 4
+    config: 13
   }
   kernels {
     name: "GeLU"
@@ -363,7 +363,7 @@ dataflow_graph {
       fwd_bwd: FWD
     }
     topological_number: 12
-    config: 4
+    config: 14
   }
   kernels {
     name: "FFN1"
@@ -390,7 +390,7 @@ dataflow_graph {
       fwd_bwd: FWD
     }
     topological_number: 13
-    config: 8
+    config: 15
   }
   kernels {
     name: "DropOut_3"
@@ -414,7 +414,7 @@ dataflow_graph {
       fwd_bwd: FWD
     }
     topological_number: 14
-    config: 8
+    config: 16
   }
   kernels {
     name: "Add_2"
@@ -438,7 +438,7 @@ dataflow_graph {
       fwd_bwd: FWD
     }
     topological_number: 15
-    config: 8
+    config: 17
   }
   kernels {
     name: "Loss_bwd"
@@ -461,7 +461,7 @@ dataflow_graph {
       shard_N: 32
       fwd_bwd: BWD
     }
-    config: 9
+    config: 18
   }
   kernels {
     name: "DropOut_3_bwd"
@@ -485,7 +485,7 @@ dataflow_graph {
       fwd_bwd: BWD
     }
     topological_number: 1
-    config: 9
+    config: 19
   }
   kernels {
     name: "FFN1_bwd"
@@ -510,7 +510,7 @@ dataflow_graph {
       fwd_bwd: BWD
     }
     topological_number: 2
-    config: 9
+    config: 20
   }
   kernels {
     name: "GeLU_bwd"
@@ -534,7 +534,7 @@ dataflow_graph {
       fwd_bwd: BWD
     }
     topological_number: 3
-    config: 11
+    config: 21
   }
   kernels {
     name: "FFN0_bwd"
@@ -561,7 +561,7 @@ dataflow_graph {
       fwd_bwd: BWD
     }
     topological_number: 4
-    config: 11
+    config: 22
   }
   kernels {
     name: "LayerNorm_2_bwd"
@@ -585,7 +585,7 @@ dataflow_graph {
       fwd_bwd: BWD
     }
     topological_number: 5
-    config: 11
+    config: 23
   }
   kernels {
     name: "DropOut_2_bwd"
@@ -609,7 +609,7 @@ dataflow_graph {
       fwd_bwd: BWD
     }
     topological_number: 6
-    config: 11
+    config: 24
   }
   kernels {
     name: "PROJ_GEMM_bwd"
@@ -634,7 +634,7 @@ dataflow_graph {
       fwd_bwd: BWD
     }
     topological_number: 7
-    config: 11
+    config: 25
   }
   kernels {
     name: "MHA_GEMM_2_bwd1"
@@ -658,7 +658,7 @@ dataflow_graph {
       fwd_bwd: BWD
     }
     topological_number: 8
-    config: 11
+    config: 26
   }
   kernels {
     name: "MHA_GEMM_2_bwd2"
@@ -682,7 +682,7 @@ dataflow_graph {
       fwd_bwd: BWD
     }
     topological_number: 8
-    config: 18
+    config: 27
   }
   kernels {
     name: "V_bwd"
@@ -709,7 +709,7 @@ dataflow_graph {
       fwd_bwd: BWD
     }
     topological_number: 9
-    config: 32
+    config: 29
   }
   kernels {
     name: "DropOut_1_bwd"
@@ -733,7 +733,7 @@ dataflow_graph {
       fwd_bwd: BWD
     }
     topological_number: 9
-    config: 11
+    config: 28
   }
   kernels {
     name: "SOFTMAX_bwd"
@@ -757,7 +757,7 @@ dataflow_graph {
       fwd_bwd: BWD
     }
     topological_number: 10
-    config: 11
+    config: 30
   }
   kernels {
     name: "MHA_GEMM_1_bwd1"
@@ -781,7 +781,7 @@ dataflow_graph {
       fwd_bwd: BWD
     }
     topological_number: 11
-    config: 11
+    config: 32
   }
   kernels {
     name: "MHA_GEMM_1_bwd2"
@@ -805,7 +805,7 @@ dataflow_graph {
       fwd_bwd: BWD
     }
     topological_number: 11
-    config: 11
+    config: 31
   }
   kernels {
     name: "Q_bwd"
@@ -830,7 +830,7 @@ dataflow_graph {
       fwd_bwd: BWD
     }
     topological_number: 12
-    config: 14
+    config: 34
   }
   kernels {
     name: "K_bwd"
@@ -855,7 +855,7 @@ dataflow_graph {
       fwd_bwd: BWD
     }
     topological_number: 12
-    config: 18
+    config: 33
   }
   connections {
     startIdx: 1
@@ -1292,7 +1292,7 @@ system {
     systolic_height: 16
     sram_cap: 88080380.0
     freq: 1.41
-    dram_bw: 2039.0
+    dram_bw: 1555.0
     dram_cap: 85899350000.0
   }
   x: 8
@@ -1304,7 +1304,7 @@ cost {
   dram_unit_price: 1.0
 }
 training {
-  optimization: FLASHATTENTION
+  optimization: KERNEL_BY_KERNEL
   seq_len: 2048
   num_layer: 80
   seq_tile_size: 32
