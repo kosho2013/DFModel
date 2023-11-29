@@ -881,9 +881,9 @@ system {
     core: 432
     systolic_width: 16
     systolic_height: 16
-    sram_cap: 88080380.0
+    sram_cap: 46137344.0
     freq: 1.41
-    dram_bw: 1555.0
+    dram_bw: 2039.0
     dram_cap: 85899350000.0
   }
   x: 8
@@ -898,7 +898,6 @@ training {
   optimization: KERNEL_BY_KERNEL
   seq_len: 2048
   num_layer: 60
-  seq_tile_size: 32
   hidden_dim: 10240
   head_dim: 128
   num_head: 80

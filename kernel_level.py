@@ -252,7 +252,7 @@ model = gp.Model()
 model.params.NonConvex = 2
 model.Params.Threads = 128
 model.params.MIPGap = 1e-10
-# model.params.TimeLimit = 80
+model.params.TimeLimit = 36000
 
 
 
@@ -442,7 +442,8 @@ Ad = model.addMVar((num_weight, C), name='Ad', vtype=gp.GRB.BINARY)
 
 for i in range(len(configs)):
     if configs[i] == -1: # not specified
-        pass
+        # pass
+        model.addConstr(Config[i] == i)
     else:
         model.addConstr(Config[i] == configs[i])
 
@@ -450,7 +451,7 @@ for i in range(len(configs)):
 if seq_tile_size == 0: # DSE
     pass
 else:
-    model.addConstr(tile_size == dse.training.seq_tile_size)
+    model.addConstr(tile_size == seq_tile_size)
 
 
 # kernel assignment   

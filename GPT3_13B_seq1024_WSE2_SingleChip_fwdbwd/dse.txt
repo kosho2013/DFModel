@@ -4,14 +4,14 @@ dataflow_graph {
     id: 1
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 6144
+      M: 5120
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 25165824.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: -1
       input_tensor_2_id: -1
       fwd_bwd: FWD
@@ -23,14 +23,14 @@ dataflow_graph {
     id: 2
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 6144
+      M: 5120
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 25165824.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 1
       input_tensor_2_id: -1
       fwd_bwd: FWD
@@ -41,15 +41,15 @@ dataflow_graph {
     name: "Q"
     id: 3
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 48
+      outer: 40
       M: 128
-      K: 6144
-      N: 2048
+      K: 5120
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
-      weight_tensor_size: 75497470.0
-      output_tensor_size: 25165824.0
+      weight_tensor_size: 52428800.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 2
       input_tensor_2_id: -1
       fwd_bwd: FWD
@@ -60,15 +60,15 @@ dataflow_graph {
     name: "K"
     id: 4
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 48
+      outer: 40
       M: 128
-      K: 6144
-      N: 2048
+      K: 5120
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
-      weight_tensor_size: 75497470.0
-      output_tensor_size: 25165824.0
+      weight_tensor_size: 52428800.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 2
       input_tensor_2_id: -1
       fwd_bwd: FWD
@@ -79,15 +79,15 @@ dataflow_graph {
     name: "V"
     id: 5
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 48
+      outer: 40
       M: 128
-      K: 6144
-      N: 2048
+      K: 5120
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
-      weight_tensor_size: 75497470.0
-      output_tensor_size: 25165824.0
+      weight_tensor_size: 52428800.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 2
       input_tensor_2_id: -1
       fwd_bwd: FWD
@@ -98,15 +98,15 @@ dataflow_graph {
     name: "MHA_GEMM_1"
     id: 6
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 48
-      M: 2048
+      outer: 40
+      M: 1024
       K: 128
-      N: 2048
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 25165824.0
-      input_tensor_2_size: 25165824.0
+      input_tensor_1_size: 10485760.0
+      input_tensor_2_size: 10485760.0
       weight_tensor_size: -1.0
-      output_tensor_size: 402653200.0
+      output_tensor_size: 83886080.0
       input_tensor_1_id: 3
       input_tensor_2_id: 4
       fwd_bwd: FWD
@@ -117,15 +117,15 @@ dataflow_graph {
     name: "SOFTMAX"
     id: 7
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 48
-      M: 2048
+      outer: 40
+      M: 1024
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 402653200.0
+      input_tensor_1_size: 83886080.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 402653200.0
+      output_tensor_size: 83886080.0
       input_tensor_1_id: 6
       input_tensor_2_id: -1
       fwd_bwd: FWD
@@ -136,15 +136,15 @@ dataflow_graph {
     name: "DropOut_1"
     id: 8
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 48
-      M: 2048
+      outer: 40
+      M: 1024
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 402653200.0
+      input_tensor_1_size: 83886080.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 402653200.0
+      output_tensor_size: 83886080.0
       input_tensor_1_id: 7
       input_tensor_2_id: -1
       fwd_bwd: FWD
@@ -155,15 +155,15 @@ dataflow_graph {
     name: "MHA_GEMM_2"
     id: 9
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 48
+      outer: 40
       M: 128
-      K: 2048
-      N: 2048
+      K: 1024
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 25165824.0
-      input_tensor_2_size: 402653200.0
+      input_tensor_1_size: 10485760.0
+      input_tensor_2_size: 83886080.0
       weight_tensor_size: -1.0
-      output_tensor_size: 25165824.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 5
       input_tensor_2_id: 8
       fwd_bwd: FWD
@@ -175,14 +175,14 @@ dataflow_graph {
     id: 10
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 6144
-      K: 6144
-      N: 2048
+      M: 5120
+      K: 5120
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
-      weight_tensor_size: 75497470.0
-      output_tensor_size: 25165824.0
+      weight_tensor_size: 52428800.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 9
       input_tensor_2_id: -1
       fwd_bwd: FWD
@@ -194,14 +194,14 @@ dataflow_graph {
     id: 11
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 6144
+      M: 5120
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 25165824.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 10
       input_tensor_2_id: -1
       fwd_bwd: FWD
@@ -213,14 +213,14 @@ dataflow_graph {
     id: 12
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 6144
+      M: 5120
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 25165824.0
-      input_tensor_2_size: 25165824.0
+      input_tensor_1_size: 10485760.0
+      input_tensor_2_size: 10485760.0
       weight_tensor_size: -1.0
-      output_tensor_size: 25165824.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 1
       input_tensor_2_id: 11
       fwd_bwd: FWD
@@ -232,14 +232,14 @@ dataflow_graph {
     id: 13
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 6144
+      M: 5120
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 25165824.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 12
       input_tensor_2_id: -1
       fwd_bwd: FWD
@@ -251,14 +251,14 @@ dataflow_graph {
     id: 14
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 24576
-      K: 6144
-      N: 2048
+      M: 20480
+      K: 5120
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
-      weight_tensor_size: 301989900.0
-      output_tensor_size: 100663300.0
+      weight_tensor_size: 209715200.0
+      output_tensor_size: 41943040.0
       input_tensor_1_id: 13
       input_tensor_2_id: -1
       fwd_bwd: FWD
@@ -270,14 +270,14 @@ dataflow_graph {
     id: 15
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 24576
+      M: 20480
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 100663300.0
+      input_tensor_1_size: 41943040.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 100663300.0
+      output_tensor_size: 41943040.0
       input_tensor_1_id: 14
       input_tensor_2_id: -1
       fwd_bwd: FWD
@@ -289,14 +289,14 @@ dataflow_graph {
     id: 16
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 6144
-      K: 24576
-      N: 2048
+      M: 5120
+      K: 20480
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 100663300.0
+      input_tensor_1_size: 41943040.0
       input_tensor_2_size: -1.0
-      weight_tensor_size: 301989900.0
-      output_tensor_size: 25165824.0
+      weight_tensor_size: 209715200.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 15
       input_tensor_2_id: -1
       fwd_bwd: FWD
@@ -308,14 +308,14 @@ dataflow_graph {
     id: 17
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 6144
+      M: 5120
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 25165824.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 16
       input_tensor_2_id: -1
       fwd_bwd: FWD
@@ -327,14 +327,14 @@ dataflow_graph {
     id: 18
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 6144
+      M: 5120
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 25165824.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 12
       input_tensor_2_id: 17
       fwd_bwd: FWD
@@ -346,14 +346,14 @@ dataflow_graph {
     id: 19
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 6144
+      M: 5120
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 25165824.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: -1
       input_tensor_2_id: -1
       fwd_bwd: BWD
@@ -365,14 +365,14 @@ dataflow_graph {
     id: 20
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 6144
+      M: 5120
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 25165824.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 19
       input_tensor_2_id: -1
       fwd_bwd: BWD
@@ -384,14 +384,14 @@ dataflow_graph {
     id: 21
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 24576
-      K: 6144
-      N: 2048
+      M: 20480
+      K: 5120
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
-      weight_tensor_size: 301989900.0
-      output_tensor_size: 100663300.0
+      weight_tensor_size: 209715200.0
+      output_tensor_size: 41943040.0
       input_tensor_1_id: 20
       input_tensor_2_id: -1
       fwd_bwd: BWD
@@ -403,14 +403,14 @@ dataflow_graph {
     id: 22
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 24576
+      M: 20480
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 100663300.0
+      input_tensor_1_size: 41943040.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 100663300.0
+      output_tensor_size: 41943040.0
       input_tensor_1_id: 21
       input_tensor_2_id: -1
       fwd_bwd: BWD
@@ -422,14 +422,14 @@ dataflow_graph {
     id: 23
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 6144
-      K: 24576
-      N: 2048
+      M: 5120
+      K: 20480
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 100663300.0
+      input_tensor_1_size: 41943040.0
       input_tensor_2_size: -1.0
-      weight_tensor_size: 301989900.0
-      output_tensor_size: 25165824.0
+      weight_tensor_size: 209715200.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 23
       input_tensor_2_id: -1
       fwd_bwd: BWD
@@ -441,14 +441,14 @@ dataflow_graph {
     id: 24
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 6144
+      M: 5120
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 25165824.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 24
       input_tensor_2_id: -1
       fwd_bwd: BWD
@@ -460,14 +460,14 @@ dataflow_graph {
     id: 25
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 6144
+      M: 5120
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 25165824.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 26
       input_tensor_2_id: -1
       fwd_bwd: BWD
@@ -479,14 +479,14 @@ dataflow_graph {
     id: 26
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 6144
-      K: 6144
-      N: 2048
+      M: 5120
+      K: 5120
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
-      weight_tensor_size: 75497470.0
-      output_tensor_size: 25165824.0
+      weight_tensor_size: 52428800.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 27
       input_tensor_2_id: -1
       fwd_bwd: BWD
@@ -497,15 +497,15 @@ dataflow_graph {
     name: "MHA_GEMM_2_bwd1"
     id: 27
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 48
-      M: 2048
+      outer: 40
+      M: 1024
       K: 128
-      N: 2048
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 25165824.0
-      input_tensor_2_size: 25165824.0
+      input_tensor_1_size: 10485760.0
+      input_tensor_2_size: 10485760.0
       weight_tensor_size: -1.0
-      output_tensor_size: 402653200.0
+      output_tensor_size: 83886080.0
       input_tensor_1_id: 28
       input_tensor_2_id: 5
       fwd_bwd: BWD
@@ -516,15 +516,15 @@ dataflow_graph {
     name: "MHA_GEMM_2_bwd2"
     id: 28
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 48
+      outer: 40
       M: 128
-      K: 2048
-      N: 2048
+      K: 1024
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 25165824.0
-      input_tensor_2_size: 402653200.0
+      input_tensor_1_size: 10485760.0
+      input_tensor_2_size: 83886080.0
       weight_tensor_size: -1.0
-      output_tensor_size: 25165824.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 28
       input_tensor_2_id: 8
       fwd_bwd: BWD
@@ -536,14 +536,14 @@ dataflow_graph {
     id: 29
     batch_gemm_elementwise_outer_m_k_n {
       outer: 1
-      M: 6144
-      K: 6144
-      N: 2048
+      M: 5120
+      K: 5120
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
-      weight_tensor_size: 75497470.0
-      output_tensor_size: 25165824.0
+      weight_tensor_size: 52428800.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 31
       input_tensor_2_id: -1
       fwd_bwd: BWD
@@ -554,15 +554,15 @@ dataflow_graph {
     name: "DropOut_1_bwd"
     id: 30
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 48
-      M: 2048
+      outer: 40
+      M: 1024
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 402653200.0
+      input_tensor_1_size: 83886080.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 402653200.0
+      output_tensor_size: 83886080.0
       input_tensor_1_id: 30
       input_tensor_2_id: -1
       fwd_bwd: BWD
@@ -573,15 +573,15 @@ dataflow_graph {
     name: "SOFTMAX_bwd"
     id: 31
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 48
-      M: 2048
+      outer: 40
+      M: 1024
       K: 1
-      N: 2048
+      N: 1024
       type: SIMD
-      input_tensor_1_size: 402653200.0
+      input_tensor_1_size: 83886080.0
       input_tensor_2_size: -1.0
       weight_tensor_size: -1.0
-      output_tensor_size: 402653200.0
+      output_tensor_size: 83886080.0
       input_tensor_1_id: 34
       input_tensor_2_id: -1
       fwd_bwd: BWD
@@ -592,15 +592,15 @@ dataflow_graph {
     name: "MHA_GEMM_1_bwd1"
     id: 32
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 48
+      outer: 40
       M: 128
-      K: 2048
-      N: 2048
+      K: 1024
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 402653200.0
-      input_tensor_2_size: 25165824.0
+      input_tensor_1_size: 83886080.0
+      input_tensor_2_size: 10485760.0
       weight_tensor_size: -1.0
-      output_tensor_size: 25165824.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 35
       input_tensor_2_id: 4
       fwd_bwd: BWD
@@ -611,15 +611,15 @@ dataflow_graph {
     name: "MHA_GEMM_1_bwd2"
     id: 33
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 48
+      outer: 40
       M: 128
-      K: 2048
-      N: 2048
+      K: 1024
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 402653200.0
-      input_tensor_2_size: 25165824.0
+      input_tensor_1_size: 83886080.0
+      input_tensor_2_size: 10485760.0
       weight_tensor_size: -1.0
-      output_tensor_size: 25165824.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 35
       input_tensor_2_id: 3
       fwd_bwd: BWD
@@ -630,15 +630,15 @@ dataflow_graph {
     name: "Q_bwd"
     id: 34
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 48
+      outer: 40
       M: 128
-      K: 6144
-      N: 2048
+      K: 5120
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
-      weight_tensor_size: 75497470.0
-      output_tensor_size: 25165824.0
+      weight_tensor_size: 52428800.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 36
       input_tensor_2_id: -1
       fwd_bwd: BWD
@@ -649,15 +649,15 @@ dataflow_graph {
     name: "K_bwd"
     id: 35
     batch_gemm_elementwise_outer_m_k_n {
-      outer: 48
+      outer: 40
       M: 128
-      K: 6144
-      N: 2048
+      K: 5120
+      N: 1024
       type: SYSTOLIC
-      input_tensor_1_size: 25165824.0
+      input_tensor_1_size: 10485760.0
       input_tensor_2_size: -1.0
-      weight_tensor_size: 75497470.0
-      output_tensor_size: 25165824.0
+      weight_tensor_size: 52428800.0
+      output_tensor_size: 10485760.0
       input_tensor_1_id: 37
       input_tensor_2_id: -1
       fwd_bwd: BWD
@@ -871,21 +871,19 @@ dataflow_graph {
   }
 }
 system {
-  name: "8_Chip_A100_GPU"
-  topo: RING_1D
-  num_chip: 8
-  link_bw_x: 600.0
+  name: "1_Chip_WSE2"
+  topo: SINGLE_CHIP
+  num_chip: 1
   accelerator {
-    name: "A100_GPU"
-    core: 432
-    systolic_width: 16
-    systolic_height: 16
-    sram_cap: 88080380.0
-    freq: 1.41
-    dram_bw: 1555.0
-    dram_cap: 85899350000.0
+    name: "WSE2"
+    core: 853776
+    systolic_width: 4
+    systolic_height: 1
+    sram_cap: 41964010000.0
+    freq: 1.1
+    dram_bw: 153.0
+    dram_cap: 1649267400000.0
   }
-  x: 8
 }
 cost {
   link_unit_price: 2.0
@@ -893,12 +891,12 @@ cost {
   dram_unit_price: 1.0
 }
 training {
-  optimization: KERNEL_BY_KERNEL
-  seq_len: 2048
+  optimization: FLASHATTENTION
+  seq_len: 1024
   num_layer: 40
-  seq_tile_size: 32
-  hidden_dim: 6144
+  seq_tile_size: 1024
+  hidden_dim: 5120
   head_dim: 128
-  num_head: 48
+  num_head: 40
   num_config: 35
 }
