@@ -442,8 +442,8 @@ Ad = model.addMVar((num_weight, C), name='Ad', vtype=gp.GRB.BINARY)
 
 for i in range(len(configs)):
     if configs[i] == -1: # not specified
-        # pass
-        model.addConstr(Config[i] == i)
+        pass
+        # model.addConstr(Config[i] == i)
     else:
         model.addConstr(Config[i] == configs[i])
 
@@ -477,8 +477,8 @@ if first_bwd_kernel == -1:
     pass
 else:
     model.addConstr(Config[first_bwd_kernel] - Config[last_fwd_kernel] >= 1)
-
-
+    
+    
 if opt == Optimization.KERNEL_BY_KERNEL.value: # kernel-by-kernel
     for i in range(C):
         model.addConstr(np.ones((num_kernel)) @ Ac[:, i] >= 1)

@@ -1149,5 +1149,5 @@ training {
   hidden_dim: 5120
   head_dim: 128
   num_head: 40
-  num_config: 35
+  num_config: 2
 }

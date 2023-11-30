@@ -900,5 +900,5 @@ training {
   
   seq_tile_size: 1024
   optimization: 1
-  num_config: 35
+  num_config: 2
 }
