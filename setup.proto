@@ -117,29 +117,84 @@ message Accelerator {
 
 message System {
     string name = 1; 
-    Topology topo = 2;
     int32 num_chip = 3;
-	float link_bw_x = 4;
-	float link_bw_y = 5;
-	float link_bw_z = 6;
 	Accelerator accelerator = 7;
 
+	oneof topology_variant {
+		SINGLE_CHIP single_chip = 13;
+		FC_1D fc_1d = 14;
+		RING_1D ring_1d = 15;
+		TORUS_2D torus_2d = 8;
+		DRAGONFLY_2D dragonfly_2d = 9;
+		DGX_1_2D dgx_1_2d = 10;
+		DGX_2_2D dgx_2_2d = 11;
+		TORUS_3D torus_3d = 12;
+	}
+}
+
+
+message TORUS_2D {
+	int32 x = 8;
+	int32 y = 9;
+	
+	float link_bw_x = 4;
+	float link_bw_y = 5;
+}
+
+message DRAGONFLY_2D {
+	int32 x = 8;
+	int32 y = 9;
+	
+	float link_bw_x = 4;
+	float link_bw_y = 5;
+}
+
+message DGX_1_2D {
+	int32 x = 8;
+	int32 y = 9;
+	
+	float link_bw_x = 4;
+	float link_bw_y = 5;
+}
+
+message DGX_2_2D {
+	int32 x = 8;
+	int32 y = 9;
+	
+	float link_bw_x = 4;
+	float link_bw_y = 5;
+}
+
+
+message TORUS_3D {
 	int32 x = 8;
 	int32 y = 9;
 	int32 z = 10;
-
-	enum Topology {
-		Topology_Placeholder = 0;
-		TORUS_2D = 1;
-		DRAGONFLY_2D = 2;
-		DGX_1_2D = 3;
-		DGX_2_2D = 4;
-		TORUS_3D = 5;
-		SINGLE_CHIP = 6;
-		FC_1D = 7;
-		RING_1D = 8;
-	}
+	
+	float link_bw_x = 4;
+	float link_bw_y = 5;
+	float link_bw_z = 6;
 }
+
+message SINGLE_CHIP {
+}
+
+
+message FC_1D {
+	int32 x = 8;
+	
+	float link_bw_x = 4;
+}
+
+
+message RING_1D {
+	int32 x = 8;
+	
+	float link_bw_x = 4;
+}
+
+
+
 
 message Cost {
 	float link_unit_price = 1;

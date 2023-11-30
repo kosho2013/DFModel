@@ -197,53 +197,48 @@ class Topology(Enum):
 
 
     
-if dse.system.topo == Topology.SINGLE_CHIP.value: # single chip
+if dse.system.WhichOneof('topology_variant') == 'single_chip': # single chip
     topology = []
     link_bw = []
-    shape = []
+    dimension = []
 
-elif dse.system.topo == Topology.FC_1D.value: # 1D FC
+elif dse.system.WhichOneof('topology_variant') == 'fc_1d': # 1D FC
     topology = [BasicTopology.FC.value]
-    link_bw = [dse.system.link_bw_x]
-    shape = [dse.system.x]
+    link_bw = [dse.system.fc_1d.link_bw_x]
+    dimension = [dse.system.fc_1d.x]
   
-elif dse.system.topo == Topology.RING_1D.value: # 1D Ring
+elif dse.system.WhichOneof('topology_variant') == 'ring_1d': # 1D Ring
     topology = [BasicTopology.R.value]
-    link_bw = [dse.system.link_bw_x]
-    shape = [dse.system.x]    
+    link_bw = [dse.system.ring_1d.link_bw_x]
+    dimension = [dse.system.ring_1d.x]    
     
-elif dse.system.topo == Topology.TORUS_2D.value: # 2D Torus
+elif dse.system.WhichOneof('topology_variant') == 'torus_2d': # 2D Torus
     topology = [BasicTopology.R.value, BasicTopology.R.value]
-    link_bw = [dse.system.link_bw_x, dse.system.link_bw_y]
-    shape = [dse.system.x, dse.system.y]
+    link_bw = [dse.system.torus_2d.link_bw_x, dse.system.torus_2d.link_bw_y]
+    dimension = [dse.system.torus_2d.x, dse.system.torus_2d.y]
 
-elif dse.system.topo == Topology.DRAGONFLY_2D.value: # 2D Dragonfly
+elif dse.system.WhichOneof('topology_variant') == 'dragonfly_2d': # 2D Dragonfly
     topology = [BasicTopology.FC.value, BasicTopology.FC.value]
-    link_bw = [dse.system.link_bw_x, dse.system.link_bw_y]
-    shape = [dse.system.x, dse.system.y]
+    link_bw = [dse.system.dragonfly_2d.link_bw_x, dse.system.dragonfly_2d.link_bw_y]
+    dimension = [dse.system.dragonfly_2d.x, dse.system.dragonfly_2d.y]
 
-elif dse.system.topo == Topology.DGX_1_2D.value: # 2D DGX-1
+elif dse.system.WhichOneof('topology_variant') == 'dgx_1_2d': # 2D DGX-1
     topology = [BasicTopology.FC.value, BasicTopology.SW.value]
-    link_bw = [dse.system.link_bw_x, dse.system.link_bw_y]
-    shape = [dse.system.x, dse.system.y]
+    link_bw = [dse.system.dgx_1_2d.link_bw_x, dse.system.dgx_1_2d.link_bw_y]
+    dimension = [dse.system.dgx_1_2d.x, dse.system.dgx_1_2d.y]
     
-elif dse.system.topo == Topology.DGX_2_2D.value: # 2D DGX-2
+elif dse.system.WhichOneof('topology_variant') == 'dgx_2_2d': # 2D DGX-2
     topology = [BasicTopology.SW.value, BasicTopology.SW.value]
-    link_bw = [dse.system.link_bw_x, dse.system.link_bw_y]
-    shape = [dse.system.x, dse.system.y]
+    link_bw = [dse.system.dgx_2_2d.link_bw_x, dse.system.dgx_2_2d.link_bw_y]
+    dimension = [dse.system.dgx_2_2d.x, dse.system.dgx_2_2d.y]
     
-elif dse.system.topo == Topology.TORUS_3D.value: # 3D Torus
+elif dse.system.WhichOneof('topology_variant') == 'torus_3d': # 3D Torus
     topology = [BasicTopology.R.value, BasicTopology.R.value, BasicTopology.R.value]
-    link_bw = [dse.system.link_bw_x, dse.system.link_bw_y, dse.system.link_bw_z]
-    shape = [dse.system.x, dse.system.y, dse.system.z]
+    link_bw = [dse.system.torus_3d.link_bw_x, dse.system.torus_3d.link_bw_y, dse.system.torus_3d.link_bw_z]
+    dimension = [dse.system.torus_3d.x, dse.system.torus_3d.y, dse.system.torus_3d.z]
 
 else:
     raise Exception('Wrong!')
-
-
-
-
-
 
 
 
@@ -264,87 +259,69 @@ TP = model.addVar(name='TP', vtype=gp.GRB.INTEGER)
 PP = model.addVar(name='PP', vtype=gp.GRB.INTEGER)
     
 if len(topology) == 0: # single chip
-    X = model.addVar(name='X', vtype=gp.GRB.INTEGER)
-    Y = model.addVar(name='Y', vtype=gp.GRB.INTEGER)
-    model.addConstr(X == 1)
-    model.addConstr(Y == 1)
-
-    model.addConstr(TP == X)
-    model.addConstr(PP == Y)    
+    Shape = model.addVar(1, name='Shape', vtype=gp.GRB.INTEGER, lb=0)
+    model.addConstr(Shape[0] == 1)
+    model.addConstr(TP == 1)
+    model.addConstr(PP == 1)    
     
-    Link_BW_X = model.addVar(name='Link_BW_X', vtype=gp.GRB.CONTINUOUS, lb=0)
-    Link_BW_Y = model.addVar(name='Link_BW_Y', vtype=gp.GRB.CONTINUOUS, lb=0)
-    model.addConstr(Link_BW_X == sys.maxsize)
-    model.addConstr(Link_BW_Y == sys.maxsize)
+    Link_BW_TP = model.addMVar(1, name='Link_BW_TP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW_PP = model.addVar(name='Link_BW_PP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    model.addConstr(Link_BW_TP[0] == sys.maxsize)
+    model.addConstr(Link_BW_PP == sys.maxsize)
     
 elif len(topology) == 1: # 1D
-    X = model.addVar(name='X', vtype=gp.GRB.INTEGER)
-    Y = model.addVar(name='Y', vtype=gp.GRB.INTEGER)
+    Shape = model.addVar(1, name='Shape', vtype=gp.GRB.INTEGER, lb=0)
+    model.addConstr(Shape[0] == num_chip)
+    model.addConstr(TP == num_chip)
+    model.addConstr(PP == 1)
     
-    model.addConstr(X == num_chip)
-    model.addConstr(Y == 1)
-
-    model.addConstr(TP == X)
-    model.addConstr(PP == Y)
-    
-    Link_BW_X = model.addVar(name='Link_BW_X', vtype=gp.GRB.CONTINUOUS, lb=0)
-    Link_BW_Y = model.addVar(name='Link_BW_Y', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW_TP = model.addMVar(1, name='Link_BW_TP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW_PP = model.addVar(name='Link_BW_PP', vtype=gp.GRB.CONTINUOUS, lb=0)
     if link_bw[0] == 0: # DSE
         pass
     else:
-        model.addConstr(Link_BW_X == link_bw[0])
-    
-    model.addConstr(Link_BW_Y == sys.maxsize)
+        model.addConstr(Link_BW_TP[0] == link_bw[0])
+    model.addConstr(Link_BW_PP == sys.maxsize)
         
 elif len(topology) == 2: # 2D
-    X = model.addVar(name='X', vtype=gp.GRB.INTEGER)
-    Y = model.addVar(name='Y', vtype=gp.GRB.INTEGER)
-    
-    if shape[0] == 0 and shape[1] == 0: # DSE on topology dimensions
+    Shape = model.addMVar(2, name='Shape', vtype=gp.GRB.INTEGER, lb=0)
+    if dimension[0] == 0 and dimension[1] == 0: # DSE on topology dimensions
         pass
     else:
-        model.addConstr(X == shape[0])
-        model.addConstr(Y == shape[1])
-    model.addConstr(X * Y == num_chip)
-
-    model.addConstr(TP == X)
-    model.addConstr(PP == Y)
+        model.addConstr(Shape[0] == dimension[0])
+        model.addConstr(Shape[1] == dimension[1])
+    model.addConstr(Shape[0] * Shape[1] == num_chip)
+    model.addConstr(TP == Shape[0])
+    model.addConstr(PP == Shape[1])
     
-    Link_BW_X = model.addVar(name='Link_BW_X', vtype=gp.GRB.CONTINUOUS, lb=0)
-    Link_BW_Y = model.addVar(name='Link_BW_Y', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW_TP = model.addMVar(1, name='Link_BW_TP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW_PP = model.addVar(name='Link_BW_PP', vtype=gp.GRB.CONTINUOUS, lb=0)
     if link_bw[0] == 0 and link_bw[1] == 0: # DSE
         pass
     else:
-        model.addConstr(Link_BW_X == link_bw[0])
-        model.addConstr(Link_BW_Y == link_bw[1])
+        model.addConstr(Link_BW_TP[0] == link_bw[0])
+        model.addConstr(Link_BW_PP == link_bw[1])
 
 elif len(topology) == 3: # 3D
-    X = model.addVar(name='X', vtype=gp.GRB.INTEGER)
-    Y = model.addVar(name='Y', vtype=gp.GRB.INTEGER)
-    Z = model.addVar(name='Z', vtype=gp.GRB.INTEGER)
-    XY = model.addVar(name='XY', vtype=gp.GRB.INTEGER)
-    model.addConstr(XY == X * Y)
-    model.addConstr(num_chip = XY * Z)
-    
-    if shape[0] == 0 and shape[1] == 0 and shape[2] == 0: # DSE on topology dimensions
+    Shape = model.addMVar(3, name='Shape', vtype=gp.GRB.INTEGER, lb=0)
+    if dimension[0] == 0 and dimension[1] == 0 and dimension[2] == 0: # DSE on topology dimensions
         pass
     else:
-        model.addConstr(X == shape[0])
-        model.addConstr(Y == shape[1])
-        model.addConstr(Z == shape[2])
-
-    model.addConstr(TP == XY)
-    model.addConstr(PP = Z)
-
-    Link_BW_X = model.addVar(name='Link_BW_X', vtype=gp.GRB.CONTINUOUS, lb=0)
-    Link_BW_Y = model.addVar(name='Link_BW_Y', vtype=gp.GRB.CONTINUOUS, lb=0)
-    Link_BW_Z = model.addVar(name='Link_BW_Z', vtype=gp.GRB.CONTINUOUS, lb=0)
+        model.addConstr(Shape[0] == dimension[0])
+        model.addConstr(Shape[1] == dimension[1])
+        model.addConstr(Shape[2] == dimension[2])
+    model.addConstr(TP == Shape[0] * Shape[1])
+    model.addConstr(PP == Shape[2])
+    model.addConstr(TP * PP == num_chip)
+    
+    Link_BW_TP = model.addMVar(2, name='Link_BW_TP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW_PP = model.addVar(name='Link_BW_PP', vtype=gp.GRB.CONTINUOUS, lb=0)
     if link_bw[0] == 0 and link_bw[1] == 0 and link_bw[2] == 0: # DSE
         pass
     else:
-        model.addConstr(Link_BW_X == link_bw[0])
-        model.addConstr(Link_BW_Y == link_bw[1])
-        model.addConstr(Link_BW_Z == link_bw[2])
+        model.addConstr(Link_BW_TP[0] == link_bw[0])
+        model.addConstr(Link_BW_TP[1] == link_bw[1])
+        model.addConstr(Link_BW_PP == link_bw[2])
 
 else:
     raise Exception('Wrong!')
@@ -650,21 +627,38 @@ model.addConstr(total_DRAM_bytes == np.ones((C)) @ DRAM_bytes)
 
 
 allreduce_ratio = model.addVar(name='allreduce_ratio', vtype=gp.GRB.CONTINUOUS) 
-if len(topology) == 0:
+if dse.system.WhichOneof('topology_variant') == 'single_chip':
     model.addConstr(allreduce_ratio == 0)
 
-elif len(topology) == 1 or len(topology) == 2:
+elif dse.system.WhichOneof('topology_variant') == 'ring_1d' or \
+    dse.system.WhichOneof('topology_variant') == 'fc_1d' or \
+    dse.system.WhichOneof('topology_variant') == 'torus_2d' or \
+    dse.system.WhichOneof('topology_variant') == 'dragonfly_2d' or \
+    dse.system.WhichOneof('topology_variant') == 'dgx_1_2d' or \
+    dse.system.WhichOneof('topology_variant') == 'dgx_2_2d':
+    
+    aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    model.addConstr(aaa == TP * Link_BW_TP[0])
     if topology[0] == BasicTopology.R.value:
-        model.addConstr(allreduce_ratio * TP == TP - 1)
+        model.addConstr(allreduce_ratio * aaa * 2 == TP - 1)
     elif topology[0] == BasicTopology.FC.value:
-        model.addConstr(allreduce_ratio * TP == 2)
+        model.addConstr(allreduce_ratio * aaa == 1)
     elif topology[0] == BasicTopology.SW.value:
-        model.addConstr(allreduce_ratio * TP == TP - 1)
+        model.addConstr(allreduce_ratio * aaa * 2 == TP - 1)
     else:
         raise Exception('Wrong!')
 
-elif len(topology) == 3:
-    pass
+elif dse.system.WhichOneof('topology_variant') == 'torus_3d':
+    dim_1 = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    dim_2 = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    bbb = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    
+    model.addConstr(aaa == Shape[0] * Link_BW_TP[0])
+    model.addConstr(bbb == TP * Link_BW_TP[1])
+    model.addConstr(dim_1 * aaa * 2 == Shape[0] - 1)
+    model.addConstr(dim_2 * bbb * 2 == Shape[1] - 1)
+    model.addConstr(allreduce_ratio == dim_1 + dim_2)
 
 else:
     raise Exception('Wrong!')
@@ -676,11 +670,11 @@ Network_bytes = model.addMVar(C, name='Network_bytes', vtype=gp.GRB.CONTINUOUS, 
 Network_Latency = model.addMVar(num_kernel, name='Network_Latency', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
     t1 = model.addVar(vtype=gp.GRB.CONTINUOUS)
-    model.addConstr(t1 == Ac[:, i] @ shard_node_communication_size)
     t2 = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    model.addConstr(t1 == Ac[:, i] @ shard_node_communication_size)
     model.addConstr(t2 == allreduce_ratio * num_tile)
-    model.addConstr(Network_Latency[i] * Link_BW_X == t1 * t2)
-    model.addConstr(Network_bytes[i] == t1 * t2)
+    model.addConstr(Network_Latency[i] == 2 * t1 * t2) # reduce-scatter/all-gather
+    model.addConstr(Network_bytes[i] == Network_Latency[i] * Link_BW_TP[0])
 
 total_Network_bytes = model.addVar(name='total_Network_bytes', vtype=gp.GRB.CONTINUOUS) 
 model.addConstr(total_Network_bytes == np.ones((C)) @ Network_bytes)
@@ -695,7 +689,7 @@ model.addConstr((aaa == 1) >> (intermediate == 0))
 model.addConstr((aaa == 0) >> (intermediate == Intermediate))
 
 p2p_latency = model.addVar(name='p2p_latency', vtype=gp.GRB.CONTINUOUS)
-model.addConstr(p2p_latency * Link_BW_Y == intermediate)
+model.addConstr(p2p_latency * Link_BW_PP == intermediate)
 
 
 # weight loading overheads

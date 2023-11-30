@@ -874,12 +874,19 @@ connections {
 }
 system {
   name: "128_Chip_TPU"
-  topo: TORUS_2D
   num_chip: 128
-  x: 8
-  y: 16
-  link_bw_x: 50.0
-  link_bw_y: 50.0
+  
+  
+  torus_2d {
+	x: 8
+	y: 16
+	
+	link_bw_x: 50.0
+	link_bw_y: 50.0
+  }
+  
+  
+  
   accelerator {
     name: "TPU_v4"
     core: 8
@@ -905,5 +912,5 @@ training {
   
   seq_tile_size: 64
   optimization: 1
-  num_config: 8
+  num_config: 10
 }

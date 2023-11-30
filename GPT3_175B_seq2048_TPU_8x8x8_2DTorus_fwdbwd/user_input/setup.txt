@@ -874,12 +874,19 @@ connections {
 }
 system {
   name: "512_Chip_TPU"
-  topo: TORUS_2D
   num_chip: 512
-  x: 64
-  y: 8
-  link_bw_x: 50.0
-  link_bw_y: 50.0
+  
+  
+  torus_3d {
+	x: 8
+	y: 8
+	z: 8
+	
+	link_bw_x: 50.0
+	link_bw_y: 50.0
+	link_bw_z: 50.0
+  }
+  
   accelerator {
     name: "TPU_v4"
     core: 8

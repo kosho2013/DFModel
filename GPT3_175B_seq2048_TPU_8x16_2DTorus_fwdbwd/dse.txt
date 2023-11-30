@@ -872,10 +872,7 @@ dataflow_graph {
 }
 system {
   name: "128_Chip_TPU"
-  topo: TORUS_2D
   num_chip: 128
-  link_bw_x: 50.0
-  link_bw_y: 50.0
   accelerator {
     name: "TPU_v4"
     core: 8
@@ -886,8 +883,12 @@ system {
     dram_bw: 1200.0
     dram_cap: 34359740000.0
   }
-  x: 8
-  y: 16
+  torus_2d {
+    link_bw_x: 50.0
+    link_bw_y: 50.0
+    x: 8
+    y: 16
+  }
 }
 cost {
   link_unit_price: 2.0
@@ -902,5 +903,5 @@ training {
   hidden_dim: 12288
   head_dim: 128
   num_head: 96
-  num_config: 8
+  num_config: 10
 }
