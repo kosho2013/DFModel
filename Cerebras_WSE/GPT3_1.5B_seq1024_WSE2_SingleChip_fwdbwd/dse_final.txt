@@ -15,9 +15,11 @@ dataflow_graph {
       input_tensor_1_id: -1
       input_tensor_2_id: -1
       sharding: NO_SHARDING
+      shard_outer_M: 2048
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: FWD
     }
-    config: -1
   }
   kernels {
     name: "LayerNorm_1"
@@ -35,10 +37,12 @@ dataflow_graph {
       input_tensor_1_id: 1
       input_tensor_2_id: -1
       sharding: NO_SHARDING
+      shard_outer_M: 2048
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 1
-    config: -1
   }
   kernels {
     name: "Q"
@@ -56,10 +60,13 @@ dataflow_graph {
       input_tensor_1_id: 2
       input_tensor_2_id: -1
       sharding: OUTER_SHARDING
+      shard_weight_size: 8388608.0
+      shard_outer_M: 2048
+      shard_K: 2048
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 2
-    config: -1
   }
   kernels {
     name: "K"
@@ -77,10 +84,13 @@ dataflow_graph {
       input_tensor_1_id: 2
       input_tensor_2_id: -1
       sharding: OUTER_SHARDING
+      shard_weight_size: 8388608.0
+      shard_outer_M: 2048
+      shard_K: 2048
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 2
-    config: -1
   }
   kernels {
     name: "V"
@@ -98,10 +108,13 @@ dataflow_graph {
       input_tensor_1_id: 2
       input_tensor_2_id: -1
       sharding: OUTER_SHARDING
+      shard_weight_size: 8388608.0
+      shard_outer_M: 2048
+      shard_K: 2048
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 2
-    config: -1
   }
   kernels {
     name: "MHA_GEMM_1"
@@ -119,10 +132,12 @@ dataflow_graph {
       input_tensor_1_id: 3
       input_tensor_2_id: 4
       sharding: OUTER_SHARDING
+      shard_outer_M: 16384
+      shard_K: 128
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 3
-    config: -1
   }
   kernels {
     name: "SOFTMAX"
@@ -140,10 +155,12 @@ dataflow_graph {
       input_tensor_1_id: 6
       input_tensor_2_id: -1
       sharding: OUTER_SHARDING
+      shard_outer_M: 16384
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 4
-    config: -1
   }
   kernels {
     name: "DropOut_1"
@@ -161,10 +178,12 @@ dataflow_graph {
       input_tensor_1_id: 7
       input_tensor_2_id: -1
       sharding: OUTER_SHARDING
+      shard_outer_M: 16384
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 5
-    config: -1
   }
   kernels {
     name: "MHA_GEMM_2"
@@ -182,10 +201,12 @@ dataflow_graph {
       input_tensor_1_id: 5
       input_tensor_2_id: 8
       sharding: OUTER_SHARDING
+      shard_outer_M: 2048
+      shard_K: 1024
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 6
-    config: -1
   }
   kernels {
     name: "PROJ_GEMM"
@@ -205,10 +226,13 @@ dataflow_graph {
       sharding: K_SHARDING
       communication_type: ALL_REDUCE
       communication_size: 4194304.0
+      shard_weight_size: 8388608.0
+      shard_outer_M: 2048
+      shard_K: 2048
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 7
-    config: -1
   }
   kernels {
     name: "DropOut_2"
@@ -226,10 +250,12 @@ dataflow_graph {
       input_tensor_1_id: 10
       input_tensor_2_id: -1
       sharding: NO_SHARDING
+      shard_outer_M: 2048
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 8
-    config: -1
   }
   kernels {
     name: "Add_1"
@@ -247,10 +273,12 @@ dataflow_graph {
       input_tensor_1_id: 1
       input_tensor_2_id: 11
       sharding: NO_SHARDING
+      shard_outer_M: 2048
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 9
-    config: -1
   }
   kernels {
     name: "LayerNorm_2"
@@ -268,10 +296,12 @@ dataflow_graph {
       input_tensor_1_id: 12
       input_tensor_2_id: -1
       sharding: NO_SHARDING
+      shard_outer_M: 2048
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 10
-    config: -1
   }
   kernels {
     name: "FFN0"
@@ -290,10 +320,13 @@ dataflow_graph {
       input_tensor_2_id: -1
       sharding: M_SHARDING
       communication_size: -0.0
+      shard_weight_size: 33554432.0
+      shard_outer_M: 8192
+      shard_K: 2048
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 11
-    config: -1
   }
   kernels {
     name: "GeLU"
@@ -311,10 +344,12 @@ dataflow_graph {
       input_tensor_1_id: 14
       input_tensor_2_id: -1
       sharding: M_SHARDING
+      shard_outer_M: 8192
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 12
-    config: -1
   }
   kernels {
     name: "FFN1"
@@ -334,10 +369,13 @@ dataflow_graph {
       sharding: K_SHARDING
       communication_type: ALL_REDUCE
       communication_size: 4194304.0
+      shard_weight_size: 33554432.0
+      shard_outer_M: 2048
+      shard_K: 8192
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 13
-    config: -1
   }
   kernels {
     name: "DropOut_3"
@@ -355,10 +393,12 @@ dataflow_graph {
       input_tensor_1_id: 16
       input_tensor_2_id: -1
       sharding: NO_SHARDING
+      shard_outer_M: 2048
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 14
-    config: -1
   }
   kernels {
     name: "Add_2"
@@ -376,10 +416,12 @@ dataflow_graph {
       input_tensor_1_id: 12
       input_tensor_2_id: 17
       sharding: M_SHARDING
+      shard_outer_M: 2048
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: FWD
     }
     topological_number: 15
-    config: -1
   }
   kernels {
     name: "Loss_bwd"
@@ -397,9 +439,12 @@ dataflow_graph {
       input_tensor_1_id: -1
       input_tensor_2_id: -1
       sharding: NO_SHARDING
+      shard_outer_M: 2048
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: BWD
     }
-    config: -1
+    config: 1
   }
   kernels {
     name: "DropOut_3_bwd"
@@ -417,10 +462,13 @@ dataflow_graph {
       input_tensor_1_id: 19
       input_tensor_2_id: -1
       sharding: NO_SHARDING
+      shard_outer_M: 2048
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: BWD
     }
     topological_number: 1
-    config: -1
+    config: 1
   }
   kernels {
     name: "FFN1_bwd"
@@ -438,10 +486,14 @@ dataflow_graph {
       input_tensor_1_id: 20
       input_tensor_2_id: -1
       sharding: M_SHARDING
+      shard_weight_size: 33554432.0
+      shard_outer_M: 8192
+      shard_K: 2048
+      shard_N: 1024
       fwd_bwd: BWD
     }
     topological_number: 2
-    config: -1
+    config: 1
   }
   kernels {
     name: "GeLU_bwd"
@@ -459,10 +511,13 @@ dataflow_graph {
       input_tensor_1_id: 21
       input_tensor_2_id: -1
       sharding: M_SHARDING
+      shard_outer_M: 8192
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: BWD
     }
     topological_number: 3
-    config: -1
+    config: 1
   }
   kernels {
     name: "FFN0_bwd"
@@ -482,10 +537,14 @@ dataflow_graph {
       sharding: K_SHARDING
       communication_type: ALL_REDUCE
       communication_size: 4194304.0
+      shard_weight_size: 33554432.0
+      shard_outer_M: 2048
+      shard_K: 8192
+      shard_N: 1024
       fwd_bwd: BWD
     }
     topological_number: 4
-    config: -1
+    config: 1
   }
   kernels {
     name: "LayerNorm_2_bwd"
@@ -503,10 +562,13 @@ dataflow_graph {
       input_tensor_1_id: 24
       input_tensor_2_id: -1
       sharding: NO_SHARDING
+      shard_outer_M: 2048
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: BWD
     }
     topological_number: 5
-    config: -1
+    config: 1
   }
   kernels {
     name: "DropOut_2_bwd"
@@ -524,10 +586,13 @@ dataflow_graph {
       input_tensor_1_id: 26
       input_tensor_2_id: -1
       sharding: NO_SHARDING
+      shard_outer_M: 2048
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: BWD
     }
     topological_number: 6
-    config: -1
+    config: 1
   }
   kernels {
     name: "PROJ_GEMM_bwd"
@@ -545,10 +610,14 @@ dataflow_graph {
       input_tensor_1_id: 27
       input_tensor_2_id: -1
       sharding: M_SHARDING
+      shard_weight_size: 8388608.0
+      shard_outer_M: 2048
+      shard_K: 2048
+      shard_N: 1024
       fwd_bwd: BWD
     }
     topological_number: 7
-    config: -1
+    config: 1
   }
   kernels {
     name: "MHA_GEMM_2_bwd1"
@@ -566,10 +635,13 @@ dataflow_graph {
       input_tensor_1_id: 28
       input_tensor_2_id: 5
       sharding: OUTER_SHARDING
+      shard_outer_M: 16384
+      shard_K: 128
+      shard_N: 1024
       fwd_bwd: BWD
     }
     topological_number: 8
-    config: -1
+    config: 1
   }
   kernels {
     name: "MHA_GEMM_2_bwd2"
@@ -587,10 +659,13 @@ dataflow_graph {
       input_tensor_1_id: 28
       input_tensor_2_id: 8
       sharding: OUTER_SHARDING
+      shard_outer_M: 2048
+      shard_K: 1024
+      shard_N: 1024
       fwd_bwd: BWD
     }
     topological_number: 8
-    config: -1
+    config: 1
   }
   kernels {
     name: "V_bwd"
@@ -610,10 +685,14 @@ dataflow_graph {
       sharding: K_SHARDING
       communication_type: ALL_REDUCE
       communication_size: 4194304.0
+      shard_weight_size: 8388608.0
+      shard_outer_M: 2048
+      shard_K: 2048
+      shard_N: 1024
       fwd_bwd: BWD
     }
     topological_number: 9
-    config: -1
+    config: 1
   }
   kernels {
     name: "DropOut_1_bwd"
@@ -631,10 +710,13 @@ dataflow_graph {
       input_tensor_1_id: 30
       input_tensor_2_id: -1
       sharding: OUTER_SHARDING
+      shard_outer_M: 16384
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: BWD
     }
     topological_number: 9
-    config: -1
+    config: 1
   }
   kernels {
     name: "SOFTMAX_bwd"
@@ -652,10 +734,13 @@ dataflow_graph {
       input_tensor_1_id: 34
       input_tensor_2_id: -1
       sharding: OUTER_SHARDING
+      shard_outer_M: 16384
+      shard_K: 1
+      shard_N: 1024
       fwd_bwd: BWD
     }
     topological_number: 10
-    config: -1
+    config: 1
   }
   kernels {
     name: "MHA_GEMM_1_bwd1"
@@ -673,10 +758,13 @@ dataflow_graph {
       input_tensor_1_id: 35
       input_tensor_2_id: 4
       sharding: OUTER_SHARDING
+      shard_outer_M: 2048
+      shard_K: 1024
+      shard_N: 1024
       fwd_bwd: BWD
     }
     topological_number: 11
-    config: -1
+    config: 1
   }
   kernels {
     name: "MHA_GEMM_1_bwd2"
@@ -694,10 +782,13 @@ dataflow_graph {
       input_tensor_1_id: 35
       input_tensor_2_id: 3
       sharding: OUTER_SHARDING
+      shard_outer_M: 2048
+      shard_K: 1024
+      shard_N: 1024
       fwd_bwd: BWD
     }
     topological_number: 11
-    config: -1
+    config: 1
   }
   kernels {
     name: "Q_bwd"
@@ -715,10 +806,14 @@ dataflow_graph {
       input_tensor_1_id: 36
       input_tensor_2_id: -1
       sharding: OUTER_SHARDING
+      shard_weight_size: 8388608.0
+      shard_outer_M: 2048
+      shard_K: 2048
+      shard_N: 1024
       fwd_bwd: BWD
     }
     topological_number: 12
-    config: -1
+    config: 1
   }
   kernels {
     name: "K_bwd"
@@ -736,10 +831,14 @@ dataflow_graph {
       input_tensor_1_id: 37
       input_tensor_2_id: -1
       sharding: OUTER_SHARDING
+      shard_weight_size: 8388608.0
+      shard_outer_M: 2048
+      shard_K: 2048
+      shard_N: 1024
       fwd_bwd: BWD
     }
     topological_number: 12
-    config: -1
+    config: 1
   }
   connections {
     startIdx: 1
@@ -747,6 +846,7 @@ dataflow_graph {
     communication_size: -0.0
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 1
     startName: "Add_Prev_Layer"
     endName: "LayerNorm_1"
@@ -756,6 +856,7 @@ dataflow_graph {
     endIdx: 3
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 2
     startName: "LayerNorm_1"
     endName: "Q"
@@ -765,6 +866,7 @@ dataflow_graph {
     endIdx: 4
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 3
     startName: "LayerNorm_1"
     endName: "K"
@@ -774,6 +876,7 @@ dataflow_graph {
     endIdx: 5
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 4
     startName: "LayerNorm_1"
     endName: "V"
@@ -783,6 +886,7 @@ dataflow_graph {
     endIdx: 6
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 5
     startName: "Q"
     endName: "MHA_GEMM_1"
@@ -792,6 +896,7 @@ dataflow_graph {
     endIdx: 6
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 6
     startName: "K"
     endName: "MHA_GEMM_1"
@@ -801,6 +906,7 @@ dataflow_graph {
     endIdx: 7
     buffer_depth: 2
     tensor_size: 33554432.0
+    shard_tensor_size: 33554432.0
     id: 7
     startName: "MHA_GEMM_1"
     endName: "SOFTMAX"
@@ -810,6 +916,7 @@ dataflow_graph {
     endIdx: 8
     buffer_depth: 2
     tensor_size: 33554432.0
+    shard_tensor_size: 33554432.0
     id: 8
     startName: "SOFTMAX"
     endName: "DropOut_1"
@@ -819,6 +926,7 @@ dataflow_graph {
     endIdx: 9
     buffer_depth: 5
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 9
     startName: "V"
     endName: "MHA_GEMM_2"
@@ -828,6 +936,7 @@ dataflow_graph {
     endIdx: 9
     buffer_depth: 2
     tensor_size: 33554432.0
+    shard_tensor_size: 33554432.0
     id: 10
     startName: "DropOut_1"
     endName: "MHA_GEMM_2"
@@ -837,6 +946,7 @@ dataflow_graph {
     endIdx: 10
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 11
     startName: "MHA_GEMM_2"
     endName: "PROJ_GEMM"
@@ -847,6 +957,7 @@ dataflow_graph {
     communication_size: -0.0
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 12
     startName: "PROJ_GEMM"
     endName: "DropOut_2"
@@ -857,6 +968,7 @@ dataflow_graph {
     communication_size: -0.0
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 13
     startName: "DropOut_2"
     endName: "Add_1"
@@ -867,6 +979,7 @@ dataflow_graph {
     communication_size: -0.0
     buffer_depth: 10
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 14
     startName: "Add_Prev_Layer"
     endName: "Add_1"
@@ -877,6 +990,7 @@ dataflow_graph {
     communication_size: -0.0
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 15
     startName: "Add_1"
     endName: "LayerNorm_2"
@@ -887,6 +1001,7 @@ dataflow_graph {
     communication_size: -0.0
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 16
     startName: "LayerNorm_2"
     endName: "FFN0"
@@ -896,6 +1011,7 @@ dataflow_graph {
     endIdx: 15
     buffer_depth: 2
     tensor_size: 16777216.0
+    shard_tensor_size: 16777216.0
     id: 17
     startName: "FFN0"
     endName: "GeLU"
@@ -906,6 +1022,7 @@ dataflow_graph {
     communication_size: -0.0
     buffer_depth: 2
     tensor_size: 16777216.0
+    shard_tensor_size: 16777216.0
     id: 18
     startName: "GeLU"
     endName: "FFN1"
@@ -916,6 +1033,7 @@ dataflow_graph {
     communication_size: -0.0
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 19
     startName: "FFN1"
     endName: "DropOut_3"
@@ -926,6 +1044,7 @@ dataflow_graph {
     communication_size: -0.0
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 20
     startName: "DropOut_3"
     endName: "Add_2"
@@ -936,6 +1055,7 @@ dataflow_graph {
     communication_size: -0.0
     buffer_depth: 7
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 21
     startName: "Add_1"
     endName: "Add_2"
@@ -945,6 +1065,7 @@ dataflow_graph {
     endIdx: 20
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 22
     startName: "Loss_bwd"
     endName: "DropOut_3_bwd"
@@ -954,6 +1075,7 @@ dataflow_graph {
     endIdx: 21
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 23
     startName: "DropOut_3_bwd"
     endName: "FFN1_bwd"
@@ -963,6 +1085,7 @@ dataflow_graph {
     endIdx: 22
     buffer_depth: 2
     tensor_size: 16777216.0
+    shard_tensor_size: 16777216.0
     id: 24
     startName: "FFN1_bwd"
     endName: "GeLU_bwd"
@@ -972,6 +1095,7 @@ dataflow_graph {
     endIdx: 23
     buffer_depth: 2
     tensor_size: 16777216.0
+    shard_tensor_size: 16777216.0
     id: 25
     startName: "GeLU_bwd"
     endName: "FFN0_bwd"
@@ -981,6 +1105,7 @@ dataflow_graph {
     endIdx: 24
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 26
     startName: "FFN0_bwd"
     endName: "LayerNorm_2_bwd"
@@ -990,6 +1115,7 @@ dataflow_graph {
     endIdx: 25
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 27
     startName: "LayerNorm_2_bwd"
     endName: "DropOut_2_bwd"
@@ -999,6 +1125,7 @@ dataflow_graph {
     endIdx: 26
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 28
     startName: "DropOut_2_bwd"
     endName: "PROJ_GEMM_bwd"
@@ -1008,6 +1135,7 @@ dataflow_graph {
     endIdx: 27
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 29
     startName: "PROJ_GEMM_bwd"
     endName: "MHA_GEMM_2_bwd1"
@@ -1017,6 +1145,7 @@ dataflow_graph {
     endIdx: 27
     buffer_depth: 7
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 30
     startName: "V"
     endName: "MHA_GEMM_2_bwd1"
@@ -1026,6 +1155,7 @@ dataflow_graph {
     endIdx: 28
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 31
     startName: "PROJ_GEMM_bwd"
     endName: "MHA_GEMM_2_bwd2"
@@ -1035,6 +1165,7 @@ dataflow_graph {
     endIdx: 28
     buffer_depth: 4
     tensor_size: 33554432.0
+    shard_tensor_size: 33554432.0
     id: 32
     startName: "DropOut_1"
     endName: "MHA_GEMM_2_bwd2"
@@ -1044,6 +1175,7 @@ dataflow_graph {
     endIdx: 30
     buffer_depth: 2
     tensor_size: 33554432.0
+    shard_tensor_size: 33554432.0
     id: 33
     startName: "MHA_GEMM_2_bwd1"
     endName: "DropOut_1_bwd"
@@ -1053,6 +1185,7 @@ dataflow_graph {
     endIdx: 29
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 34
     startName: "MHA_GEMM_2_bwd2"
     endName: "V_bwd"
@@ -1062,6 +1195,7 @@ dataflow_graph {
     endIdx: 31
     buffer_depth: 2
     tensor_size: 33554432.0
+    shard_tensor_size: 33554432.0
     id: 35
     startName: "DropOut_1_bwd"
     endName: "SOFTMAX_bwd"
@@ -1071,6 +1205,7 @@ dataflow_graph {
     endIdx: 32
     buffer_depth: 2
     tensor_size: 33554432.0
+    shard_tensor_size: 33554432.0
     id: 36
     startName: "SOFTMAX_bwd"
     endName: "MHA_GEMM_1_bwd1"
@@ -1080,6 +1215,7 @@ dataflow_graph {
     endIdx: 33
     buffer_depth: 2
     tensor_size: 33554432.0
+    shard_tensor_size: 33554432.0
     id: 37
     startName: "SOFTMAX_bwd"
     endName: "MHA_GEMM_1_bwd2"
@@ -1089,6 +1225,7 @@ dataflow_graph {
     endIdx: 32
     buffer_depth: 10
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 38
     startName: "K"
     endName: "MHA_GEMM_1_bwd1"
@@ -1098,6 +1235,7 @@ dataflow_graph {
     endIdx: 33
     buffer_depth: 10
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 39
     startName: "Q"
     endName: "MHA_GEMM_1_bwd2"
@@ -1107,6 +1245,7 @@ dataflow_graph {
     endIdx: 34
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 40
     startName: "MHA_GEMM_1_bwd1"
     endName: "Q_bwd"
@@ -1116,6 +1255,7 @@ dataflow_graph {
     endIdx: 35
     buffer_depth: 2
     tensor_size: 4194304.0
+    shard_tensor_size: 4194304.0
     id: 41
     startName: "MHA_GEMM_1_bwd2"
     endName: "K_bwd"
@@ -1123,7 +1263,6 @@ dataflow_graph {
 }
 system {
   name: "1_Chip_WSE2"
-  topo: SINGLE_CHIP
   num_chip: 1
   accelerator {
     name: "WSE2"
@@ -1134,6 +1273,8 @@ system {
     freq: 1.1
     dram_bw: 153.0
     dram_cap: 1649267400000.0
+  }
+  single_chip {
   }
 }
 cost {

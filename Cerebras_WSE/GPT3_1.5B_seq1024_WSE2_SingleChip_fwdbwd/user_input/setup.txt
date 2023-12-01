@@ -874,8 +874,13 @@ connections {
 }
 system {
   name: "1_Chip_WSE2"
-  topo: SINGLE_CHIP
   num_chip: 1
+  
+  single_chip {
+	
+  }
+  
+  
   accelerator {
     name: "WSE2"
     core: 853776

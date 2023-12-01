@@ -3,24 +3,36 @@ syntax = "proto3";
 message Kernel {
 	string name = 1;
 	int32 id = 2;
+	int32 topological_number = 5;
+	int32 config = 6;
+	FWD_BWD fwd_bwd = 19;
+	KernelType type = 5;
 	
 	oneof kernel_variant {
 		Batch_GEMM_ELEMENTWISE_OUTER_M_K_N batch_gemm_elementwise_outer_m_k_n = 3;
 	}
 
-	int32 topological_number = 5;
-	int32 config = 6;
 	
+	enum FWD_BWD {
+		FWD_BWD_Placeholder = 0;
+		FWD = 1;
+		BWD = 2;
+	}
 	
+	enum KernelType {
+		KernelType_Placeholder = 0;
+		SYSTOLIC = 1;
+		SIMD = 2;
+	}
 	
 }
 
-message Batch_GEMM_ELEMENTWISE_OUTER_M_K_N {
+message Batch_GEMM_Input_Weight {
 	int32 outer = 1;
 	int32 M = 2;
 	int32 K = 3;
 	int32 N = 4;
-	KernelType type = 5;
+	
 	float input_tensor_1_size = 6;
 	float input_tensor_2_size = 7;
 	float weight_tensor_size = 8;
@@ -37,17 +49,6 @@ message Batch_GEMM_ELEMENTWISE_OUTER_M_K_N {
 	int32 shard_outer_M = 16;
 	int32 shard_K = 17;
 	int32 shard_N = 18;
-	
-	
-	FWD_BWD fwd_bwd = 19;
-	
-	
-	
-	enum KernelType {
-		KernelType_Placeholder = 0;
-		SYSTOLIC = 1;
-		SIMD = 2;
-	}
 
 	enum Communication_Type {
 		Communication_Type_Placeholder = 0;
@@ -63,12 +64,6 @@ message Batch_GEMM_ELEMENTWISE_OUTER_M_K_N {
 		K_SHARDING = 3;
 		N_SHARDING = 4;
 		NO_SHARDING = 5;
-	}
-	
-	enum FWD_BWD {
-		FWD_BWD_Placeholder = 0;
-		FWD = 1;
-		BWD = 2;
 	}
 	
 }

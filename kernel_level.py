@@ -218,7 +218,7 @@ elif dse.system.WhichOneof('topology_variant') == 'torus_2d': # 2D Torus
     dimension = [dse.system.torus_2d.x, dse.system.torus_2d.y]
 
 elif dse.system.WhichOneof('topology_variant') == 'dragonfly_2d': # 2D Dragonfly
-    topology = [BasicTopology.FC.value, BasicTopology.FC.value]
+    topology = [BasicTopology.FC.value, BasicTopology.R.value]
     link_bw = [dse.system.dragonfly_2d.link_bw_x, dse.system.dragonfly_2d.link_bw_y]
     dimension = [dse.system.dragonfly_2d.x, dse.system.dragonfly_2d.y]
 
@@ -259,7 +259,7 @@ TP = model.addVar(name='TP', vtype=gp.GRB.INTEGER)
 PP = model.addVar(name='PP', vtype=gp.GRB.INTEGER)
     
 if len(topology) == 0: # single chip
-    Shape = model.addVar(1, name='Shape', vtype=gp.GRB.INTEGER, lb=0)
+    Shape = model.addMVar(1, name='Shape', vtype=gp.GRB.INTEGER, lb=0)
     model.addConstr(Shape[0] == 1)
     model.addConstr(TP == 1)
     model.addConstr(PP == 1)    
@@ -270,7 +270,7 @@ if len(topology) == 0: # single chip
     model.addConstr(Link_BW_PP == sys.maxsize)
     
 elif len(topology) == 1: # 1D
-    Shape = model.addVar(1, name='Shape', vtype=gp.GRB.INTEGER, lb=0)
+    Shape = model.addMVar(1, name='Shape', vtype=gp.GRB.INTEGER, lb=0)
     model.addConstr(Shape[0] == num_chip)
     model.addConstr(TP == num_chip)
     model.addConstr(PP == 1)
