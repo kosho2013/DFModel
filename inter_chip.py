@@ -36,8 +36,6 @@ outer = []
 M = []
 K = []
 N = []
-input_tensor_1_id = []
-input_tensor_2_id = []
 weight_tensor_size = []
 input_tensor_1_size = []
 input_tensor_2_size = []
@@ -45,18 +43,67 @@ node_dict = {}
 i = 0
 for kernel in dse.dataflow_graph.kernels:
     kernel_name.append(kernel.name)
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        output_tensor_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size)
-        kernel_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.type)
-        outer.append(kernel.batch_gemm_elementwise_outer_m_k_n.outer)
-        M.append(kernel.batch_gemm_elementwise_outer_m_k_n.M)
-        K.append(kernel.batch_gemm_elementwise_outer_m_k_n.K)
-        N.append(kernel.batch_gemm_elementwise_outer_m_k_n.N)
-        input_tensor_1_id.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id)
-        input_tensor_2_id.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id)
-        weight_tensor_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size)
-        input_tensor_1_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size)
-        input_tensor_2_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size)
+    kernel_type.append(kernel.type)
+    
+    if kernel.WhichOneof('kernel_variant') == 'gemm_input1_weight':  
+        outer.append(kernel.gemm_input1_weight.outer)
+        M.append(kernel.gemm_input1_weight.M)
+        K.append(kernel.gemm_input1_weight.K)
+        N.append(kernel.gemm_input1_weight.N)
+        
+        input_tensor_1_size.append(kernel.gemm_input1_weight.input_tensor_size)
+        input_tensor_2_size.append(-1.0)
+        weight_tensor_size.append(kernel.gemm_input1_weight.weight_tensor_size)
+        output_tensor_size.append(kernel.gemm_input1_weight.output_tensor_size)
+        
+        if outer[-1] == 0 or M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or input_tensor_1_size[-1] == 0 or input_tensor_2_size[-1] == 0 or weight_tensor_size[-1] == 0 or output_tensor_size[-1] == 0:
+            raise Exception('Wrong!')
+        
+    elif kernel.WhichOneof('kernel_variant') == 'gemm_input1_input2':
+        outer.append(kernel.gemm_input1_input2.outer)
+        M.append(kernel.gemm_input1_input2.M)
+        K.append(kernel.gemm_input1_input2.K)
+        N.append(kernel.gemm_input1_input2.N)
+        
+        input_tensor_1_size.append(kernel.gemm_input1_input2.input_tensor_1_size)
+        input_tensor_2_size.append(kernel.gemm_input1_input2.input_tensor_2_size)
+        weight_tensor_size.append(-1.0)
+        output_tensor_size.append(kernel.gemm_input1_input2.output_tensor_size)
+        
+        if outer[-1] == 0 or M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or input_tensor_1_size[-1] == 0 or input_tensor_2_size[-1] == 0 or weight_tensor_size[-1] == 0 or output_tensor_size[-1] == 0:
+            raise Exception('Wrong!')
+            
+    elif kernel.WhichOneof('kernel_variant') == 'elementwise_input1':
+        outer.append(kernel.elementwise_input1.outer)
+        M.append(kernel.elementwise_input1.M)
+        K.append(1)
+        N.append(kernel.elementwise_input1.N)
+        
+        input_tensor_1_size.append(kernel.elementwise_input1.input_tensor_size)
+        input_tensor_2_size.append(-1.0)
+        weight_tensor_size.append(-1.0)
+        output_tensor_size.append(kernel.elementwise_input1.output_tensor_size)
+        
+        if outer[-1] == 0 or M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or input_tensor_1_size[-1] == 0 or input_tensor_2_size[-1] == 0 or weight_tensor_size[-1] == 0 or output_tensor_size[-1] == 0:
+            raise Exception('Wrong!')
+        
+    elif kernel.WhichOneof('kernel_variant') == 'elementwise_input1_input2':
+        outer.append(kernel.elementwise_input1_input2.outer)
+        M.append(kernel.elementwise_input1_input2.M)
+        K.append(1)
+        N.append(kernel.elementwise_input1_input2.N)
+        
+        input_tensor_1_size.append(kernel.elementwise_input1_input2.input_tensor_1_size)
+        input_tensor_2_size.append(kernel.elementwise_input1_input2.input_tensor_2_size)
+        weight_tensor_size.append(-1.0)
+        output_tensor_size.append(kernel.elementwise_input1_input2.output_tensor_size)
+        
+        if outer[-1] == 0 or M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or input_tensor_1_size[-1] == 0 or input_tensor_2_size[-1] == 0 or weight_tensor_size[-1] == 0 or output_tensor_size[-1] == 0:
+            raise Exception('Wrong!')
+            
+    else:
+        raise Exception('Wrong!')
+    
     node_dict[kernel.id] = i
     i += 1
 
@@ -328,22 +375,72 @@ for v in model.getVars():
 # update kernels
 i = 0
 for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
+    if kernel.WhichOneof('kernel_variant') == 'gemm_input1_weight':
         if sharding[i*5+0] == 1:
-            kernel.batch_gemm_elementwise_outer_m_k_n.sharding = Dim.OUTER.value+1
+            kernel.gemm_input1_weight.sharding = Dim.OUTER.value+1
         elif sharding[i*5+1] == 1:
-            kernel.batch_gemm_elementwise_outer_m_k_n.sharding = Dim.M.value+1
+            kernel.gemm_input1_weight.sharding = Dim.M.value+1
         elif sharding[i*5+2] == 1:
-            kernel.batch_gemm_elementwise_outer_m_k_n.sharding = Dim.K.value+1
+            kernel.gemm_input1_weight.sharding = Dim.K.value+1
         elif sharding[i*5+3] == 1:
-            kernel.batch_gemm_elementwise_outer_m_k_n.sharding = Dim.N.value+1
+            kernel.gemm_input1_weight.sharding = Dim.N.value+1
         else:
-            kernel.batch_gemm_elementwise_outer_m_k_n.sharding = Dim.NO_SHARDING.value+1
+            kernel.gemm_input1_weight.sharding = Dim.NO_SHARDING.value+1
             
-        kernel.batch_gemm_elementwise_outer_m_k_n.communication_size = float(communication_size[i])
-        kernel.batch_gemm_elementwise_outer_m_k_n.communication_type = int(communication_type[i])
+        kernel.gemm_input1_weight.communication_size = float(communication_size[i])
+        kernel.gemm_input1_weight.communication_type = int(communication_type[i])
         i += 1
-
+        
+    elif kernel.WhichOneof('kernel_variant') == 'gemm_input1_input2':
+        if sharding[i*5+0] == 1:
+            kernel.gemm_input1_input2.sharding = Dim.OUTER.value+1
+        elif sharding[i*5+1] == 1:
+            kernel.gemm_input1_input2.sharding = Dim.M.value+1
+        elif sharding[i*5+2] == 1:
+            kernel.gemm_input1_input2.sharding = Dim.K.value+1
+        elif sharding[i*5+3] == 1:
+            kernel.gemm_input1_input2.sharding = Dim.N.value+1
+        else:
+            kernel.gemm_input1_input2.sharding = Dim.NO_SHARDING.value+1
+            
+        kernel.gemm_input1_input2.communication_size = float(communication_size[i])
+        kernel.gemm_input1_input2.communication_type = int(communication_type[i])
+        i += 1
+        
+    elif kernel.WhichOneof('kernel_variant') == 'elementwise_input1':
+        if sharding[i*5+0] == 1:
+            kernel.elementwise_input1.sharding = Dim.OUTER.value+1
+        elif sharding[i*5+1] == 1:
+            kernel.elementwise_input1.sharding = Dim.M.value+1
+        elif sharding[i*5+2] == 1:
+            kernel.elementwise_input1.sharding = Dim.K.value+1
+        elif sharding[i*5+3] == 1:
+            kernel.elementwise_input1.sharding = Dim.N.value+1
+        else:
+            kernel.elementwise_input1.sharding = Dim.NO_SHARDING.value+1
+            
+        kernel.elementwise_input1.communication_size = float(communication_size[i])
+        kernel.elementwise_input1.communication_type = int(communication_type[i])
+        i += 1
+        
+    elif kernel.WhichOneof('kernel_variant') == 'elementwise_input1_input2':
+        if sharding[i*5+0] == 1:
+            kernel.elementwise_input1_input2.sharding = Dim.OUTER.value+1
+        elif sharding[i*5+1] == 1:
+            kernel.elementwise_input1_input2.sharding = Dim.M.value+1
+        elif sharding[i*5+2] == 1:
+            kernel.elementwise_input1_input2.sharding = Dim.K.value+1
+        elif sharding[i*5+3] == 1:
+            kernel.elementwise_input1_input2.sharding = Dim.N.value+1
+        else:
+            kernel.elementwise_input1_input2.sharding = Dim.NO_SHARDING.value+1
+            
+        kernel.elementwise_input1_input2.communication_size = float(communication_size[i])
+        kernel.elementwise_input1_input2.communication_type = int(communication_type[i])
+        i += 1
+        
+    else:
+        raise Exception('Wrong!')
 
 
 # update edges

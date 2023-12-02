@@ -60,43 +60,117 @@ class FWD_BWD(Enum):
 
 
 
-
+kernel_id = []
 kernel_name = []   
 kernel_type = []
-outer = []
+configs = []
+fwd_bwd = []
+topological_number = []
+
 M = []
 K = []
 N = []
+weight_tensor_size = []
+
 sharding = []
-configs = []
 node_communication_type = []
 node_communication_size = []
-fwd_bwd = []
-topological_number = []
-weight_tensor_size = []
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        kernel_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.type)
-        outer.append(kernel.batch_gemm_elementwise_outer_m_k_n.outer)
-        M.append(kernel.batch_gemm_elementwise_outer_m_k_n.M * kernel.batch_gemm_elementwise_outer_m_k_n.outer)
-        K.append(kernel.batch_gemm_elementwise_outer_m_k_n.K)
-        N.append(kernel.batch_gemm_elementwise_outer_m_k_n.N)
-        sharding.append(kernel.batch_gemm_elementwise_outer_m_k_n.sharding)
-        node_communication_type.append(kernel.batch_gemm_elementwise_outer_m_k_n.communication_type)
-        node_communication_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.communication_size)
-        fwd_bwd.append(kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd)
-        weight_tensor_size.append(kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size)
-    configs.append(kernel.config)
-    kernel_name.append(kernel.name)
-    topological_number.append(kernel.topological_number)
-
 
 
 node_dict = {}
 i = 0
 for kernel in dse.dataflow_graph.kernels:
+    kernel_id.append(kernel.id)
+    kernel_name.append(kernel.name)
+    kernel_type.append(kernel.type)
+    fwd_bwd.append(kernel.fwd_bwd)
+    configs.append(kernel.config)
+    topological_number.append(kernel.topological_number)
+    
+    if kernel.WhichOneof('kernel_variant') == 'gemm_input1_weight':  
+        M.append(kernel.gemm_input1_weight.outer * kernel.gemm_input1_weight.M)
+        K.append(kernel.gemm_input1_weight.K)
+        N.append(kernel.gemm_input1_weight.N)
+        
+        weight_tensor_size.append(kernel.gemm_input1_weight.weight_tensor_size)
+        
+        sharding.append(kernel.gemm_input1_weight.sharding)
+        node_communication_type.append(kernel.gemm_input1_weight.communication_type)
+        node_communication_size.append(kernel.gemm_input1_weight.communication_size)
+        
+        
+        if M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or weight_tensor_size[-1] == 0:
+            raise Exception('Wrong!')
+        
+    elif kernel.WhichOneof('kernel_variant') == 'gemm_input1_input2':
+        M.append(kernel.gemm_input1_input2.outer * kernel.gemm_input1_input2.M)
+        K.append(kernel.gemm_input1_input2.K)
+        N.append(kernel.gemm_input1_input2.N)
+        
+        weight_tensor_size.append(-1.0)
+        
+        sharding.append(kernel.gemm_input1_input2.sharding)
+        node_communication_type.append(kernel.gemm_input1_input2.communication_type)
+        node_communication_size.append(kernel.gemm_input1_input2.communication_size)
+        
+        if M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or weight_tensor_size[-1] == 0:
+            raise Exception('Wrong!')
+            
+    elif kernel.WhichOneof('kernel_variant') == 'elementwise_input1':
+        M.append(kernel.elementwise_input1.outer * kernel.elementwise_input1.M)
+        K.append(1)
+        N.append(kernel.elementwise_input1.N)
+        
+        weight_tensor_size.append(-1.0)
+        
+        sharding.append(kernel.elementwise_input1.sharding)
+        node_communication_type.append(kernel.elementwise_input1.communication_type)
+        node_communication_size.append(kernel.elementwise_input1.communication_size)
+        
+        if M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or weight_tensor_size[-1] == 0:
+            raise Exception('Wrong!')
+        
+    elif kernel.WhichOneof('kernel_variant') == 'elementwise_input1_input2':
+        M.append(kernel.elementwise_input1_input2.outer * kernel.elementwise_input1_input2.M)
+        K.append(1)
+        N.append(kernel.elementwise_input1_input2.N)
+        
+        weight_tensor_size.append(-1.0)
+        
+        sharding.append(kernel.elementwise_input1_input2.sharding)
+        node_communication_type.append(kernel.elementwise_input1_input2.communication_type)
+        node_communication_size.append(kernel.elementwise_input1_input2.communication_size)
+        
+        if M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or weight_tensor_size[-1] == 0:
+            raise Exception('Wrong!')
+            
+    else:
+        raise Exception('Wrong!')
+    
     node_dict[kernel.id] = i
     i += 1
+
+
+
+
+
+# get weights
+weight_dict = {} # index in weights to node id
+cnt = 0
+for i in range(len(weight_tensor_size)):
+    if weight_tensor_size[i] != -1:
+        weight_dict[cnt] = kernel_id[i]
+        cnt += 1
+num_weight = len(weight_dict.keys())
+
+
+
+
+
+
+
+
+
 
 num_kernel = len(kernel_name)
 hidden_dim = dse.training.hidden_dim
@@ -148,18 +222,7 @@ num_edge = len(startIdx)
     
 
 
-# get weights
-weight_dict = {} # index in weights to node id
-weights = []
-i = 0
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size != -1:
-        if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-            weights.append(kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size)
-            weight_dict[i] = kernel.id
-            i += 1
 
-num_weight = len(weights)
 
 
 
@@ -239,6 +302,16 @@ elif dse.system.WhichOneof('topology_variant') == 'torus_3d': # 3D Torus
 
 else:
     raise Exception('Wrong!')
+
+
+
+
+
+
+
+
+
+
 
 
 

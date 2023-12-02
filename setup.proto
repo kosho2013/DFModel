@@ -3,13 +3,16 @@ syntax = "proto3";
 message Kernel {
 	string name = 1;
 	int32 id = 2;
-	int32 topological_number = 5;
-	int32 config = 6;
-	FWD_BWD fwd_bwd = 19;
-	KernelType type = 5;
+	int32 topological_number = 3;
+	int32 config = 4;
+	FWD_BWD fwd_bwd = 5;
+	KernelType type = 6;
 	
 	oneof kernel_variant {
-		Batch_GEMM_ELEMENTWISE_OUTER_M_K_N batch_gemm_elementwise_outer_m_k_n = 3;
+		GEMM_Input1_Weight gemm_input1_weight = 7;
+		GEMM_Input1_Input2 gemm_input1_input2 = 8;
+		ElementWise_Input1 elementwise_input1 = 9;
+		ElementWise_Input1_Input2 elementwise_input1_input2 = 10;
 	}
 
 	
@@ -27,19 +30,17 @@ message Kernel {
 	
 }
 
-message Batch_GEMM_Input_Weight {
+message GEMM_Input1_Weight {
 	int32 outer = 1;
 	int32 M = 2;
 	int32 K = 3;
 	int32 N = 4;
 	
-	float input_tensor_1_size = 6;
-	float input_tensor_2_size = 7;
+	float input_tensor_size = 6;
 	float weight_tensor_size = 8;
 	float output_tensor_size = 9;
 
-	int32 input_tensor_1_id = 10;
-	int32 input_tensor_2_id = 11;
+	int32 input_tensor_id = 10;
 
 	Sharding sharding = 12;
 	Communication_Type communication_type = 13;
@@ -69,6 +70,118 @@ message Batch_GEMM_Input_Weight {
 }
 
 
+
+message GEMM_Input1_Input2 {
+	int32 outer = 1;
+	int32 M = 2;
+	int32 K = 3;
+	int32 N = 4;
+	
+	float input_tensor_1_size = 6;
+	float input_tensor_2_size = 8;
+	float output_tensor_size = 9;
+
+	int32 input_tensor_1_id = 10;
+	int32 input_tensor_2_id = 11;
+
+	Sharding sharding = 12;
+	Communication_Type communication_type = 13;
+	float communication_size = 14;
+
+	int32 shard_outer_M = 16;
+	int32 shard_K = 17;
+	int32 shard_N = 18;
+
+	enum Communication_Type {
+		Communication_Type_Placeholder = 0;
+		ALL_REDUCE = 1;
+		ALL_TO_ALL = 2;
+		ALL_GATHER = 3;
+	}
+
+	enum Sharding {
+		SHARDING_Placeholder = 0;
+		OUTER_SHARDING = 1;
+		M_SHARDING = 2;
+		K_SHARDING = 3;
+		N_SHARDING = 4;
+		NO_SHARDING = 5;
+	}
+	
+}
+
+
+message ElementWise_Input1 {
+	int32 outer = 1;
+	int32 M = 2;
+	int32 N = 4;
+	
+	float input_tensor_size = 6;
+	float output_tensor_size = 9;
+
+	int32 input_tensor_id = 10;
+
+	Sharding sharding = 12;
+	Communication_Type communication_type = 13;
+	float communication_size = 14;
+
+	int32 shard_outer_M = 16;
+	int32 shard_N = 18;
+
+	enum Communication_Type {
+		Communication_Type_Placeholder = 0;
+		ALL_REDUCE = 1;
+		ALL_TO_ALL = 2;
+		ALL_GATHER = 3;
+	}
+
+	enum Sharding {
+		SHARDING_Placeholder = 0;
+		OUTER_SHARDING = 1;
+		M_SHARDING = 2;
+		N_SHARDING = 4;
+		NO_SHARDING = 5;
+	}
+	
+}
+
+
+
+message ElementWise_Input1_Input2 {
+	int32 outer = 1;
+	int32 M = 2;
+	int32 N = 4;
+	
+	float input_tensor_1_size = 6;
+	float input_tensor_2_size = 30;
+	float output_tensor_size = 9;
+
+	int32 input_tensor_1_id = 10;
+	int32 input_tensor_2_id = 20;
+
+	Sharding sharding = 12;
+	Communication_Type communication_type = 13;
+	float communication_size = 14;
+
+	int32 shard_outer_M = 16;
+	int32 shard_N = 18;
+
+	enum Communication_Type {
+		Communication_Type_Placeholder = 0;
+		ALL_REDUCE = 1;
+		ALL_TO_ALL = 2;
+		ALL_GATHER = 3;
+	}
+
+	enum Sharding {
+		SHARDING_Placeholder = 0;
+		OUTER_SHARDING = 1;
+		M_SHARDING = 2;
+		N_SHARDING = 4;
+		NO_SHARDING = 5;
+	}
+	
+}
 
 message Connection {
 	int32 id = 10;
