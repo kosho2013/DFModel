@@ -1,680 +1,569 @@
 dataflow_graph {
   kernels {
-	  name: "Add_Prev_Layer"
-	  id: 1
-	  fwd_bwd: FWD
-	  type: SIMD
-	  config: -1
-	  
-	  elementwise_input1 {
-		outer: 1
-		M: 12288
-		N: 2048
-		
-		input_tensor_size: 50331650.0
-		output_tensor_size: 50331650.0
-		input_tensor_id: -1
-  }
-}
-
-kernels {
-  name: "LayerNorm_1"
-  id: 2
+  name: "Add_Prev_Layer"
+  id: 1
+  config: -1
   fwd_bwd: FWD
   type: SIMD
-  config: -1
-  
   elementwise_input1 {
     outer: 1
     M: 12288
     N: 2048
-    
+    input_tensor_size: 50331650.0
+    output_tensor_size: 50331650.0
+    input_tensor_id: -1
+  }
+}
+kernels {
+  name: "LayerNorm_1"
+  id: 2
+  config: -1
+  fwd_bwd: FWD
+  type: SIMD
+  elementwise_input1 {
+    outer: 1
+    M: 12288
+    N: 2048
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
     input_tensor_id: 1
   }
-  
 }
 kernels {
   name: "Q"
   id: 3
+  config: -1
   fwd_bwd: FWD
   type: SYSTOLIC
-  config: -1
-  
   gemm_input1_weight {
     outer: 96
     M: 128
     K: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     weight_tensor_size: 301989900.0
     output_tensor_size: 50331650.0
     input_tensor_id: 2
   }
-  
 }
 kernels {
   name: "K"
   id: 4
+  config: -1
   fwd_bwd: FWD
   type: SYSTOLIC
-  config: -1
-  
   gemm_input1_weight {
     outer: 96
     M: 128
     K: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     weight_tensor_size: 301989900.0
     output_tensor_size: 50331650.0
     input_tensor_id: 2
-    
   }
-  
 }
 kernels {
   name: "V"
   id: 5
+  config: -1
   fwd_bwd: FWD
   type: SYSTOLIC
-  config: -1
-  
   gemm_input1_weight {
     outer: 96
     M: 128
     K: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     weight_tensor_size: 301989900.0
     output_tensor_size: 50331650.0
     input_tensor_id: 2
   }
-  
 }
 kernels {
   name: "MHA_GEMM_1"
   id: 6
+  config: -1
   fwd_bwd: FWD
   type: SYSTOLIC
-  config: -1
-  
   gemm_input1_input2 {
     outer: 96
     M: 2048
     K: 128
     N: 2048
-    
     input_tensor_1_size: 50331650.0
     input_tensor_2_size: 50331650.0
     output_tensor_size: 805306400.0
     input_tensor_1_id: 3
     input_tensor_2_id: 4
   }
-  
 }
 kernels {
   name: "SOFTMAX"
   id: 7
+  config: -1
   fwd_bwd: FWD
   type: SIMD
-  config: -1
-  
   elementwise_input1 {
     outer: 96
     M: 2048
     N: 2048
-    
     input_tensor_size: 805306400.0
     output_tensor_size: 805306400.0
     input_tensor_id: 6
   }
-  
 }
 kernels {
   name: "DropOut_1"
   id: 8
+  config: -1
   fwd_bwd: FWD
   type: SIMD
-  config: -1
-  
   elementwise_input1 {
     outer: 96
     M: 2048
     N: 2048
-    
     input_tensor_size: 805306400.0
     output_tensor_size: 805306400.0
     input_tensor_id: 7
   }
-  
 }
 kernels {
   name: "MHA_GEMM_2"
   id: 9
+  config: -1
   fwd_bwd: FWD
   type: SYSTOLIC
-  config: -1
-  
   gemm_input1_input2 {
     outer: 96
     M: 128
     K: 2048
     N: 2048
-    
     input_tensor_1_size: 50331650.0
     input_tensor_2_size: 805306400.0
     output_tensor_size: 50331650.0
     input_tensor_1_id: 5
     input_tensor_2_id: 8
-    
   }
-  
 }
 kernels {
   name: "PROJ_GEMM"
   id: 10
+  config: -1
   fwd_bwd: FWD
   type: SYSTOLIC
-  config: -1
-  
   gemm_input1_weight {
     outer: 1
     M: 12288
     K: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     weight_tensor_size: 301989900.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 9    
+    input_tensor_id: 9
   }
-  
 }
 kernels {
   name: "DropOut_2"
   id: 11
+  config: -1
   fwd_bwd: FWD
   type: SIMD
-  config: -1
-  
   elementwise_input1 {
     outer: 1
     M: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
     input_tensor_id: 10
   }
-  
 }
 kernels {
   name: "Add_1"
   id: 12
+  config: -1
   fwd_bwd: FWD
   type: SIMD
-  config: -1
-  
   elementwise_input1_input2 {
     outer: 1
     M: 12288
     N: 2048
-    
     input_tensor_1_size: 50331650.0
-    input_tensor_2_size: 50331650.0
     output_tensor_size: 50331650.0
     input_tensor_1_id: 1
     input_tensor_2_id: 11
+    input_tensor_2_size: 50331650.0
   }
-  
 }
 kernels {
   name: "LayerNorm_2"
   id: 13
+  config: -1
   fwd_bwd: FWD
   type: SIMD
-  config: -1
-  
   elementwise_input1 {
     outer: 1
     M: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
     input_tensor_id: 12
   }
-  
 }
 kernels {
   name: "FFN0"
   id: 14
+  config: -1
   fwd_bwd: FWD
   type: SYSTOLIC
-  config: -1
-  
   gemm_input1_weight {
     outer: 1
     M: 49152
     K: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     weight_tensor_size: 1207959600.0
     output_tensor_size: 201326600.0
     input_tensor_id: 13
-    
   }
-  
 }
 kernels {
   name: "GeLU"
   id: 15
+  config: -1
   fwd_bwd: FWD
   type: SIMD
-  config: -1
-  
   elementwise_input1 {
     outer: 1
     M: 49152
     N: 2048
-    
     input_tensor_size: 201326600.0
     output_tensor_size: 201326600.0
     input_tensor_id: 14
   }
-  
 }
 kernels {
   name: "FFN1"
   id: 16
+  config: -1
   fwd_bwd: FWD
   type: SYSTOLIC
-  config: -1
-  
   gemm_input1_weight {
     outer: 1
     M: 12288
     K: 49152
     N: 2048
-    
     input_tensor_size: 201326600.0
     weight_tensor_size: 1207959600.0
     output_tensor_size: 50331650.0
     input_tensor_id: 15
-    
   }
-  
 }
 kernels {
   name: "DropOut_3"
   id: 17
+  config: -1
   fwd_bwd: FWD
   type: SIMD
-  config: -1
-  
   elementwise_input1 {
     outer: 1
     M: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
     input_tensor_id: 16
   }
-  
 }
 kernels {
   name: "Add_2"
   id: 18
+  config: -1
   fwd_bwd: FWD
   type: SIMD
-  config: -1
-  
   elementwise_input1_input2 {
     outer: 1
     M: 12288
     N: 2048
-    
     input_tensor_1_size: 50331650.0
-    input_tensor_2_size: 50331650.0
     output_tensor_size: 50331650.0
     input_tensor_1_id: 12
     input_tensor_2_id: 17
-    
+    input_tensor_2_size: 50331650.0
   }
-  
 }
 kernels {
   name: "Loss_bwd"
   id: 19
+  config: -1
   fwd_bwd: BWD
   type: SIMD
-  config: -1
-  
   elementwise_input1 {
     outer: 1
     M: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
     input_tensor_id: -1
-    
   }
-  
 }
 kernels {
   name: "DropOut_3_bwd"
   id: 20
-  type: SIMD
-  fwd_bwd: BWD
   config: -1
-  
+  fwd_bwd: BWD
+  type: SIMD
   elementwise_input1 {
     outer: 1
     M: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
     input_tensor_id: 19
   }
-  
 }
 kernels {
   name: "FFN1_bwd"
   id: 21
+  config: -1
   fwd_bwd: BWD
   type: SYSTOLIC
-  config: -1
-  
   gemm_input1_weight {
     outer: 1
     M: 49152
     K: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     weight_tensor_size: 1207959600.0
     output_tensor_size: 201326600.0
-    input_tensor_id: 20    
+    input_tensor_id: 20
   }
-  
 }
 kernels {
   name: "GeLU_bwd"
   id: 22
-  type: SIMD
-  fwd_bwd: BWD
   config: -1
-  
+  fwd_bwd: BWD
+  type: SIMD
   elementwise_input1 {
     outer: 1
     M: 49152
     N: 2048
-    
     input_tensor_size: 201326600.0
     output_tensor_size: 201326600.0
     input_tensor_id: 21
   }
-  
 }
 kernels {
   name: "FFN0_bwd"
   id: 23
-  type: SYSTOLIC
-  fwd_bwd: BWD
   config: -1
-  
+  fwd_bwd: BWD
+  type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
     M: 12288
     K: 49152
     N: 2048
-    
     input_tensor_size: 201326600.0
     weight_tensor_size: 1207959600.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 23    
+    input_tensor_id: 23
   }
-  
 }
 kernels {
   name: "LayerNorm_2_bwd"
   id: 24
-  type: SIMD
-  fwd_bwd: BWD
   config: -1
-  
+  fwd_bwd: BWD
+  type: SIMD
   elementwise_input1 {
     outer: 1
     M: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
     input_tensor_id: 24
   }
-  
 }
 kernels {
   name: "DropOut_2_bwd"
   id: 25
+  config: -1
   fwd_bwd: BWD
   type: SIMD
-  config: -1
-  
   elementwise_input1 {
     outer: 1
     M: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 26   
+    input_tensor_id: 26
   }
-  
 }
 kernels {
   name: "PROJ_GEMM_bwd"
   id: 26
+  config: -1
   fwd_bwd: BWD
   type: SYSTOLIC
-  config: -1
-  
   gemm_input1_weight {
     outer: 1
     M: 12288
     K: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     weight_tensor_size: 301989900.0
     output_tensor_size: 50331650.0
     input_tensor_id: 27
   }
-  
 }
 kernels {
   name: "MHA_GEMM_2_bwd1"
   id: 27
-  type: SYSTOLIC
-  fwd_bwd: BWD
   config: -1
-  
+  fwd_bwd: BWD
+  type: SYSTOLIC
   gemm_input1_input2 {
     outer: 96
     M: 2048
     K: 128
     N: 2048
-    
     input_tensor_1_size: 50331650.0
     input_tensor_2_size: 50331650.0
     output_tensor_size: 805306400.0
     input_tensor_1_id: 28
     input_tensor_2_id: 5
   }
-  
 }
 kernels {
   name: "MHA_GEMM_2_bwd2"
   id: 28
-  type: SYSTOLIC
-  fwd_bwd: BWD
   config: -1
-  
+  fwd_bwd: BWD
+  type: SYSTOLIC
   gemm_input1_input2 {
     outer: 96
     M: 128
     K: 2048
     N: 2048
-    
     input_tensor_1_size: 50331650.0
     input_tensor_2_size: 805306400.0
     output_tensor_size: 50331650.0
     input_tensor_1_id: 28
     input_tensor_2_id: 8
-    
   }
-  
 }
 kernels {
   name: "V_bwd"
   id: 29
+  config: -1
   fwd_bwd: BWD
   type: SYSTOLIC
-  config: -1
-  
   gemm_input1_weight {
     outer: 1
     M: 12288
     K: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     weight_tensor_size: 301989900.0
     output_tensor_size: 50331650.0
     input_tensor_id: 31
   }
-  
 }
 kernels {
   name: "DropOut_1_bwd"
   id: 30
-  type: SIMD
-  fwd_bwd: BWD
   config: -1
-  
+  fwd_bwd: BWD
+  type: SIMD
   elementwise_input1 {
     outer: 96
     M: 2048
     N: 2048
-    
     input_tensor_size: 805306400.0
     output_tensor_size: 805306400.0
     input_tensor_id: 30
   }
-  
 }
 kernels {
   name: "SOFTMAX_bwd"
   id: 31
+  config: -1
   fwd_bwd: BWD
   type: SIMD
-  config: -1
-  
   elementwise_input1 {
     outer: 96
     M: 2048
     N: 2048
-    
     input_tensor_size: 805306400.0
     output_tensor_size: 805306400.0
     input_tensor_id: 34
   }
-  
 }
 kernels {
   name: "MHA_GEMM_1_bwd1"
   id: 32
-  type: SYSTOLIC
-  fwd_bwd: BWD
   config: -1
-  
+  fwd_bwd: BWD
+  type: SYSTOLIC
   gemm_input1_input2 {
     outer: 96
     M: 128
     K: 2048
     N: 2048
-    
     input_tensor_1_size: 805306400.0
     input_tensor_2_size: 50331650.0
     output_tensor_size: 50331650.0
     input_tensor_1_id: 35
     input_tensor_2_id: 4
   }
-  
 }
 kernels {
   name: "MHA_GEMM_1_bwd2"
   id: 33
-  type: SYSTOLIC
-  fwd_bwd: BWD
   config: -1
-  
+  fwd_bwd: BWD
+  type: SYSTOLIC
   gemm_input1_input2 {
     outer: 96
     M: 128
     K: 2048
     N: 2048
-    
     input_tensor_1_size: 805306400.0
     input_tensor_2_size: 50331650.0
     output_tensor_size: 50331650.0
     input_tensor_1_id: 35
     input_tensor_2_id: 3
   }
-  
 }
 kernels {
   name: "Q_bwd"
   id: 34
-  type: SYSTOLIC
-  fwd_bwd: BWD
   config: -1
-  
+  fwd_bwd: BWD
+  type: SYSTOLIC
   gemm_input1_weight {
     outer: 96
     M: 128
     K: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     weight_tensor_size: 301989900.0
     output_tensor_size: 50331650.0
     input_tensor_id: 36
   }
-  
 }
 kernels {
   name: "K_bwd"
   id: 35
+  config: -1
   fwd_bwd: BWD
   type: SYSTOLIC
-  config: -1
-  
   gemm_input1_weight {
     outer: 96
     M: 128
     K: 12288
     N: 2048
-    
     input_tensor_size: 50331650.0
     weight_tensor_size: 301989900.0
     output_tensor_size: 50331650.0
@@ -886,6 +775,7 @@ connections {
   endIdx: 35
   id: 41
 }
+
 
 
 }

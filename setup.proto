@@ -46,7 +46,6 @@ message GEMM_Input1_Weight {
 	Communication_Type communication_type = 13;
 	float communication_size = 14;
 
-	float shard_weight_size = 15;
 	int32 shard_outer_M = 16;
 	int32 shard_K = 17;
 	int32 shard_N = 18;

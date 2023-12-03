@@ -2,856 +2,650 @@ dataflow_graph {
   kernels {
     name: "Add_Prev_Layer"
     id: 1
-    batch_gemm_elementwise_outer_m_k_n {
+    config: -1
+    fwd_bwd: FWD
+    type: SIMD
+    elementwise_input1 {
       outer: 1
       M: 12288
-      K: 1
       N: 2048
-      type: SIMD
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      input_tensor_size: 50331650.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: -1
-      input_tensor_2_id: -1
+      input_tensor_id: -1
       sharding: NO_SHARDING
-      shard_outer_M: 12288
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: FWD
     }
   }
   kernels {
     name: "LayerNorm_1"
     id: 2
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 1
+    config: -1
+    fwd_bwd: FWD
+    type: SIMD
+    elementwise_input1 {
       outer: 1
       M: 12288
-      K: 1
       N: 2048
-      type: SIMD
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      input_tensor_size: 50331650.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 1
-      input_tensor_2_id: -1
+      input_tensor_id: 1
       sharding: NO_SHARDING
-      shard_outer_M: 12288
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: FWD
     }
-    topological_number: 1
   }
   kernels {
     name: "Q"
     id: 3
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 2
+    config: -1
+    fwd_bwd: FWD
+    type: SYSTOLIC
+    gemm_input1_weight {
       outer: 96
       M: 128
       K: 12288
       N: 2048
-      type: SYSTOLIC
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
+      input_tensor_size: 50331650.0
       weight_tensor_size: 301989900.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 2
-      input_tensor_2_id: -1
+      input_tensor_id: 2
       sharding: OUTER_SHARDING
-      shard_weight_size: 4718592.0
-      shard_outer_M: 192
-      shard_K: 12288
-      shard_N: 64
-      fwd_bwd: FWD
     }
-    topological_number: 2
   }
   kernels {
     name: "K"
     id: 4
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 2
+    config: -1
+    fwd_bwd: FWD
+    type: SYSTOLIC
+    gemm_input1_weight {
       outer: 96
       M: 128
       K: 12288
       N: 2048
-      type: SYSTOLIC
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
+      input_tensor_size: 50331650.0
       weight_tensor_size: 301989900.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 2
-      input_tensor_2_id: -1
+      input_tensor_id: 2
       sharding: OUTER_SHARDING
-      shard_weight_size: 4718592.0
-      shard_outer_M: 192
-      shard_K: 12288
-      shard_N: 64
-      fwd_bwd: FWD
     }
-    topological_number: 2
   }
   kernels {
     name: "V"
     id: 5
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 2
+    config: -1
+    fwd_bwd: FWD
+    type: SYSTOLIC
+    gemm_input1_weight {
       outer: 96
       M: 128
       K: 12288
       N: 2048
-      type: SYSTOLIC
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
+      input_tensor_size: 50331650.0
       weight_tensor_size: 301989900.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 2
-      input_tensor_2_id: -1
+      input_tensor_id: 2
       sharding: OUTER_SHARDING
-      shard_weight_size: 4718592.0
-      shard_outer_M: 192
-      shard_K: 12288
-      shard_N: 64
-      fwd_bwd: FWD
     }
-    topological_number: 2
   }
   kernels {
     name: "MHA_GEMM_1"
     id: 6
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 3
+    config: -1
+    fwd_bwd: FWD
+    type: SYSTOLIC
+    gemm_input1_input2 {
       outer: 96
       M: 2048
       K: 128
       N: 2048
-      type: SYSTOLIC
       input_tensor_1_size: 50331650.0
       input_tensor_2_size: 50331650.0
-      weight_tensor_size: -1.0
       output_tensor_size: 805306400.0
       input_tensor_1_id: 3
       input_tensor_2_id: 4
       sharding: OUTER_SHARDING
-      shard_outer_M: 3072
-      shard_K: 128
-      shard_N: 64
-      fwd_bwd: FWD
     }
-    topological_number: 3
-    config: 1
   }
   kernels {
     name: "SOFTMAX"
     id: 7
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 4
+    config: -1
+    fwd_bwd: FWD
+    type: SIMD
+    elementwise_input1 {
       outer: 96
       M: 2048
-      K: 1
       N: 2048
-      type: SIMD
-      input_tensor_1_size: 805306400.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      input_tensor_size: 805306400.0
       output_tensor_size: 805306400.0
-      input_tensor_1_id: 6
-      input_tensor_2_id: -1
+      input_tensor_id: 6
       sharding: OUTER_SHARDING
-      shard_outer_M: 3072
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: FWD
     }
-    topological_number: 4
-    config: 1
   }
   kernels {
     name: "DropOut_1"
     id: 8
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 5
+    config: -1
+    fwd_bwd: FWD
+    type: SIMD
+    elementwise_input1 {
       outer: 96
       M: 2048
-      K: 1
       N: 2048
-      type: SIMD
-      input_tensor_1_size: 805306400.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      input_tensor_size: 805306400.0
       output_tensor_size: 805306400.0
-      input_tensor_1_id: 7
-      input_tensor_2_id: -1
+      input_tensor_id: 7
       sharding: OUTER_SHARDING
-      shard_outer_M: 3072
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: FWD
     }
-    topological_number: 5
-    config: 1
   }
   kernels {
     name: "MHA_GEMM_2"
     id: 9
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 6
+    config: -1
+    fwd_bwd: FWD
+    type: SYSTOLIC
+    gemm_input1_input2 {
       outer: 96
       M: 128
       K: 2048
       N: 2048
-      type: SYSTOLIC
       input_tensor_1_size: 50331650.0
       input_tensor_2_size: 805306400.0
-      weight_tensor_size: -1.0
       output_tensor_size: 50331650.0
       input_tensor_1_id: 5
       input_tensor_2_id: 8
       sharding: OUTER_SHARDING
-      shard_outer_M: 192
-      shard_K: 2048
-      shard_N: 64
-      fwd_bwd: FWD
     }
-    topological_number: 6
-    config: 2
   }
   kernels {
     name: "PROJ_GEMM"
     id: 10
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 7
+    config: -1
+    fwd_bwd: FWD
+    type: SYSTOLIC
+    gemm_input1_weight {
       outer: 1
       M: 12288
       K: 12288
       N: 2048
-      type: SYSTOLIC
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
+      input_tensor_size: 50331650.0
       weight_tensor_size: 301989900.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 9
-      input_tensor_2_id: -1
+      input_tensor_id: 9
       sharding: K_SHARDING
       communication_type: ALL_REDUCE
       communication_size: 50331650.0
-      shard_weight_size: 4718592.0
-      shard_outer_M: 12288
-      shard_K: 192
-      shard_N: 64
-      fwd_bwd: FWD
     }
-    topological_number: 7
-    config: 2
   }
   kernels {
     name: "DropOut_2"
     id: 11
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 8
+    config: -1
+    fwd_bwd: FWD
+    type: SIMD
+    elementwise_input1 {
       outer: 1
       M: 12288
-      K: 1
       N: 2048
-      type: SIMD
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      input_tensor_size: 50331650.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 10
-      input_tensor_2_id: -1
+      input_tensor_id: 10
       sharding: NO_SHARDING
-      shard_outer_M: 12288
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: FWD
     }
-    topological_number: 8
-    config: 2
   }
   kernels {
     name: "Add_1"
     id: 12
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 9
+    config: -1
+    fwd_bwd: FWD
+    type: SIMD
+    elementwise_input1_input2 {
       outer: 1
       M: 12288
-      K: 1
       N: 2048
-      type: SIMD
       input_tensor_1_size: 50331650.0
-      input_tensor_2_size: 50331650.0
-      weight_tensor_size: -1.0
       output_tensor_size: 50331650.0
       input_tensor_1_id: 1
-      input_tensor_2_id: 11
       sharding: NO_SHARDING
-      shard_outer_M: 12288
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: FWD
+      input_tensor_2_id: 11
+      input_tensor_2_size: 50331650.0
     }
-    topological_number: 9
-    config: 2
   }
   kernels {
     name: "LayerNorm_2"
     id: 13
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 10
+    config: -1
+    fwd_bwd: FWD
+    type: SIMD
+    elementwise_input1 {
       outer: 1
       M: 12288
-      K: 1
       N: 2048
-      type: SIMD
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      input_tensor_size: 50331650.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 12
-      input_tensor_2_id: -1
+      input_tensor_id: 12
       sharding: NO_SHARDING
-      shard_outer_M: 12288
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: FWD
     }
-    topological_number: 10
-    config: 2
   }
   kernels {
     name: "FFN0"
     id: 14
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 11
+    config: -1
+    fwd_bwd: FWD
+    type: SYSTOLIC
+    gemm_input1_weight {
       outer: 1
       M: 49152
       K: 12288
       N: 2048
-      type: SYSTOLIC
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
+      input_tensor_size: 50331650.0
       weight_tensor_size: 1207959600.0
       output_tensor_size: 201326600.0
-      input_tensor_1_id: 13
-      input_tensor_2_id: -1
+      input_tensor_id: 13
       sharding: M_SHARDING
       communication_size: -0.0
-      shard_weight_size: 18874368.0
-      shard_outer_M: 768
-      shard_K: 12288
-      shard_N: 64
-      fwd_bwd: FWD
     }
-    topological_number: 11
-    config: 2
   }
   kernels {
     name: "GeLU"
     id: 15
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 12
+    config: -1
+    fwd_bwd: FWD
+    type: SIMD
+    elementwise_input1 {
       outer: 1
       M: 49152
-      K: 1
       N: 2048
-      type: SIMD
-      input_tensor_1_size: 201326600.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      input_tensor_size: 201326600.0
       output_tensor_size: 201326600.0
-      input_tensor_1_id: 14
-      input_tensor_2_id: -1
+      input_tensor_id: 14
       sharding: M_SHARDING
-      shard_outer_M: 768
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: FWD
     }
-    topological_number: 12
-    config: 3
   }
   kernels {
     name: "FFN1"
     id: 16
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 13
+    config: -1
+    fwd_bwd: FWD
+    type: SYSTOLIC
+    gemm_input1_weight {
       outer: 1
       M: 12288
       K: 49152
       N: 2048
-      type: SYSTOLIC
-      input_tensor_1_size: 201326600.0
-      input_tensor_2_size: -1.0
+      input_tensor_size: 201326600.0
       weight_tensor_size: 1207959600.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 15
-      input_tensor_2_id: -1
+      input_tensor_id: 15
       sharding: K_SHARDING
       communication_type: ALL_REDUCE
       communication_size: 50331650.0
-      shard_weight_size: 18874368.0
-      shard_outer_M: 12288
-      shard_K: 768
-      shard_N: 64
-      fwd_bwd: FWD
     }
-    topological_number: 13
-    config: 3
   }
   kernels {
     name: "DropOut_3"
     id: 17
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 14
+    config: -1
+    fwd_bwd: FWD
+    type: SIMD
+    elementwise_input1 {
       outer: 1
       M: 12288
-      K: 1
       N: 2048
-      type: SIMD
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      input_tensor_size: 50331650.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 16
-      input_tensor_2_id: -1
+      input_tensor_id: 16
       sharding: NO_SHARDING
-      shard_outer_M: 12288
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: FWD
     }
-    topological_number: 14
-    config: 3
   }
   kernels {
     name: "Add_2"
     id: 18
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 15
+    config: -1
+    fwd_bwd: FWD
+    type: SIMD
+    elementwise_input1_input2 {
       outer: 1
       M: 12288
-      K: 1
       N: 2048
-      type: SIMD
       input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
       output_tensor_size: 50331650.0
       input_tensor_1_id: 12
-      input_tensor_2_id: 17
       sharding: M_SHARDING
-      shard_outer_M: 192
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: FWD
+      input_tensor_2_id: 17
+      input_tensor_2_size: 50331650.0
     }
-    topological_number: 15
-    config: 3
   }
   kernels {
     name: "Loss_bwd"
     id: 19
-    batch_gemm_elementwise_outer_m_k_n {
+    config: -1
+    fwd_bwd: BWD
+    type: SIMD
+    elementwise_input1 {
       outer: 1
       M: 12288
-      K: 1
       N: 2048
-      type: SIMD
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      input_tensor_size: 50331650.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: -1
-      input_tensor_2_id: -1
+      input_tensor_id: -1
       sharding: NO_SHARDING
-      shard_outer_M: 12288
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    config: 4
   }
   kernels {
     name: "DropOut_3_bwd"
     id: 20
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 1
+    config: -1
+    fwd_bwd: BWD
+    type: SIMD
+    elementwise_input1 {
       outer: 1
       M: 12288
-      K: 1
       N: 2048
-      type: SIMD
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      input_tensor_size: 50331650.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 19
-      input_tensor_2_id: -1
+      input_tensor_id: 19
       sharding: NO_SHARDING
-      shard_outer_M: 12288
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    topological_number: 1
-    config: 4
   }
   kernels {
     name: "FFN1_bwd"
     id: 21
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 2
+    config: -1
+    fwd_bwd: BWD
+    type: SYSTOLIC
+    gemm_input1_weight {
       outer: 1
       M: 49152
       K: 12288
       N: 2048
-      type: SYSTOLIC
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
+      input_tensor_size: 50331650.0
       weight_tensor_size: 1207959600.0
       output_tensor_size: 201326600.0
-      input_tensor_1_id: 20
-      input_tensor_2_id: -1
+      input_tensor_id: 20
       sharding: M_SHARDING
-      shard_weight_size: 18874368.0
-      shard_outer_M: 768
-      shard_K: 12288
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    topological_number: 2
-    config: 5
   }
   kernels {
     name: "GeLU_bwd"
     id: 22
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 3
+    config: -1
+    fwd_bwd: BWD
+    type: SIMD
+    elementwise_input1 {
       outer: 1
       M: 49152
-      K: 1
       N: 2048
-      type: SIMD
-      input_tensor_1_size: 201326600.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      input_tensor_size: 201326600.0
       output_tensor_size: 201326600.0
-      input_tensor_1_id: 21
-      input_tensor_2_id: -1
+      input_tensor_id: 21
       sharding: M_SHARDING
-      shard_outer_M: 768
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    topological_number: 3
-    config: 5
   }
   kernels {
     name: "FFN0_bwd"
     id: 23
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 4
+    config: -1
+    fwd_bwd: BWD
+    type: SYSTOLIC
+    gemm_input1_weight {
       outer: 1
       M: 12288
       K: 49152
       N: 2048
-      type: SYSTOLIC
-      input_tensor_1_size: 201326600.0
-      input_tensor_2_size: -1.0
+      input_tensor_size: 201326600.0
       weight_tensor_size: 1207959600.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 23
-      input_tensor_2_id: -1
+      input_tensor_id: 23
       sharding: K_SHARDING
       communication_type: ALL_REDUCE
       communication_size: 50331650.0
-      shard_weight_size: 18874368.0
-      shard_outer_M: 12288
-      shard_K: 768
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    topological_number: 4
-    config: 5
   }
   kernels {
     name: "LayerNorm_2_bwd"
     id: 24
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 5
+    config: -1
+    fwd_bwd: BWD
+    type: SIMD
+    elementwise_input1 {
       outer: 1
       M: 12288
-      K: 1
       N: 2048
-      type: SIMD
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      input_tensor_size: 50331650.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 24
-      input_tensor_2_id: -1
+      input_tensor_id: 24
       sharding: NO_SHARDING
-      shard_outer_M: 12288
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    topological_number: 5
-    config: 5
   }
   kernels {
     name: "DropOut_2_bwd"
     id: 25
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 6
+    config: -1
+    fwd_bwd: BWD
+    type: SIMD
+    elementwise_input1 {
       outer: 1
       M: 12288
-      K: 1
       N: 2048
-      type: SIMD
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      input_tensor_size: 50331650.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 26
-      input_tensor_2_id: -1
+      input_tensor_id: 26
       sharding: NO_SHARDING
-      shard_outer_M: 12288
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    topological_number: 6
-    config: 5
   }
   kernels {
     name: "PROJ_GEMM_bwd"
     id: 26
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 7
+    config: -1
+    fwd_bwd: BWD
+    type: SYSTOLIC
+    gemm_input1_weight {
       outer: 1
       M: 12288
       K: 12288
       N: 2048
-      type: SYSTOLIC
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
+      input_tensor_size: 50331650.0
       weight_tensor_size: 301989900.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 27
-      input_tensor_2_id: -1
+      input_tensor_id: 27
       sharding: M_SHARDING
-      shard_weight_size: 4718592.0
-      shard_outer_M: 192
-      shard_K: 12288
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    topological_number: 7
-    config: 5
   }
   kernels {
     name: "MHA_GEMM_2_bwd1"
     id: 27
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 8
+    config: -1
+    fwd_bwd: BWD
+    type: SYSTOLIC
+    gemm_input1_input2 {
       outer: 96
       M: 2048
       K: 128
       N: 2048
-      type: SYSTOLIC
       input_tensor_1_size: 50331650.0
       input_tensor_2_size: 50331650.0
-      weight_tensor_size: -1.0
       output_tensor_size: 805306400.0
       input_tensor_1_id: 28
       input_tensor_2_id: 5
       sharding: OUTER_SHARDING
-      shard_outer_M: 3072
-      shard_K: 128
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    topological_number: 8
-    config: 6
   }
   kernels {
     name: "MHA_GEMM_2_bwd2"
     id: 28
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 8
+    config: -1
+    fwd_bwd: BWD
+    type: SYSTOLIC
+    gemm_input1_input2 {
       outer: 96
       M: 128
       K: 2048
       N: 2048
-      type: SYSTOLIC
       input_tensor_1_size: 50331650.0
       input_tensor_2_size: 805306400.0
-      weight_tensor_size: -1.0
       output_tensor_size: 50331650.0
       input_tensor_1_id: 28
       input_tensor_2_id: 8
       sharding: OUTER_SHARDING
-      shard_outer_M: 192
-      shard_K: 2048
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    topological_number: 8
-    config: 7
   }
   kernels {
     name: "V_bwd"
     id: 29
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 9
+    config: -1
+    fwd_bwd: BWD
+    type: SYSTOLIC
+    gemm_input1_weight {
       outer: 1
       M: 12288
       K: 12288
       N: 2048
-      type: SYSTOLIC
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
+      input_tensor_size: 50331650.0
       weight_tensor_size: 301989900.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 31
-      input_tensor_2_id: -1
+      input_tensor_id: 31
       sharding: K_SHARDING
       communication_type: ALL_REDUCE
       communication_size: 50331650.0
-      shard_weight_size: 4718592.0
-      shard_outer_M: 12288
-      shard_K: 192
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    topological_number: 9
-    config: 7
   }
   kernels {
     name: "DropOut_1_bwd"
     id: 30
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 9
+    config: -1
+    fwd_bwd: BWD
+    type: SIMD
+    elementwise_input1 {
       outer: 96
       M: 2048
-      K: 1
       N: 2048
-      type: SIMD
-      input_tensor_1_size: 805306400.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      input_tensor_size: 805306400.0
       output_tensor_size: 805306400.0
-      input_tensor_1_id: 30
-      input_tensor_2_id: -1
+      input_tensor_id: 30
       sharding: OUTER_SHARDING
-      shard_outer_M: 3072
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    topological_number: 9
-    config: 7
   }
   kernels {
     name: "SOFTMAX_bwd"
     id: 31
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 10
+    config: -1
+    fwd_bwd: BWD
+    type: SIMD
+    elementwise_input1 {
       outer: 96
       M: 2048
-      K: 1
       N: 2048
-      type: SIMD
-      input_tensor_1_size: 805306400.0
-      input_tensor_2_size: -1.0
-      weight_tensor_size: -1.0
+      input_tensor_size: 805306400.0
       output_tensor_size: 805306400.0
-      input_tensor_1_id: 34
-      input_tensor_2_id: -1
+      input_tensor_id: 34
       sharding: OUTER_SHARDING
-      shard_outer_M: 3072
-      shard_K: 1
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    topological_number: 10
-    config: 7
   }
   kernels {
     name: "MHA_GEMM_1_bwd1"
     id: 32
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 11
+    config: -1
+    fwd_bwd: BWD
+    type: SYSTOLIC
+    gemm_input1_input2 {
       outer: 96
       M: 128
       K: 2048
       N: 2048
-      type: SYSTOLIC
       input_tensor_1_size: 805306400.0
       input_tensor_2_size: 50331650.0
-      weight_tensor_size: -1.0
       output_tensor_size: 50331650.0
       input_tensor_1_id: 35
       input_tensor_2_id: 4
       sharding: OUTER_SHARDING
-      shard_outer_M: 192
-      shard_K: 2048
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    topological_number: 11
-    config: 7
   }
   kernels {
     name: "MHA_GEMM_1_bwd2"
     id: 33
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 11
+    config: -1
+    fwd_bwd: BWD
+    type: SYSTOLIC
+    gemm_input1_input2 {
       outer: 96
       M: 128
       K: 2048
       N: 2048
-      type: SYSTOLIC
       input_tensor_1_size: 805306400.0
       input_tensor_2_size: 50331650.0
-      weight_tensor_size: -1.0
       output_tensor_size: 50331650.0
       input_tensor_1_id: 35
       input_tensor_2_id: 3
       sharding: OUTER_SHARDING
-      shard_outer_M: 192
-      shard_K: 2048
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    topological_number: 11
-    config: 7
   }
   kernels {
     name: "Q_bwd"
     id: 34
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 12
+    config: -1
+    fwd_bwd: BWD
+    type: SYSTOLIC
+    gemm_input1_weight {
       outer: 96
       M: 128
       K: 12288
       N: 2048
-      type: SYSTOLIC
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
+      input_tensor_size: 50331650.0
       weight_tensor_size: 301989900.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 36
-      input_tensor_2_id: -1
+      input_tensor_id: 36
       sharding: OUTER_SHARDING
-      shard_weight_size: 4718592.0
-      shard_outer_M: 192
-      shard_K: 12288
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    topological_number: 12
-    config: 7
   }
   kernels {
     name: "K_bwd"
     id: 35
-    batch_gemm_elementwise_outer_m_k_n {
+    topological_number: 12
+    config: -1
+    fwd_bwd: BWD
+    type: SYSTOLIC
+    gemm_input1_weight {
       outer: 96
       M: 128
       K: 12288
       N: 2048
-      type: SYSTOLIC
-      input_tensor_1_size: 50331650.0
-      input_tensor_2_size: -1.0
+      input_tensor_size: 50331650.0
       weight_tensor_size: 301989900.0
       output_tensor_size: 50331650.0
-      input_tensor_1_id: 37
-      input_tensor_2_id: -1
+      input_tensor_id: 37
       sharding: OUTER_SHARDING
-      shard_weight_size: 4718592.0
-      shard_outer_M: 192
-      shard_K: 12288
-      shard_N: 64
-      fwd_bwd: BWD
     }
-    topological_number: 12
-    config: 7
   }
   connections {
     startIdx: 1
@@ -1310,5 +1104,5 @@ training {
   hidden_dim: 12288
   head_dim: 128
   num_head: 96
-  num_config: 8
+  num_config: 10
 }

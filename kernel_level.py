@@ -866,28 +866,38 @@ else:
 # update kernels
 i = 0
 for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        kernel.batch_gemm_elementwise_outer_m_k_n.shard_outer_M = int(shard_M[i])
-        kernel.batch_gemm_elementwise_outer_m_k_n.shard_K = int(shard_K[i])
-        kernel.batch_gemm_elementwise_outer_m_k_n.shard_N = int(shard_N[i])
+    if kernel.WhichOneof('kernel_variant') == 'gemm_input1_weight':
+        kernel.gemm_input1_weight.shard_outer_M = int(shard_M[i])
+        kernel.gemm_input1_weight.shard_K = int(shard_K[i])
+        kernel.gemm_input1_weight.shard_N = int(shard_N[i])
         kernel.config = int(Config[i])
-        i += 1
-
+    
+    elif kernel.WhichOneof('kernel_variant') == 'gemm_input1_input2':
+        kernel.gemm_input1_input2.shard_outer_M = int(shard_M[i])
+        kernel.gemm_input1_input2.shard_K = int(shard_K[i])
+        kernel.gemm_input1_input2.shard_N = int(shard_N[i])
+        kernel.config = int(Config[i])
+        
+    elif kernel.WhichOneof('kernel_variant') == 'elementwise_input1':
+        kernel.elementwise_input1.shard_outer_M = int(shard_M[i])
+        kernel.elementwise_input1.shard_N = int(shard_N[i])
+        kernel.config = int(Config[i])
+        
+    elif kernel.WhichOneof('kernel_variant') == 'elementwise_input1_input2':
+        kernel.elementwise_input1_input2.shard_outer_M = int(shard_M[i])
+        kernel.elementwise_input1_input2.shard_N = int(shard_N[i])
+        kernel.config = int(Config[i])
+     
+    else:
+        raise Exception('Wrong!')
+   
+    i += 1
 
 # update edges
 i = 0
 for connection in dse.dataflow_graph.connections:
     connection.shard_tensor_size = float(shard_intermediate_buffer_size[i])
     i += 1
-
-
-# update weights
-i = 0
-for kernel in dse.dataflow_graph.kernels:
-    if kernel.WhichOneof('kernel_variant') == 'batch_gemm_elementwise_outer_m_k_n':
-        if kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size != -1:
-            kernel.batch_gemm_elementwise_outer_m_k_n.shard_weight_size = float(shard_initiation_buffer_size[i])
-            i += 1
 
 
 

@@ -33,311 +33,260 @@ for i in range(1, 19):
     kernel = dataflow_graph.kernels.add()
     
     if i == 1:
-        kernel.name = 'Add_Prev_Layer'
-        kernel.id = i
+        kernel.name = "Add_Prev_Layer"
+        kernel.id = 1
+        kernel.fwd_bwd = 1
+        kernel.type = 2
         kernel.config = -1
-        
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 2
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
+        kernel.elementwise_input1.outer = 1
+        kernel.elementwise_input1.M = hidden
+        kernel.elementwise_input1.N = seq		
+        kernel.elementwise_input1.input_tensor_size = hidden*seq*word
+        kernel.elementwise_input1.output_tensor_size = hidden*seq*word
+        kernel.elementwise_input1.input_tensor_id = -1
         
     elif i == 2:
-        kernel.name = 'LayerNorm_1'
-        kernel.id = i
-        kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 2
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
-        
+        kernel.name = "LayerNorm_1"
+        kernel.id = 2
+        kernel.fwd_bwd = 1
+        kernel.type = 2
+        kernel.config = -1  
+        kernel.elementwise_input1.outer = 1
+        kernel.elementwise_input1.M = hidden
+        kernel.elementwise_input1.N = seq  
+        kernel.elementwise_input1.input_tensor_size = hidden*seq*word
+        kernel.elementwise_input1.output_tensor_size = hidden*seq*word
+        kernel.elementwise_input1.input_tensor_id = 1
+          
     elif i == 3:
-        kernel.name = 'Q'
-        kernel.id = i
+        kernel.name = "Q"
+        kernel.id = 3
+        kernel.fwd_bwd = 1
+        kernel.type = 1
         kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = num_head
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = head_dim
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = hidden*hidden*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 2
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
-        
+        kernel.gemm_input1_weight.outer = num_head
+        kernel.gemm_input1_weight.M = head_dim
+        kernel.gemm_input1_weight.K = hidden
+        kernel.gemm_input1_weight.N = seq
+        kernel.gemm_input1_weight.input_tensor_size = hidden*seq*word
+        kernel.gemm_input1_weight.weight_tensor_size = hidden*hidden*word
+        kernel.gemm_input1_weight.output_tensor_size = hidden*seq*word
+        kernel.gemm_input1_weight.input_tensor_id = 2
+
     elif i == 4:
-        kernel.name = 'K'
-        kernel.id = i
+        kernel.name = "K"
+        kernel.id = 4
+        kernel.fwd_bwd = 1
+        kernel.type = 1
         kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = num_head
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = head_dim
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = hidden*hidden*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 2
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
-        
+        kernel.gemm_input1_weight.outer = num_head
+        kernel.gemm_input1_weight.M = head_dim
+        kernel.gemm_input1_weight.K = hidden
+        kernel.gemm_input1_weight.N = seq
+        kernel.gemm_input1_weight.input_tensor_size = hidden*seq*word
+        kernel.gemm_input1_weight.weight_tensor_size = hidden*hidden*word
+        kernel.gemm_input1_weight.output_tensor_size = hidden*seq*word
+        kernel.gemm_input1_weight.input_tensor_id = 2
+
     elif i == 5:
-        kernel.name = 'V'
-        kernel.id = i
+        kernel.name = "V"
+        kernel.id = 5
+        kernel.fwd_bwd = 1
+        kernel.type = 1
         kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = num_head
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = head_dim
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = -1.0
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = hidden*hidden*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 2
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
-    
+        kernel.gemm_input1_weight.outer = num_head
+        kernel.gemm_input1_weight.M = head_dim
+        kernel.gemm_input1_weight.K = hidden
+        kernel.gemm_input1_weight.N = seq
+        kernel.gemm_input1_weight.input_tensor_size = hidden*seq*word
+        kernel.gemm_input1_weight.weight_tensor_size = hidden*hidden*word
+        kernel.gemm_input1_weight.output_tensor_size = hidden*seq*word
+        kernel.gemm_input1_weight.input_tensor_id = 2
+
     elif i == 6:
-        kernel.name = 'MHA_GEMM_1'
-        kernel.id = i
+        kernel.name = "MHA_GEMM_1"
+        kernel.id = 6
+        kernel.fwd_bwd = 1
+        kernel.type = 1
         kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = num_head
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = head_dim
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = seq*seq*num_head*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 3
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = 4
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
+        kernel.gemm_input1_input2.outer = num_head
+        kernel.gemm_input1_input2.M = seq
+        kernel.gemm_input1_input2.K = head_dim
+        kernel.gemm_input1_input2.N = seq
+        kernel.gemm_input1_input2.input_tensor_1_size = hidden*seq*word
+        kernel.gemm_input1_input2.input_tensor_2_size = hidden*seq*word
+        kernel.gemm_input1_input2.output_tensor_size = seq*seq*num_head*word
+        kernel.gemm_input1_input2.input_tensor_1_id = 3
+        kernel.gemm_input1_input2.input_tensor_2_id = 4
         
     elif i == 7:
-        kernel.name = 'SOFTMAX'
-        kernel.id = i
+        kernel.name = "SOFTMAX"
+        kernel.id = 7
+        kernel.fwd_bwd = 1
+        kernel.type = 2
         kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = num_head
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 2
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = seq*seq*num_head*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = seq*seq*num_head*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 6
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
-        
+        kernel.elementwise_input1.outer = num_head
+        kernel.elementwise_input1.M = seq
+        kernel.elementwise_input1.N = seq
+        kernel.elementwise_input1.input_tensor_size = seq*seq*num_head*word
+        kernel.elementwise_input1.output_tensor_size = seq*seq*num_head*word
+        kernel.elementwise_input1.input_tensor_id = 6
+
     elif i == 8:
-        kernel.name = 'DropOut_1'
-        kernel.id = i
+        kernel.name = "DropOut_1"
+        kernel.id = 8
+        kernel.fwd_bwd = 1
+        kernel.type = 2
         kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = num_head
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 2
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = seq*seq*num_head*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = seq*seq*num_head*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 7
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
-        
+        kernel.elementwise_input1.outer = num_head
+        kernel.elementwise_input1.M = seq
+        kernel.elementwise_input1.N = seq
+        kernel.elementwise_input1.input_tensor_size = seq*seq*num_head*word
+        kernel.elementwise_input1.output_tensor_size = seq*seq*num_head*word
+        kernel.elementwise_input1.input_tensor_id = 7
+
     elif i == 9:
-        kernel.name = 'MHA_GEMM_2'
-        kernel.id = i
+        kernel.name = "MHA_GEMM_2"
+        kernel.id = 9
+        kernel.fwd_bwd = 1
+        kernel.type = 1
         kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = num_head
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = head_dim
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = seq*seq*num_head*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 5
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = 8
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
+        kernel.gemm_input1_input2.outer = num_head
+        kernel.gemm_input1_input2.M = head_dim
+        kernel.gemm_input1_input2.K = seq
+        kernel.gemm_input1_input2.N = seq
+        kernel.gemm_input1_input2.input_tensor_1_size = hidden*seq*word
+        kernel.gemm_input1_input2.input_tensor_2_size = seq*seq*num_head*word
+        kernel.gemm_input1_input2.output_tensor_size = hidden*seq*word
+        kernel.gemm_input1_input2.input_tensor_1_id = 5
+        kernel.gemm_input1_input2.input_tensor_2_id = 8
 
     elif i == 10:
-        kernel.name = 'PROJ_GEMM'
-        kernel.id = i
+        kernel.name = "PROJ_GEMM"
+        kernel.id = 10
+        kernel.fwd_bwd = 1
+        kernel.type = 1
         kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = hidden*hidden*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 9
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
-        
+        kernel.gemm_input1_weight.outer = 1
+        kernel.gemm_input1_weight.M = hidden
+        kernel.gemm_input1_weight.K = hidden
+        kernel.gemm_input1_weight.N = seq
+        kernel.gemm_input1_weight.input_tensor_size = hidden*seq*word
+        kernel.gemm_input1_weight.weight_tensor_size = hidden*hidden*word
+        kernel.gemm_input1_weight.output_tensor_size = hidden*seq*word
+        kernel.gemm_input1_weight.input_tensor_id = 9    
+
     elif i == 11:
-        kernel.name = 'DropOut_2'
-        kernel.id = i
+        kernel.name = "DropOut_2"
+        kernel.id = 11
+        kernel.fwd_bwd = 1
+        kernel.type = 2
         kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 2
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 10
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
-        
+        kernel.elementwise_input1.outer = 1
+        kernel.elementwise_input1.M = hidden
+        kernel.elementwise_input1.N = seq
+        kernel.elementwise_input1.input_tensor_size = hidden*seq*word
+        kernel.elementwise_input1.output_tensor_size = hidden*seq*word
+        kernel.elementwise_input1.input_tensor_id = 10
+
     elif i == 12:
-        kernel.name = 'Add_1'
-        kernel.id = i
+        kernel.name = "Add_1"
+        kernel.id = 12
+        kernel.fwd_bwd = 1
+        kernel.type = 2
         kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 2
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = 11
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
-        
+        kernel.elementwise_input1_input2.outer = 1
+        kernel.elementwise_input1_input2.M = hidden
+        kernel.elementwise_input1_input2.N = seq  
+        kernel.elementwise_input1_input2.input_tensor_1_size = hidden*seq*word
+        kernel.elementwise_input1_input2.input_tensor_2_size = hidden*seq*word
+        kernel.elementwise_input1_input2.output_tensor_size = hidden*seq*word
+        kernel.elementwise_input1_input2.input_tensor_1_id = 1
+        kernel.elementwise_input1_input2.input_tensor_2_id = 11
+
     elif i == 13:
         kernel.name = "LayerNorm_2"
-        kernel.id = i
-        kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 2
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 12
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
+        kernel.id = 13
+        kernel.fwd_bwd = 1
+        kernel.type = 2
+        kernel.config = -1  
+        kernel.elementwise_input1.outer = 1
+        kernel.elementwise_input1.M = hidden
+        kernel.elementwise_input1.N = seq
+        kernel.elementwise_input1.input_tensor_size = hidden*seq*word
+        kernel.elementwise_input1.output_tensor_size = hidden*seq*word
+        kernel.elementwise_input1.input_tensor_id = 12
 
     elif i == 14:
         kernel.name = "FFN0"
-        kernel.id = i
+        kernel.id = 14
+        kernel.fwd_bwd = 1
+        kernel.type = 1
         kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = 4*hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = 4*hidden*hidden*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = 4*hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 13
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
-        
+        kernel.gemm_input1_weight.outer = 1
+        kernel.gemm_input1_weight.M = 4*hidden
+        kernel.gemm_input1_weight.K = hidden
+        kernel.gemm_input1_weight.N = seq
+        kernel.gemm_input1_weight.input_tensor_size = hidden*seq*word
+        kernel.gemm_input1_weight.weight_tensor_size = 4*hidden*hidden*word
+        kernel.gemm_input1_weight.output_tensor_size = 4*hidden*seq*word
+        kernel.gemm_input1_weight.input_tensor_id = 13
+    
     elif i == 15:
-        kernel.name = 'GeLU'
-        kernel.id = i
+        kernel.name = "GeLU"
+        kernel.id = 15
+        kernel.fwd_bwd = 1
+        kernel.type = 2
         kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = 4*hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 2
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = 4*hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = 4*hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 14
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
-        
+        kernel.elementwise_input1.outer = 1
+        kernel.elementwise_input1.M = 4*hidden
+        kernel.elementwise_input1.N = seq 
+        kernel.elementwise_input1.input_tensor_size = 4*hidden*seq*word
+        kernel.elementwise_input1.output_tensor_size = 4*hidden*seq*word
+        kernel.elementwise_input1.input_tensor_id = 14
+
     elif i == 16:
-        kernel.name = 'FFN1'
-        kernel.id = i
-        kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = 4*hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = 4*hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = 4*hidden*hidden*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 15
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
-          
+        kernel.name = "FFN1"
+        kernel.id = 16
+        kernel.fwd_bwd = 1
+        kernel.type = 1
+        kernel.config = -1 
+        kernel.gemm_input1_weight.outer = 1
+        kernel.gemm_input1_weight.M = hidden
+        kernel.gemm_input1_weight.K = 4*hidden
+        kernel.gemm_input1_weight.N = seq
+        kernel.gemm_input1_weight.input_tensor_size = 4*hidden*seq*word
+        kernel.gemm_input1_weight.weight_tensor_size = 4*hidden*hidden*word
+        kernel.gemm_input1_weight.output_tensor_size = hidden*seq*word
+        kernel.gemm_input1_weight.input_tensor_id = 15
+
     elif i == 17:
         kernel.name = "DropOut_3"
-        kernel.id = i
+        kernel.id = 17
+        kernel.fwd_bwd = 1
+        kernel.type = 2
         kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 2
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 16
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
-    
+        kernel.elementwise_input1.outer = 1
+        kernel.elementwise_input1.M = hidden
+        kernel.elementwise_input1.N = seq
+        kernel.elementwise_input1.input_tensor_size = hidden*seq*word
+        kernel.elementwise_input1.output_tensor_size = hidden*seq*word
+        kernel.elementwise_input1.input_tensor_id = 16
+
     elif i == 18:
-        kernel.name = 'Add_2'
-        kernel.id = i
+        kernel.name = "Add_2"
+        kernel.id = 18
+        kernel.fwd_bwd = 1
+        kernel.type = 2
         kernel.config = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.outer = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.M = hidden
-        kernel.batch_gemm_elementwise_outer_m_k_n.K = 1
-        kernel.batch_gemm_elementwise_outer_m_k_n.N = seq
-        kernel.batch_gemm_elementwise_outer_m_k_n.type = 2
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.weight_tensor_size = -1
-        kernel.batch_gemm_elementwise_outer_m_k_n.output_tensor_size = hidden*seq*word
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_1_id = 12
-        kernel.batch_gemm_elementwise_outer_m_k_n.input_tensor_2_id = 17
-        kernel.batch_gemm_elementwise_outer_m_k_n.fwd_bwd = 1
+        kernel.elementwise_input1_input2.outer = 1
+        kernel.elementwise_input1_input2.M = hidden
+        kernel.elementwise_input1_input2.N = seq
+        kernel.elementwise_input1_input2.input_tensor_1_size = hidden*seq*word
+        kernel.elementwise_input1_input2.input_tensor_2_size = hidden*seq*word
+        kernel.elementwise_input1_input2.output_tensor_size = hidden*seq*word
+        kernel.elementwise_input1_input2.input_tensor_1_id = 12
+        kernel.elementwise_input1_input2.input_tensor_2_id = 17
           
 
 for i in range(1, 22):
