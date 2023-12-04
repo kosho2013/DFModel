@@ -27,7 +27,7 @@ word = 2
 
 dataflow_graph = setup_pb2.Dataflow_Graph()
 
-for i in range(1, 36):
+for i in range(1, 42):
     kernel = dataflow_graph.kernels.add()
     
     if i == 1:
@@ -41,7 +41,7 @@ for i in range(1, 36):
         kernel.elementwise_input1.N = seq		
         kernel.elementwise_input1.input_tensor_size = hidden*seq*word
         kernel.elementwise_input1.output_tensor_size = hidden*seq*word
-        kernel.elementwise_input1.input_tensor_id = -1
+        kernel.elementwise_input1.tiling = 4
         
     elif i == 2:
         kernel.name = "LayerNorm_1"
@@ -54,7 +54,7 @@ for i in range(1, 36):
         kernel.elementwise_input1.N = seq  
         kernel.elementwise_input1.input_tensor_size = hidden*seq*word
         kernel.elementwise_input1.output_tensor_size = hidden*seq*word
-        kernel.elementwise_input1.input_tensor_id = 1
+        kernel.elementwise_input1.tiling = 4
           
     elif i == 3:
         kernel.name = "Q"
@@ -69,7 +69,7 @@ for i in range(1, 36):
         kernel.gemm_input1_weight.input_tensor_size = hidden*seq*word
         kernel.gemm_input1_weight.weight_tensor_size = hidden*hidden*word
         kernel.gemm_input1_weight.output_tensor_size = hidden*seq*word
-        kernel.gemm_input1_weight.input_tensor_id = 2
+        kernel.gemm_input1_weight.tiling = 4
 
     elif i == 4:
         kernel.name = "K"
@@ -84,7 +84,7 @@ for i in range(1, 36):
         kernel.gemm_input1_weight.input_tensor_size = hidden*seq*word
         kernel.gemm_input1_weight.weight_tensor_size = hidden*hidden*word
         kernel.gemm_input1_weight.output_tensor_size = hidden*seq*word
-        kernel.gemm_input1_weight.input_tensor_id = 2
+        kernel.gemm_input1_weight.tiling = 4
 
     elif i == 5:
         kernel.name = "V"
@@ -99,7 +99,7 @@ for i in range(1, 36):
         kernel.gemm_input1_weight.input_tensor_size = hidden*seq*word
         kernel.gemm_input1_weight.weight_tensor_size = hidden*hidden*word
         kernel.gemm_input1_weight.output_tensor_size = hidden*seq*word
-        kernel.gemm_input1_weight.input_tensor_id = 2
+        kernel.gemm_input1_weight.tiling = 4
 
     elif i == 6:
         kernel.name = "MHA_GEMM_1"
@@ -114,8 +114,7 @@ for i in range(1, 36):
         kernel.gemm_input1_input2.input_tensor_1_size = hidden*seq*word
         kernel.gemm_input1_input2.input_tensor_2_size = hidden*seq*word
         kernel.gemm_input1_input2.output_tensor_size = seq*seq*num_head*word
-        kernel.gemm_input1_input2.input_tensor_1_id = 3
-        kernel.gemm_input1_input2.input_tensor_2_id = 4
+        kernel.gemm_input1_input2.tiling = 4
         
     elif i == 7:
         kernel.name = "SOFTMAX"
@@ -128,7 +127,7 @@ for i in range(1, 36):
         kernel.elementwise_input1.N = seq
         kernel.elementwise_input1.input_tensor_size = seq*seq*num_head*word
         kernel.elementwise_input1.output_tensor_size = seq*seq*num_head*word
-        kernel.elementwise_input1.input_tensor_id = 6
+        kernel.elementwise_input1.tiling = 4
 
     elif i == 8:
         kernel.name = "DropOut_1"
@@ -141,7 +140,7 @@ for i in range(1, 36):
         kernel.elementwise_input1.N = seq
         kernel.elementwise_input1.input_tensor_size = seq*seq*num_head*word
         kernel.elementwise_input1.output_tensor_size = seq*seq*num_head*word
-        kernel.elementwise_input1.input_tensor_id = 7
+        kernel.elementwise_input1.tiling = 4
 
     elif i == 9:
         kernel.name = "MHA_GEMM_2"
@@ -156,8 +155,7 @@ for i in range(1, 36):
         kernel.gemm_input1_input2.input_tensor_1_size = hidden*seq*word
         kernel.gemm_input1_input2.input_tensor_2_size = seq*seq*num_head*word
         kernel.gemm_input1_input2.output_tensor_size = hidden*seq*word
-        kernel.gemm_input1_input2.input_tensor_1_id = 5
-        kernel.gemm_input1_input2.input_tensor_2_id = 8
+        kernel.gemm_input1_input2.tiling = 4
 
     elif i == 10:
         kernel.name = "PROJ_GEMM"
@@ -172,7 +170,7 @@ for i in range(1, 36):
         kernel.gemm_input1_weight.input_tensor_size = hidden*seq*word
         kernel.gemm_input1_weight.weight_tensor_size = hidden*hidden*word
         kernel.gemm_input1_weight.output_tensor_size = hidden*seq*word
-        kernel.gemm_input1_weight.input_tensor_id = 9    
+        kernel.gemm_input1_weight.tiling = 4       
 
     elif i == 11:
         kernel.name = "DropOut_2"
@@ -185,7 +183,7 @@ for i in range(1, 36):
         kernel.elementwise_input1.N = seq
         kernel.elementwise_input1.input_tensor_size = hidden*seq*word
         kernel.elementwise_input1.output_tensor_size = hidden*seq*word
-        kernel.elementwise_input1.input_tensor_id = 10
+        kernel.elementwise_input1.tiling = 4
 
     elif i == 12:
         kernel.name = "Add_1"
@@ -199,8 +197,7 @@ for i in range(1, 36):
         kernel.elementwise_input1_input2.input_tensor_1_size = hidden*seq*word
         kernel.elementwise_input1_input2.input_tensor_2_size = hidden*seq*word
         kernel.elementwise_input1_input2.output_tensor_size = hidden*seq*word
-        kernel.elementwise_input1_input2.input_tensor_1_id = 1
-        kernel.elementwise_input1_input2.input_tensor_2_id = 11
+        kernel.elementwise_input1_input2.tiling = 4
 
     elif i == 13:
         kernel.name = "LayerNorm_2"
@@ -213,7 +210,7 @@ for i in range(1, 36):
         kernel.elementwise_input1.N = seq
         kernel.elementwise_input1.input_tensor_size = hidden*seq*word
         kernel.elementwise_input1.output_tensor_size = hidden*seq*word
-        kernel.elementwise_input1.input_tensor_id = 12
+        kernel.elementwise_input1.tiling = 4
 
     elif i == 14:
         kernel.name = "FFN0"
@@ -228,7 +225,7 @@ for i in range(1, 36):
         kernel.gemm_input1_weight.input_tensor_size = hidden*seq*word
         kernel.gemm_input1_weight.weight_tensor_size = 4*hidden*hidden*word
         kernel.gemm_input1_weight.output_tensor_size = 4*hidden*seq*word
-        kernel.gemm_input1_weight.input_tensor_id = 13
+        kernel.gemm_input1_weight.tiling = 4
     
     elif i == 15:
         kernel.name = "GeLU"
@@ -241,7 +238,7 @@ for i in range(1, 36):
         kernel.elementwise_input1.N = seq 
         kernel.elementwise_input1.input_tensor_size = 4*hidden*seq*word
         kernel.elementwise_input1.output_tensor_size = 4*hidden*seq*word
-        kernel.elementwise_input1.input_tensor_id = 14
+        kernel.elementwise_input1.tiling = 4
 
     elif i == 16:
         kernel.name = "FFN1"
@@ -256,7 +253,7 @@ for i in range(1, 36):
         kernel.gemm_input1_weight.input_tensor_size = 4*hidden*seq*word
         kernel.gemm_input1_weight.weight_tensor_size = 4*hidden*hidden*word
         kernel.gemm_input1_weight.output_tensor_size = hidden*seq*word
-        kernel.gemm_input1_weight.input_tensor_id = 15
+        kernel.gemm_input1_weight.tiling = 4
 
     elif i == 17:
         kernel.name = "DropOut_3"
@@ -269,7 +266,7 @@ for i in range(1, 36):
         kernel.elementwise_input1.N = seq
         kernel.elementwise_input1.input_tensor_size = hidden*seq*word
         kernel.elementwise_input1.output_tensor_size = hidden*seq*word
-        kernel.elementwise_input1.input_tensor_id = 16
+        kernel.elementwise_input1.tiling = 4
 
     elif i == 18:
         kernel.name = "Add_2"
@@ -283,8 +280,7 @@ for i in range(1, 36):
         kernel.elementwise_input1_input2.input_tensor_1_size = hidden*seq*word
         kernel.elementwise_input1_input2.input_tensor_2_size = hidden*seq*word
         kernel.elementwise_input1_input2.output_tensor_size = hidden*seq*word
-        kernel.elementwise_input1_input2.input_tensor_1_id = 12
-        kernel.elementwise_input1_input2.input_tensor_2_id = 17
+        kernel.elementwise_input1_input2.tiling = 4
 
     elif i == 19:
         kernel.name = "Loss_bwd"
@@ -297,7 +293,7 @@ for i in range(1, 36):
         kernel.elementwise_input1.N = seq
         kernel.elementwise_input1.input_tensor_size = hidden*seq*word
         kernel.elementwise_input1.output_tensor_size = hidden*seq*word
-        kernel.elementwise_input1.input_tensor_id = -1
+        kernel.elementwise_input1.tiling = 4
     
     elif i == 20:
         kernel.name = "DropOut_3_bwd"
@@ -310,7 +306,7 @@ for i in range(1, 36):
         kernel.elementwise_input1.N = seq
         kernel.elementwise_input1.input_tensor_size = hidden*seq*word
         kernel.elementwise_input1.output_tensor_size = hidden*seq*word
-        kernel.elementwise_input1.input_tensor_id = 19
+        kernel.elementwise_input1.tiling = 4
 
     elif i == 21:
         kernel.name = "FFN1_bwd"
@@ -325,7 +321,7 @@ for i in range(1, 36):
         kernel.gemm_input1_weight.input_tensor_size = hidden*seq*word
         kernel.gemm_input1_weight.weight_tensor_size = 4*hidden*hidden*word
         kernel.gemm_input1_weight.output_tensor_size = 4*hidden*seq*word
-        kernel.gemm_input1_weight.input_tensor_id = 20    
+        kernel.gemm_input1_weight.tiling = 4
 
     elif i == 22:
         kernel.name = "GeLU_bwd"
@@ -338,7 +334,7 @@ for i in range(1, 36):
         kernel.elementwise_input1.N = seq
         kernel.elementwise_input1.input_tensor_size = 4*hidden*seq*word
         kernel.elementwise_input1.output_tensor_size = 4*hidden*seq*word
-        kernel.elementwise_input1.input_tensor_id = 21
+        kernel.elementwise_input1.tiling = 4
 
     elif i == 23:
         kernel.name = "FFN0_bwd"
@@ -353,7 +349,7 @@ for i in range(1, 36):
         kernel.gemm_input1_weight.input_tensor_size = 4*hidden*seq*word
         kernel.gemm_input1_weight.weight_tensor_size = 4*hidden*hidden*word
         kernel.gemm_input1_weight.output_tensor_size = hidden*seq*word
-        kernel.gemm_input1_weight.input_tensor_id = 23    
+        kernel.gemm_input1_weight.tiling = 4        
 
     elif i == 24:
         kernel.name = "LayerNorm_2_bwd"
@@ -366,7 +362,7 @@ for i in range(1, 36):
         kernel.elementwise_input1.N = seq
         kernel.elementwise_input1.input_tensor_size = hidden*seq*word
         kernel.elementwise_input1.output_tensor_size = hidden*seq*word
-        kernel.elementwise_input1.input_tensor_id = 24
+        kernel.elementwise_input1.tiling = 4
 
     elif i == 25:
         kernel.name = "DropOut_2_bwd"
@@ -379,7 +375,7 @@ for i in range(1, 36):
         kernel.elementwise_input1.N = seq
         kernel.elementwise_input1.input_tensor_size = hidden*seq*word
         kernel.elementwise_input1.output_tensor_size = hidden*seq*word
-        kernel.elementwise_input1.input_tensor_id = 26   
+        kernel.elementwise_input1.tiling = 4
 
     elif i == 26:
         kernel.name = "PROJ_GEMM_bwd"
@@ -394,7 +390,7 @@ for i in range(1, 36):
         kernel.gemm_input1_weight.input_tensor_size = hidden*seq*word
         kernel.gemm_input1_weight.weight_tensor_size = hidden*hidden*word
         kernel.gemm_input1_weight.output_tensor_size = hidden*seq*word
-        kernel.gemm_input1_weight.input_tensor_id = 27
+        kernel.gemm_input1_weight.tiling = 4
 
     elif i == 27:
         kernel.name = "MHA_GEMM_2_bwd1"
@@ -409,8 +405,7 @@ for i in range(1, 36):
         kernel.gemm_input1_input2.input_tensor_1_size = hidden*seq*word
         kernel.gemm_input1_input2.input_tensor_2_size = hidden*seq*word
         kernel.gemm_input1_input2.output_tensor_size = seq*seq*num_head*word
-        kernel.gemm_input1_input2.input_tensor_1_id = 28
-        kernel.gemm_input1_input2.input_tensor_2_id = 5
+        kernel.gemm_input1_input2.tiling = 4
 
     elif i == 28:
         kernel.name = "MHA_GEMM_2_bwd2"
@@ -425,8 +420,7 @@ for i in range(1, 36):
         kernel.gemm_input1_input2.input_tensor_1_size = hidden*seq*word
         kernel.gemm_input1_input2.input_tensor_2_size = seq*seq*num_head*word
         kernel.gemm_input1_input2.output_tensor_size = hidden*seq*word
-        kernel.gemm_input1_input2.input_tensor_1_id = 28
-        kernel.gemm_input1_input2.input_tensor_2_id = 8
+        kernel.gemm_input1_input2.tiling = 4
         
     elif i == 29:
         kernel.name = "V_bwd"
@@ -441,7 +435,7 @@ for i in range(1, 36):
         kernel.gemm_input1_weight.input_tensor_size = hidden*seq*word
         kernel.gemm_input1_weight.weight_tensor_size = hidden*hidden*word
         kernel.gemm_input1_weight.output_tensor_size = hidden*seq*word
-        kernel.gemm_input1_weight.input_tensor_id = 31
+        kernel.gemm_input1_weight.tiling = 4
     
     elif i == 30:
         kernel.name = "DropOut_1_bwd"
@@ -454,7 +448,7 @@ for i in range(1, 36):
         kernel.elementwise_input1.N = seq   
         kernel.elementwise_input1.input_tensor_size = seq*seq*num_head*word
         kernel.elementwise_input1.output_tensor_size = seq*seq*num_head*word
-        kernel.elementwise_input1.input_tensor_id = 30
+        kernel.elementwise_input1.tiling = 4
 
     elif i == 31:
         kernel.name = "SOFTMAX_bwd"
@@ -467,7 +461,7 @@ for i in range(1, 36):
         kernel.elementwise_input1.N = seq
         kernel.elementwise_input1.input_tensor_size = seq*seq*num_head*word
         kernel.elementwise_input1.output_tensor_size = seq*seq*num_head*word
-        kernel.elementwise_input1.input_tensor_id = 34
+        kernel.elementwise_input1.tiling = 4
 
     elif i == 32:
         kernel.name = "MHA_GEMM_1_bwd1"
@@ -482,8 +476,7 @@ for i in range(1, 36):
         kernel.gemm_input1_input2.input_tensor_1_size = seq*seq*num_head*word
         kernel.gemm_input1_input2.input_tensor_2_size = hidden*seq*word
         kernel.gemm_input1_input2.output_tensor_size = hidden*seq*word
-        kernel.gemm_input1_input2.input_tensor_1_id = 35
-        kernel.gemm_input1_input2.input_tensor_2_id = 4
+        kernel.gemm_input1_input2.tiling = 4
 
     elif i == 33:
         kernel.name = "MHA_GEMM_1_bwd2"
@@ -498,8 +491,7 @@ for i in range(1, 36):
         kernel.gemm_input1_input2.input_tensor_1_size = seq*seq*num_head*word
         kernel.gemm_input1_input2.input_tensor_2_size = hidden*seq*word
         kernel.gemm_input1_input2.output_tensor_size = hidden*seq*word
-        kernel.gemm_input1_input2.input_tensor_1_id = 35
-        kernel.gemm_input1_input2.input_tensor_2_id = 3
+        kernel.gemm_input1_input2.tiling = 4
 
     elif i == 34:
         kernel.name = "Q_bwd"
@@ -514,7 +506,7 @@ for i in range(1, 36):
         kernel.gemm_input1_weight.input_tensor_size = hidden*seq*word
         kernel.gemm_input1_weight.weight_tensor_size = hidden*hidden*word
         kernel.gemm_input1_weight.output_tensor_size = hidden*seq*word
-        kernel.gemm_input1_weight.input_tensor_id = 36
+        kernel.gemm_input1_weight.tiling = 4
 
     elif i == 35:
         kernel.name = "K_bwd"
@@ -529,12 +521,100 @@ for i in range(1, 36):
         kernel.gemm_input1_weight.input_tensor_size = hidden*seq*word
         kernel.gemm_input1_weight.weight_tensor_size = hidden*hidden*word
         kernel.gemm_input1_weight.output_tensor_size = hidden*seq*word
-        kernel.gemm_input1_weight.input_tensor_id = 37
+        kernel.gemm_input1_weight.tiling = 4
    
-          
+    elif i == 36:
+        kernel.name = "FFN1_bwd_weight_update"
+        kernel.id = 36
+        kernel.config = -1
+        kernel.fwd_bwd = 2
+        kernel.type = 1
+        kernel.gemm_input1_input2.outer = 1
+        kernel.gemm_input1_input2.M = 4*hidden
+        kernel.gemm_input1_input2.K = seq
+        kernel.gemm_input1_input2.N = hidden
+        kernel.gemm_input1_input2.input_tensor_1_size = hidden*seq*word
+        kernel.gemm_input1_input2.input_tensor_2_size = 4*hidden*seq*word
+        kernel.gemm_input1_input2.output_tensor_size = 4*hidden*hidden*word
+        kernel.gemm_input1_input2.tiling = 3
+
+    elif i == 37:
+        kernel.name = "FFN0_bwd_weight_update"
+        kernel.id = 37
+        kernel.config = -1
+        kernel.fwd_bwd = 2
+        kernel.type = 1
+        kernel.gemm_input1_input2.outer = 1
+        kernel.gemm_input1_input2.M = hidden
+        kernel.gemm_input1_input2.K = seq
+        kernel.gemm_input1_input2.N = 4*hidden
+        kernel.gemm_input1_input2.input_tensor_1_size = 4*hidden*seq*word
+        kernel.gemm_input1_input2.input_tensor_2_size = hidden*seq*word
+        kernel.gemm_input1_input2.output_tensor_size = 4*hidden*hidden*word
+        kernel.gemm_input1_input2.tiling = 3
+
+    elif i == 38:
+        kernel.name = "PROJ_GEMM_bwd_weight_update"
+        kernel.id = 38
+        kernel.config = -1
+        kernel.fwd_bwd = 2
+        kernel.type = 1
+        kernel.gemm_input1_input2.outer = 1
+        kernel.gemm_input1_input2.M = hidden
+        kernel.gemm_input1_input2.K = seq
+        kernel.gemm_input1_input2.N = hidden
+        kernel.gemm_input1_input2.input_tensor_1_size = hidden*seq*word
+        kernel.gemm_input1_input2.input_tensor_2_size = hidden*seq*word
+        kernel.gemm_input1_input2.output_tensor_size = hidden*hidden*word
+        kernel.gemm_input1_input2.tiling = 3
+
+    elif i == 39:
+        kernel.name = "V_bwd_weight_update"
+        kernel.id = 39
+        kernel.config = -1
+        kernel.fwd_bwd = 2
+        kernel.type = 1
+        kernel.gemm_input1_input2.outer = 1
+        kernel.gemm_input1_input2.M = hidden
+        kernel.gemm_input1_input2.K = seq
+        kernel.gemm_input1_input2.N = hidden
+        kernel.gemm_input1_input2.input_tensor_1_size = hidden*seq*word
+        kernel.gemm_input1_input2.input_tensor_2_size = hidden*seq*word
+        kernel.gemm_input1_input2.output_tensor_size = hidden*hidden*word
+        kernel.gemm_input1_input2.tiling = 3
+
+    elif i == 40:
+        kernel.name = "K_bwd_weight_update"
+        kernel.id = 40
+        kernel.config = -1
+        kernel.fwd_bwd = 2
+        kernel.type = 1
+        kernel.gemm_input1_input2.outer = 1
+        kernel.gemm_input1_input2.M = hidden
+        kernel.gemm_input1_input2.K = seq
+        kernel.gemm_input1_input2.N = hidden
+        kernel.gemm_input1_input2.input_tensor_1_size = hidden*seq*word
+        kernel.gemm_input1_input2.input_tensor_2_size = hidden*seq*word
+        kernel.gemm_input1_input2.output_tensor_size = hidden*hidden*word
+        kernel.gemm_input1_input2.tiling = 3
+
+    elif i == 41:
+        kernel.name = "Q_bwd_weight_update"
+        kernel.id = 41
+        kernel.config = -1
+        kernel.fwd_bwd = 2
+        kernel.type = 1
+        kernel.gemm_input1_input2.outer = 1
+        kernel.gemm_input1_input2.M = hidden
+        kernel.gemm_input1_input2.K = seq
+        kernel.gemm_input1_input2.N = hidden
+        kernel.gemm_input1_input2.input_tensor_1_size = hidden*seq*word
+        kernel.gemm_input1_input2.input_tensor_2_size = hidden*seq*word
+        kernel.gemm_input1_input2.output_tensor_size = hidden*hidden*word
+        kernel.gemm_input1_input2.tiling = 3
 
 
-for i in range(1, 42):
+for i in range(1, 54):
     connection = dataflow_graph.connections.add()
     
     if i == 1:
@@ -744,7 +824,66 @@ for i in range(1, 42):
         connection.id = i
         connection.startIdx = 33
         connection.endIdx = 35 
-        
+    
+    elif i == 42:
+        connection.id = i
+        connection.startIdx = 20
+        connection.endIdx = 36
+
+    elif i == 43:
+        connection.id = i
+        connection.startIdx = 15
+        connection.endIdx = 36
+    
+    elif i == 44:
+        connection.id = i
+        connection.startIdx = 22
+        connection.endIdx = 37
+    
+    elif i == 45:
+        connection.id = i
+        connection.startIdx = 13
+        connection.endIdx = 37
+
+    elif i == 46:
+        connection.id = i
+        connection.startIdx = 25
+        connection.endIdx = 38
+
+    elif i == 47:
+        connection.id = i
+        connection.startIdx = 9
+        connection.endIdx = 38
+
+    elif i == 48:
+        connection.id = i
+        connection.startIdx = 28
+        connection.endIdx = 39
+    
+    elif i == 49:
+        connection.id = i
+        connection.startIdx = 2
+        connection.endIdx = 39
+    
+    elif i == 50:
+        connection.id = i
+        connection.startIdx = 33
+        connection.endIdx = 40
+    
+    elif i == 51:
+        connection.id = i
+        connection.startIdx = 2
+        connection.endIdx = 40
+    
+    elif i == 52:
+        connection.id = i
+        connection.startIdx = 32
+        connection.endIdx = 41
+    
+    elif i == 53:
+        connection.id = i
+        connection.startIdx = 2
+        connection.endIdx = 41
         
         
 # write to text file

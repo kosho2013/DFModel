@@ -40,9 +40,8 @@ message GEMM_Input1_Weight {
 	float weight_tensor_size = 8;
 	float output_tensor_size = 9;
 
-	int32 input_tensor_id = 10;
-
 	Sharding sharding = 12;
+	Tiling tiling = 20;
 	Communication_Type communication_type = 13;
 	float communication_size = 14;
 
@@ -64,6 +63,15 @@ message GEMM_Input1_Weight {
 		K_SHARDING = 3;
 		N_SHARDING = 4;
 		NO_SHARDING = 5;
+	}
+	
+	enum Tiling {
+		TILING_Placeholder = 0;
+		OUTER_TILING = 1;
+		M_TILING = 2;
+		K_TILING = 3;
+		N_TILING = 4;
+		NO_TILING = 5;
 	}
 	
 }
@@ -80,10 +88,8 @@ message GEMM_Input1_Input2 {
 	float input_tensor_2_size = 8;
 	float output_tensor_size = 9;
 
-	int32 input_tensor_1_id = 10;
-	int32 input_tensor_2_id = 11;
-
 	Sharding sharding = 12;
+	Tiling tiling = 20;
 	Communication_Type communication_type = 13;
 	float communication_size = 14;
 
@@ -107,6 +113,15 @@ message GEMM_Input1_Input2 {
 		NO_SHARDING = 5;
 	}
 	
+	enum Tiling {
+		TILING_Placeholder = 0;
+		OUTER_TILING = 1;
+		M_TILING = 2;
+		K_TILING = 3;
+		N_TILING = 4;
+		NO_TILING = 5;
+	}
+	
 }
 
 
@@ -118,9 +133,8 @@ message ElementWise_Input1 {
 	float input_tensor_size = 6;
 	float output_tensor_size = 9;
 
-	int32 input_tensor_id = 10;
-
 	Sharding sharding = 12;
+	Tiling tiling = 20;
 	Communication_Type communication_type = 13;
 	float communication_size = 14;
 
@@ -140,6 +154,15 @@ message ElementWise_Input1 {
 		M_SHARDING = 2;
 		N_SHARDING = 4;
 		NO_SHARDING = 5;
+	}
+	
+	enum Tiling {
+		TILING_Placeholder = 0;
+		OUTER_TILING = 1;
+		M_TILING = 2;
+		K_TILING = 3;
+		N_TILING = 4;
+		NO_TILING = 5;
 	}
 	
 }
@@ -155,10 +178,8 @@ message ElementWise_Input1_Input2 {
 	float input_tensor_2_size = 30;
 	float output_tensor_size = 9;
 
-	int32 input_tensor_1_id = 10;
-	int32 input_tensor_2_id = 20;
-
 	Sharding sharding = 12;
+	Tiling tiling = 20;
 	Communication_Type communication_type = 13;
 	float communication_size = 14;
 
@@ -178,6 +199,15 @@ message ElementWise_Input1_Input2 {
 		M_SHARDING = 2;
 		N_SHARDING = 4;
 		NO_SHARDING = 5;
+	}
+	
+	enum Tiling {
+		TILING_Placeholder = 0;
+		OUTER_TILING = 1;
+		M_TILING = 2;
+		K_TILING = 3;
+		N_TILING = 4;
+		NO_TILING = 5;
 	}
 	
 }

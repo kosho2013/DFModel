@@ -11,7 +11,7 @@ dataflow_graph {
     N: 2048
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
-    input_tensor_id: -1
+    tiling: N_TILING
   }
 }
 kernels {
@@ -26,7 +26,7 @@ kernels {
     N: 2048
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 1
+    tiling: N_TILING
   }
 }
 kernels {
@@ -43,7 +43,7 @@ kernels {
     input_tensor_size: 50331650.0
     weight_tensor_size: 301989900.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 2
+    tiling: N_TILING
   }
 }
 kernels {
@@ -60,7 +60,7 @@ kernels {
     input_tensor_size: 50331650.0
     weight_tensor_size: 301989900.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 2
+    tiling: N_TILING
   }
 }
 kernels {
@@ -77,7 +77,7 @@ kernels {
     input_tensor_size: 50331650.0
     weight_tensor_size: 301989900.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 2
+    tiling: N_TILING
   }
 }
 kernels {
@@ -94,8 +94,7 @@ kernels {
     input_tensor_1_size: 50331650.0
     input_tensor_2_size: 50331650.0
     output_tensor_size: 805306400.0
-    input_tensor_1_id: 3
-    input_tensor_2_id: 4
+    tiling: N_TILING
   }
 }
 kernels {
@@ -110,7 +109,7 @@ kernels {
     N: 2048
     input_tensor_size: 805306400.0
     output_tensor_size: 805306400.0
-    input_tensor_id: 6
+    tiling: N_TILING
   }
 }
 kernels {
@@ -125,7 +124,7 @@ kernels {
     N: 2048
     input_tensor_size: 805306400.0
     output_tensor_size: 805306400.0
-    input_tensor_id: 7
+    tiling: N_TILING
   }
 }
 kernels {
@@ -142,8 +141,7 @@ kernels {
     input_tensor_1_size: 50331650.0
     input_tensor_2_size: 805306400.0
     output_tensor_size: 50331650.0
-    input_tensor_1_id: 5
-    input_tensor_2_id: 8
+    tiling: N_TILING
   }
 }
 kernels {
@@ -160,7 +158,7 @@ kernels {
     input_tensor_size: 50331650.0
     weight_tensor_size: 301989900.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 9
+    tiling: N_TILING
   }
 }
 kernels {
@@ -175,7 +173,7 @@ kernels {
     N: 2048
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 10
+    tiling: N_TILING
   }
 }
 kernels {
@@ -190,8 +188,7 @@ kernels {
     N: 2048
     input_tensor_1_size: 50331650.0
     output_tensor_size: 50331650.0
-    input_tensor_1_id: 1
-    input_tensor_2_id: 11
+    tiling: N_TILING
     input_tensor_2_size: 50331650.0
   }
 }
@@ -207,7 +204,7 @@ kernels {
     N: 2048
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 12
+    tiling: N_TILING
   }
 }
 kernels {
@@ -224,7 +221,7 @@ kernels {
     input_tensor_size: 50331650.0
     weight_tensor_size: 1207959600.0
     output_tensor_size: 201326600.0
-    input_tensor_id: 13
+    tiling: N_TILING
   }
 }
 kernels {
@@ -239,7 +236,7 @@ kernels {
     N: 2048
     input_tensor_size: 201326600.0
     output_tensor_size: 201326600.0
-    input_tensor_id: 14
+    tiling: N_TILING
   }
 }
 kernels {
@@ -256,7 +253,7 @@ kernels {
     input_tensor_size: 201326600.0
     weight_tensor_size: 1207959600.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 15
+    tiling: N_TILING
   }
 }
 kernels {
@@ -271,7 +268,7 @@ kernels {
     N: 2048
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 16
+    tiling: N_TILING
   }
 }
 kernels {
@@ -286,8 +283,7 @@ kernels {
     N: 2048
     input_tensor_1_size: 50331650.0
     output_tensor_size: 50331650.0
-    input_tensor_1_id: 12
-    input_tensor_2_id: 17
+    tiling: N_TILING
     input_tensor_2_size: 50331650.0
   }
 }
@@ -303,7 +299,7 @@ kernels {
     N: 2048
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
-    input_tensor_id: -1
+    tiling: N_TILING
   }
 }
 kernels {
@@ -318,7 +314,7 @@ kernels {
     N: 2048
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 19
+    tiling: N_TILING
   }
 }
 kernels {
@@ -335,7 +331,7 @@ kernels {
     input_tensor_size: 50331650.0
     weight_tensor_size: 1207959600.0
     output_tensor_size: 201326600.0
-    input_tensor_id: 20
+    tiling: N_TILING
   }
 }
 kernels {
@@ -350,7 +346,7 @@ kernels {
     N: 2048
     input_tensor_size: 201326600.0
     output_tensor_size: 201326600.0
-    input_tensor_id: 21
+    tiling: N_TILING
   }
 }
 kernels {
@@ -367,7 +363,7 @@ kernels {
     input_tensor_size: 201326600.0
     weight_tensor_size: 1207959600.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 23
+    tiling: N_TILING
   }
 }
 kernels {
@@ -382,7 +378,7 @@ kernels {
     N: 2048
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 24
+    tiling: N_TILING
   }
 }
 kernels {
@@ -397,7 +393,7 @@ kernels {
     N: 2048
     input_tensor_size: 50331650.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 26
+    tiling: N_TILING
   }
 }
 kernels {
@@ -414,7 +410,7 @@ kernels {
     input_tensor_size: 50331650.0
     weight_tensor_size: 301989900.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 27
+    tiling: N_TILING
   }
 }
 kernels {
@@ -431,8 +427,7 @@ kernels {
     input_tensor_1_size: 50331650.0
     input_tensor_2_size: 50331650.0
     output_tensor_size: 805306400.0
-    input_tensor_1_id: 28
-    input_tensor_2_id: 5
+    tiling: N_TILING
   }
 }
 kernels {
@@ -449,8 +444,7 @@ kernels {
     input_tensor_1_size: 50331650.0
     input_tensor_2_size: 805306400.0
     output_tensor_size: 50331650.0
-    input_tensor_1_id: 28
-    input_tensor_2_id: 8
+    tiling: N_TILING
   }
 }
 kernels {
@@ -467,7 +461,7 @@ kernels {
     input_tensor_size: 50331650.0
     weight_tensor_size: 301989900.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 31
+    tiling: N_TILING
   }
 }
 kernels {
@@ -482,7 +476,7 @@ kernels {
     N: 2048
     input_tensor_size: 805306400.0
     output_tensor_size: 805306400.0
-    input_tensor_id: 30
+    tiling: N_TILING
   }
 }
 kernels {
@@ -497,7 +491,7 @@ kernels {
     N: 2048
     input_tensor_size: 805306400.0
     output_tensor_size: 805306400.0
-    input_tensor_id: 34
+    tiling: N_TILING
   }
 }
 kernels {
@@ -514,8 +508,7 @@ kernels {
     input_tensor_1_size: 805306400.0
     input_tensor_2_size: 50331650.0
     output_tensor_size: 50331650.0
-    input_tensor_1_id: 35
-    input_tensor_2_id: 4
+    tiling: N_TILING
   }
 }
 kernels {
@@ -532,8 +525,7 @@ kernels {
     input_tensor_1_size: 805306400.0
     input_tensor_2_size: 50331650.0
     output_tensor_size: 50331650.0
-    input_tensor_1_id: 35
-    input_tensor_2_id: 3
+    tiling: N_TILING
   }
 }
 kernels {
@@ -550,7 +542,7 @@ kernels {
     input_tensor_size: 50331650.0
     weight_tensor_size: 301989900.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 36
+    tiling: N_TILING
   }
 }
 kernels {
@@ -567,7 +559,109 @@ kernels {
     input_tensor_size: 50331650.0
     weight_tensor_size: 301989900.0
     output_tensor_size: 50331650.0
-    input_tensor_id: 37
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "FFN1_bwd_weight_update"
+  id: 36
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 1
+    M: 49152
+    K: 2048
+    N: 12288
+    input_tensor_1_size: 50331650.0
+    input_tensor_2_size: 201326600.0
+    output_tensor_size: 1207959600.0
+    tiling: K_TILING
+  }
+}
+kernels {
+  name: "FFN0_bwd_weight_update"
+  id: 37
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 1
+    M: 12288
+    K: 2048
+    N: 49152
+    input_tensor_1_size: 201326600.0
+    input_tensor_2_size: 50331650.0
+    output_tensor_size: 1207959600.0
+    tiling: K_TILING
+  }
+}
+kernels {
+  name: "PROJ_GEMM_bwd_weight_update"
+  id: 38
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 1
+    M: 12288
+    K: 2048
+    N: 12288
+    input_tensor_1_size: 50331650.0
+    input_tensor_2_size: 50331650.0
+    output_tensor_size: 301989900.0
+    tiling: K_TILING
+  }
+}
+kernels {
+  name: "V_bwd_weight_update"
+  id: 39
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 1
+    M: 12288
+    K: 2048
+    N: 12288
+    input_tensor_1_size: 50331650.0
+    input_tensor_2_size: 50331650.0
+    output_tensor_size: 301989900.0
+    tiling: K_TILING
+  }
+}
+kernels {
+  name: "K_bwd_weight_update"
+  id: 40
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 1
+    M: 12288
+    K: 2048
+    N: 12288
+    input_tensor_1_size: 50331650.0
+    input_tensor_2_size: 50331650.0
+    output_tensor_size: 301989900.0
+    tiling: K_TILING
+  }
+}
+kernels {
+  name: "Q_bwd_weight_update"
+  id: 41
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 1
+    M: 12288
+    K: 2048
+    N: 12288
+    input_tensor_1_size: 50331650.0
+    input_tensor_2_size: 50331650.0
+    output_tensor_size: 301989900.0
+    tiling: K_TILING
   }
 }
 connections {
@@ -775,8 +869,66 @@ connections {
   endIdx: 35
   id: 41
 }
-
-
+connections {
+  startIdx: 20
+  endIdx: 36
+  id: 42
+}
+connections {
+  startIdx: 15
+  endIdx: 36
+  id: 43
+}
+connections {
+  startIdx: 22
+  endIdx: 37
+  id: 44
+}
+connections {
+  startIdx: 13
+  endIdx: 37
+  id: 45
+}
+connections {
+  startIdx: 25
+  endIdx: 38
+  id: 46
+}
+connections {
+  startIdx: 9
+  endIdx: 38
+  id: 47
+}
+connections {
+  startIdx: 28
+  endIdx: 39
+  id: 48
+}
+connections {
+  startIdx: 2
+  endIdx: 39
+  id: 49
+}
+connections {
+  startIdx: 33
+  endIdx: 40
+  id: 50
+}
+connections {
+  startIdx: 2
+  endIdx: 40
+  id: 51
+}
+connections {
+  startIdx: 32
+  endIdx: 41
+  id: 52
+}
+connections {
+  startIdx: 2
+  endIdx: 41
+  id: 53
+}
 
 }
 system {

@@ -76,7 +76,7 @@ sharding = []
 node_communication_type = []
 node_communication_size = []
 
-
+tiling = []
 node_dict = {}
 i = 0
 for kernel in dse.dataflow_graph.kernels:
@@ -98,6 +98,7 @@ for kernel in dse.dataflow_graph.kernels:
         node_communication_type.append(kernel.gemm_input1_weight.communication_type)
         node_communication_size.append(kernel.gemm_input1_weight.communication_size)
         
+        tiling.append(kernel.gemm_input1_weight.tiling)
         
         if M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or weight_tensor_size[-1] == 0:
             raise Exception('Wrong!')
@@ -113,6 +114,8 @@ for kernel in dse.dataflow_graph.kernels:
         node_communication_type.append(kernel.gemm_input1_input2.communication_type)
         node_communication_size.append(kernel.gemm_input1_input2.communication_size)
         
+        tiling.append(kernel.gemm_input1_input2.tiling)
+        
         if M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or weight_tensor_size[-1] == 0:
             raise Exception('Wrong!')
             
@@ -127,6 +130,8 @@ for kernel in dse.dataflow_graph.kernels:
         node_communication_type.append(kernel.elementwise_input1.communication_type)
         node_communication_size.append(kernel.elementwise_input1.communication_size)
         
+        tiling.append(kernel.elementwise_input1.tiling)
+        
         if M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or weight_tensor_size[-1] == 0:
             raise Exception('Wrong!')
         
@@ -140,6 +145,8 @@ for kernel in dse.dataflow_graph.kernels:
         sharding.append(kernel.elementwise_input1_input2.sharding)
         node_communication_type.append(kernel.elementwise_input1_input2.communication_type)
         node_communication_size.append(kernel.elementwise_input1_input2.communication_size)
+        
+        tiling.append(kernel.elementwise_input1_input2.tiling)
         
         if M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or weight_tensor_size[-1] == 0:
             raise Exception('Wrong!')
@@ -432,18 +439,77 @@ shard_N = model.addMVar(num_kernel, name='shard_N', vtype=gp.GRB.INTEGER, lb=0)
 
 for i in range(num_kernel):
     if sharding[i] == Dim.OUTER_DIM.value or sharding[i] == Dim.M_DIM.value:
-        model.addConstr(shard_M[i] * TP >= M[i])
-        model.addConstr(shard_K[i] == K[i])
+        if tiling[i] == Dim.OUTER_DIM.value or tiling[i] == Dim.M_DIM.value:
+            raise Exception('Wrong!')
+        
+        elif tiling[i] == Dim.K_DIM.value:
+            model.addConstr(shard_M[i] * TP >= M[i])
+            model.addConstr(shard_K[i] * num_tile >= K[i])
+            model.addConstr(shard_N[i] >= N[i])
+            
+        elif tiling[i] == Dim.N_DIM.value:
+            model.addConstr(shard_M[i] * TP >= M[i])
+            model.addConstr(shard_K[i] >= K[i])
+            model.addConstr(shard_N[i] * num_tile >= N[i])
+            
+        else:
+            raise Exception('Wrong!')
+ 
     elif sharding[i] == Dim.K_DIM.value:
-        model.addConstr(shard_M[i] == M[i])
-        model.addConstr(shard_K[i] * TP >= K[i])
+        if tiling[i] == Dim.OUTER_DIM.value or tiling[i] == Dim.M_DIM.value:
+            model.addConstr(shard_M[i] * num_tile >= M[i])
+            model.addConstr(shard_K[i] * TP >= K[i])
+            model.addConstr(shard_N[i] >= N[i])
+        
+        elif tiling[i] == Dim.K_DIM.value:
+            raise Exception('Wrong!')
+            
+        elif tiling[i] == Dim.N_DIM.value:
+            model.addConstr(shard_M[i] >= M[i])
+            model.addConstr(shard_K[i] * TP >= K[i])
+            model.addConstr(shard_N[i] * num_tile >= N[i])
+            
+        else:
+            raise Exception('Wrong!')
+        
+    elif sharding[i] == Dim.N_DIM.value:
+        if tiling[i] == Dim.OUTER_DIM.value or tiling[i] == Dim.M_DIM.value:
+            model.addConstr(shard_M[i] * num_tile >= M[i])
+            model.addConstr(shard_K[i] >= K[i])
+            model.addConstr(shard_N[i] * TP >= N[i])
+        
+        elif tiling[i] == Dim.K_DIM.value:
+            model.addConstr(shard_M[i] >= M[i])
+            model.addConstr(shard_K[i] * num_tile >= K[i])
+            model.addConstr(shard_N[i] * TP >= N[i])
+            
+        elif tiling[i] == Dim.N_DIM.value:
+            raise Exception('Wrong!')
+            
+        else:
+            raise Exception('Wrong!')
+        
     elif sharding[i] == Dim.NO_SHARDING.value:
-        model.addConstr(shard_M[i] == M[i])
-        model.addConstr(shard_K[i] == K[i])
+        if tiling[i] == Dim.OUTER_DIM.value or tiling[i] == Dim.M_DIM.value:
+            model.addConstr(shard_M[i] * num_tile >= M[i])
+            model.addConstr(shard_K[i] >= K[i])
+            model.addConstr(shard_N[i] >= N[i])
+        
+        elif tiling[i] == Dim.K_DIM.value:
+            model.addConstr(shard_M[i] >= M[i])
+            model.addConstr(shard_K[i] * num_tile >= K[i])
+            model.addConstr(shard_N[i] >= N[i])
+            
+        elif tiling[i] == Dim.N_DIM.value:
+            model.addConstr(shard_M[i] >= M[i])
+            model.addConstr(shard_K[i] >= K[i])
+            model.addConstr(shard_N[i] * num_tile >= N[i])
+            
+        else:
+            raise Exception('Wrong!')
+        
     else:
         raise Exception('Wrong!')
-        
-    model.addConstr(shard_N[i] == tile_size)
 
 
 

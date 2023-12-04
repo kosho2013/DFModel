@@ -39,6 +39,7 @@ N = []
 weight_tensor_size = []
 input_tensor_1_size = []
 input_tensor_2_size = []
+tiling = []
 node_dict = {}
 i = 0
 for kernel in dse.dataflow_graph.kernels:
@@ -56,6 +57,8 @@ for kernel in dse.dataflow_graph.kernels:
         weight_tensor_size.append(kernel.gemm_input1_weight.weight_tensor_size)
         output_tensor_size.append(kernel.gemm_input1_weight.output_tensor_size)
         
+        tiling.append(kernel.gemm_input1_weight.tiling)
+        
         if outer[-1] == 0 or M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or input_tensor_1_size[-1] == 0 or input_tensor_2_size[-1] == 0 or weight_tensor_size[-1] == 0 or output_tensor_size[-1] == 0:
             raise Exception('Wrong!')
         
@@ -69,6 +72,8 @@ for kernel in dse.dataflow_graph.kernels:
         input_tensor_2_size.append(kernel.gemm_input1_input2.input_tensor_2_size)
         weight_tensor_size.append(-1.0)
         output_tensor_size.append(kernel.gemm_input1_input2.output_tensor_size)
+        
+        tiling.append(kernel.gemm_input1_input2.tiling)
         
         if outer[-1] == 0 or M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or input_tensor_1_size[-1] == 0 or input_tensor_2_size[-1] == 0 or weight_tensor_size[-1] == 0 or output_tensor_size[-1] == 0:
             raise Exception('Wrong!')
@@ -84,6 +89,8 @@ for kernel in dse.dataflow_graph.kernels:
         weight_tensor_size.append(-1.0)
         output_tensor_size.append(kernel.elementwise_input1.output_tensor_size)
         
+        tiling.append(kernel.elementwise_input1.tiling)
+        
         if outer[-1] == 0 or M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or input_tensor_1_size[-1] == 0 or input_tensor_2_size[-1] == 0 or weight_tensor_size[-1] == 0 or output_tensor_size[-1] == 0:
             raise Exception('Wrong!')
         
@@ -97,6 +104,8 @@ for kernel in dse.dataflow_graph.kernels:
         input_tensor_2_size.append(kernel.elementwise_input1_input2.input_tensor_2_size)
         weight_tensor_size.append(-1.0)
         output_tensor_size.append(kernel.elementwise_input1_input2.output_tensor_size)
+        
+        tiling.append(kernel.elementwise_input1_input2.tiling)
         
         if outer[-1] == 0 or M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or input_tensor_1_size[-1] == 0 or input_tensor_2_size[-1] == 0 or weight_tensor_size[-1] == 0 or output_tensor_size[-1] == 0:
             raise Exception('Wrong!')
@@ -214,12 +223,24 @@ class Dim(Enum):
     NO_SHARDING = 4
     
 
+class Tensor(Enum):
+    RR = 0
+    RS = 1
+    SR = 2
+    
+    
 
 for i in range(num_kernel):
     print(kernel_name[i], i)
     
 for i in range(num_edge):
     print(startName[i], endName[i], i)
+
+
+
+
+pprint.pprint(tiling)
+
 
 
 
@@ -244,8 +265,18 @@ for i in range(num_kernel):
         model.addConstr(sharding[i, Dim.N.value] == 0)
     model.addConstr(np.ones((5)) @ sharding[i, :] == 1)
         
-        
-    model.addConstr(sharding[i, Dim.N.value] == 0)
+    # don't shard the tile dim
+    if tiling[i] == Dim.OUTER.value+1:
+        model.addConstr(sharding[i, Dim.OUTER.value] == 0)
+    elif tiling[i] == Dim.M.value+1:
+        model.addConstr(sharding[i, Dim.M.value] == 0)
+    elif tiling[i] == Dim.K.value+1:
+        model.addConstr(sharding[i, Dim.K.value] == 0)
+    elif tiling[i] == Dim.N.value+1:
+        model.addConstr(sharding[i, Dim.N.value] == 0)
+    else:
+        raise Exception('Wrong!')
+    
     
 
     if weight_tensor_size[i] == -1: # no weights
@@ -268,55 +299,72 @@ for i in range(num_kernel):
 
 
 
+
+    
+
 # RR, RS, SR
 upstream_sharding = model.addMVar((num_edge, 3), name='upstream_sharding', vtype=gp.GRB.BINARY)
 downstream_sharding = model.addMVar((num_edge, 3), name='downstream_sharding', vtype=gp.GRB.BINARY)
 for i in range(num_edge):
     model.addConstr(np.ones((3)) @ upstream_sharding[i, :] == 1)
     model.addConstr(np.ones((3)) @ downstream_sharding[i, :] == 1)
-
-    # upsteam
+    
     upstream_node_idx = node_dict[startIdx[i]]
-    model.addConstr((sharding[upstream_node_idx, Dim.OUTER.value] == 1) >> (upstream_sharding[i, Dim.K.value] == 1)) # shard outer
-    model.addConstr((sharding[upstream_node_idx, Dim.M.value] == 1) >> (upstream_sharding[i, Dim.K.value] == 1)) # shard M
-    model.addConstr((sharding[upstream_node_idx, Dim.K.value] == 1) >> (upstream_sharding[i, Dim.OUTER.value] == 1)) # shard K
-    model.addConstr((sharding[upstream_node_idx, Dim.N.value] == 1) >> (upstream_sharding[i, Dim.M.value] == 1)) # shard N
-    model.addConstr((sharding[upstream_node_idx, Dim.NO_SHARDING.value] == 1) >> (upstream_sharding[i, Dim.OUTER.value] == 1)) # no sharding
+    downstream_node_idx = node_dict[endIdx[i]]
+    
+    
+    
+    
+    # upsteam 
+    model.addConstr((sharding[upstream_node_idx, Dim.OUTER.value] == 1) >> (upstream_sharding[i, Tensor.SR.value] == 1)) # shard outer
+    model.addConstr((sharding[upstream_node_idx, Dim.M.value] == 1) >> (upstream_sharding[i, Tensor.SR.value] == 1)) # shard M
+    model.addConstr((sharding[upstream_node_idx, Dim.K.value] == 1) >> (upstream_sharding[i, Tensor.RR.value] == 1)) # shard K
+    model.addConstr((sharding[upstream_node_idx, Dim.N.value] == 1) >> (upstream_sharding[i, Tensor.RS.value] == 1)) # shard N
+    model.addConstr((sharding[upstream_node_idx, Dim.NO_SHARDING.value] == 1) >> (upstream_sharding[i, Tensor.RR.value] == 1)) # no sharding
+
+
 
     # downstream
-    downstream_node_idx = node_dict[endIdx[i]]
-    if kernel_type[downstream_node_idx] == KernelType.SIMD.value:
-        model.addConstr((sharding[downstream_node_idx, Dim.OUTER.value] == 1) >> (downstream_sharding[i, Dim.K.value] == 1)) # shard outer
-        model.addConstr((sharding[downstream_node_idx, Dim.M.value] == 1) >> (downstream_sharding[i, Dim.K.value] == 1)) # shard M
-        model.addConstr((sharding[downstream_node_idx, Dim.K.value] == 1) >> (downstream_sharding[i, Dim.OUTER.value] == 1)) # shard K
-        model.addConstr((sharding[downstream_node_idx, Dim.N.value] == 1) >> (downstream_sharding[i, Dim.M.value] == 1)) # shard N
-        model.addConstr((sharding[downstream_node_idx, Dim.NO_SHARDING.value] == 1) >> (downstream_sharding[i, Dim.OUTER.value] == 1)) # no sharding
-
+    if tiling[downstream_node_idx] == Dim.K.value+1: # for weight update kernels
+        model.addConstr((sharding[downstream_node_idx, Dim.OUTER.value] == 1) >> (downstream_sharding[i, Tensor.SR.value] == 1))
+        model.addConstr((sharding[downstream_node_idx, Dim.M.value] == 1) >> (downstream_sharding[i, Tensor.SR.value] == 1))
+        model.addConstr((sharding[downstream_node_idx, Dim.K.value] == 1) >> (downstream_sharding[i, Tensor.RS.value] == 1))
+        model.addConstr((sharding[downstream_node_idx, Dim.N.value] == 1) >> (downstream_sharding[i, Tensor.SR.value] == 1))
+        model.addConstr((sharding[downstream_node_idx, Dim.NO_SHARDING.value] == 1) >> (downstream_sharding[i, Tensor.RR.value] == 1))
+    
     else:
-        if weight_tensor_size[downstream_node_idx] != -1: # weight is present, this edge represents outer,K,N
-            model.addConstr((sharding[downstream_node_idx, Dim.OUTER.value] == 1) >> (downstream_sharding[i, Dim.K.value] == 1)) # shard outer
-            model.addConstr((sharding[downstream_node_idx, Dim.M.value] == 1) >> (downstream_sharding[i, Dim.OUTER.value] == 1)) # shard M
-            model.addConstr((sharding[downstream_node_idx, Dim.K.value] == 1) >> (downstream_sharding[i, Dim.K.value] == 1)) # shard K
-            model.addConstr((sharding[downstream_node_idx, Dim.N.value] == 1) >> (downstream_sharding[i, Dim.M.value] == 1)) # shard N
-            model.addConstr((sharding[downstream_node_idx, Dim.NO_SHARDING.value] == 1) >> (downstream_sharding[i, Dim.OUTER.value] == 1)) # no sharding
+        if kernel_type[downstream_node_idx] == KernelType.SIMD.value:
+            model.addConstr((sharding[downstream_node_idx, Dim.OUTER.value] == 1) >> (downstream_sharding[i, Tensor.SR.value] == 1)) # shard outer
+            model.addConstr((sharding[downstream_node_idx, Dim.M.value] == 1) >> (downstream_sharding[i, Tensor.SR.value] == 1)) # shard M
+            model.addConstr((sharding[downstream_node_idx, Dim.K.value] == 1) >> (downstream_sharding[i, Tensor.RR.value] == 1)) # shard K
+            model.addConstr((sharding[downstream_node_idx, Dim.N.value] == 1) >> (downstream_sharding[i, Tensor.RS.value] == 1)) # shard N
+            model.addConstr((sharding[downstream_node_idx, Dim.NO_SHARDING.value] == 1) >> (downstream_sharding[i, Tensor.RR.value] == 1)) # no sharding
 
-        else: # weight is not present
-            if tensor_size[i] == input_tensor_1_size[downstream_node_idx]: # if the edge represent tensor 1
-                model.addConstr((sharding[downstream_node_idx, Dim.OUTER.value] == 1) >> (downstream_sharding[i, Dim.K.value] == 1)) # shard outer
-                model.addConstr((sharding[downstream_node_idx, Dim.M.value] == 1) >> (downstream_sharding[i, Dim.OUTER.value] == 1)) # shard M
-                model.addConstr((sharding[downstream_node_idx, Dim.K.value] == 1) >> (downstream_sharding[i, Dim.K.value] == 1)) # shard K
-                model.addConstr((sharding[downstream_node_idx, Dim.N.value] == 1) >> (downstream_sharding[i, Dim.M.value] == 1)) # shard N
-                model.addConstr((sharding[downstream_node_idx, Dim.NO_SHARDING.value] == 1) >> (downstream_sharding[i, Dim.OUTER.value] == 1)) # no sharding
+        else:
+            if weight_tensor_size[downstream_node_idx] != -1: # weight is present, this edge represents outer,K,N
+                model.addConstr((sharding[downstream_node_idx, Dim.OUTER.value] == 1) >> (downstream_sharding[i, Tensor.SR.value] == 1)) # shard outer
+                model.addConstr((sharding[downstream_node_idx, Dim.M.value] == 1) >> (downstream_sharding[i, Tensor.RR.value] == 1)) # shard M
+                model.addConstr((sharding[downstream_node_idx, Dim.K.value] == 1) >> (downstream_sharding[i, Tensor.SR.value] == 1)) # shard K
+                model.addConstr((sharding[downstream_node_idx, Dim.N.value] == 1) >> (downstream_sharding[i, Tensor.RS.value] == 1)) # shard N
+                model.addConstr((sharding[downstream_node_idx, Dim.NO_SHARDING.value] == 1) >> (downstream_sharding[i, Tensor.RR.value] == 1)) # no sharding
 
-            elif tensor_size[i] == input_tensor_2_size[downstream_node_idx]: # if the edge represent tensor 2
-                model.addConstr((sharding[downstream_node_idx, Dim.OUTER.value] == 1) >> (downstream_sharding[i, Dim.K.value] == 1)) # shard outer
-                model.addConstr((sharding[downstream_node_idx, Dim.M.value] == 1) >> (downstream_sharding[i, Dim.K.value] == 1)) # shard M
-                model.addConstr((sharding[downstream_node_idx, Dim.K.value] == 1) >> (downstream_sharding[i, Dim.M.value] == 1)) # shard K
-                model.addConstr((sharding[downstream_node_idx, Dim.N.value] == 1) >> (downstream_sharding[i, Dim.OUTER.value] == 1)) # shard N
-                model.addConstr((sharding[downstream_node_idx, Dim.NO_SHARDING.value] == 1) >> (downstream_sharding[i, Dim.OUTER.value] == 1)) # no sharding
+            else: # weight is not present
+                if tensor_size[i] == input_tensor_1_size[downstream_node_idx]: # if the edge represent tensor 1
+                    model.addConstr((sharding[downstream_node_idx, Dim.OUTER.value] == 1) >> (downstream_sharding[i, Tensor.SR.value] == 1)) # shard outer
+                    model.addConstr((sharding[downstream_node_idx, Dim.M.value] == 1) >> (downstream_sharding[i, Tensor.RR.value] == 1)) # shard M
+                    model.addConstr((sharding[downstream_node_idx, Dim.K.value] == 1) >> (downstream_sharding[i, Tensor.SR.value] == 1)) # shard K
+                    model.addConstr((sharding[downstream_node_idx, Dim.N.value] == 1) >> (downstream_sharding[i, Tensor.RS.value] == 1)) # shard N
+                    model.addConstr((sharding[downstream_node_idx, Dim.NO_SHARDING.value] == 1) >> (downstream_sharding[i, Tensor.RR.value] == 1)) # no sharding
 
-            else:
-                raise Exception('Wrong!')
+                elif tensor_size[i] == input_tensor_2_size[downstream_node_idx]: # if the edge represent tensor 2
+                    model.addConstr((sharding[downstream_node_idx, Dim.OUTER.value] == 1) >> (downstream_sharding[i, Tensor.SR.value] == 1)) # shard outer
+                    model.addConstr((sharding[downstream_node_idx, Dim.M.value] == 1) >> (downstream_sharding[i, Tensor.SR.value] == 1)) # shard M
+                    model.addConstr((sharding[downstream_node_idx, Dim.K.value] == 1) >> (downstream_sharding[i, Tensor.RS.value] == 1)) # shard K
+                    model.addConstr((sharding[downstream_node_idx, Dim.N.value] == 1) >> (downstream_sharding[i, Tensor.RR.value] == 1)) # shard N
+                    model.addConstr((sharding[downstream_node_idx, Dim.NO_SHARDING.value] == 1) >> (downstream_sharding[i, Tensor.RR.value] == 1)) # no sharding
+
+                else:
+                    raise Exception('Wrong!')
 
 
 matrix_commu_type = [[0, 0, 0],
