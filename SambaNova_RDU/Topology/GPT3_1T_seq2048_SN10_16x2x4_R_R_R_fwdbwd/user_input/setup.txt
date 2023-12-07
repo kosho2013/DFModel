@@ -969,6 +969,9 @@ system {
     dram_bw: 100.0
     dram_cap: 1649267441664.0
   }
+  
+  dram_bw_dse: False
+  net_bw_dse: False
 }
 cost {
   link_unit_price: 2.0
@@ -986,4 +989,6 @@ training {
   seq_tile_size: 16
   optimization: 1
   num_config: 8
+  
+  objective: 1
 }

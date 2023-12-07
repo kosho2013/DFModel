@@ -257,6 +257,8 @@ Freq = dse.system.accelerator.freq
 dram_bw = dse.system.accelerator.dram_bw
 DRAM_Cap = dse.system.accelerator.dram_cap
 num_chip = dse.system.num_chip
+dram_bw_dse = dse.system.dram_bw_dse
+net_bw_dse = dse.system.net_bw_dse
 GFLOPS = 2*VecWidth*StageWidth*Core*Freq
 
 
@@ -364,8 +366,8 @@ elif len(topology) == 1: # 1D
     model.addConstr(DP == 1)   
     
     Link_BW = model.addMVar(1, name='Link_BW', vtype=gp.GRB.CONTINUOUS, lb=0)
-    if link_bw[0] == 0: # DSE
-        pass
+    if net_bw_dse == True: # DSE
+        model.addConstr(Link_BW[0] <= link_bw[0])
     else:
         model.addConstr(Link_BW[0] == link_bw[0])
     
@@ -391,8 +393,9 @@ elif len(topology) == 2: # 2D
     model.addConstr(DP == 1)
 
     Link_BW = model.addMVar(2, name='Link_BW', vtype=gp.GRB.CONTINUOUS, lb=0)
-    if link_bw[0] == 0: # DSE
-        pass
+    if net_bw_dse == True: # DSE
+        model.addConstr(Link_BW[0] <= link_bw[0])
+        model.addConstr(Link_BW[1] <= link_bw[1])
     else:
         model.addConstr(Link_BW[0] == link_bw[0])
         model.addConstr(Link_BW[1] == link_bw[1])
@@ -422,7 +425,10 @@ elif len(topology) == 3: # 3D
     model.addConstr(DP == Shape[2])
     
     Link_BW = model.addMVar(3, name='Link_BW', vtype=gp.GRB.CONTINUOUS, lb=0)
-    if link_bw[0] == 0: # DSE
+    if net_bw_dse == True: # DSE
+        model.addConstr(Link_BW[0] <= link_bw[0])
+        model.addConstr(Link_BW[1] <= link_bw[1])
+        model.addConstr(Link_BW[2] <= link_bw[2])
         pass
     else:
         model.addConstr(Link_BW[0] == link_bw[0])
@@ -444,8 +450,8 @@ else:
 
 
 DRAM_BW = model.addVar(name='DRAM_BW', vtype=gp.GRB.CONTINUOUS, lb=0)
-if dram_bw == 0: # DSE
-    pass
+if dram_bw_dse == True: # DSE
+    model.addConstr(DRAM_BW <= dram_bw)
 else:
     model.addConstr(DRAM_BW == dram_bw)
 
@@ -884,7 +890,7 @@ for i in range(C):
 # total network latency from data/tensor parallelism
 Network_Latency = model.addMVar(C, name='Network_Latency', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
-    model.addConstr(Network_Latency[i] == Network_Latency_ALL_REDUCE[i] + Network_Bytes_ALL_REDUCE_PERIODIC[i])
+    model.addConstr(Network_Latency[i] == Network_Latency_ALL_REDUCE[i] + Network_Latency_ALL_REDUCE_PERIODIC[i])
     
     
 

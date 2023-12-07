@@ -273,6 +273,9 @@ message System {
 		SW_SW sw_sw = 11;
 		R_R_R r_r_r = 12;
 	}
+	
+	bool dram_bw_dse = 30;
+	bool net_bw_dse = 40;
 }
 
 message SINGLE_CHIP {
@@ -338,13 +341,6 @@ message R_R_R {
 	float link_bw_z = 6;
 }
 
-
-
-
-
-
-
-
 message Cost {
 	float link_unit_price = 1;
     float switch_unit_price = 2;
@@ -377,7 +373,6 @@ message Training {
 	
 	float util_threshold = 40;
 	Objective objective = 41;
-	
 }
 
 message DSE {

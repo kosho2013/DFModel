@@ -953,6 +953,10 @@ system {
 	x: 16
 	y: 4
 	z: 2
+	
+	link_bw_x: 25.0
+	link_bw_y: 25.0
+	link_bw_z: 25.0
   }
   
   accelerator {
@@ -961,9 +965,13 @@ system {
     systolic_width: 32
     systolic_height: 6
     sram_cap: 335544320.0
+	dram_bw: 100
     freq: 1.25
     dram_cap: 1649267441664.0
   }
+  
+  dram_bw_dse: True
+  net_bw_dse: True
 }
 cost {
   link_unit_price: 2.0
@@ -982,6 +990,6 @@ training {
   optimization: 1
   num_config: 8
   
-  util_threshold: 0.51
-  objective: 1
+  util_threshold: 0.6
+  objective: 2
 }
