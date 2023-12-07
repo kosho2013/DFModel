@@ -537,6 +537,8 @@ for i in range(1, 42):
         kernel.gemm_input1_input2.input_tensor_2_size = 4*hidden*seq*word
         kernel.gemm_input1_input2.output_tensor_size = 4*hidden*hidden*word
         kernel.gemm_input1_input2.tiling = 3
+        kernel.gemm_input1_input2.communication_type = 4
+        kernel.gemm_input1_input2.communication_size = 4*hidden*hidden*word
 
     elif i == 37:
         kernel.name = "FFN0_bwd_weight_update"
@@ -552,7 +554,9 @@ for i in range(1, 42):
         kernel.gemm_input1_input2.input_tensor_2_size = hidden*seq*word
         kernel.gemm_input1_input2.output_tensor_size = 4*hidden*hidden*word
         kernel.gemm_input1_input2.tiling = 3
-
+        kernel.gemm_input1_input2.communication_type = 4
+        kernel.gemm_input1_input2.communication_size = 4*hidden*hidden*word
+        
     elif i == 38:
         kernel.name = "PROJ_GEMM_bwd_weight_update"
         kernel.id = 38
@@ -567,6 +571,8 @@ for i in range(1, 42):
         kernel.gemm_input1_input2.input_tensor_2_size = hidden*seq*word
         kernel.gemm_input1_input2.output_tensor_size = hidden*hidden*word
         kernel.gemm_input1_input2.tiling = 3
+        kernel.gemm_input1_input2.communication_type = 4
+        kernel.gemm_input1_input2.communication_size = hidden*hidden*word
 
     elif i == 39:
         kernel.name = "V_bwd_weight_update"
@@ -582,6 +588,8 @@ for i in range(1, 42):
         kernel.gemm_input1_input2.input_tensor_2_size = hidden*seq*word
         kernel.gemm_input1_input2.output_tensor_size = hidden*hidden*word
         kernel.gemm_input1_input2.tiling = 3
+        kernel.gemm_input1_input2.communication_type = 4
+        kernel.gemm_input1_input2.communication_size = hidden*hidden*word
 
     elif i == 40:
         kernel.name = "K_bwd_weight_update"
@@ -597,7 +605,9 @@ for i in range(1, 42):
         kernel.gemm_input1_input2.input_tensor_2_size = hidden*seq*word
         kernel.gemm_input1_input2.output_tensor_size = hidden*hidden*word
         kernel.gemm_input1_input2.tiling = 3
-
+        kernel.gemm_input1_input2.communication_type = 4
+        kernel.gemm_input1_input2.communication_size = hidden*hidden*word
+        
     elif i == 41:
         kernel.name = "Q_bwd_weight_update"
         kernel.id = 41
@@ -612,6 +622,8 @@ for i in range(1, 42):
         kernel.gemm_input1_input2.input_tensor_2_size = hidden*seq*word
         kernel.gemm_input1_input2.output_tensor_size = hidden*hidden*word
         kernel.gemm_input1_input2.tiling = 3
+        kernel.gemm_input1_input2.communication_type = 4
+        kernel.gemm_input1_input2.communication_size = hidden*hidden*word
 
 
 for i in range(1, 54):

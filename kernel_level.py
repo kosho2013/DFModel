@@ -41,12 +41,14 @@ class KernelType(Enum):
     SYSTOLIC = 1
     SIMD = 2
 
-class CommunicationType(Enum):
+class Communication(Enum):
     NO_COMMUNICATION = 0
     ALL_REDUCE = 1
     ALL_TO_ALL = 2
     ALL_GATHER = 3
-
+    ALL_REDUCE_PERIODIC = 4
+    
+    
 class Optimization(Enum):
     NO_OPTIMIZATION = 0
     FLASHATTENTION = 1
@@ -58,7 +60,11 @@ class FWD_BWD(Enum):
     FWD = 1
     BWD = 2
 
-
+class Objective(Enum):
+    Objective_Placeholder = 0
+    PERFORMANCE = 1
+    COST = 2
+    
 
 kernel_id = []
 kernel_name = []   
@@ -188,9 +194,17 @@ num_layer = dse.training.num_layer
 num_config = dse.training.num_config
 seq_tile_size = dse.training.seq_tile_size
 opt = dse.training.optimization
+global_batch_size = dse.training.global_batch_size
+util_threshold = dse.training.util_threshold
+objective = dse.training.objective
+
 Intermediate = hidden_dim * seq_len * word
 
 
+
+link_unit_price = dse.cost.link_unit_price
+switch_unit_price = dse.cost.switch_unit_price
+dram_unit_price = dse.cost.dram_unit_price
 
 
 
@@ -252,60 +266,51 @@ class BasicTopology(Enum):
     FC = 2
     SW = 3
 
-
-class Topology(Enum):
-    NO_TOPOLOGY = 0
-    TORUS_2D = 1
-    DRAGONFLY_2D = 2
-    DGX_1_2D = 3
-    DGX_2_2D = 4
-    TORUS_3D = 5
-    SINGLE_CHIP = 6
-    FC_1D = 7
-    RING_1D = 8
-    
-
-
     
 if dse.system.WhichOneof('topology_variant') == 'single_chip': # single chip
     topology = []
     link_bw = []
     dimension = []
 
-elif dse.system.WhichOneof('topology_variant') == 'fc_1d': # 1D FC
+elif dse.system.WhichOneof('topology_variant') == 'sw': # 1D SW
+    topology = [BasicTopology.SW.value]
+    link_bw = [dse.system.sw.link_bw_x]
+    dimension = [dse.system.sw.x]
+    
+elif dse.system.WhichOneof('topology_variant') == 'fc': # 1D FC
     topology = [BasicTopology.FC.value]
-    link_bw = [dse.system.fc_1d.link_bw_x]
-    dimension = [dse.system.fc_1d.x]
+    link_bw = [dse.system.fc.link_bw_x]
+    dimension = [dse.system.fc.x]
   
-elif dse.system.WhichOneof('topology_variant') == 'ring_1d': # 1D Ring
+elif dse.system.WhichOneof('topology_variant') == 'r': # 1D Ring
     topology = [BasicTopology.R.value]
-    link_bw = [dse.system.ring_1d.link_bw_x]
-    dimension = [dse.system.ring_1d.x]    
+    link_bw = [dse.system.r.link_bw_x]
+    dimension = [dse.system.r.x]    
     
-elif dse.system.WhichOneof('topology_variant') == 'torus_2d': # 2D Torus
+elif dse.system.WhichOneof('topology_variant') == 'r_r': # 2D Torus
     topology = [BasicTopology.R.value, BasicTopology.R.value]
-    link_bw = [dse.system.torus_2d.link_bw_x, dse.system.torus_2d.link_bw_y]
-    dimension = [dse.system.torus_2d.x, dse.system.torus_2d.y]
+    link_bw = [dse.system.r_r.link_bw_x, dse.system.r_r.link_bw_y]
+    dimension = [dse.system.r_r.x, dse.system.r_r.y]
 
-elif dse.system.WhichOneof('topology_variant') == 'dragonfly_2d': # 2D Dragonfly
-    topology = [BasicTopology.FC.value, BasicTopology.R.value]
-    link_bw = [dse.system.dragonfly_2d.link_bw_x, dse.system.dragonfly_2d.link_bw_y]
-    dimension = [dse.system.dragonfly_2d.x, dse.system.dragonfly_2d.y]
+elif dse.system.WhichOneof('topology_variant') == 'fc_fc': # 2D Dragonfly
+    topology = [BasicTopology.FC.value, BasicTopology.FC.value]
+    link_bw = [dse.system.fc_fc.link_bw_x, dse.system.fc_fc.link_bw_y]
+    dimension = [dse.system.fc_fc.x, dse.system.fc_fc.y]
 
-elif dse.system.WhichOneof('topology_variant') == 'dgx_1_2d': # 2D DGX-1
-    topology = [BasicTopology.FC.value, BasicTopology.SW.value]
-    link_bw = [dse.system.dgx_1_2d.link_bw_x, dse.system.dgx_1_2d.link_bw_y]
-    dimension = [dse.system.dgx_1_2d.x, dse.system.dgx_1_2d.y]
+elif dse.system.WhichOneof('topology_variant') == 'r_sw': # 2D DGX-1
+    topology = [BasicTopology.R.value, BasicTopology.SW.value]
+    link_bw = [dse.system.r_sw.link_bw_x, dse.system.r_sw.link_bw_y]
+    dimension = [dse.system.r_sw.x, dse.system.r_sw.y]
     
-elif dse.system.WhichOneof('topology_variant') == 'dgx_2_2d': # 2D DGX-2
+elif dse.system.WhichOneof('topology_variant') == 'sw_sw': # 2D DGX-2
     topology = [BasicTopology.SW.value, BasicTopology.SW.value]
-    link_bw = [dse.system.dgx_2_2d.link_bw_x, dse.system.dgx_2_2d.link_bw_y]
-    dimension = [dse.system.dgx_2_2d.x, dse.system.dgx_2_2d.y]
+    link_bw = [dse.system.sw_sw.link_bw_x, dse.system.sw_sw.link_bw_y]
+    dimension = [dse.system.sw_sw.x, dse.system.sw_sw.y]
     
-elif dse.system.WhichOneof('topology_variant') == 'torus_3d': # 3D Torus
+elif dse.system.WhichOneof('topology_variant') == 'r_r_r': # 3D Torus
     topology = [BasicTopology.R.value, BasicTopology.R.value, BasicTopology.R.value]
-    link_bw = [dse.system.torus_3d.link_bw_x, dse.system.torus_3d.link_bw_y, dse.system.torus_3d.link_bw_z]
-    dimension = [dse.system.torus_3d.x, dse.system.torus_3d.y, dse.system.torus_3d.z]
+    link_bw = [dse.system.r_r_r.link_bw_x, dse.system.r_r_r.link_bw_y, dse.system.r_r_r.link_bw_z]
+    dimension = [dse.system.r_r_r.x, dse.system.r_r_r.y, dse.system.r_r_r.z]
 
 else:
     raise Exception('Wrong!')
@@ -318,15 +323,10 @@ else:
 
 
 
-
-
-
-
-
 model = gp.Model()
 model.params.NonConvex = 2
-model.Params.Threads = 128
-model.params.MIPGap = 1e-10
+model.Params.Threads = 140
+model.params.MIPGap = 1e-50
 model.params.TimeLimit = 36000
 
 
@@ -334,74 +334,107 @@ model.params.TimeLimit = 36000
 
 
 
-# topology and TP/PP
+# TP/PP/DP
 TP = model.addVar(name='TP', vtype=gp.GRB.INTEGER)
 PP = model.addVar(name='PP', vtype=gp.GRB.INTEGER)
+DP = model.addVar(name='DP', vtype=gp.GRB.INTEGER)
     
 if len(topology) == 0: # single chip
-    Shape = model.addMVar(1, name='Shape', vtype=gp.GRB.INTEGER, lb=0)
-    model.addConstr(Shape[0] == 1)
     model.addConstr(TP == 1)
-    model.addConstr(PP == 1)    
+    model.addConstr(PP == 1)
+    model.addConstr(DP == 1)   
     
-    Link_BW_TP = model.addMVar(1, name='Link_BW_TP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW_TP = model.addVar(name='Link_BW_TP', vtype=gp.GRB.CONTINUOUS, lb=0)
     Link_BW_PP = model.addVar(name='Link_BW_PP', vtype=gp.GRB.CONTINUOUS, lb=0)
-    model.addConstr(Link_BW_TP[0] == sys.maxsize)
-    model.addConstr(Link_BW_PP == sys.maxsize)
+    Link_BW_DP = model.addVar(name='Link_BW_PP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW = model.addVar(name='Link_BW', vtype=gp.GRB.CONTINUOUS, lb=0)
+    model.addConstr(Link_BW == sys.maxsize)
+    
+    model.addConstr(Link_BW_TP == Link_BW)
+    model.addConstr(Link_BW_PP == Link_BW)
+    model.addConstr(Link_BW_DP == Link_BW)
     
 elif len(topology) == 1: # 1D
+    
     Shape = model.addMVar(1, name='Shape', vtype=gp.GRB.INTEGER, lb=0)
     model.addConstr(Shape[0] == num_chip)
+    
     model.addConstr(TP == num_chip)
     model.addConstr(PP == 1)
+    model.addConstr(DP == 1)   
     
-    Link_BW_TP = model.addMVar(1, name='Link_BW_TP', vtype=gp.GRB.CONTINUOUS, lb=0)
-    Link_BW_PP = model.addVar(name='Link_BW_PP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW = model.addMVar(1, name='Link_BW', vtype=gp.GRB.CONTINUOUS, lb=0)
     if link_bw[0] == 0: # DSE
         pass
     else:
-        model.addConstr(Link_BW_TP[0] == link_bw[0])
+        model.addConstr(Link_BW[0] == link_bw[0])
+    
+    Link_BW_TP = model.addVar(name='Link_BW_TP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW_PP = model.addVar(name='Link_BW_PP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW_DP = model.addVar(name='Link_BW_DP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    model.addConstr(Link_BW_TP == Link_BW[0])
     model.addConstr(Link_BW_PP == sys.maxsize)
+    model.addConstr(Link_BW_DP == sys.maxsize)
         
 elif len(topology) == 2: # 2D
+
     Shape = model.addMVar(2, name='Shape', vtype=gp.GRB.INTEGER, lb=0)
-    if dimension[0] == 0 and dimension[1] == 0: # DSE on topology dimensions
+    if dimension[0] == 0: # DSE on topology dimensions
         pass
     else:
         model.addConstr(Shape[0] == dimension[0])
         model.addConstr(Shape[1] == dimension[1])
     model.addConstr(Shape[0] * Shape[1] == num_chip)
+    
     model.addConstr(TP == Shape[0])
     model.addConstr(PP == Shape[1])
-    
-    Link_BW_TP = model.addMVar(1, name='Link_BW_TP', vtype=gp.GRB.CONTINUOUS, lb=0)
-    Link_BW_PP = model.addVar(name='Link_BW_PP', vtype=gp.GRB.CONTINUOUS, lb=0)
-    if link_bw[0] == 0 and link_bw[1] == 0: # DSE
+    model.addConstr(DP == 1)
+
+    Link_BW = model.addMVar(2, name='Link_BW', vtype=gp.GRB.CONTINUOUS, lb=0)
+    if link_bw[0] == 0: # DSE
         pass
     else:
-        model.addConstr(Link_BW_TP[0] == link_bw[0])
-        model.addConstr(Link_BW_PP == link_bw[1])
+        model.addConstr(Link_BW[0] == link_bw[0])
+        model.addConstr(Link_BW[1] == link_bw[1])
+    
+    Link_BW_TP = model.addVar(name='Link_BW_TP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW_PP = model.addVar(name='Link_BW_PP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW_DP = model.addVar(name='Link_BW_DP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    model.addConstr(Link_BW_TP == Link_BW[0])
+    model.addConstr(Link_BW_PP == Link_BW[1])
+    model.addConstr(Link_BW_DP == sys.maxsize)
 
 elif len(topology) == 3: # 3D
     Shape = model.addMVar(3, name='Shape', vtype=gp.GRB.INTEGER, lb=0)
-    if dimension[0] == 0 and dimension[1] == 0 and dimension[2] == 0: # DSE on topology dimensions
+    if dimension[0] == 0: # DSE on topology dimensions
         pass
     else:
         model.addConstr(Shape[0] == dimension[0])
         model.addConstr(Shape[1] == dimension[1])
         model.addConstr(Shape[2] == dimension[2])
-    model.addConstr(TP == Shape[0] * Shape[1])
-    model.addConstr(PP == Shape[2])
-    model.addConstr(TP * PP == num_chip)
     
-    Link_BW_TP = model.addMVar(2, name='Link_BW_TP', vtype=gp.GRB.CONTINUOUS, lb=0)
-    Link_BW_PP = model.addVar(name='Link_BW_PP', vtype=gp.GRB.CONTINUOUS, lb=0)
-    if link_bw[0] == 0 and link_bw[1] == 0 and link_bw[2] == 0: # DSE
+    aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    model.addConstr(aaa == Shape[0] * Shape[1])
+    model.addConstr(aaa * Shape[2] == num_chip)
+    
+    model.addConstr(TP == Shape[0])
+    model.addConstr(PP == Shape[1])
+    model.addConstr(DP == Shape[2])
+    
+    Link_BW = model.addMVar(3, name='Link_BW', vtype=gp.GRB.CONTINUOUS, lb=0)
+    if link_bw[0] == 0: # DSE
         pass
     else:
-        model.addConstr(Link_BW_TP[0] == link_bw[0])
-        model.addConstr(Link_BW_TP[1] == link_bw[1])
-        model.addConstr(Link_BW_PP == link_bw[2])
+        model.addConstr(Link_BW[0] == link_bw[0])
+        model.addConstr(Link_BW[1] == link_bw[1])
+        model.addConstr(Link_BW[2] == link_bw[2])
+
+    Link_BW_TP = model.addVar(name='Link_BW_TP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW_PP = model.addVar(name='Link_BW_PP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Link_BW_DP = model.addVar(name='Link_BW_DP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    model.addConstr(Link_BW_TP == Link_BW[0])
+    model.addConstr(Link_BW_PP == Link_BW[1])
+    model.addConstr(Link_BW_DP == Link_BW[2])
 
 else:
     raise Exception('Wrong!')
@@ -528,12 +561,21 @@ for i in range(num_weight):
 
 
 # sharding node communication
-shard_node_communication_size = model.addMVar(num_kernel, name='shard_node_communication_size', vtype=gp.GRB.CONTINUOUS, lb=0)
+ALL_REDUCE_communication_size = model.addMVar(num_kernel, name='ALL_REDUCE_communication_size', vtype=gp.GRB.CONTINUOUS, lb=0)
+ALL_REDUCE_PERIODIC_communication_size = model.addMVar(num_kernel, name='ALL_REDUCE_PERIODIC_communication_size', vtype=gp.GRB.CONTINUOUS, lb=0)
+Micro_Batch_Size = model.addVar(name='Micro_Batch_Size', vtype=gp.GRB.INTEGER, lb=1)
 for i in range(num_kernel):
-    if node_communication_size[i] > 0:
-        model.addConstr(shard_node_communication_size[i] == shard_M[i] * shard_N[i] * word)
+    if node_communication_type[i] == Communication.ALL_REDUCE.value:
+        model.addConstr(ALL_REDUCE_communication_size[i] == shard_M[i] * shard_N[i] * word)
+
+    elif node_communication_type[i] == Communication.ALL_REDUCE_PERIODIC.value:
+        aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
+        model.addConstr(aaa == shard_M[i] * shard_N[i])
+        model.addConstr(ALL_REDUCE_PERIODIC_communication_size[i] == aaa * word * Micro_Batch_Size / global_batch_size)
+        
     else:
-        model.addConstr(shard_node_communication_size[i] == 0)
+        model.addConstr(ALL_REDUCE_communication_size[i] == 0)
+        model.addConstr(ALL_REDUCE_PERIODIC_communication_size[i] == 0)
 
 
 
@@ -679,7 +721,6 @@ for i in range(C):
 
 
 # dram cap
-Micro_Batch_Size = model.addVar(name='Micro_Batch_Size', vtype=gp.GRB.INTEGER, lb=1)
 dram_bytes_per_config_intermediate = model.addMVar(C, name='dram_bytes_per_config_intermediate', vtype=gp.GRB.CONTINUOUS, lb=0)
 dram_bytes_per_config_initiation = model.addMVar(C, name='dram_bytes_per_config_initiation', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
@@ -730,7 +771,7 @@ for i in range(num_kernel):
 
 
 
-Compute_Latency = model.addMVar(num_kernel, name='Compute_Latency', vtype=gp.GRB.CONTINUOUS, lb=0)
+Compute_Latency = model.addMVar(C, name='Compute_Latency', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
     t1 = model.addMVar(num_kernel, vtype=gp.GRB.INTEGER, lb=0)
     t2 = model.addVar(vtype=gp.GRB.CONTINUOUS)
@@ -741,7 +782,7 @@ for i in range(C):
 
 
 DRAM_bytes = model.addMVar(C, name='DRAM_bytes', vtype=gp.GRB.CONTINUOUS, lb=0)
-DRAM_Latency = model.addMVar(num_kernel, name='DRAM_Latency', vtype=gp.GRB.CONTINUOUS, lb=0)
+DRAM_Latency = model.addMVar(C, name='DRAM_Latency', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
     t1 = model.addVar(vtype=gp.GRB.CONTINUOUS)
     model.addConstr(t1 == shard_intermediate_buffer_size @ Ab_dram[:, i])
@@ -765,61 +806,99 @@ model.addConstr(total_DRAM_bytes == np.ones((C)) @ DRAM_bytes)
 
 
 
-allreduce_ratio = model.addVar(name='allreduce_ratio', vtype=gp.GRB.CONTINUOUS) 
-if dse.system.WhichOneof('topology_variant') == 'single_chip':
-    model.addConstr(allreduce_ratio == 0)
 
-elif dse.system.WhichOneof('topology_variant') == 'ring_1d' or \
-    dse.system.WhichOneof('topology_variant') == 'fc_1d' or \
-    dse.system.WhichOneof('topology_variant') == 'torus_2d' or \
-    dse.system.WhichOneof('topology_variant') == 'dragonfly_2d' or \
-    dse.system.WhichOneof('topology_variant') == 'dgx_1_2d' or \
-    dse.system.WhichOneof('topology_variant') == 'dgx_2_2d':
-    
+
+# tensor parallelism
+ALL_REDUCE_ratio = model.addVar(name='ALL_REDUCE_ratio', vtype=gp.GRB.CONTINUOUS) 
+if len(topology) == 0: # single chip
+    model.addConstr(ALL_REDUCE_ratio == 0)
+
+elif 1 <= len(topology) <= 3: # 1D/2D/3D
     aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
-    model.addConstr(aaa == TP * Link_BW_TP[0])
+    model.addConstr(aaa == TP * Link_BW_TP)
     if topology[0] == BasicTopology.R.value:
-        model.addConstr(allreduce_ratio * aaa * 2 == TP - 1)
+        model.addConstr(ALL_REDUCE_ratio * aaa * 2 == TP - 1)
     elif topology[0] == BasicTopology.FC.value:
-        model.addConstr(allreduce_ratio * aaa == 1)
+        model.addConstr(ALL_REDUCE_ratio * aaa == 1)
     elif topology[0] == BasicTopology.SW.value:
-        model.addConstr(allreduce_ratio * aaa * 2 == TP - 1)
+        model.addConstr(ALL_REDUCE_ratio * aaa * 2 == TP - 1)
     else:
         raise Exception('Wrong!')
-
-elif dse.system.WhichOneof('topology_variant') == 'torus_3d':
-    dim_1 = model.addVar(vtype=gp.GRB.CONTINUOUS)
-    dim_2 = model.addVar(vtype=gp.GRB.CONTINUOUS)
-    aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
-    bbb = model.addVar(vtype=gp.GRB.CONTINUOUS)
-    
-    model.addConstr(aaa == Shape[0] * Link_BW_TP[0])
-    model.addConstr(bbb == TP * Link_BW_TP[1])
-    model.addConstr(dim_1 * aaa * 2 == Shape[0] - 1)
-    model.addConstr(dim_2 * bbb * 2 == Shape[1] - 1)
-    model.addConstr(allreduce_ratio == dim_1 + dim_2)
 
 else:
     raise Exception('Wrong!')
 
-
-
-# communication created by tensor parallelism 
-Network_bytes = model.addMVar(C, name='Network_bytes', vtype=gp.GRB.CONTINUOUS, lb=0)
-Network_Latency = model.addMVar(num_kernel, name='Network_Latency', vtype=gp.GRB.CONTINUOUS, lb=0)
+ 
+Network_Bytes_ALL_REDUCE = model.addMVar(C, name='Network_Bytes_ALL_REDUCE', vtype=gp.GRB.CONTINUOUS, lb=0)
+Network_Latency_ALL_REDUCE = model.addMVar(C, name='Network_Latency_ALL_REDUCE', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
     t1 = model.addVar(vtype=gp.GRB.CONTINUOUS)
     t2 = model.addVar(vtype=gp.GRB.CONTINUOUS)
-    model.addConstr(t1 == Ac[:, i] @ shard_node_communication_size)
-    model.addConstr(t2 == allreduce_ratio * num_tile)
-    model.addConstr(Network_Latency[i] == 2 * t1 * t2) # reduce-scatter/all-gather
-    model.addConstr(Network_bytes[i] == Network_Latency[i] * Link_BW_TP[0])
+    model.addConstr(t1 == Ac[:, i] @ ALL_REDUCE_communication_size)
+    model.addConstr(t2 == ALL_REDUCE_ratio * num_tile)
+    model.addConstr(Network_Latency_ALL_REDUCE[i] == 2 * t1 * t2) # reduce-scatter/all-gather
+    model.addConstr(Network_Bytes_ALL_REDUCE[i] == Network_Latency_ALL_REDUCE[i] * Link_BW_TP)
 
+
+
+
+
+
+
+
+
+# data parallelism
+ALL_REDUCE_PERIODIC_ratio = model.addVar(name='ALL_REDUCE_PERIODIC_ratio', vtype=gp.GRB.CONTINUOUS) 
+if 0 <= len(topology) <= 2: # single chip/1D/2D
+    model.addConstr(ALL_REDUCE_PERIODIC_ratio == 0)
+
+elif len(topology) == 3: # 3D
+    aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    model.addConstr(aaa == DP * Link_BW_DP)
+    if topology[0] == BasicTopology.R.value:
+        model.addConstr(ALL_REDUCE_PERIODIC_ratio * aaa * 2 == DP - 1)
+    elif topology[0] == BasicTopology.FC.value:
+        model.addConstr(ALL_REDUCE_PERIODIC_ratio * aaa == 1)
+    elif topology[0] == BasicTopology.SW.value:
+        model.addConstr(ALL_REDUCE_PERIODIC_ratio * aaa * 2 == DP - 1)
+    else:
+        raise Exception('Wrong!')
+        
+else:
+    raise Exception('Wrong!')
+
+
+Network_Bytes_ALL_REDUCE_PERIODIC = model.addMVar(C, name='Network_Bytes_ALL_REDUCE_PERIODIC', vtype=gp.GRB.CONTINUOUS, lb=0)
+Network_Latency_ALL_REDUCE_PERIODIC = model.addMVar(C, name='Network_Latency_ALL_REDUCE_PERIODIC', vtype=gp.GRB.CONTINUOUS, lb=0)
+for i in range(C):
+    t1 = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    t2 = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    model.addConstr(t1 == Ac[:, i] @ ALL_REDUCE_PERIODIC_communication_size)
+    model.addConstr(t2 == ALL_REDUCE_PERIODIC_ratio)
+    model.addConstr(Network_Latency_ALL_REDUCE_PERIODIC[i] == 2 * t1 * t2) # reduce-scatter/all-gather
+    model.addConstr(Network_Bytes_ALL_REDUCE_PERIODIC[i] == Network_Latency_ALL_REDUCE_PERIODIC[i] * Link_BW_DP)
+
+
+
+
+# total network latency from data/tensor parallelism
+Network_Latency = model.addMVar(C, name='Network_Latency', vtype=gp.GRB.CONTINUOUS, lb=0)
+for i in range(C):
+    model.addConstr(Network_Latency[i] == Network_Latency_ALL_REDUCE[i] + Network_Bytes_ALL_REDUCE_PERIODIC[i])
+    
+    
+
+# total network bytes from data/tensor parallelism
 total_Network_bytes = model.addVar(name='total_Network_bytes', vtype=gp.GRB.CONTINUOUS) 
-model.addConstr(total_Network_bytes == np.ones((C)) @ Network_bytes)
+model.addConstr(total_Network_bytes == np.ones((C)) @ Network_Bytes_ALL_REDUCE + np.ones((C)) @ Network_Bytes_ALL_REDUCE_PERIODIC)
 
 
-# communication created by pipeline parallelism
+
+
+
+
+
+# pipeline parallelism
 aaa = model.addVar(vtype=gp.GRB.BINARY)
 intermediate = model.addVar(name='intermediate', vtype=gp.GRB.CONTINUOUS, lb=0)
 model.addConstr((aaa == 1) >> (PP == 1))
@@ -831,8 +910,12 @@ p2p_latency = model.addVar(name='p2p_latency', vtype=gp.GRB.CONTINUOUS)
 model.addConstr(p2p_latency * Link_BW_PP == intermediate)
 
 
+
+
+
+
 # weight loading overheads
-Setup_Latency = model.addMVar(num_kernel, name='Setup_Latency', vtype=gp.GRB.CONTINUOUS, lb=0)
+Setup_Latency = model.addMVar(C, name='Setup_Latency', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
     aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
     model.addConstr(aaa == DRAM_BW * Micro_Batch_Size)
@@ -860,7 +943,94 @@ model.addConstr(II == gp.max_(aaa, p2p_latency))
 
 
 
-model.setObjective(II, gp.GRB.MINIMIZE)
+
+
+
+if util_threshold == 0.0:
+    pass
+else:
+    FLOP_per_layer = 0.0
+    for i in range(len(M)):
+        if kernel_type[i] == KernelType.SIMD.value:
+            FLOP_per_layer += M[i] * K[i] * N[i]
+        else:
+            FLOP_per_layer += 2 * M[i] * K[i] * N[i]
+            
+    model.addConstr(FLOP_per_layer >= util_threshold * GFLOPS * II * TP)
+
+
+
+
+
+# cost
+DRAM_cost = model.addVar(name='DRAM_cost', vtype=gp.GRB.CONTINUOUS, lb=0)
+model.addConstr(DRAM_cost == num_chip * DRAM_BW * dram_unit_price)
+
+
+
+accumulated_shape = model.addMVar(len(topology), name='accumulated_shape', vtype=gp.GRB.CONTINUOUS, lb=0)
+for i in range(len(topology)):
+    if i == 0:
+        model.addConstr(accumulated_shape[i] == Shape[i])
+    else:
+        model.addConstr(accumulated_shape[i] == accumulated_shape[i-1] * Shape[i])
+    
+    
+    
+if len(topology) == 0:
+    pass
+else:
+    Link_Switch_cost = model.addMVar(len(topology), name='Link_Switch_cost', vtype=gp.GRB.CONTINUOUS, lb=0)
+    for i in range(len(topology)):
+        if i == 0:
+            if topology[i] == BasicTopology.R.value:
+                model.addConstr(Link_Switch_cost[i] == Shape[i] * Link_BW[i] * link_unit_price)
+                
+            elif topology[i] == BasicTopology.FC.value:
+                aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
+                model.addConstr(aaa == Shape[i] * (Shape[i] - 1))
+                model.addConstr(Link_Switch_cost[i] == aaa / 2 * Link_BW[i] * link_unit_price)
+                
+            elif topology[i] == BasicTopology.SW.value:
+                model.addConstr(Link_Switch_cost[i] == Shape[i] * Link_BW[i] * link_unit_price + Shape[i] * Link_BW[i] * switch_unit_price)
+            
+            else:
+                raise Exception('Wrong!')
+         
+        else:
+            if topology[i] == BasicTopology.R.value:
+                model.addConstr(Link_Switch_cost[i] == Link_Switch_cost[i-1] * Shape[i] + accumulated_shape[i] * Link_BW[i] * link_unit_price)
+                
+            elif topology[i] == BasicTopology.FC.value:
+                aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
+                model.addConstr(aaa == Shape[i] * (Shape[i] - 1))
+                model.addConstr(Link_Switch_cost[i] == Link_Switch_cost[i-1] * Shape[i] + aaa * Link_BW[i] / 2 * link_unit_price)
+                
+            elif topology[i] == BasicTopology.SW.value:
+                model.addConstr(Link_Switch_cost[i] == Link_Switch_cost[i-1] * Shape[i] + accumulated_shape[i] * Link_BW[i] * link_unit_price + accumulated_shape[i] * Link_BW[i] * switch_unit_price)
+            
+            else:
+                raise Exception('Wrong!')
+            
+        
+total_cost = model.addVar(name='total_cost', vtype=gp.GRB.CONTINUOUS, lb=0)
+if len(topology) == 0:
+    model.addConstr(total_cost == DRAM_cost)
+else:
+    model.addConstr(total_cost == DRAM_cost + Link_Switch_cost[-1])
+
+
+
+
+if objective == Objective.PERFORMANCE.value:
+    model.setObjective(II, gp.GRB.MINIMIZE)
+    
+elif objective == Objective.COST.value:
+    model.setObjective(total_cost, gp.GRB.MINIMIZE)
+    
+else:
+    raise Exception('Wrong!')
+    
 model.optimize()
 
 
@@ -872,6 +1042,7 @@ shard_N = []
 shard_intermediate_buffer_size = []
 shard_initiation_buffer_size = []
 Config = []
+Link_BW = []
 for v in model.getVars():
     print(v.varName, v.X)
     
@@ -895,11 +1066,17 @@ for v in model.getVars():
         TP = v.X
     if v.varName.startswith('PP'):
         PP = v.X
+    if v.varName.startswith('DP'):
+        DP = v.X
     if v.varName.startswith('Config'):
         Config.append(v.X)
+    if v.varName.startswith('total_cost'):
+        total_cost = v.X  
+    if v.varName.startswith('DRAM_BW'):
+        DRAM_BW = v.X 
+    if v.varName.startswith('Link_BW['):
+        Link_BW.append(v.X)
         
-
-
 
 FLOP = 0.0
 for i in range(len(M)):
@@ -912,19 +1089,27 @@ FLOP *= num_layer
 layers_per_stage = num_layer / PP
 II *= layers_per_stage
 
-   
+
+
+print('total_cost', total_cost)
+print('DRAM_BW', DRAM_BW)
+print('Link_BW', Link_BW)
+print('TP', TP)   
+print('PP', PP)   
+print('DP', DP)  
+print('layers_per_stage', layers_per_stage) 
 print('GFLOPS', GFLOPS)
 print('II', II)
-print('Samples/s', 1e9/II)
-print('util', FLOP/II/GFLOPS/num_chip)
+print('Samples/s', 1e9/II*DP)
+print('util', DP*FLOP/II/GFLOPS/num_chip)
 if total_DRAM_bytes == 0:
     print('oim infinity')
 else:
-    print('OI Memory', FLOP / num_chip / total_DRAM_bytes / layers_per_stage)
+    print('OI Memory', DP*FLOP / total_DRAM_bytes / layers_per_stage / num_chip)
 if total_Network_bytes == 0:
     print('oin infinity')
 else:
-    print('OI network', FLOP / num_chip / total_Network_bytes / layers_per_stage)
+    print('OI network', DP*FLOP / total_Network_bytes / layers_per_stage / num_chip)
 
 
 

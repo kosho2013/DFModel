@@ -54,6 +54,7 @@ message GEMM_Input1_Weight {
 		ALL_REDUCE = 1;
 		ALL_TO_ALL = 2;
 		ALL_GATHER = 3;
+		ALL_REDUCE_PERIODIC = 4;
 	}
 
 	enum Sharding {
@@ -102,6 +103,7 @@ message GEMM_Input1_Input2 {
 		ALL_REDUCE = 1;
 		ALL_TO_ALL = 2;
 		ALL_GATHER = 3;
+		ALL_REDUCE_PERIODIC = 4;
 	}
 
 	enum Sharding {
@@ -146,6 +148,7 @@ message ElementWise_Input1 {
 		ALL_REDUCE = 1;
 		ALL_TO_ALL = 2;
 		ALL_GATHER = 3;
+		ALL_REDUCE_PERIODIC = 4;
 	}
 
 	enum Sharding {
@@ -191,6 +194,7 @@ message ElementWise_Input1_Input2 {
 		ALL_REDUCE = 1;
 		ALL_TO_ALL = 2;
 		ALL_GATHER = 3;
+		ALL_REDUCE_PERIODIC = 4;
 	}
 
 	enum Sharding {
@@ -225,6 +229,7 @@ message Connection {
 		ALL_REDUCE = 1;
 		ALL_TO_ALL = 2;
 		ALL_GATHER = 3;
+		ALL_REDUCE_PERIODIC = 4;
 	}
 
 	int32 buffer_depth = 6;
@@ -258,19 +263,40 @@ message System {
 	Accelerator accelerator = 7;
 
 	oneof topology_variant {
-		SINGLE_CHIP single_chip = 13;
-		FC_1D fc_1d = 14;
-		RING_1D ring_1d = 15;
-		TORUS_2D torus_2d = 8;
-		DRAGONFLY_2D dragonfly_2d = 9;
-		DGX_1_2D dgx_1_2d = 10;
-		DGX_2_2D dgx_2_2d = 11;
-		TORUS_3D torus_3d = 12;
+		SINGLE_CHIP single_chip = 20;
+		R r = 13;
+		SW sw = 14;
+		FC fc = 15;
+		R_R r_r = 8;
+		FC_FC fc_fc = 9;
+		R_SW r_sw = 10;
+		SW_SW sw_sw = 11;
+		R_R_R r_r_r = 12;
 	}
 }
 
+message SINGLE_CHIP {
+}
 
-message TORUS_2D {
+message R {
+	int32 x = 8;
+	
+	float link_bw_x = 4;
+}
+
+message SW {
+	int32 x = 8;
+	
+	float link_bw_x = 4;
+}
+
+message FC {
+	int32 x = 8;
+	
+	float link_bw_x = 4;
+}
+
+message R_R {
 	int32 x = 8;
 	int32 y = 9;
 	
@@ -278,7 +304,7 @@ message TORUS_2D {
 	float link_bw_y = 5;
 }
 
-message DRAGONFLY_2D {
+message FC_FC {
 	int32 x = 8;
 	int32 y = 9;
 	
@@ -286,7 +312,7 @@ message DRAGONFLY_2D {
 	float link_bw_y = 5;
 }
 
-message DGX_1_2D {
+message R_SW {
 	int32 x = 8;
 	int32 y = 9;
 	
@@ -294,7 +320,7 @@ message DGX_1_2D {
 	float link_bw_y = 5;
 }
 
-message DGX_2_2D {
+message SW_SW {
 	int32 x = 8;
 	int32 y = 9;
 	
@@ -302,8 +328,7 @@ message DGX_2_2D {
 	float link_bw_y = 5;
 }
 
-
-message TORUS_3D {
+message R_R_R {
 	int32 x = 8;
 	int32 y = 9;
 	int32 z = 10;
@@ -313,22 +338,9 @@ message TORUS_3D {
 	float link_bw_z = 6;
 }
 
-message SINGLE_CHIP {
-}
 
 
-message FC_1D {
-	int32 x = 8;
-	
-	float link_bw_x = 4;
-}
 
-
-message RING_1D {
-	int32 x = 8;
-	
-	float link_bw_x = 4;
-}
 
 
 
@@ -346,15 +358,26 @@ message Training {
 		KERNEL_BY_KERNEL = 2;
 	}
 	
+	enum Objective {
+		Objective_Placeholder = 0;
+		PERFORMANCE = 1;
+		COST = 2;
+	}
+	
 	int32 hidden_dim = 10;
 	int32 head_dim = 11;
 	int32 num_head = 12;
 	int32 seq_len = 4;
 	int32 num_layer = 5;
+	int32 global_batch_size = 30;
 	
 	int32 num_config = 20;
 	int32 seq_tile_size = 7;
 	Optimization optimization = 2;
+	
+	float util_threshold = 40;
+	Objective objective = 41;
+	
 }
 
 message DSE {

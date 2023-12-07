@@ -213,6 +213,7 @@ class Communication(Enum):
     ALL_REDUCE = 1
     ALL_TO_ALL = 2
     ALL_GATHER = 3
+    ALL_REDUCE_PERIODIC = 4
 
 
 class Dim(Enum):
@@ -450,9 +451,12 @@ for kernel in dse.dataflow_graph.kernels:
             kernel.gemm_input1_input2.sharding = Dim.N.value+1
         else:
             kernel.gemm_input1_input2.sharding = Dim.NO_SHARDING.value+1
-            
-        kernel.gemm_input1_input2.communication_size = float(communication_size[i])
-        kernel.gemm_input1_input2.communication_type = int(communication_type[i])
+                
+        if kernel.gemm_input1_input2.communication_type == Communication.ALL_REDUCE_PERIODIC.value:
+            pass
+        else:
+            kernel.gemm_input1_input2.communication_size = float(communication_size[i])
+            kernel.gemm_input1_input2.communication_type = int(communication_type[i])
         i += 1
         
     elif kernel.WhichOneof('kernel_variant') == 'elementwise_input1':
