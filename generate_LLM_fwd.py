@@ -395,5 +395,5 @@ for i in range(1, 22):
         
 
 # write to text file
-with open('./fwd.txt', "w") as file:
+with open('./LLM_fwd.txt', "w") as file:
     text_format.PrintMessage(dataflow_graph, file)

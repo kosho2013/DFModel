@@ -963,8 +963,6 @@ system {
     y: 4
     z: 2
   }
-  dram_bw_dse: true
-  net_bw_dse: true
 }
 cost {
   link_unit_price: 2.0
@@ -973,14 +971,15 @@ cost {
 }
 training {
   optimization: FLASHATTENTION
-  seq_len: 2048
-  num_layer: 128
-  seq_tile_size: 16
-  hidden_dim: 25600
-  head_dim: 160
-  num_head: 160
+  llm {
+    hidden_dim: 25600
+    head_dim: 160
+    num_head: 160
+    seq_len: 2048
+    num_layer: 128
+    seq_tile_size: 16
+  }
   num_config: 8
   global_batch_size: 1536
-  util_threshold: 0.6
-  objective: COST
+  objective: PERFORMANCE
 }

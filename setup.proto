@@ -30,6 +30,7 @@ message Kernel {
 	
 }
 
+
 message GEMM_Input1_Weight {
 	int32 outer = 1;
 	int32 M = 2;
@@ -48,6 +49,8 @@ message GEMM_Input1_Weight {
 	int32 shard_outer_M = 16;
 	int32 shard_K = 17;
 	int32 shard_N = 18;
+	
+	float memory_size = 100;
 
 	enum Communication_Type {
 		Communication_Type_Placeholder = 0;
@@ -97,6 +100,8 @@ message GEMM_Input1_Input2 {
 	int32 shard_outer_M = 16;
 	int32 shard_K = 17;
 	int32 shard_N = 18;
+	
+	float memory_size = 100;
 
 	enum Communication_Type {
 		Communication_Type_Placeholder = 0;
@@ -142,6 +147,8 @@ message ElementWise_Input1 {
 
 	int32 shard_outer_M = 16;
 	int32 shard_N = 18;
+	
+	float memory_size = 100;
 
 	enum Communication_Type {
 		Communication_Type_Placeholder = 0;
@@ -188,6 +195,8 @@ message ElementWise_Input1_Input2 {
 
 	int32 shard_outer_M = 16;
 	int32 shard_N = 18;
+	
+	float memory_size = 100;
 
 	enum Communication_Type {
 		Communication_Type_Placeholder = 0;
@@ -268,6 +277,7 @@ message System {
 		SW sw = 14;
 		FC fc = 15;
 		R_R r_r = 8;
+		R_FC r_fc = 50;
 		FC_FC fc_fc = 9;
 		R_SW r_sw = 10;
 		SW_SW sw_sw = 11;
@@ -300,6 +310,14 @@ message FC {
 }
 
 message R_R {
+	int32 x = 8;
+	int32 y = 9;
+	
+	float link_bw_x = 4;
+	float link_bw_y = 5;
+}
+
+message R_FC {
 	int32 x = 8;
 	int32 y = 9;
 	
@@ -360,19 +378,43 @@ message Training {
 		COST = 2;
 	}
 	
-	int32 hidden_dim = 10;
-	int32 head_dim = 11;
-	int32 num_head = 12;
-	int32 seq_len = 4;
-	int32 num_layer = 5;
-	int32 global_batch_size = 30;
 	
+	oneof workload_variant {
+		LLM llm = 7;
+		DLRM dlrm = 8;
+		Other other = 9;
+	}
+		
+	int32 global_batch_size = 30;
+	int32 micro_batch_size = 50;
 	int32 num_config = 20;
-	int32 seq_tile_size = 7;
 	Optimization optimization = 2;
+	Objective objective = 41;
 	
 	float util_threshold = 40;
-	Objective objective = 41;
+	bool skip_inter_chip = 42;
+}
+
+
+message LLM {
+	int32 hidden_dim = 1;
+	int32 head_dim = 2;
+	int32 num_head = 3;
+	int32 seq_len = 4;
+	int32 num_layer = 5;
+	int32 seq_tile_size = 6;
+}
+
+message DLRM {
+	int32 mlp_dim = 1;
+	int32 bottom_num_mlp = 2;
+	int32 top_num_mlp = 4;
+	int32 pooled_row = 5;
+	int32 num_table = 6;
+	int32 emb = 7;
+}
+
+message Other {
 }
 
 message DSE {
