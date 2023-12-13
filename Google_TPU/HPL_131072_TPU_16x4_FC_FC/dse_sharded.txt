@@ -1,0 +1,7562 @@
+dataflow_graph {
+  kernels {
+    name: "Iteration_1_FACT"
+    id: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 8192
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 33554432.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_1_BCAST"
+    id: 2
+    topological_number: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 33554432.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_1_SWAP"
+    id: 3
+    topological_number: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 134217730.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_1_UPDATE"
+    id: 4
+    topological_number: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 8192
+      K: 2048
+      N: 32768
+      input_tensor_size: 134217730.0
+      weight_tensor_size: 33554432.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_2_FACT"
+    id: 5
+    topological_number: 2
+    config: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 8064
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 33030144.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_2_BCAST"
+    id: 6
+    topological_number: 3
+    config: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 33030144.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_2_SWAP"
+    id: 7
+    topological_number: 3
+    config: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 132120580.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_2_UPDATE"
+    id: 8
+    topological_number: 3
+    config: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 8064
+      K: 2048
+      N: 32256
+      input_tensor_size: 132120580.0
+      weight_tensor_size: 33030144.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_3_FACT"
+    id: 9
+    topological_number: 4
+    config: 2
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 7936
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 32505856.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_3_BCAST"
+    id: 10
+    topological_number: 5
+    config: 2
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 32505856.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_3_SWAP"
+    id: 11
+    topological_number: 5
+    config: 2
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 130023420.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_3_UPDATE"
+    id: 12
+    topological_number: 5
+    config: 2
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 7936
+      K: 2048
+      N: 31744
+      input_tensor_size: 130023420.0
+      weight_tensor_size: 32505856.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_4_FACT"
+    id: 13
+    topological_number: 6
+    config: 3
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 7808
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 31981568.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_4_BCAST"
+    id: 14
+    topological_number: 7
+    config: 3
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 31981568.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_4_SWAP"
+    id: 15
+    topological_number: 7
+    config: 3
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 127926270.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_4_UPDATE"
+    id: 16
+    topological_number: 7
+    config: 3
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 7808
+      K: 2048
+      N: 31232
+      input_tensor_size: 127926270.0
+      weight_tensor_size: 31981568.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_5_FACT"
+    id: 17
+    topological_number: 8
+    config: 4
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 7680
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 31457280.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_5_BCAST"
+    id: 18
+    topological_number: 9
+    config: 4
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 31457280.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_5_SWAP"
+    id: 19
+    topological_number: 9
+    config: 4
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 125829120.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_5_UPDATE"
+    id: 20
+    topological_number: 9
+    config: 4
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 7680
+      K: 2048
+      N: 30720
+      input_tensor_size: 125829120.0
+      weight_tensor_size: 31457280.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_6_FACT"
+    id: 21
+    topological_number: 10
+    config: 5
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 7552
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 30932992.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_6_BCAST"
+    id: 22
+    topological_number: 11
+    config: 5
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 30932992.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_6_SWAP"
+    id: 23
+    topological_number: 11
+    config: 5
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 123731970.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_6_UPDATE"
+    id: 24
+    topological_number: 11
+    config: 5
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 7552
+      K: 2048
+      N: 30208
+      input_tensor_size: 123731970.0
+      weight_tensor_size: 30932992.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_7_FACT"
+    id: 25
+    topological_number: 12
+    config: 6
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 7424
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 30408704.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_7_BCAST"
+    id: 26
+    topological_number: 13
+    config: 6
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 30408704.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_7_SWAP"
+    id: 27
+    topological_number: 13
+    config: 6
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 121634820.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_7_UPDATE"
+    id: 28
+    topological_number: 13
+    config: 6
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 7424
+      K: 2048
+      N: 29696
+      input_tensor_size: 121634820.0
+      weight_tensor_size: 30408704.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_8_FACT"
+    id: 29
+    topological_number: 14
+    config: 7
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 7296
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 29884416.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_8_BCAST"
+    id: 30
+    topological_number: 15
+    config: 7
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 29884416.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_8_SWAP"
+    id: 31
+    topological_number: 15
+    config: 7
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 119537660.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_8_UPDATE"
+    id: 32
+    topological_number: 15
+    config: 7
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 7296
+      K: 2048
+      N: 29184
+      input_tensor_size: 119537660.0
+      weight_tensor_size: 29884416.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_9_FACT"
+    id: 33
+    topological_number: 16
+    config: 8
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 7168
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 29360128.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_9_BCAST"
+    id: 34
+    topological_number: 17
+    config: 8
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 29360128.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_9_SWAP"
+    id: 35
+    topological_number: 17
+    config: 8
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 117440510.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_9_UPDATE"
+    id: 36
+    topological_number: 17
+    config: 8
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 7168
+      K: 2048
+      N: 28672
+      input_tensor_size: 117440510.0
+      weight_tensor_size: 29360128.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_10_FACT"
+    id: 37
+    topological_number: 18
+    config: 9
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 7040
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 28835840.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_10_BCAST"
+    id: 38
+    topological_number: 19
+    config: 9
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 28835840.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_10_SWAP"
+    id: 39
+    topological_number: 19
+    config: 9
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 115343360.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_10_UPDATE"
+    id: 40
+    topological_number: 19
+    config: 9
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 7040
+      K: 2048
+      N: 28160
+      input_tensor_size: 115343360.0
+      weight_tensor_size: 28835840.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_11_FACT"
+    id: 41
+    topological_number: 20
+    config: 10
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 6912
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 28311552.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_11_BCAST"
+    id: 42
+    topological_number: 21
+    config: 10
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 28311552.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_11_SWAP"
+    id: 43
+    topological_number: 21
+    config: 10
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 113246210.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_11_UPDATE"
+    id: 44
+    topological_number: 21
+    config: 10
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 6912
+      K: 2048
+      N: 27648
+      input_tensor_size: 113246210.0
+      weight_tensor_size: 28311552.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_12_FACT"
+    id: 45
+    topological_number: 22
+    config: 11
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 6784
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 27787264.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_12_BCAST"
+    id: 46
+    topological_number: 23
+    config: 11
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 27787264.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_12_SWAP"
+    id: 47
+    topological_number: 23
+    config: 11
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 111149060.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_12_UPDATE"
+    id: 48
+    topological_number: 23
+    config: 11
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 6784
+      K: 2048
+      N: 27136
+      input_tensor_size: 111149060.0
+      weight_tensor_size: 27787264.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_13_FACT"
+    id: 49
+    topological_number: 24
+    config: 12
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 6656
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 27262976.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_13_BCAST"
+    id: 50
+    topological_number: 25
+    config: 12
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 27262976.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_13_SWAP"
+    id: 51
+    topological_number: 25
+    config: 12
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 109051900.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_13_UPDATE"
+    id: 52
+    topological_number: 25
+    config: 12
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 6656
+      K: 2048
+      N: 26624
+      input_tensor_size: 109051900.0
+      weight_tensor_size: 27262976.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_14_FACT"
+    id: 53
+    topological_number: 26
+    config: 13
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 6528
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 26738688.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_14_BCAST"
+    id: 54
+    topological_number: 27
+    config: 13
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 26738688.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_14_SWAP"
+    id: 55
+    topological_number: 27
+    config: 13
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 106954750.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_14_UPDATE"
+    id: 56
+    topological_number: 27
+    config: 13
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 6528
+      K: 2048
+      N: 26112
+      input_tensor_size: 106954750.0
+      weight_tensor_size: 26738688.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_15_FACT"
+    id: 57
+    topological_number: 28
+    config: 14
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 6400
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 26214400.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_15_BCAST"
+    id: 58
+    topological_number: 29
+    config: 14
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 26214400.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_15_SWAP"
+    id: 59
+    topological_number: 29
+    config: 14
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 104857600.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_15_UPDATE"
+    id: 60
+    topological_number: 29
+    config: 14
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 6400
+      K: 2048
+      N: 25600
+      input_tensor_size: 104857600.0
+      weight_tensor_size: 26214400.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_16_FACT"
+    id: 61
+    topological_number: 30
+    config: 15
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 6272
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 25690112.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_16_BCAST"
+    id: 62
+    topological_number: 31
+    config: 15
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 25690112.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_16_SWAP"
+    id: 63
+    topological_number: 31
+    config: 15
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 102760450.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_16_UPDATE"
+    id: 64
+    topological_number: 31
+    config: 15
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 6272
+      K: 2048
+      N: 25088
+      input_tensor_size: 102760450.0
+      weight_tensor_size: 25690112.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_17_FACT"
+    id: 65
+    topological_number: 32
+    config: 16
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 6144
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 25165824.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_17_BCAST"
+    id: 66
+    topological_number: 33
+    config: 16
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 25165824.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_17_SWAP"
+    id: 67
+    topological_number: 33
+    config: 16
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 100663300.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_17_UPDATE"
+    id: 68
+    topological_number: 33
+    config: 16
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 6144
+      K: 2048
+      N: 24576
+      input_tensor_size: 100663300.0
+      weight_tensor_size: 25165824.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_18_FACT"
+    id: 69
+    topological_number: 34
+    config: 17
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 6016
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 24641536.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_18_BCAST"
+    id: 70
+    topological_number: 35
+    config: 17
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 24641536.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_18_SWAP"
+    id: 71
+    topological_number: 35
+    config: 17
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 98566140.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_18_UPDATE"
+    id: 72
+    topological_number: 35
+    config: 17
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 6016
+      K: 2048
+      N: 24064
+      input_tensor_size: 98566140.0
+      weight_tensor_size: 24641536.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_19_FACT"
+    id: 73
+    topological_number: 36
+    config: 18
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 5888
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 24117248.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_19_BCAST"
+    id: 74
+    topological_number: 37
+    config: 18
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 24117248.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_19_SWAP"
+    id: 75
+    topological_number: 37
+    config: 18
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 96468990.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_19_UPDATE"
+    id: 76
+    topological_number: 37
+    config: 18
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 5888
+      K: 2048
+      N: 23552
+      input_tensor_size: 96468990.0
+      weight_tensor_size: 24117248.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_20_FACT"
+    id: 77
+    topological_number: 38
+    config: 19
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 5760
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 23592960.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_20_BCAST"
+    id: 78
+    topological_number: 39
+    config: 19
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 23592960.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_20_SWAP"
+    id: 79
+    topological_number: 39
+    config: 19
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 94371840.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_20_UPDATE"
+    id: 80
+    topological_number: 39
+    config: 19
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 5760
+      K: 2048
+      N: 23040
+      input_tensor_size: 94371840.0
+      weight_tensor_size: 23592960.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_21_FACT"
+    id: 81
+    topological_number: 40
+    config: 20
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 5632
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 23068672.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_21_BCAST"
+    id: 82
+    topological_number: 41
+    config: 20
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 23068672.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_21_SWAP"
+    id: 83
+    topological_number: 41
+    config: 20
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 92274690.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_21_UPDATE"
+    id: 84
+    topological_number: 41
+    config: 20
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 5632
+      K: 2048
+      N: 22528
+      input_tensor_size: 92274690.0
+      weight_tensor_size: 23068672.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_22_FACT"
+    id: 85
+    topological_number: 42
+    config: 21
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 5504
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 22544384.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_22_BCAST"
+    id: 86
+    topological_number: 43
+    config: 21
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 22544384.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_22_SWAP"
+    id: 87
+    topological_number: 43
+    config: 21
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 90177540.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_22_UPDATE"
+    id: 88
+    topological_number: 43
+    config: 21
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 5504
+      K: 2048
+      N: 22016
+      input_tensor_size: 90177540.0
+      weight_tensor_size: 22544384.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_23_FACT"
+    id: 89
+    topological_number: 44
+    config: 22
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 5376
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 22020096.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_23_BCAST"
+    id: 90
+    topological_number: 45
+    config: 22
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 22020096.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_23_SWAP"
+    id: 91
+    topological_number: 45
+    config: 22
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 88080380.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_23_UPDATE"
+    id: 92
+    topological_number: 45
+    config: 22
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 5376
+      K: 2048
+      N: 21504
+      input_tensor_size: 88080380.0
+      weight_tensor_size: 22020096.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_24_FACT"
+    id: 93
+    topological_number: 46
+    config: 23
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 5248
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 21495808.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_24_BCAST"
+    id: 94
+    topological_number: 47
+    config: 23
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 21495808.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_24_SWAP"
+    id: 95
+    topological_number: 47
+    config: 23
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 85983230.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_24_UPDATE"
+    id: 96
+    topological_number: 47
+    config: 23
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 5248
+      K: 2048
+      N: 20992
+      input_tensor_size: 85983230.0
+      weight_tensor_size: 21495808.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_25_FACT"
+    id: 97
+    topological_number: 48
+    config: 24
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 5120
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 20971520.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_25_BCAST"
+    id: 98
+    topological_number: 49
+    config: 24
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 20971520.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_25_SWAP"
+    id: 99
+    topological_number: 49
+    config: 24
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 83886080.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_25_UPDATE"
+    id: 100
+    topological_number: 49
+    config: 24
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 5120
+      K: 2048
+      N: 20480
+      input_tensor_size: 83886080.0
+      weight_tensor_size: 20971520.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_26_FACT"
+    id: 101
+    topological_number: 50
+    config: 25
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 4992
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 20447232.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_26_BCAST"
+    id: 102
+    topological_number: 51
+    config: 25
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 20447232.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_26_SWAP"
+    id: 103
+    topological_number: 51
+    config: 25
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 81788930.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_26_UPDATE"
+    id: 104
+    topological_number: 51
+    config: 25
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 4992
+      K: 2048
+      N: 19968
+      input_tensor_size: 81788930.0
+      weight_tensor_size: 20447232.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_27_FACT"
+    id: 105
+    topological_number: 52
+    config: 26
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 4864
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 19922944.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_27_BCAST"
+    id: 106
+    topological_number: 53
+    config: 26
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 19922944.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_27_SWAP"
+    id: 107
+    topological_number: 53
+    config: 26
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 79691780.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_27_UPDATE"
+    id: 108
+    topological_number: 53
+    config: 26
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 4864
+      K: 2048
+      N: 19456
+      input_tensor_size: 79691780.0
+      weight_tensor_size: 19922944.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_28_FACT"
+    id: 109
+    topological_number: 54
+    config: 27
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 4736
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 19398656.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_28_BCAST"
+    id: 110
+    topological_number: 55
+    config: 27
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 19398656.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_28_SWAP"
+    id: 111
+    topological_number: 55
+    config: 27
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 77594620.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_28_UPDATE"
+    id: 112
+    topological_number: 55
+    config: 27
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 4736
+      K: 2048
+      N: 18944
+      input_tensor_size: 77594620.0
+      weight_tensor_size: 19398656.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_29_FACT"
+    id: 113
+    topological_number: 56
+    config: 28
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 4608
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 18874368.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_29_BCAST"
+    id: 114
+    topological_number: 57
+    config: 28
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 18874368.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_29_SWAP"
+    id: 115
+    topological_number: 57
+    config: 28
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 75497470.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_29_UPDATE"
+    id: 116
+    topological_number: 57
+    config: 28
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 4608
+      K: 2048
+      N: 18432
+      input_tensor_size: 75497470.0
+      weight_tensor_size: 18874368.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_30_FACT"
+    id: 117
+    topological_number: 58
+    config: 29
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 4480
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 18350080.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_30_BCAST"
+    id: 118
+    topological_number: 59
+    config: 29
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 18350080.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_30_SWAP"
+    id: 119
+    topological_number: 59
+    config: 29
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 73400320.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_30_UPDATE"
+    id: 120
+    topological_number: 59
+    config: 29
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 4480
+      K: 2048
+      N: 17920
+      input_tensor_size: 73400320.0
+      weight_tensor_size: 18350080.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_31_FACT"
+    id: 121
+    topological_number: 60
+    config: 30
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 4352
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 17825792.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_31_BCAST"
+    id: 122
+    topological_number: 61
+    config: 30
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 17825792.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_31_SWAP"
+    id: 123
+    topological_number: 61
+    config: 30
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 71303170.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_31_UPDATE"
+    id: 124
+    topological_number: 61
+    config: 30
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 4352
+      K: 2048
+      N: 17408
+      input_tensor_size: 71303170.0
+      weight_tensor_size: 17825792.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_32_FACT"
+    id: 125
+    topological_number: 62
+    config: 31
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 4224
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 17301504.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_32_BCAST"
+    id: 126
+    topological_number: 63
+    config: 31
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 17301504.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_32_SWAP"
+    id: 127
+    topological_number: 63
+    config: 31
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 69206020.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_32_UPDATE"
+    id: 128
+    topological_number: 63
+    config: 31
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 4224
+      K: 2048
+      N: 16896
+      input_tensor_size: 69206020.0
+      weight_tensor_size: 17301504.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_33_FACT"
+    id: 129
+    topological_number: 64
+    config: 32
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 4096
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 16777216.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_33_BCAST"
+    id: 130
+    topological_number: 65
+    config: 32
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 16777216.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_33_SWAP"
+    id: 131
+    topological_number: 65
+    config: 32
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 67108864.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_33_UPDATE"
+    id: 132
+    topological_number: 65
+    config: 32
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 4096
+      K: 2048
+      N: 16384
+      input_tensor_size: 67108864.0
+      weight_tensor_size: 16777216.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_34_FACT"
+    id: 133
+    topological_number: 66
+    config: 33
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 3968
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 16252928.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_34_BCAST"
+    id: 134
+    topological_number: 67
+    config: 33
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 16252928.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_34_SWAP"
+    id: 135
+    topological_number: 67
+    config: 33
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 65011710.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_34_UPDATE"
+    id: 136
+    topological_number: 67
+    config: 33
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 3968
+      K: 2048
+      N: 15872
+      input_tensor_size: 65011710.0
+      weight_tensor_size: 16252928.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_35_FACT"
+    id: 137
+    topological_number: 68
+    config: 34
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 3840
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 15728640.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_35_BCAST"
+    id: 138
+    topological_number: 69
+    config: 34
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 15728640.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_35_SWAP"
+    id: 139
+    topological_number: 69
+    config: 34
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 62914560.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_35_UPDATE"
+    id: 140
+    topological_number: 69
+    config: 34
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 3840
+      K: 2048
+      N: 15360
+      input_tensor_size: 62914560.0
+      weight_tensor_size: 15728640.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_36_FACT"
+    id: 141
+    topological_number: 70
+    config: 35
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 3712
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 15204352.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_36_BCAST"
+    id: 142
+    topological_number: 71
+    config: 35
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 15204352.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_36_SWAP"
+    id: 143
+    topological_number: 71
+    config: 35
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 60817410.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_36_UPDATE"
+    id: 144
+    topological_number: 71
+    config: 35
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 3712
+      K: 2048
+      N: 14848
+      input_tensor_size: 60817410.0
+      weight_tensor_size: 15204352.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_37_FACT"
+    id: 145
+    topological_number: 72
+    config: 36
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 3584
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 14680064.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_37_BCAST"
+    id: 146
+    topological_number: 73
+    config: 36
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 14680064.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_37_SWAP"
+    id: 147
+    topological_number: 73
+    config: 36
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 58720256.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_37_UPDATE"
+    id: 148
+    topological_number: 73
+    config: 36
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 3584
+      K: 2048
+      N: 14336
+      input_tensor_size: 58720256.0
+      weight_tensor_size: 14680064.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_38_FACT"
+    id: 149
+    topological_number: 74
+    config: 37
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 3456
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 14155776.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_38_BCAST"
+    id: 150
+    topological_number: 75
+    config: 37
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 14155776.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_38_SWAP"
+    id: 151
+    topological_number: 75
+    config: 37
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 56623104.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_38_UPDATE"
+    id: 152
+    topological_number: 75
+    config: 37
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 3456
+      K: 2048
+      N: 13824
+      input_tensor_size: 56623104.0
+      weight_tensor_size: 14155776.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_39_FACT"
+    id: 153
+    topological_number: 76
+    config: 38
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 3328
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 13631488.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_39_BCAST"
+    id: 154
+    topological_number: 77
+    config: 38
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 13631488.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_39_SWAP"
+    id: 155
+    topological_number: 77
+    config: 38
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 54525950.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_39_UPDATE"
+    id: 156
+    topological_number: 77
+    config: 38
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 3328
+      K: 2048
+      N: 13312
+      input_tensor_size: 54525950.0
+      weight_tensor_size: 13631488.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_40_FACT"
+    id: 157
+    topological_number: 78
+    config: 39
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 3200
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 13107200.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_40_BCAST"
+    id: 158
+    topological_number: 79
+    config: 39
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 13107200.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_40_SWAP"
+    id: 159
+    topological_number: 79
+    config: 39
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 52428800.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_40_UPDATE"
+    id: 160
+    topological_number: 79
+    config: 39
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 3200
+      K: 2048
+      N: 12800
+      input_tensor_size: 52428800.0
+      weight_tensor_size: 13107200.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_41_FACT"
+    id: 161
+    topological_number: 80
+    config: 40
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 3072
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 12582912.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_41_BCAST"
+    id: 162
+    topological_number: 81
+    config: 40
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 12582912.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_41_SWAP"
+    id: 163
+    topological_number: 81
+    config: 40
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 50331650.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_41_UPDATE"
+    id: 164
+    topological_number: 81
+    config: 40
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 3072
+      K: 2048
+      N: 12288
+      input_tensor_size: 50331650.0
+      weight_tensor_size: 12582912.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_42_FACT"
+    id: 165
+    topological_number: 82
+    config: 41
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2944
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 12058624.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_42_BCAST"
+    id: 166
+    topological_number: 83
+    config: 41
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 12058624.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_42_SWAP"
+    id: 167
+    topological_number: 83
+    config: 41
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 48234496.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_42_UPDATE"
+    id: 168
+    topological_number: 83
+    config: 41
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2944
+      K: 2048
+      N: 11776
+      input_tensor_size: 48234496.0
+      weight_tensor_size: 12058624.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_43_FACT"
+    id: 169
+    topological_number: 84
+    config: 42
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2816
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 11534336.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_43_BCAST"
+    id: 170
+    topological_number: 85
+    config: 42
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 11534336.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_43_SWAP"
+    id: 171
+    topological_number: 85
+    config: 42
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 46137344.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_43_UPDATE"
+    id: 172
+    topological_number: 85
+    config: 42
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2816
+      K: 2048
+      N: 11264
+      input_tensor_size: 46137344.0
+      weight_tensor_size: 11534336.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_44_FACT"
+    id: 173
+    topological_number: 86
+    config: 43
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2688
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 11010048.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_44_BCAST"
+    id: 174
+    topological_number: 87
+    config: 43
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 11010048.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_44_SWAP"
+    id: 175
+    topological_number: 87
+    config: 43
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 44040190.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_44_UPDATE"
+    id: 176
+    topological_number: 87
+    config: 43
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2688
+      K: 2048
+      N: 10752
+      input_tensor_size: 44040190.0
+      weight_tensor_size: 11010048.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_45_FACT"
+    id: 177
+    topological_number: 88
+    config: 44
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2560
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 10485760.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_45_BCAST"
+    id: 178
+    topological_number: 89
+    config: 44
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 10485760.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_45_SWAP"
+    id: 179
+    topological_number: 89
+    config: 44
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 41943040.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_45_UPDATE"
+    id: 180
+    topological_number: 89
+    config: 44
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2560
+      K: 2048
+      N: 10240
+      input_tensor_size: 41943040.0
+      weight_tensor_size: 10485760.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_46_FACT"
+    id: 181
+    topological_number: 90
+    config: 45
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2432
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 9961472.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_46_BCAST"
+    id: 182
+    topological_number: 91
+    config: 45
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 9961472.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_46_SWAP"
+    id: 183
+    topological_number: 91
+    config: 45
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 39845890.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_46_UPDATE"
+    id: 184
+    topological_number: 91
+    config: 45
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2432
+      K: 2048
+      N: 9728
+      input_tensor_size: 39845890.0
+      weight_tensor_size: 9961472.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_47_FACT"
+    id: 185
+    topological_number: 92
+    config: 46
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2304
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 9437184.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_47_BCAST"
+    id: 186
+    topological_number: 93
+    config: 46
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 9437184.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_47_SWAP"
+    id: 187
+    topological_number: 93
+    config: 46
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 37748736.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_47_UPDATE"
+    id: 188
+    topological_number: 93
+    config: 46
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2304
+      K: 2048
+      N: 9216
+      input_tensor_size: 37748736.0
+      weight_tensor_size: 9437184.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_48_FACT"
+    id: 189
+    topological_number: 94
+    config: 47
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2176
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 8912896.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_48_BCAST"
+    id: 190
+    topological_number: 95
+    config: 47
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 8912896.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_48_SWAP"
+    id: 191
+    topological_number: 95
+    config: 47
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 35651584.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_48_UPDATE"
+    id: 192
+    topological_number: 95
+    config: 47
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2176
+      K: 2048
+      N: 8704
+      input_tensor_size: 35651584.0
+      weight_tensor_size: 8912896.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_49_FACT"
+    id: 193
+    topological_number: 96
+    config: 48
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2048
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 8388608.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_49_BCAST"
+    id: 194
+    topological_number: 97
+    config: 48
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_49_SWAP"
+    id: 195
+    topological_number: 97
+    config: 48
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 33554432.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_49_UPDATE"
+    id: 196
+    topological_number: 97
+    config: 48
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2048
+      K: 2048
+      N: 8192
+      input_tensor_size: 33554432.0
+      weight_tensor_size: 8388608.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_50_FACT"
+    id: 197
+    topological_number: 98
+    config: 49
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1920
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 7864320.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_50_BCAST"
+    id: 198
+    topological_number: 99
+    config: 49
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 7864320.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_50_SWAP"
+    id: 199
+    topological_number: 99
+    config: 49
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 31457280.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_50_UPDATE"
+    id: 200
+    topological_number: 99
+    config: 49
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1920
+      K: 2048
+      N: 7680
+      input_tensor_size: 31457280.0
+      weight_tensor_size: 7864320.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_51_FACT"
+    id: 201
+    topological_number: 100
+    config: 50
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1792
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 7340032.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_51_BCAST"
+    id: 202
+    topological_number: 101
+    config: 50
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 7340032.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_51_SWAP"
+    id: 203
+    topological_number: 101
+    config: 50
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 29360128.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_51_UPDATE"
+    id: 204
+    topological_number: 101
+    config: 50
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1792
+      K: 2048
+      N: 7168
+      input_tensor_size: 29360128.0
+      weight_tensor_size: 7340032.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_52_FACT"
+    id: 205
+    topological_number: 102
+    config: 51
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1664
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 6815744.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_52_BCAST"
+    id: 206
+    topological_number: 103
+    config: 51
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 6815744.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_52_SWAP"
+    id: 207
+    topological_number: 103
+    config: 51
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 27262976.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_52_UPDATE"
+    id: 208
+    topological_number: 103
+    config: 51
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1664
+      K: 2048
+      N: 6656
+      input_tensor_size: 27262976.0
+      weight_tensor_size: 6815744.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_53_FACT"
+    id: 209
+    topological_number: 104
+    config: 52
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1536
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 6291456.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_53_BCAST"
+    id: 210
+    topological_number: 105
+    config: 52
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 6291456.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_53_SWAP"
+    id: 211
+    topological_number: 105
+    config: 52
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 25165824.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_53_UPDATE"
+    id: 212
+    topological_number: 105
+    config: 52
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1536
+      K: 2048
+      N: 6144
+      input_tensor_size: 25165824.0
+      weight_tensor_size: 6291456.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_54_FACT"
+    id: 213
+    topological_number: 106
+    config: 53
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1408
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 5767168.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_54_BCAST"
+    id: 214
+    topological_number: 107
+    config: 53
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 5767168.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_54_SWAP"
+    id: 215
+    topological_number: 107
+    config: 53
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 23068672.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_54_UPDATE"
+    id: 216
+    topological_number: 107
+    config: 53
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1408
+      K: 2048
+      N: 5632
+      input_tensor_size: 23068672.0
+      weight_tensor_size: 5767168.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_55_FACT"
+    id: 217
+    topological_number: 108
+    config: 54
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1280
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 5242880.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_55_BCAST"
+    id: 218
+    topological_number: 109
+    config: 54
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 5242880.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_55_SWAP"
+    id: 219
+    topological_number: 109
+    config: 54
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 20971520.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_55_UPDATE"
+    id: 220
+    topological_number: 109
+    config: 54
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1280
+      K: 2048
+      N: 5120
+      input_tensor_size: 20971520.0
+      weight_tensor_size: 5242880.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_56_FACT"
+    id: 221
+    topological_number: 110
+    config: 55
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1152
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 4718592.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_56_BCAST"
+    id: 222
+    topological_number: 111
+    config: 55
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 4718592.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_56_SWAP"
+    id: 223
+    topological_number: 111
+    config: 55
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 18874368.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_56_UPDATE"
+    id: 224
+    topological_number: 111
+    config: 55
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1152
+      K: 2048
+      N: 4608
+      input_tensor_size: 18874368.0
+      weight_tensor_size: 4718592.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_57_FACT"
+    id: 225
+    topological_number: 112
+    config: 56
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1024
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 4194304.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_57_BCAST"
+    id: 226
+    topological_number: 113
+    config: 56
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 4194304.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_57_SWAP"
+    id: 227
+    topological_number: 113
+    config: 56
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 16777216.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_57_UPDATE"
+    id: 228
+    topological_number: 113
+    config: 56
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1024
+      K: 2048
+      N: 4096
+      input_tensor_size: 16777216.0
+      weight_tensor_size: 4194304.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_58_FACT"
+    id: 229
+    topological_number: 114
+    config: 57
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 896
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 3670016.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_58_BCAST"
+    id: 230
+    topological_number: 115
+    config: 57
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 3670016.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_58_SWAP"
+    id: 231
+    topological_number: 115
+    config: 57
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 14680064.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_58_UPDATE"
+    id: 232
+    topological_number: 115
+    config: 57
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 896
+      K: 2048
+      N: 3584
+      input_tensor_size: 14680064.0
+      weight_tensor_size: 3670016.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_59_FACT"
+    id: 233
+    topological_number: 116
+    config: 58
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 768
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 3145728.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_59_BCAST"
+    id: 234
+    topological_number: 117
+    config: 58
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 3145728.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_59_SWAP"
+    id: 235
+    topological_number: 117
+    config: 58
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 12582912.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_59_UPDATE"
+    id: 236
+    topological_number: 117
+    config: 58
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 768
+      K: 2048
+      N: 3072
+      input_tensor_size: 12582912.0
+      weight_tensor_size: 3145728.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_60_FACT"
+    id: 237
+    topological_number: 118
+    config: 59
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 640
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 2621440.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_60_BCAST"
+    id: 238
+    topological_number: 119
+    config: 59
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 2621440.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_60_SWAP"
+    id: 239
+    topological_number: 119
+    config: 59
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 10485760.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_60_UPDATE"
+    id: 240
+    topological_number: 119
+    config: 59
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 640
+      K: 2048
+      N: 2560
+      input_tensor_size: 10485760.0
+      weight_tensor_size: 2621440.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_61_FACT"
+    id: 241
+    topological_number: 120
+    config: 60
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 512
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 2097152.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_61_BCAST"
+    id: 242
+    topological_number: 121
+    config: 60
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 2097152.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_61_SWAP"
+    id: 243
+    topological_number: 121
+    config: 60
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_61_UPDATE"
+    id: 244
+    topological_number: 121
+    config: 60
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 512
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 2097152.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_62_FACT"
+    id: 245
+    topological_number: 122
+    config: 61
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 384
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 1572864.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_62_BCAST"
+    id: 246
+    topological_number: 123
+    config: 61
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 1572864.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_62_SWAP"
+    id: 247
+    topological_number: 123
+    config: 61
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 6291456.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_62_UPDATE"
+    id: 248
+    topological_number: 123
+    config: 61
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 384
+      K: 2048
+      N: 1536
+      input_tensor_size: 6291456.0
+      weight_tensor_size: 1572864.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_63_FACT"
+    id: 249
+    topological_number: 124
+    config: 62
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 256
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 1048576.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_63_BCAST"
+    id: 250
+    topological_number: 125
+    config: 62
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 1048576.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_63_SWAP"
+    id: 251
+    topological_number: 125
+    config: 62
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 4194304.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_63_UPDATE"
+    id: 252
+    topological_number: 125
+    config: 62
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 256
+      K: 2048
+      N: 1024
+      input_tensor_size: 4194304.0
+      weight_tensor_size: 1048576.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_64_FACT"
+    id: 253
+    topological_number: 126
+    config: 63
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 128
+      K: 2048
+      N: 2048
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 524288.0
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_64_BCAST"
+    id: 254
+    topological_number: 127
+    config: 63
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: BROADCAST
+      communication_size: 524288.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_64_SWAP"
+    id: 255
+    topological_number: 127
+    config: 63
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      sharding: NO_SHARDING
+      communication_type: POINT_TO_POINT
+      communication_size: 2097152.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_64_UPDATE"
+    id: 256
+    topological_number: 127
+    config: 63
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 128
+      K: 2048
+      N: 512
+      input_tensor_size: 2097152.0
+      weight_tensor_size: 524288.0
+      sharding: NO_SHARDING
+      tiling: NO_TILING
+    }
+  }
+  connections {
+    startIdx: 1
+    endIdx: 2
+    buffer_depth: 2
+    id: 1
+    startName: "Iteration_1_FACT"
+    endName: "Iteration_1_BCAST"
+  }
+  connections {
+    startIdx: 1
+    endIdx: 3
+    buffer_depth: 2
+    id: 2
+    startName: "Iteration_1_FACT"
+    endName: "Iteration_1_SWAP"
+  }
+  connections {
+    startIdx: 1
+    endIdx: 4
+    buffer_depth: 2
+    id: 3
+    startName: "Iteration_1_FACT"
+    endName: "Iteration_1_UPDATE"
+  }
+  connections {
+    startIdx: 5
+    endIdx: 6
+    buffer_depth: 2
+    id: 4
+    startName: "Iteration_2_FACT"
+    endName: "Iteration_2_BCAST"
+  }
+  connections {
+    startIdx: 5
+    endIdx: 7
+    buffer_depth: 2
+    id: 5
+    startName: "Iteration_2_FACT"
+    endName: "Iteration_2_SWAP"
+  }
+  connections {
+    startIdx: 5
+    endIdx: 8
+    buffer_depth: 2
+    id: 6
+    startName: "Iteration_2_FACT"
+    endName: "Iteration_2_UPDATE"
+  }
+  connections {
+    startIdx: 9
+    endIdx: 10
+    buffer_depth: 2
+    id: 7
+    startName: "Iteration_3_FACT"
+    endName: "Iteration_3_BCAST"
+  }
+  connections {
+    startIdx: 9
+    endIdx: 11
+    buffer_depth: 2
+    id: 8
+    startName: "Iteration_3_FACT"
+    endName: "Iteration_3_SWAP"
+  }
+  connections {
+    startIdx: 9
+    endIdx: 12
+    buffer_depth: 2
+    id: 9
+    startName: "Iteration_3_FACT"
+    endName: "Iteration_3_UPDATE"
+  }
+  connections {
+    startIdx: 13
+    endIdx: 14
+    buffer_depth: 2
+    id: 10
+    startName: "Iteration_4_FACT"
+    endName: "Iteration_4_BCAST"
+  }
+  connections {
+    startIdx: 13
+    endIdx: 15
+    buffer_depth: 2
+    id: 11
+    startName: "Iteration_4_FACT"
+    endName: "Iteration_4_SWAP"
+  }
+  connections {
+    startIdx: 13
+    endIdx: 16
+    buffer_depth: 2
+    id: 12
+    startName: "Iteration_4_FACT"
+    endName: "Iteration_4_UPDATE"
+  }
+  connections {
+    startIdx: 17
+    endIdx: 18
+    buffer_depth: 2
+    id: 13
+    startName: "Iteration_5_FACT"
+    endName: "Iteration_5_BCAST"
+  }
+  connections {
+    startIdx: 17
+    endIdx: 19
+    buffer_depth: 2
+    id: 14
+    startName: "Iteration_5_FACT"
+    endName: "Iteration_5_SWAP"
+  }
+  connections {
+    startIdx: 17
+    endIdx: 20
+    buffer_depth: 2
+    id: 15
+    startName: "Iteration_5_FACT"
+    endName: "Iteration_5_UPDATE"
+  }
+  connections {
+    startIdx: 21
+    endIdx: 22
+    buffer_depth: 2
+    id: 16
+    startName: "Iteration_6_FACT"
+    endName: "Iteration_6_BCAST"
+  }
+  connections {
+    startIdx: 21
+    endIdx: 23
+    buffer_depth: 2
+    id: 17
+    startName: "Iteration_6_FACT"
+    endName: "Iteration_6_SWAP"
+  }
+  connections {
+    startIdx: 21
+    endIdx: 24
+    buffer_depth: 2
+    id: 18
+    startName: "Iteration_6_FACT"
+    endName: "Iteration_6_UPDATE"
+  }
+  connections {
+    startIdx: 25
+    endIdx: 26
+    buffer_depth: 2
+    id: 19
+    startName: "Iteration_7_FACT"
+    endName: "Iteration_7_BCAST"
+  }
+  connections {
+    startIdx: 25
+    endIdx: 27
+    buffer_depth: 2
+    id: 20
+    startName: "Iteration_7_FACT"
+    endName: "Iteration_7_SWAP"
+  }
+  connections {
+    startIdx: 25
+    endIdx: 28
+    buffer_depth: 2
+    id: 21
+    startName: "Iteration_7_FACT"
+    endName: "Iteration_7_UPDATE"
+  }
+  connections {
+    startIdx: 29
+    endIdx: 30
+    buffer_depth: 2
+    id: 22
+    startName: "Iteration_8_FACT"
+    endName: "Iteration_8_BCAST"
+  }
+  connections {
+    startIdx: 29
+    endIdx: 31
+    buffer_depth: 2
+    id: 23
+    startName: "Iteration_8_FACT"
+    endName: "Iteration_8_SWAP"
+  }
+  connections {
+    startIdx: 29
+    endIdx: 32
+    buffer_depth: 2
+    id: 24
+    startName: "Iteration_8_FACT"
+    endName: "Iteration_8_UPDATE"
+  }
+  connections {
+    startIdx: 33
+    endIdx: 34
+    buffer_depth: 2
+    id: 25
+    startName: "Iteration_9_FACT"
+    endName: "Iteration_9_BCAST"
+  }
+  connections {
+    startIdx: 33
+    endIdx: 35
+    buffer_depth: 2
+    id: 26
+    startName: "Iteration_9_FACT"
+    endName: "Iteration_9_SWAP"
+  }
+  connections {
+    startIdx: 33
+    endIdx: 36
+    buffer_depth: 2
+    id: 27
+    startName: "Iteration_9_FACT"
+    endName: "Iteration_9_UPDATE"
+  }
+  connections {
+    startIdx: 37
+    endIdx: 38
+    buffer_depth: 2
+    id: 28
+    startName: "Iteration_10_FACT"
+    endName: "Iteration_10_BCAST"
+  }
+  connections {
+    startIdx: 37
+    endIdx: 39
+    buffer_depth: 2
+    id: 29
+    startName: "Iteration_10_FACT"
+    endName: "Iteration_10_SWAP"
+  }
+  connections {
+    startIdx: 37
+    endIdx: 40
+    buffer_depth: 2
+    id: 30
+    startName: "Iteration_10_FACT"
+    endName: "Iteration_10_UPDATE"
+  }
+  connections {
+    startIdx: 41
+    endIdx: 42
+    buffer_depth: 2
+    id: 31
+    startName: "Iteration_11_FACT"
+    endName: "Iteration_11_BCAST"
+  }
+  connections {
+    startIdx: 41
+    endIdx: 43
+    buffer_depth: 2
+    id: 32
+    startName: "Iteration_11_FACT"
+    endName: "Iteration_11_SWAP"
+  }
+  connections {
+    startIdx: 41
+    endIdx: 44
+    buffer_depth: 2
+    id: 33
+    startName: "Iteration_11_FACT"
+    endName: "Iteration_11_UPDATE"
+  }
+  connections {
+    startIdx: 45
+    endIdx: 46
+    buffer_depth: 2
+    id: 34
+    startName: "Iteration_12_FACT"
+    endName: "Iteration_12_BCAST"
+  }
+  connections {
+    startIdx: 45
+    endIdx: 47
+    buffer_depth: 2
+    id: 35
+    startName: "Iteration_12_FACT"
+    endName: "Iteration_12_SWAP"
+  }
+  connections {
+    startIdx: 45
+    endIdx: 48
+    buffer_depth: 2
+    id: 36
+    startName: "Iteration_12_FACT"
+    endName: "Iteration_12_UPDATE"
+  }
+  connections {
+    startIdx: 49
+    endIdx: 50
+    buffer_depth: 2
+    id: 37
+    startName: "Iteration_13_FACT"
+    endName: "Iteration_13_BCAST"
+  }
+  connections {
+    startIdx: 49
+    endIdx: 51
+    buffer_depth: 2
+    id: 38
+    startName: "Iteration_13_FACT"
+    endName: "Iteration_13_SWAP"
+  }
+  connections {
+    startIdx: 49
+    endIdx: 52
+    buffer_depth: 2
+    id: 39
+    startName: "Iteration_13_FACT"
+    endName: "Iteration_13_UPDATE"
+  }
+  connections {
+    startIdx: 53
+    endIdx: 54
+    buffer_depth: 2
+    id: 40
+    startName: "Iteration_14_FACT"
+    endName: "Iteration_14_BCAST"
+  }
+  connections {
+    startIdx: 53
+    endIdx: 55
+    buffer_depth: 2
+    id: 41
+    startName: "Iteration_14_FACT"
+    endName: "Iteration_14_SWAP"
+  }
+  connections {
+    startIdx: 53
+    endIdx: 56
+    buffer_depth: 2
+    id: 42
+    startName: "Iteration_14_FACT"
+    endName: "Iteration_14_UPDATE"
+  }
+  connections {
+    startIdx: 57
+    endIdx: 58
+    buffer_depth: 2
+    id: 43
+    startName: "Iteration_15_FACT"
+    endName: "Iteration_15_BCAST"
+  }
+  connections {
+    startIdx: 57
+    endIdx: 59
+    buffer_depth: 2
+    id: 44
+    startName: "Iteration_15_FACT"
+    endName: "Iteration_15_SWAP"
+  }
+  connections {
+    startIdx: 57
+    endIdx: 60
+    buffer_depth: 2
+    id: 45
+    startName: "Iteration_15_FACT"
+    endName: "Iteration_15_UPDATE"
+  }
+  connections {
+    startIdx: 61
+    endIdx: 62
+    buffer_depth: 2
+    id: 46
+    startName: "Iteration_16_FACT"
+    endName: "Iteration_16_BCAST"
+  }
+  connections {
+    startIdx: 61
+    endIdx: 63
+    buffer_depth: 2
+    id: 47
+    startName: "Iteration_16_FACT"
+    endName: "Iteration_16_SWAP"
+  }
+  connections {
+    startIdx: 61
+    endIdx: 64
+    buffer_depth: 2
+    id: 48
+    startName: "Iteration_16_FACT"
+    endName: "Iteration_16_UPDATE"
+  }
+  connections {
+    startIdx: 65
+    endIdx: 66
+    buffer_depth: 2
+    id: 49
+    startName: "Iteration_17_FACT"
+    endName: "Iteration_17_BCAST"
+  }
+  connections {
+    startIdx: 65
+    endIdx: 67
+    buffer_depth: 2
+    id: 50
+    startName: "Iteration_17_FACT"
+    endName: "Iteration_17_SWAP"
+  }
+  connections {
+    startIdx: 65
+    endIdx: 68
+    buffer_depth: 2
+    id: 51
+    startName: "Iteration_17_FACT"
+    endName: "Iteration_17_UPDATE"
+  }
+  connections {
+    startIdx: 69
+    endIdx: 70
+    buffer_depth: 2
+    id: 52
+    startName: "Iteration_18_FACT"
+    endName: "Iteration_18_BCAST"
+  }
+  connections {
+    startIdx: 69
+    endIdx: 71
+    buffer_depth: 2
+    id: 53
+    startName: "Iteration_18_FACT"
+    endName: "Iteration_18_SWAP"
+  }
+  connections {
+    startIdx: 69
+    endIdx: 72
+    buffer_depth: 2
+    id: 54
+    startName: "Iteration_18_FACT"
+    endName: "Iteration_18_UPDATE"
+  }
+  connections {
+    startIdx: 73
+    endIdx: 74
+    buffer_depth: 2
+    id: 55
+    startName: "Iteration_19_FACT"
+    endName: "Iteration_19_BCAST"
+  }
+  connections {
+    startIdx: 73
+    endIdx: 75
+    buffer_depth: 2
+    id: 56
+    startName: "Iteration_19_FACT"
+    endName: "Iteration_19_SWAP"
+  }
+  connections {
+    startIdx: 73
+    endIdx: 76
+    buffer_depth: 2
+    id: 57
+    startName: "Iteration_19_FACT"
+    endName: "Iteration_19_UPDATE"
+  }
+  connections {
+    startIdx: 77
+    endIdx: 78
+    buffer_depth: 2
+    id: 58
+    startName: "Iteration_20_FACT"
+    endName: "Iteration_20_BCAST"
+  }
+  connections {
+    startIdx: 77
+    endIdx: 79
+    buffer_depth: 2
+    id: 59
+    startName: "Iteration_20_FACT"
+    endName: "Iteration_20_SWAP"
+  }
+  connections {
+    startIdx: 77
+    endIdx: 80
+    buffer_depth: 2
+    id: 60
+    startName: "Iteration_20_FACT"
+    endName: "Iteration_20_UPDATE"
+  }
+  connections {
+    startIdx: 81
+    endIdx: 82
+    buffer_depth: 2
+    id: 61
+    startName: "Iteration_21_FACT"
+    endName: "Iteration_21_BCAST"
+  }
+  connections {
+    startIdx: 81
+    endIdx: 83
+    buffer_depth: 2
+    id: 62
+    startName: "Iteration_21_FACT"
+    endName: "Iteration_21_SWAP"
+  }
+  connections {
+    startIdx: 81
+    endIdx: 84
+    buffer_depth: 2
+    id: 63
+    startName: "Iteration_21_FACT"
+    endName: "Iteration_21_UPDATE"
+  }
+  connections {
+    startIdx: 85
+    endIdx: 86
+    buffer_depth: 2
+    id: 64
+    startName: "Iteration_22_FACT"
+    endName: "Iteration_22_BCAST"
+  }
+  connections {
+    startIdx: 85
+    endIdx: 87
+    buffer_depth: 2
+    id: 65
+    startName: "Iteration_22_FACT"
+    endName: "Iteration_22_SWAP"
+  }
+  connections {
+    startIdx: 85
+    endIdx: 88
+    buffer_depth: 2
+    id: 66
+    startName: "Iteration_22_FACT"
+    endName: "Iteration_22_UPDATE"
+  }
+  connections {
+    startIdx: 89
+    endIdx: 90
+    buffer_depth: 2
+    id: 67
+    startName: "Iteration_23_FACT"
+    endName: "Iteration_23_BCAST"
+  }
+  connections {
+    startIdx: 89
+    endIdx: 91
+    buffer_depth: 2
+    id: 68
+    startName: "Iteration_23_FACT"
+    endName: "Iteration_23_SWAP"
+  }
+  connections {
+    startIdx: 89
+    endIdx: 92
+    buffer_depth: 2
+    id: 69
+    startName: "Iteration_23_FACT"
+    endName: "Iteration_23_UPDATE"
+  }
+  connections {
+    startIdx: 93
+    endIdx: 94
+    buffer_depth: 2
+    id: 70
+    startName: "Iteration_24_FACT"
+    endName: "Iteration_24_BCAST"
+  }
+  connections {
+    startIdx: 93
+    endIdx: 95
+    buffer_depth: 2
+    id: 71
+    startName: "Iteration_24_FACT"
+    endName: "Iteration_24_SWAP"
+  }
+  connections {
+    startIdx: 93
+    endIdx: 96
+    buffer_depth: 2
+    id: 72
+    startName: "Iteration_24_FACT"
+    endName: "Iteration_24_UPDATE"
+  }
+  connections {
+    startIdx: 97
+    endIdx: 98
+    buffer_depth: 2
+    id: 73
+    startName: "Iteration_25_FACT"
+    endName: "Iteration_25_BCAST"
+  }
+  connections {
+    startIdx: 97
+    endIdx: 99
+    buffer_depth: 2
+    id: 74
+    startName: "Iteration_25_FACT"
+    endName: "Iteration_25_SWAP"
+  }
+  connections {
+    startIdx: 97
+    endIdx: 100
+    buffer_depth: 2
+    id: 75
+    startName: "Iteration_25_FACT"
+    endName: "Iteration_25_UPDATE"
+  }
+  connections {
+    startIdx: 101
+    endIdx: 102
+    buffer_depth: 2
+    id: 76
+    startName: "Iteration_26_FACT"
+    endName: "Iteration_26_BCAST"
+  }
+  connections {
+    startIdx: 101
+    endIdx: 103
+    buffer_depth: 2
+    id: 77
+    startName: "Iteration_26_FACT"
+    endName: "Iteration_26_SWAP"
+  }
+  connections {
+    startIdx: 101
+    endIdx: 104
+    buffer_depth: 2
+    id: 78
+    startName: "Iteration_26_FACT"
+    endName: "Iteration_26_UPDATE"
+  }
+  connections {
+    startIdx: 105
+    endIdx: 106
+    buffer_depth: 2
+    id: 79
+    startName: "Iteration_27_FACT"
+    endName: "Iteration_27_BCAST"
+  }
+  connections {
+    startIdx: 105
+    endIdx: 107
+    buffer_depth: 2
+    id: 80
+    startName: "Iteration_27_FACT"
+    endName: "Iteration_27_SWAP"
+  }
+  connections {
+    startIdx: 105
+    endIdx: 108
+    buffer_depth: 2
+    id: 81
+    startName: "Iteration_27_FACT"
+    endName: "Iteration_27_UPDATE"
+  }
+  connections {
+    startIdx: 109
+    endIdx: 110
+    buffer_depth: 2
+    id: 82
+    startName: "Iteration_28_FACT"
+    endName: "Iteration_28_BCAST"
+  }
+  connections {
+    startIdx: 109
+    endIdx: 111
+    buffer_depth: 2
+    id: 83
+    startName: "Iteration_28_FACT"
+    endName: "Iteration_28_SWAP"
+  }
+  connections {
+    startIdx: 109
+    endIdx: 112
+    buffer_depth: 2
+    id: 84
+    startName: "Iteration_28_FACT"
+    endName: "Iteration_28_UPDATE"
+  }
+  connections {
+    startIdx: 113
+    endIdx: 114
+    buffer_depth: 2
+    id: 85
+    startName: "Iteration_29_FACT"
+    endName: "Iteration_29_BCAST"
+  }
+  connections {
+    startIdx: 113
+    endIdx: 115
+    buffer_depth: 2
+    id: 86
+    startName: "Iteration_29_FACT"
+    endName: "Iteration_29_SWAP"
+  }
+  connections {
+    startIdx: 113
+    endIdx: 116
+    buffer_depth: 2
+    id: 87
+    startName: "Iteration_29_FACT"
+    endName: "Iteration_29_UPDATE"
+  }
+  connections {
+    startIdx: 117
+    endIdx: 118
+    buffer_depth: 2
+    id: 88
+    startName: "Iteration_30_FACT"
+    endName: "Iteration_30_BCAST"
+  }
+  connections {
+    startIdx: 117
+    endIdx: 119
+    buffer_depth: 2
+    id: 89
+    startName: "Iteration_30_FACT"
+    endName: "Iteration_30_SWAP"
+  }
+  connections {
+    startIdx: 117
+    endIdx: 120
+    buffer_depth: 2
+    id: 90
+    startName: "Iteration_30_FACT"
+    endName: "Iteration_30_UPDATE"
+  }
+  connections {
+    startIdx: 121
+    endIdx: 122
+    buffer_depth: 2
+    id: 91
+    startName: "Iteration_31_FACT"
+    endName: "Iteration_31_BCAST"
+  }
+  connections {
+    startIdx: 121
+    endIdx: 123
+    buffer_depth: 2
+    id: 92
+    startName: "Iteration_31_FACT"
+    endName: "Iteration_31_SWAP"
+  }
+  connections {
+    startIdx: 121
+    endIdx: 124
+    buffer_depth: 2
+    id: 93
+    startName: "Iteration_31_FACT"
+    endName: "Iteration_31_UPDATE"
+  }
+  connections {
+    startIdx: 125
+    endIdx: 126
+    buffer_depth: 2
+    id: 94
+    startName: "Iteration_32_FACT"
+    endName: "Iteration_32_BCAST"
+  }
+  connections {
+    startIdx: 125
+    endIdx: 127
+    buffer_depth: 2
+    id: 95
+    startName: "Iteration_32_FACT"
+    endName: "Iteration_32_SWAP"
+  }
+  connections {
+    startIdx: 125
+    endIdx: 128
+    buffer_depth: 2
+    id: 96
+    startName: "Iteration_32_FACT"
+    endName: "Iteration_32_UPDATE"
+  }
+  connections {
+    startIdx: 129
+    endIdx: 130
+    buffer_depth: 2
+    id: 97
+    startName: "Iteration_33_FACT"
+    endName: "Iteration_33_BCAST"
+  }
+  connections {
+    startIdx: 129
+    endIdx: 131
+    buffer_depth: 2
+    id: 98
+    startName: "Iteration_33_FACT"
+    endName: "Iteration_33_SWAP"
+  }
+  connections {
+    startIdx: 129
+    endIdx: 132
+    buffer_depth: 2
+    id: 99
+    startName: "Iteration_33_FACT"
+    endName: "Iteration_33_UPDATE"
+  }
+  connections {
+    startIdx: 133
+    endIdx: 134
+    buffer_depth: 2
+    id: 100
+    startName: "Iteration_34_FACT"
+    endName: "Iteration_34_BCAST"
+  }
+  connections {
+    startIdx: 133
+    endIdx: 135
+    buffer_depth: 2
+    id: 101
+    startName: "Iteration_34_FACT"
+    endName: "Iteration_34_SWAP"
+  }
+  connections {
+    startIdx: 133
+    endIdx: 136
+    buffer_depth: 2
+    id: 102
+    startName: "Iteration_34_FACT"
+    endName: "Iteration_34_UPDATE"
+  }
+  connections {
+    startIdx: 137
+    endIdx: 138
+    buffer_depth: 2
+    id: 103
+    startName: "Iteration_35_FACT"
+    endName: "Iteration_35_BCAST"
+  }
+  connections {
+    startIdx: 137
+    endIdx: 139
+    buffer_depth: 2
+    id: 104
+    startName: "Iteration_35_FACT"
+    endName: "Iteration_35_SWAP"
+  }
+  connections {
+    startIdx: 137
+    endIdx: 140
+    buffer_depth: 2
+    id: 105
+    startName: "Iteration_35_FACT"
+    endName: "Iteration_35_UPDATE"
+  }
+  connections {
+    startIdx: 141
+    endIdx: 142
+    buffer_depth: 2
+    id: 106
+    startName: "Iteration_36_FACT"
+    endName: "Iteration_36_BCAST"
+  }
+  connections {
+    startIdx: 141
+    endIdx: 143
+    buffer_depth: 2
+    id: 107
+    startName: "Iteration_36_FACT"
+    endName: "Iteration_36_SWAP"
+  }
+  connections {
+    startIdx: 141
+    endIdx: 144
+    buffer_depth: 2
+    id: 108
+    startName: "Iteration_36_FACT"
+    endName: "Iteration_36_UPDATE"
+  }
+  connections {
+    startIdx: 145
+    endIdx: 146
+    buffer_depth: 2
+    id: 109
+    startName: "Iteration_37_FACT"
+    endName: "Iteration_37_BCAST"
+  }
+  connections {
+    startIdx: 145
+    endIdx: 147
+    buffer_depth: 2
+    id: 110
+    startName: "Iteration_37_FACT"
+    endName: "Iteration_37_SWAP"
+  }
+  connections {
+    startIdx: 145
+    endIdx: 148
+    buffer_depth: 2
+    id: 111
+    startName: "Iteration_37_FACT"
+    endName: "Iteration_37_UPDATE"
+  }
+  connections {
+    startIdx: 149
+    endIdx: 150
+    buffer_depth: 2
+    id: 112
+    startName: "Iteration_38_FACT"
+    endName: "Iteration_38_BCAST"
+  }
+  connections {
+    startIdx: 149
+    endIdx: 151
+    buffer_depth: 2
+    id: 113
+    startName: "Iteration_38_FACT"
+    endName: "Iteration_38_SWAP"
+  }
+  connections {
+    startIdx: 149
+    endIdx: 152
+    buffer_depth: 2
+    id: 114
+    startName: "Iteration_38_FACT"
+    endName: "Iteration_38_UPDATE"
+  }
+  connections {
+    startIdx: 153
+    endIdx: 154
+    buffer_depth: 2
+    id: 115
+    startName: "Iteration_39_FACT"
+    endName: "Iteration_39_BCAST"
+  }
+  connections {
+    startIdx: 153
+    endIdx: 155
+    buffer_depth: 2
+    id: 116
+    startName: "Iteration_39_FACT"
+    endName: "Iteration_39_SWAP"
+  }
+  connections {
+    startIdx: 153
+    endIdx: 156
+    buffer_depth: 2
+    id: 117
+    startName: "Iteration_39_FACT"
+    endName: "Iteration_39_UPDATE"
+  }
+  connections {
+    startIdx: 157
+    endIdx: 158
+    buffer_depth: 2
+    id: 118
+    startName: "Iteration_40_FACT"
+    endName: "Iteration_40_BCAST"
+  }
+  connections {
+    startIdx: 157
+    endIdx: 159
+    buffer_depth: 2
+    id: 119
+    startName: "Iteration_40_FACT"
+    endName: "Iteration_40_SWAP"
+  }
+  connections {
+    startIdx: 157
+    endIdx: 160
+    buffer_depth: 2
+    id: 120
+    startName: "Iteration_40_FACT"
+    endName: "Iteration_40_UPDATE"
+  }
+  connections {
+    startIdx: 161
+    endIdx: 162
+    buffer_depth: 2
+    id: 121
+    startName: "Iteration_41_FACT"
+    endName: "Iteration_41_BCAST"
+  }
+  connections {
+    startIdx: 161
+    endIdx: 163
+    buffer_depth: 2
+    id: 122
+    startName: "Iteration_41_FACT"
+    endName: "Iteration_41_SWAP"
+  }
+  connections {
+    startIdx: 161
+    endIdx: 164
+    buffer_depth: 2
+    id: 123
+    startName: "Iteration_41_FACT"
+    endName: "Iteration_41_UPDATE"
+  }
+  connections {
+    startIdx: 165
+    endIdx: 166
+    buffer_depth: 2
+    id: 124
+    startName: "Iteration_42_FACT"
+    endName: "Iteration_42_BCAST"
+  }
+  connections {
+    startIdx: 165
+    endIdx: 167
+    buffer_depth: 2
+    id: 125
+    startName: "Iteration_42_FACT"
+    endName: "Iteration_42_SWAP"
+  }
+  connections {
+    startIdx: 165
+    endIdx: 168
+    buffer_depth: 2
+    id: 126
+    startName: "Iteration_42_FACT"
+    endName: "Iteration_42_UPDATE"
+  }
+  connections {
+    startIdx: 169
+    endIdx: 170
+    buffer_depth: 2
+    id: 127
+    startName: "Iteration_43_FACT"
+    endName: "Iteration_43_BCAST"
+  }
+  connections {
+    startIdx: 169
+    endIdx: 171
+    buffer_depth: 2
+    id: 128
+    startName: "Iteration_43_FACT"
+    endName: "Iteration_43_SWAP"
+  }
+  connections {
+    startIdx: 169
+    endIdx: 172
+    buffer_depth: 2
+    id: 129
+    startName: "Iteration_43_FACT"
+    endName: "Iteration_43_UPDATE"
+  }
+  connections {
+    startIdx: 173
+    endIdx: 174
+    buffer_depth: 2
+    id: 130
+    startName: "Iteration_44_FACT"
+    endName: "Iteration_44_BCAST"
+  }
+  connections {
+    startIdx: 173
+    endIdx: 175
+    buffer_depth: 2
+    id: 131
+    startName: "Iteration_44_FACT"
+    endName: "Iteration_44_SWAP"
+  }
+  connections {
+    startIdx: 173
+    endIdx: 176
+    buffer_depth: 2
+    id: 132
+    startName: "Iteration_44_FACT"
+    endName: "Iteration_44_UPDATE"
+  }
+  connections {
+    startIdx: 177
+    endIdx: 178
+    buffer_depth: 2
+    id: 133
+    startName: "Iteration_45_FACT"
+    endName: "Iteration_45_BCAST"
+  }
+  connections {
+    startIdx: 177
+    endIdx: 179
+    buffer_depth: 2
+    id: 134
+    startName: "Iteration_45_FACT"
+    endName: "Iteration_45_SWAP"
+  }
+  connections {
+    startIdx: 177
+    endIdx: 180
+    buffer_depth: 2
+    id: 135
+    startName: "Iteration_45_FACT"
+    endName: "Iteration_45_UPDATE"
+  }
+  connections {
+    startIdx: 181
+    endIdx: 182
+    buffer_depth: 2
+    id: 136
+    startName: "Iteration_46_FACT"
+    endName: "Iteration_46_BCAST"
+  }
+  connections {
+    startIdx: 181
+    endIdx: 183
+    buffer_depth: 2
+    id: 137
+    startName: "Iteration_46_FACT"
+    endName: "Iteration_46_SWAP"
+  }
+  connections {
+    startIdx: 181
+    endIdx: 184
+    buffer_depth: 2
+    id: 138
+    startName: "Iteration_46_FACT"
+    endName: "Iteration_46_UPDATE"
+  }
+  connections {
+    startIdx: 185
+    endIdx: 186
+    buffer_depth: 2
+    id: 139
+    startName: "Iteration_47_FACT"
+    endName: "Iteration_47_BCAST"
+  }
+  connections {
+    startIdx: 185
+    endIdx: 187
+    buffer_depth: 2
+    id: 140
+    startName: "Iteration_47_FACT"
+    endName: "Iteration_47_SWAP"
+  }
+  connections {
+    startIdx: 185
+    endIdx: 188
+    buffer_depth: 2
+    id: 141
+    startName: "Iteration_47_FACT"
+    endName: "Iteration_47_UPDATE"
+  }
+  connections {
+    startIdx: 189
+    endIdx: 190
+    buffer_depth: 2
+    id: 142
+    startName: "Iteration_48_FACT"
+    endName: "Iteration_48_BCAST"
+  }
+  connections {
+    startIdx: 189
+    endIdx: 191
+    buffer_depth: 2
+    id: 143
+    startName: "Iteration_48_FACT"
+    endName: "Iteration_48_SWAP"
+  }
+  connections {
+    startIdx: 189
+    endIdx: 192
+    buffer_depth: 2
+    id: 144
+    startName: "Iteration_48_FACT"
+    endName: "Iteration_48_UPDATE"
+  }
+  connections {
+    startIdx: 193
+    endIdx: 194
+    buffer_depth: 2
+    id: 145
+    startName: "Iteration_49_FACT"
+    endName: "Iteration_49_BCAST"
+  }
+  connections {
+    startIdx: 193
+    endIdx: 195
+    buffer_depth: 2
+    id: 146
+    startName: "Iteration_49_FACT"
+    endName: "Iteration_49_SWAP"
+  }
+  connections {
+    startIdx: 193
+    endIdx: 196
+    buffer_depth: 2
+    id: 147
+    startName: "Iteration_49_FACT"
+    endName: "Iteration_49_UPDATE"
+  }
+  connections {
+    startIdx: 197
+    endIdx: 198
+    buffer_depth: 2
+    id: 148
+    startName: "Iteration_50_FACT"
+    endName: "Iteration_50_BCAST"
+  }
+  connections {
+    startIdx: 197
+    endIdx: 199
+    buffer_depth: 2
+    id: 149
+    startName: "Iteration_50_FACT"
+    endName: "Iteration_50_SWAP"
+  }
+  connections {
+    startIdx: 197
+    endIdx: 200
+    buffer_depth: 2
+    id: 150
+    startName: "Iteration_50_FACT"
+    endName: "Iteration_50_UPDATE"
+  }
+  connections {
+    startIdx: 201
+    endIdx: 202
+    buffer_depth: 2
+    id: 151
+    startName: "Iteration_51_FACT"
+    endName: "Iteration_51_BCAST"
+  }
+  connections {
+    startIdx: 201
+    endIdx: 203
+    buffer_depth: 2
+    id: 152
+    startName: "Iteration_51_FACT"
+    endName: "Iteration_51_SWAP"
+  }
+  connections {
+    startIdx: 201
+    endIdx: 204
+    buffer_depth: 2
+    id: 153
+    startName: "Iteration_51_FACT"
+    endName: "Iteration_51_UPDATE"
+  }
+  connections {
+    startIdx: 205
+    endIdx: 206
+    buffer_depth: 2
+    id: 154
+    startName: "Iteration_52_FACT"
+    endName: "Iteration_52_BCAST"
+  }
+  connections {
+    startIdx: 205
+    endIdx: 207
+    buffer_depth: 2
+    id: 155
+    startName: "Iteration_52_FACT"
+    endName: "Iteration_52_SWAP"
+  }
+  connections {
+    startIdx: 205
+    endIdx: 208
+    buffer_depth: 2
+    id: 156
+    startName: "Iteration_52_FACT"
+    endName: "Iteration_52_UPDATE"
+  }
+  connections {
+    startIdx: 209
+    endIdx: 210
+    buffer_depth: 2
+    id: 157
+    startName: "Iteration_53_FACT"
+    endName: "Iteration_53_BCAST"
+  }
+  connections {
+    startIdx: 209
+    endIdx: 211
+    buffer_depth: 2
+    id: 158
+    startName: "Iteration_53_FACT"
+    endName: "Iteration_53_SWAP"
+  }
+  connections {
+    startIdx: 209
+    endIdx: 212
+    buffer_depth: 2
+    id: 159
+    startName: "Iteration_53_FACT"
+    endName: "Iteration_53_UPDATE"
+  }
+  connections {
+    startIdx: 213
+    endIdx: 214
+    buffer_depth: 2
+    id: 160
+    startName: "Iteration_54_FACT"
+    endName: "Iteration_54_BCAST"
+  }
+  connections {
+    startIdx: 213
+    endIdx: 215
+    buffer_depth: 2
+    id: 161
+    startName: "Iteration_54_FACT"
+    endName: "Iteration_54_SWAP"
+  }
+  connections {
+    startIdx: 213
+    endIdx: 216
+    buffer_depth: 2
+    id: 162
+    startName: "Iteration_54_FACT"
+    endName: "Iteration_54_UPDATE"
+  }
+  connections {
+    startIdx: 217
+    endIdx: 218
+    buffer_depth: 2
+    id: 163
+    startName: "Iteration_55_FACT"
+    endName: "Iteration_55_BCAST"
+  }
+  connections {
+    startIdx: 217
+    endIdx: 219
+    buffer_depth: 2
+    id: 164
+    startName: "Iteration_55_FACT"
+    endName: "Iteration_55_SWAP"
+  }
+  connections {
+    startIdx: 217
+    endIdx: 220
+    buffer_depth: 2
+    id: 165
+    startName: "Iteration_55_FACT"
+    endName: "Iteration_55_UPDATE"
+  }
+  connections {
+    startIdx: 221
+    endIdx: 222
+    buffer_depth: 2
+    id: 166
+    startName: "Iteration_56_FACT"
+    endName: "Iteration_56_BCAST"
+  }
+  connections {
+    startIdx: 221
+    endIdx: 223
+    buffer_depth: 2
+    id: 167
+    startName: "Iteration_56_FACT"
+    endName: "Iteration_56_SWAP"
+  }
+  connections {
+    startIdx: 221
+    endIdx: 224
+    buffer_depth: 2
+    id: 168
+    startName: "Iteration_56_FACT"
+    endName: "Iteration_56_UPDATE"
+  }
+  connections {
+    startIdx: 225
+    endIdx: 226
+    buffer_depth: 2
+    id: 169
+    startName: "Iteration_57_FACT"
+    endName: "Iteration_57_BCAST"
+  }
+  connections {
+    startIdx: 225
+    endIdx: 227
+    buffer_depth: 2
+    id: 170
+    startName: "Iteration_57_FACT"
+    endName: "Iteration_57_SWAP"
+  }
+  connections {
+    startIdx: 225
+    endIdx: 228
+    buffer_depth: 2
+    id: 171
+    startName: "Iteration_57_FACT"
+    endName: "Iteration_57_UPDATE"
+  }
+  connections {
+    startIdx: 229
+    endIdx: 230
+    buffer_depth: 2
+    id: 172
+    startName: "Iteration_58_FACT"
+    endName: "Iteration_58_BCAST"
+  }
+  connections {
+    startIdx: 229
+    endIdx: 231
+    buffer_depth: 2
+    id: 173
+    startName: "Iteration_58_FACT"
+    endName: "Iteration_58_SWAP"
+  }
+  connections {
+    startIdx: 229
+    endIdx: 232
+    buffer_depth: 2
+    id: 174
+    startName: "Iteration_58_FACT"
+    endName: "Iteration_58_UPDATE"
+  }
+  connections {
+    startIdx: 233
+    endIdx: 234
+    buffer_depth: 2
+    id: 175
+    startName: "Iteration_59_FACT"
+    endName: "Iteration_59_BCAST"
+  }
+  connections {
+    startIdx: 233
+    endIdx: 235
+    buffer_depth: 2
+    id: 176
+    startName: "Iteration_59_FACT"
+    endName: "Iteration_59_SWAP"
+  }
+  connections {
+    startIdx: 233
+    endIdx: 236
+    buffer_depth: 2
+    id: 177
+    startName: "Iteration_59_FACT"
+    endName: "Iteration_59_UPDATE"
+  }
+  connections {
+    startIdx: 237
+    endIdx: 238
+    buffer_depth: 2
+    id: 178
+    startName: "Iteration_60_FACT"
+    endName: "Iteration_60_BCAST"
+  }
+  connections {
+    startIdx: 237
+    endIdx: 239
+    buffer_depth: 2
+    id: 179
+    startName: "Iteration_60_FACT"
+    endName: "Iteration_60_SWAP"
+  }
+  connections {
+    startIdx: 237
+    endIdx: 240
+    buffer_depth: 2
+    id: 180
+    startName: "Iteration_60_FACT"
+    endName: "Iteration_60_UPDATE"
+  }
+  connections {
+    startIdx: 241
+    endIdx: 242
+    buffer_depth: 2
+    id: 181
+    startName: "Iteration_61_FACT"
+    endName: "Iteration_61_BCAST"
+  }
+  connections {
+    startIdx: 241
+    endIdx: 243
+    buffer_depth: 2
+    id: 182
+    startName: "Iteration_61_FACT"
+    endName: "Iteration_61_SWAP"
+  }
+  connections {
+    startIdx: 241
+    endIdx: 244
+    buffer_depth: 2
+    id: 183
+    startName: "Iteration_61_FACT"
+    endName: "Iteration_61_UPDATE"
+  }
+  connections {
+    startIdx: 245
+    endIdx: 246
+    buffer_depth: 2
+    id: 184
+    startName: "Iteration_62_FACT"
+    endName: "Iteration_62_BCAST"
+  }
+  connections {
+    startIdx: 245
+    endIdx: 247
+    buffer_depth: 2
+    id: 185
+    startName: "Iteration_62_FACT"
+    endName: "Iteration_62_SWAP"
+  }
+  connections {
+    startIdx: 245
+    endIdx: 248
+    buffer_depth: 2
+    id: 186
+    startName: "Iteration_62_FACT"
+    endName: "Iteration_62_UPDATE"
+  }
+  connections {
+    startIdx: 249
+    endIdx: 250
+    buffer_depth: 2
+    id: 187
+    startName: "Iteration_63_FACT"
+    endName: "Iteration_63_BCAST"
+  }
+  connections {
+    startIdx: 249
+    endIdx: 251
+    buffer_depth: 2
+    id: 188
+    startName: "Iteration_63_FACT"
+    endName: "Iteration_63_SWAP"
+  }
+  connections {
+    startIdx: 249
+    endIdx: 252
+    buffer_depth: 2
+    id: 189
+    startName: "Iteration_63_FACT"
+    endName: "Iteration_63_UPDATE"
+  }
+  connections {
+    startIdx: 253
+    endIdx: 254
+    buffer_depth: 2
+    id: 190
+    startName: "Iteration_64_FACT"
+    endName: "Iteration_64_BCAST"
+  }
+  connections {
+    startIdx: 253
+    endIdx: 255
+    buffer_depth: 2
+    id: 191
+    startName: "Iteration_64_FACT"
+    endName: "Iteration_64_SWAP"
+  }
+  connections {
+    startIdx: 253
+    endIdx: 256
+    buffer_depth: 2
+    id: 192
+    startName: "Iteration_64_FACT"
+    endName: "Iteration_64_UPDATE"
+  }
+  connections {
+    startIdx: 2
+    endIdx: 5
+    buffer_depth: 2
+    id: 193
+    startName: "Iteration_1_BCAST"
+    endName: "Iteration_2_FACT"
+  }
+  connections {
+    startIdx: 3
+    endIdx: 5
+    buffer_depth: 2
+    id: 194
+    startName: "Iteration_1_SWAP"
+    endName: "Iteration_2_FACT"
+  }
+  connections {
+    startIdx: 4
+    endIdx: 5
+    buffer_depth: 2
+    id: 195
+    startName: "Iteration_1_UPDATE"
+    endName: "Iteration_2_FACT"
+  }
+  connections {
+    startIdx: 6
+    endIdx: 9
+    buffer_depth: 2
+    id: 196
+    startName: "Iteration_2_BCAST"
+    endName: "Iteration_3_FACT"
+  }
+  connections {
+    startIdx: 7
+    endIdx: 9
+    buffer_depth: 2
+    id: 197
+    startName: "Iteration_2_SWAP"
+    endName: "Iteration_3_FACT"
+  }
+  connections {
+    startIdx: 8
+    endIdx: 9
+    buffer_depth: 2
+    id: 198
+    startName: "Iteration_2_UPDATE"
+    endName: "Iteration_3_FACT"
+  }
+  connections {
+    startIdx: 10
+    endIdx: 13
+    buffer_depth: 2
+    id: 199
+    startName: "Iteration_3_BCAST"
+    endName: "Iteration_4_FACT"
+  }
+  connections {
+    startIdx: 11
+    endIdx: 13
+    buffer_depth: 2
+    id: 200
+    startName: "Iteration_3_SWAP"
+    endName: "Iteration_4_FACT"
+  }
+  connections {
+    startIdx: 12
+    endIdx: 13
+    buffer_depth: 2
+    id: 201
+    startName: "Iteration_3_UPDATE"
+    endName: "Iteration_4_FACT"
+  }
+  connections {
+    startIdx: 14
+    endIdx: 17
+    buffer_depth: 2
+    id: 202
+    startName: "Iteration_4_BCAST"
+    endName: "Iteration_5_FACT"
+  }
+  connections {
+    startIdx: 15
+    endIdx: 17
+    buffer_depth: 2
+    id: 203
+    startName: "Iteration_4_SWAP"
+    endName: "Iteration_5_FACT"
+  }
+  connections {
+    startIdx: 16
+    endIdx: 17
+    buffer_depth: 2
+    id: 204
+    startName: "Iteration_4_UPDATE"
+    endName: "Iteration_5_FACT"
+  }
+  connections {
+    startIdx: 18
+    endIdx: 21
+    buffer_depth: 2
+    id: 205
+    startName: "Iteration_5_BCAST"
+    endName: "Iteration_6_FACT"
+  }
+  connections {
+    startIdx: 19
+    endIdx: 21
+    buffer_depth: 2
+    id: 206
+    startName: "Iteration_5_SWAP"
+    endName: "Iteration_6_FACT"
+  }
+  connections {
+    startIdx: 20
+    endIdx: 21
+    buffer_depth: 2
+    id: 207
+    startName: "Iteration_5_UPDATE"
+    endName: "Iteration_6_FACT"
+  }
+  connections {
+    startIdx: 22
+    endIdx: 25
+    buffer_depth: 2
+    id: 208
+    startName: "Iteration_6_BCAST"
+    endName: "Iteration_7_FACT"
+  }
+  connections {
+    startIdx: 23
+    endIdx: 25
+    buffer_depth: 2
+    id: 209
+    startName: "Iteration_6_SWAP"
+    endName: "Iteration_7_FACT"
+  }
+  connections {
+    startIdx: 24
+    endIdx: 25
+    buffer_depth: 2
+    id: 210
+    startName: "Iteration_6_UPDATE"
+    endName: "Iteration_7_FACT"
+  }
+  connections {
+    startIdx: 26
+    endIdx: 29
+    buffer_depth: 2
+    id: 211
+    startName: "Iteration_7_BCAST"
+    endName: "Iteration_8_FACT"
+  }
+  connections {
+    startIdx: 27
+    endIdx: 29
+    buffer_depth: 2
+    id: 212
+    startName: "Iteration_7_SWAP"
+    endName: "Iteration_8_FACT"
+  }
+  connections {
+    startIdx: 28
+    endIdx: 29
+    buffer_depth: 2
+    id: 213
+    startName: "Iteration_7_UPDATE"
+    endName: "Iteration_8_FACT"
+  }
+  connections {
+    startIdx: 30
+    endIdx: 33
+    buffer_depth: 2
+    id: 214
+    startName: "Iteration_8_BCAST"
+    endName: "Iteration_9_FACT"
+  }
+  connections {
+    startIdx: 31
+    endIdx: 33
+    buffer_depth: 2
+    id: 215
+    startName: "Iteration_8_SWAP"
+    endName: "Iteration_9_FACT"
+  }
+  connections {
+    startIdx: 32
+    endIdx: 33
+    buffer_depth: 2
+    id: 216
+    startName: "Iteration_8_UPDATE"
+    endName: "Iteration_9_FACT"
+  }
+  connections {
+    startIdx: 34
+    endIdx: 37
+    buffer_depth: 2
+    id: 217
+    startName: "Iteration_9_BCAST"
+    endName: "Iteration_10_FACT"
+  }
+  connections {
+    startIdx: 35
+    endIdx: 37
+    buffer_depth: 2
+    id: 218
+    startName: "Iteration_9_SWAP"
+    endName: "Iteration_10_FACT"
+  }
+  connections {
+    startIdx: 36
+    endIdx: 37
+    buffer_depth: 2
+    id: 219
+    startName: "Iteration_9_UPDATE"
+    endName: "Iteration_10_FACT"
+  }
+  connections {
+    startIdx: 38
+    endIdx: 41
+    buffer_depth: 2
+    id: 220
+    startName: "Iteration_10_BCAST"
+    endName: "Iteration_11_FACT"
+  }
+  connections {
+    startIdx: 39
+    endIdx: 41
+    buffer_depth: 2
+    id: 221
+    startName: "Iteration_10_SWAP"
+    endName: "Iteration_11_FACT"
+  }
+  connections {
+    startIdx: 40
+    endIdx: 41
+    buffer_depth: 2
+    id: 222
+    startName: "Iteration_10_UPDATE"
+    endName: "Iteration_11_FACT"
+  }
+  connections {
+    startIdx: 42
+    endIdx: 45
+    buffer_depth: 2
+    id: 223
+    startName: "Iteration_11_BCAST"
+    endName: "Iteration_12_FACT"
+  }
+  connections {
+    startIdx: 43
+    endIdx: 45
+    buffer_depth: 2
+    id: 224
+    startName: "Iteration_11_SWAP"
+    endName: "Iteration_12_FACT"
+  }
+  connections {
+    startIdx: 44
+    endIdx: 45
+    buffer_depth: 2
+    id: 225
+    startName: "Iteration_11_UPDATE"
+    endName: "Iteration_12_FACT"
+  }
+  connections {
+    startIdx: 46
+    endIdx: 49
+    buffer_depth: 2
+    id: 226
+    startName: "Iteration_12_BCAST"
+    endName: "Iteration_13_FACT"
+  }
+  connections {
+    startIdx: 47
+    endIdx: 49
+    buffer_depth: 2
+    id: 227
+    startName: "Iteration_12_SWAP"
+    endName: "Iteration_13_FACT"
+  }
+  connections {
+    startIdx: 48
+    endIdx: 49
+    buffer_depth: 2
+    id: 228
+    startName: "Iteration_12_UPDATE"
+    endName: "Iteration_13_FACT"
+  }
+  connections {
+    startIdx: 50
+    endIdx: 53
+    buffer_depth: 2
+    id: 229
+    startName: "Iteration_13_BCAST"
+    endName: "Iteration_14_FACT"
+  }
+  connections {
+    startIdx: 51
+    endIdx: 53
+    buffer_depth: 2
+    id: 230
+    startName: "Iteration_13_SWAP"
+    endName: "Iteration_14_FACT"
+  }
+  connections {
+    startIdx: 52
+    endIdx: 53
+    buffer_depth: 2
+    id: 231
+    startName: "Iteration_13_UPDATE"
+    endName: "Iteration_14_FACT"
+  }
+  connections {
+    startIdx: 54
+    endIdx: 57
+    buffer_depth: 2
+    id: 232
+    startName: "Iteration_14_BCAST"
+    endName: "Iteration_15_FACT"
+  }
+  connections {
+    startIdx: 55
+    endIdx: 57
+    buffer_depth: 2
+    id: 233
+    startName: "Iteration_14_SWAP"
+    endName: "Iteration_15_FACT"
+  }
+  connections {
+    startIdx: 56
+    endIdx: 57
+    buffer_depth: 2
+    id: 234
+    startName: "Iteration_14_UPDATE"
+    endName: "Iteration_15_FACT"
+  }
+  connections {
+    startIdx: 58
+    endIdx: 61
+    buffer_depth: 2
+    id: 235
+    startName: "Iteration_15_BCAST"
+    endName: "Iteration_16_FACT"
+  }
+  connections {
+    startIdx: 59
+    endIdx: 61
+    buffer_depth: 2
+    id: 236
+    startName: "Iteration_15_SWAP"
+    endName: "Iteration_16_FACT"
+  }
+  connections {
+    startIdx: 60
+    endIdx: 61
+    buffer_depth: 2
+    id: 237
+    startName: "Iteration_15_UPDATE"
+    endName: "Iteration_16_FACT"
+  }
+  connections {
+    startIdx: 62
+    endIdx: 65
+    buffer_depth: 2
+    id: 238
+    startName: "Iteration_16_BCAST"
+    endName: "Iteration_17_FACT"
+  }
+  connections {
+    startIdx: 63
+    endIdx: 65
+    buffer_depth: 2
+    id: 239
+    startName: "Iteration_16_SWAP"
+    endName: "Iteration_17_FACT"
+  }
+  connections {
+    startIdx: 64
+    endIdx: 65
+    buffer_depth: 2
+    id: 240
+    startName: "Iteration_16_UPDATE"
+    endName: "Iteration_17_FACT"
+  }
+  connections {
+    startIdx: 66
+    endIdx: 69
+    buffer_depth: 2
+    id: 241
+    startName: "Iteration_17_BCAST"
+    endName: "Iteration_18_FACT"
+  }
+  connections {
+    startIdx: 67
+    endIdx: 69
+    buffer_depth: 2
+    id: 242
+    startName: "Iteration_17_SWAP"
+    endName: "Iteration_18_FACT"
+  }
+  connections {
+    startIdx: 68
+    endIdx: 69
+    buffer_depth: 2
+    id: 243
+    startName: "Iteration_17_UPDATE"
+    endName: "Iteration_18_FACT"
+  }
+  connections {
+    startIdx: 70
+    endIdx: 73
+    buffer_depth: 2
+    id: 244
+    startName: "Iteration_18_BCAST"
+    endName: "Iteration_19_FACT"
+  }
+  connections {
+    startIdx: 71
+    endIdx: 73
+    buffer_depth: 2
+    id: 245
+    startName: "Iteration_18_SWAP"
+    endName: "Iteration_19_FACT"
+  }
+  connections {
+    startIdx: 72
+    endIdx: 73
+    buffer_depth: 2
+    id: 246
+    startName: "Iteration_18_UPDATE"
+    endName: "Iteration_19_FACT"
+  }
+  connections {
+    startIdx: 74
+    endIdx: 77
+    buffer_depth: 2
+    id: 247
+    startName: "Iteration_19_BCAST"
+    endName: "Iteration_20_FACT"
+  }
+  connections {
+    startIdx: 75
+    endIdx: 77
+    buffer_depth: 2
+    id: 248
+    startName: "Iteration_19_SWAP"
+    endName: "Iteration_20_FACT"
+  }
+  connections {
+    startIdx: 76
+    endIdx: 77
+    buffer_depth: 2
+    id: 249
+    startName: "Iteration_19_UPDATE"
+    endName: "Iteration_20_FACT"
+  }
+  connections {
+    startIdx: 78
+    endIdx: 81
+    buffer_depth: 2
+    id: 250
+    startName: "Iteration_20_BCAST"
+    endName: "Iteration_21_FACT"
+  }
+  connections {
+    startIdx: 79
+    endIdx: 81
+    buffer_depth: 2
+    id: 251
+    startName: "Iteration_20_SWAP"
+    endName: "Iteration_21_FACT"
+  }
+  connections {
+    startIdx: 80
+    endIdx: 81
+    buffer_depth: 2
+    id: 252
+    startName: "Iteration_20_UPDATE"
+    endName: "Iteration_21_FACT"
+  }
+  connections {
+    startIdx: 82
+    endIdx: 85
+    buffer_depth: 2
+    id: 253
+    startName: "Iteration_21_BCAST"
+    endName: "Iteration_22_FACT"
+  }
+  connections {
+    startIdx: 83
+    endIdx: 85
+    buffer_depth: 2
+    id: 254
+    startName: "Iteration_21_SWAP"
+    endName: "Iteration_22_FACT"
+  }
+  connections {
+    startIdx: 84
+    endIdx: 85
+    buffer_depth: 2
+    id: 255
+    startName: "Iteration_21_UPDATE"
+    endName: "Iteration_22_FACT"
+  }
+  connections {
+    startIdx: 86
+    endIdx: 89
+    buffer_depth: 2
+    id: 256
+    startName: "Iteration_22_BCAST"
+    endName: "Iteration_23_FACT"
+  }
+  connections {
+    startIdx: 87
+    endIdx: 89
+    buffer_depth: 2
+    id: 257
+    startName: "Iteration_22_SWAP"
+    endName: "Iteration_23_FACT"
+  }
+  connections {
+    startIdx: 88
+    endIdx: 89
+    buffer_depth: 2
+    id: 258
+    startName: "Iteration_22_UPDATE"
+    endName: "Iteration_23_FACT"
+  }
+  connections {
+    startIdx: 90
+    endIdx: 93
+    buffer_depth: 2
+    id: 259
+    startName: "Iteration_23_BCAST"
+    endName: "Iteration_24_FACT"
+  }
+  connections {
+    startIdx: 91
+    endIdx: 93
+    buffer_depth: 2
+    id: 260
+    startName: "Iteration_23_SWAP"
+    endName: "Iteration_24_FACT"
+  }
+  connections {
+    startIdx: 92
+    endIdx: 93
+    buffer_depth: 2
+    id: 261
+    startName: "Iteration_23_UPDATE"
+    endName: "Iteration_24_FACT"
+  }
+  connections {
+    startIdx: 94
+    endIdx: 97
+    buffer_depth: 2
+    id: 262
+    startName: "Iteration_24_BCAST"
+    endName: "Iteration_25_FACT"
+  }
+  connections {
+    startIdx: 95
+    endIdx: 97
+    buffer_depth: 2
+    id: 263
+    startName: "Iteration_24_SWAP"
+    endName: "Iteration_25_FACT"
+  }
+  connections {
+    startIdx: 96
+    endIdx: 97
+    buffer_depth: 2
+    id: 264
+    startName: "Iteration_24_UPDATE"
+    endName: "Iteration_25_FACT"
+  }
+  connections {
+    startIdx: 98
+    endIdx: 101
+    buffer_depth: 2
+    id: 265
+    startName: "Iteration_25_BCAST"
+    endName: "Iteration_26_FACT"
+  }
+  connections {
+    startIdx: 99
+    endIdx: 101
+    buffer_depth: 2
+    id: 266
+    startName: "Iteration_25_SWAP"
+    endName: "Iteration_26_FACT"
+  }
+  connections {
+    startIdx: 100
+    endIdx: 101
+    buffer_depth: 2
+    id: 267
+    startName: "Iteration_25_UPDATE"
+    endName: "Iteration_26_FACT"
+  }
+  connections {
+    startIdx: 102
+    endIdx: 105
+    buffer_depth: 2
+    id: 268
+    startName: "Iteration_26_BCAST"
+    endName: "Iteration_27_FACT"
+  }
+  connections {
+    startIdx: 103
+    endIdx: 105
+    buffer_depth: 2
+    id: 269
+    startName: "Iteration_26_SWAP"
+    endName: "Iteration_27_FACT"
+  }
+  connections {
+    startIdx: 104
+    endIdx: 105
+    buffer_depth: 2
+    id: 270
+    startName: "Iteration_26_UPDATE"
+    endName: "Iteration_27_FACT"
+  }
+  connections {
+    startIdx: 106
+    endIdx: 109
+    buffer_depth: 2
+    id: 271
+    startName: "Iteration_27_BCAST"
+    endName: "Iteration_28_FACT"
+  }
+  connections {
+    startIdx: 107
+    endIdx: 109
+    buffer_depth: 2
+    id: 272
+    startName: "Iteration_27_SWAP"
+    endName: "Iteration_28_FACT"
+  }
+  connections {
+    startIdx: 108
+    endIdx: 109
+    buffer_depth: 2
+    id: 273
+    startName: "Iteration_27_UPDATE"
+    endName: "Iteration_28_FACT"
+  }
+  connections {
+    startIdx: 110
+    endIdx: 113
+    buffer_depth: 2
+    id: 274
+    startName: "Iteration_28_BCAST"
+    endName: "Iteration_29_FACT"
+  }
+  connections {
+    startIdx: 111
+    endIdx: 113
+    buffer_depth: 2
+    id: 275
+    startName: "Iteration_28_SWAP"
+    endName: "Iteration_29_FACT"
+  }
+  connections {
+    startIdx: 112
+    endIdx: 113
+    buffer_depth: 2
+    id: 276
+    startName: "Iteration_28_UPDATE"
+    endName: "Iteration_29_FACT"
+  }
+  connections {
+    startIdx: 114
+    endIdx: 117
+    buffer_depth: 2
+    id: 277
+    startName: "Iteration_29_BCAST"
+    endName: "Iteration_30_FACT"
+  }
+  connections {
+    startIdx: 115
+    endIdx: 117
+    buffer_depth: 2
+    id: 278
+    startName: "Iteration_29_SWAP"
+    endName: "Iteration_30_FACT"
+  }
+  connections {
+    startIdx: 116
+    endIdx: 117
+    buffer_depth: 2
+    id: 279
+    startName: "Iteration_29_UPDATE"
+    endName: "Iteration_30_FACT"
+  }
+  connections {
+    startIdx: 118
+    endIdx: 121
+    buffer_depth: 2
+    id: 280
+    startName: "Iteration_30_BCAST"
+    endName: "Iteration_31_FACT"
+  }
+  connections {
+    startIdx: 119
+    endIdx: 121
+    buffer_depth: 2
+    id: 281
+    startName: "Iteration_30_SWAP"
+    endName: "Iteration_31_FACT"
+  }
+  connections {
+    startIdx: 120
+    endIdx: 121
+    buffer_depth: 2
+    id: 282
+    startName: "Iteration_30_UPDATE"
+    endName: "Iteration_31_FACT"
+  }
+  connections {
+    startIdx: 122
+    endIdx: 125
+    buffer_depth: 2
+    id: 283
+    startName: "Iteration_31_BCAST"
+    endName: "Iteration_32_FACT"
+  }
+  connections {
+    startIdx: 123
+    endIdx: 125
+    buffer_depth: 2
+    id: 284
+    startName: "Iteration_31_SWAP"
+    endName: "Iteration_32_FACT"
+  }
+  connections {
+    startIdx: 124
+    endIdx: 125
+    buffer_depth: 2
+    id: 285
+    startName: "Iteration_31_UPDATE"
+    endName: "Iteration_32_FACT"
+  }
+  connections {
+    startIdx: 126
+    endIdx: 129
+    buffer_depth: 2
+    id: 286
+    startName: "Iteration_32_BCAST"
+    endName: "Iteration_33_FACT"
+  }
+  connections {
+    startIdx: 127
+    endIdx: 129
+    buffer_depth: 2
+    id: 287
+    startName: "Iteration_32_SWAP"
+    endName: "Iteration_33_FACT"
+  }
+  connections {
+    startIdx: 128
+    endIdx: 129
+    buffer_depth: 2
+    id: 288
+    startName: "Iteration_32_UPDATE"
+    endName: "Iteration_33_FACT"
+  }
+  connections {
+    startIdx: 130
+    endIdx: 133
+    buffer_depth: 2
+    id: 289
+    startName: "Iteration_33_BCAST"
+    endName: "Iteration_34_FACT"
+  }
+  connections {
+    startIdx: 131
+    endIdx: 133
+    buffer_depth: 2
+    id: 290
+    startName: "Iteration_33_SWAP"
+    endName: "Iteration_34_FACT"
+  }
+  connections {
+    startIdx: 132
+    endIdx: 133
+    buffer_depth: 2
+    id: 291
+    startName: "Iteration_33_UPDATE"
+    endName: "Iteration_34_FACT"
+  }
+  connections {
+    startIdx: 134
+    endIdx: 137
+    buffer_depth: 2
+    id: 292
+    startName: "Iteration_34_BCAST"
+    endName: "Iteration_35_FACT"
+  }
+  connections {
+    startIdx: 135
+    endIdx: 137
+    buffer_depth: 2
+    id: 293
+    startName: "Iteration_34_SWAP"
+    endName: "Iteration_35_FACT"
+  }
+  connections {
+    startIdx: 136
+    endIdx: 137
+    buffer_depth: 2
+    id: 294
+    startName: "Iteration_34_UPDATE"
+    endName: "Iteration_35_FACT"
+  }
+  connections {
+    startIdx: 138
+    endIdx: 141
+    buffer_depth: 2
+    id: 295
+    startName: "Iteration_35_BCAST"
+    endName: "Iteration_36_FACT"
+  }
+  connections {
+    startIdx: 139
+    endIdx: 141
+    buffer_depth: 2
+    id: 296
+    startName: "Iteration_35_SWAP"
+    endName: "Iteration_36_FACT"
+  }
+  connections {
+    startIdx: 140
+    endIdx: 141
+    buffer_depth: 2
+    id: 297
+    startName: "Iteration_35_UPDATE"
+    endName: "Iteration_36_FACT"
+  }
+  connections {
+    startIdx: 142
+    endIdx: 145
+    buffer_depth: 2
+    id: 298
+    startName: "Iteration_36_BCAST"
+    endName: "Iteration_37_FACT"
+  }
+  connections {
+    startIdx: 143
+    endIdx: 145
+    buffer_depth: 2
+    id: 299
+    startName: "Iteration_36_SWAP"
+    endName: "Iteration_37_FACT"
+  }
+  connections {
+    startIdx: 144
+    endIdx: 145
+    buffer_depth: 2
+    id: 300
+    startName: "Iteration_36_UPDATE"
+    endName: "Iteration_37_FACT"
+  }
+  connections {
+    startIdx: 146
+    endIdx: 149
+    buffer_depth: 2
+    id: 301
+    startName: "Iteration_37_BCAST"
+    endName: "Iteration_38_FACT"
+  }
+  connections {
+    startIdx: 147
+    endIdx: 149
+    buffer_depth: 2
+    id: 302
+    startName: "Iteration_37_SWAP"
+    endName: "Iteration_38_FACT"
+  }
+  connections {
+    startIdx: 148
+    endIdx: 149
+    buffer_depth: 2
+    id: 303
+    startName: "Iteration_37_UPDATE"
+    endName: "Iteration_38_FACT"
+  }
+  connections {
+    startIdx: 150
+    endIdx: 153
+    buffer_depth: 2
+    id: 304
+    startName: "Iteration_38_BCAST"
+    endName: "Iteration_39_FACT"
+  }
+  connections {
+    startIdx: 151
+    endIdx: 153
+    buffer_depth: 2
+    id: 305
+    startName: "Iteration_38_SWAP"
+    endName: "Iteration_39_FACT"
+  }
+  connections {
+    startIdx: 152
+    endIdx: 153
+    buffer_depth: 2
+    id: 306
+    startName: "Iteration_38_UPDATE"
+    endName: "Iteration_39_FACT"
+  }
+  connections {
+    startIdx: 154
+    endIdx: 157
+    buffer_depth: 2
+    id: 307
+    startName: "Iteration_39_BCAST"
+    endName: "Iteration_40_FACT"
+  }
+  connections {
+    startIdx: 155
+    endIdx: 157
+    buffer_depth: 2
+    id: 308
+    startName: "Iteration_39_SWAP"
+    endName: "Iteration_40_FACT"
+  }
+  connections {
+    startIdx: 156
+    endIdx: 157
+    buffer_depth: 2
+    id: 309
+    startName: "Iteration_39_UPDATE"
+    endName: "Iteration_40_FACT"
+  }
+  connections {
+    startIdx: 158
+    endIdx: 161
+    buffer_depth: 2
+    id: 310
+    startName: "Iteration_40_BCAST"
+    endName: "Iteration_41_FACT"
+  }
+  connections {
+    startIdx: 159
+    endIdx: 161
+    buffer_depth: 2
+    id: 311
+    startName: "Iteration_40_SWAP"
+    endName: "Iteration_41_FACT"
+  }
+  connections {
+    startIdx: 160
+    endIdx: 161
+    buffer_depth: 2
+    id: 312
+    startName: "Iteration_40_UPDATE"
+    endName: "Iteration_41_FACT"
+  }
+  connections {
+    startIdx: 162
+    endIdx: 165
+    buffer_depth: 2
+    id: 313
+    startName: "Iteration_41_BCAST"
+    endName: "Iteration_42_FACT"
+  }
+  connections {
+    startIdx: 163
+    endIdx: 165
+    buffer_depth: 2
+    id: 314
+    startName: "Iteration_41_SWAP"
+    endName: "Iteration_42_FACT"
+  }
+  connections {
+    startIdx: 164
+    endIdx: 165
+    buffer_depth: 2
+    id: 315
+    startName: "Iteration_41_UPDATE"
+    endName: "Iteration_42_FACT"
+  }
+  connections {
+    startIdx: 166
+    endIdx: 169
+    buffer_depth: 2
+    id: 316
+    startName: "Iteration_42_BCAST"
+    endName: "Iteration_43_FACT"
+  }
+  connections {
+    startIdx: 167
+    endIdx: 169
+    buffer_depth: 2
+    id: 317
+    startName: "Iteration_42_SWAP"
+    endName: "Iteration_43_FACT"
+  }
+  connections {
+    startIdx: 168
+    endIdx: 169
+    buffer_depth: 2
+    id: 318
+    startName: "Iteration_42_UPDATE"
+    endName: "Iteration_43_FACT"
+  }
+  connections {
+    startIdx: 170
+    endIdx: 173
+    buffer_depth: 2
+    id: 319
+    startName: "Iteration_43_BCAST"
+    endName: "Iteration_44_FACT"
+  }
+  connections {
+    startIdx: 171
+    endIdx: 173
+    buffer_depth: 2
+    id: 320
+    startName: "Iteration_43_SWAP"
+    endName: "Iteration_44_FACT"
+  }
+  connections {
+    startIdx: 172
+    endIdx: 173
+    buffer_depth: 2
+    id: 321
+    startName: "Iteration_43_UPDATE"
+    endName: "Iteration_44_FACT"
+  }
+  connections {
+    startIdx: 174
+    endIdx: 177
+    buffer_depth: 2
+    id: 322
+    startName: "Iteration_44_BCAST"
+    endName: "Iteration_45_FACT"
+  }
+  connections {
+    startIdx: 175
+    endIdx: 177
+    buffer_depth: 2
+    id: 323
+    startName: "Iteration_44_SWAP"
+    endName: "Iteration_45_FACT"
+  }
+  connections {
+    startIdx: 176
+    endIdx: 177
+    buffer_depth: 2
+    id: 324
+    startName: "Iteration_44_UPDATE"
+    endName: "Iteration_45_FACT"
+  }
+  connections {
+    startIdx: 178
+    endIdx: 181
+    buffer_depth: 2
+    id: 325
+    startName: "Iteration_45_BCAST"
+    endName: "Iteration_46_FACT"
+  }
+  connections {
+    startIdx: 179
+    endIdx: 181
+    buffer_depth: 2
+    id: 326
+    startName: "Iteration_45_SWAP"
+    endName: "Iteration_46_FACT"
+  }
+  connections {
+    startIdx: 180
+    endIdx: 181
+    buffer_depth: 2
+    id: 327
+    startName: "Iteration_45_UPDATE"
+    endName: "Iteration_46_FACT"
+  }
+  connections {
+    startIdx: 182
+    endIdx: 185
+    buffer_depth: 2
+    id: 328
+    startName: "Iteration_46_BCAST"
+    endName: "Iteration_47_FACT"
+  }
+  connections {
+    startIdx: 183
+    endIdx: 185
+    buffer_depth: 2
+    id: 329
+    startName: "Iteration_46_SWAP"
+    endName: "Iteration_47_FACT"
+  }
+  connections {
+    startIdx: 184
+    endIdx: 185
+    buffer_depth: 2
+    id: 330
+    startName: "Iteration_46_UPDATE"
+    endName: "Iteration_47_FACT"
+  }
+  connections {
+    startIdx: 186
+    endIdx: 189
+    buffer_depth: 2
+    id: 331
+    startName: "Iteration_47_BCAST"
+    endName: "Iteration_48_FACT"
+  }
+  connections {
+    startIdx: 187
+    endIdx: 189
+    buffer_depth: 2
+    id: 332
+    startName: "Iteration_47_SWAP"
+    endName: "Iteration_48_FACT"
+  }
+  connections {
+    startIdx: 188
+    endIdx: 189
+    buffer_depth: 2
+    id: 333
+    startName: "Iteration_47_UPDATE"
+    endName: "Iteration_48_FACT"
+  }
+  connections {
+    startIdx: 190
+    endIdx: 193
+    buffer_depth: 2
+    id: 334
+    startName: "Iteration_48_BCAST"
+    endName: "Iteration_49_FACT"
+  }
+  connections {
+    startIdx: 191
+    endIdx: 193
+    buffer_depth: 2
+    id: 335
+    startName: "Iteration_48_SWAP"
+    endName: "Iteration_49_FACT"
+  }
+  connections {
+    startIdx: 192
+    endIdx: 193
+    buffer_depth: 2
+    id: 336
+    startName: "Iteration_48_UPDATE"
+    endName: "Iteration_49_FACT"
+  }
+  connections {
+    startIdx: 194
+    endIdx: 197
+    buffer_depth: 2
+    id: 337
+    startName: "Iteration_49_BCAST"
+    endName: "Iteration_50_FACT"
+  }
+  connections {
+    startIdx: 195
+    endIdx: 197
+    buffer_depth: 2
+    id: 338
+    startName: "Iteration_49_SWAP"
+    endName: "Iteration_50_FACT"
+  }
+  connections {
+    startIdx: 196
+    endIdx: 197
+    buffer_depth: 2
+    id: 339
+    startName: "Iteration_49_UPDATE"
+    endName: "Iteration_50_FACT"
+  }
+  connections {
+    startIdx: 198
+    endIdx: 201
+    buffer_depth: 2
+    id: 340
+    startName: "Iteration_50_BCAST"
+    endName: "Iteration_51_FACT"
+  }
+  connections {
+    startIdx: 199
+    endIdx: 201
+    buffer_depth: 2
+    id: 341
+    startName: "Iteration_50_SWAP"
+    endName: "Iteration_51_FACT"
+  }
+  connections {
+    startIdx: 200
+    endIdx: 201
+    buffer_depth: 2
+    id: 342
+    startName: "Iteration_50_UPDATE"
+    endName: "Iteration_51_FACT"
+  }
+  connections {
+    startIdx: 202
+    endIdx: 205
+    buffer_depth: 2
+    id: 343
+    startName: "Iteration_51_BCAST"
+    endName: "Iteration_52_FACT"
+  }
+  connections {
+    startIdx: 203
+    endIdx: 205
+    buffer_depth: 2
+    id: 344
+    startName: "Iteration_51_SWAP"
+    endName: "Iteration_52_FACT"
+  }
+  connections {
+    startIdx: 204
+    endIdx: 205
+    buffer_depth: 2
+    id: 345
+    startName: "Iteration_51_UPDATE"
+    endName: "Iteration_52_FACT"
+  }
+  connections {
+    startIdx: 206
+    endIdx: 209
+    buffer_depth: 2
+    id: 346
+    startName: "Iteration_52_BCAST"
+    endName: "Iteration_53_FACT"
+  }
+  connections {
+    startIdx: 207
+    endIdx: 209
+    buffer_depth: 2
+    id: 347
+    startName: "Iteration_52_SWAP"
+    endName: "Iteration_53_FACT"
+  }
+  connections {
+    startIdx: 208
+    endIdx: 209
+    buffer_depth: 2
+    id: 348
+    startName: "Iteration_52_UPDATE"
+    endName: "Iteration_53_FACT"
+  }
+  connections {
+    startIdx: 210
+    endIdx: 213
+    buffer_depth: 2
+    id: 349
+    startName: "Iteration_53_BCAST"
+    endName: "Iteration_54_FACT"
+  }
+  connections {
+    startIdx: 211
+    endIdx: 213
+    buffer_depth: 2
+    id: 350
+    startName: "Iteration_53_SWAP"
+    endName: "Iteration_54_FACT"
+  }
+  connections {
+    startIdx: 212
+    endIdx: 213
+    buffer_depth: 2
+    id: 351
+    startName: "Iteration_53_UPDATE"
+    endName: "Iteration_54_FACT"
+  }
+  connections {
+    startIdx: 214
+    endIdx: 217
+    buffer_depth: 2
+    id: 352
+    startName: "Iteration_54_BCAST"
+    endName: "Iteration_55_FACT"
+  }
+  connections {
+    startIdx: 215
+    endIdx: 217
+    buffer_depth: 2
+    id: 353
+    startName: "Iteration_54_SWAP"
+    endName: "Iteration_55_FACT"
+  }
+  connections {
+    startIdx: 216
+    endIdx: 217
+    buffer_depth: 2
+    id: 354
+    startName: "Iteration_54_UPDATE"
+    endName: "Iteration_55_FACT"
+  }
+  connections {
+    startIdx: 218
+    endIdx: 221
+    buffer_depth: 2
+    id: 355
+    startName: "Iteration_55_BCAST"
+    endName: "Iteration_56_FACT"
+  }
+  connections {
+    startIdx: 219
+    endIdx: 221
+    buffer_depth: 2
+    id: 356
+    startName: "Iteration_55_SWAP"
+    endName: "Iteration_56_FACT"
+  }
+  connections {
+    startIdx: 220
+    endIdx: 221
+    buffer_depth: 2
+    id: 357
+    startName: "Iteration_55_UPDATE"
+    endName: "Iteration_56_FACT"
+  }
+  connections {
+    startIdx: 222
+    endIdx: 225
+    buffer_depth: 2
+    id: 358
+    startName: "Iteration_56_BCAST"
+    endName: "Iteration_57_FACT"
+  }
+  connections {
+    startIdx: 223
+    endIdx: 225
+    buffer_depth: 2
+    id: 359
+    startName: "Iteration_56_SWAP"
+    endName: "Iteration_57_FACT"
+  }
+  connections {
+    startIdx: 224
+    endIdx: 225
+    buffer_depth: 2
+    id: 360
+    startName: "Iteration_56_UPDATE"
+    endName: "Iteration_57_FACT"
+  }
+  connections {
+    startIdx: 226
+    endIdx: 229
+    buffer_depth: 2
+    id: 361
+    startName: "Iteration_57_BCAST"
+    endName: "Iteration_58_FACT"
+  }
+  connections {
+    startIdx: 227
+    endIdx: 229
+    buffer_depth: 2
+    id: 362
+    startName: "Iteration_57_SWAP"
+    endName: "Iteration_58_FACT"
+  }
+  connections {
+    startIdx: 228
+    endIdx: 229
+    buffer_depth: 2
+    id: 363
+    startName: "Iteration_57_UPDATE"
+    endName: "Iteration_58_FACT"
+  }
+  connections {
+    startIdx: 230
+    endIdx: 233
+    buffer_depth: 2
+    id: 364
+    startName: "Iteration_58_BCAST"
+    endName: "Iteration_59_FACT"
+  }
+  connections {
+    startIdx: 231
+    endIdx: 233
+    buffer_depth: 2
+    id: 365
+    startName: "Iteration_58_SWAP"
+    endName: "Iteration_59_FACT"
+  }
+  connections {
+    startIdx: 232
+    endIdx: 233
+    buffer_depth: 2
+    id: 366
+    startName: "Iteration_58_UPDATE"
+    endName: "Iteration_59_FACT"
+  }
+  connections {
+    startIdx: 234
+    endIdx: 237
+    buffer_depth: 2
+    id: 367
+    startName: "Iteration_59_BCAST"
+    endName: "Iteration_60_FACT"
+  }
+  connections {
+    startIdx: 235
+    endIdx: 237
+    buffer_depth: 2
+    id: 368
+    startName: "Iteration_59_SWAP"
+    endName: "Iteration_60_FACT"
+  }
+  connections {
+    startIdx: 236
+    endIdx: 237
+    buffer_depth: 2
+    id: 369
+    startName: "Iteration_59_UPDATE"
+    endName: "Iteration_60_FACT"
+  }
+  connections {
+    startIdx: 238
+    endIdx: 241
+    buffer_depth: 2
+    id: 370
+    startName: "Iteration_60_BCAST"
+    endName: "Iteration_61_FACT"
+  }
+  connections {
+    startIdx: 239
+    endIdx: 241
+    buffer_depth: 2
+    id: 371
+    startName: "Iteration_60_SWAP"
+    endName: "Iteration_61_FACT"
+  }
+  connections {
+    startIdx: 240
+    endIdx: 241
+    buffer_depth: 2
+    id: 372
+    startName: "Iteration_60_UPDATE"
+    endName: "Iteration_61_FACT"
+  }
+  connections {
+    startIdx: 242
+    endIdx: 245
+    buffer_depth: 2
+    id: 373
+    startName: "Iteration_61_BCAST"
+    endName: "Iteration_62_FACT"
+  }
+  connections {
+    startIdx: 243
+    endIdx: 245
+    buffer_depth: 2
+    id: 374
+    startName: "Iteration_61_SWAP"
+    endName: "Iteration_62_FACT"
+  }
+  connections {
+    startIdx: 244
+    endIdx: 245
+    buffer_depth: 2
+    id: 375
+    startName: "Iteration_61_UPDATE"
+    endName: "Iteration_62_FACT"
+  }
+  connections {
+    startIdx: 246
+    endIdx: 249
+    buffer_depth: 2
+    id: 376
+    startName: "Iteration_62_BCAST"
+    endName: "Iteration_63_FACT"
+  }
+  connections {
+    startIdx: 247
+    endIdx: 249
+    buffer_depth: 2
+    id: 377
+    startName: "Iteration_62_SWAP"
+    endName: "Iteration_63_FACT"
+  }
+  connections {
+    startIdx: 248
+    endIdx: 249
+    buffer_depth: 2
+    id: 378
+    startName: "Iteration_62_UPDATE"
+    endName: "Iteration_63_FACT"
+  }
+  connections {
+    startIdx: 250
+    endIdx: 253
+    buffer_depth: 2
+    id: 379
+    startName: "Iteration_63_BCAST"
+    endName: "Iteration_64_FACT"
+  }
+  connections {
+    startIdx: 251
+    endIdx: 253
+    buffer_depth: 2
+    id: 380
+    startName: "Iteration_63_SWAP"
+    endName: "Iteration_64_FACT"
+  }
+  connections {
+    startIdx: 252
+    endIdx: 253
+    buffer_depth: 2
+    id: 381
+    startName: "Iteration_63_UPDATE"
+    endName: "Iteration_64_FACT"
+  }
+}
+system {
+  name: "64_Chip_TPU"
+  num_chip: 64
+  accelerator {
+    name: "TPU_v4"
+    core: 8
+    systolic_width: 128
+    systolic_height: 128
+    sram_cap: 167772160.0
+    freq: 1.05
+    dram_bw: 1200.0
+    dram_cap: 34359740000.0
+  }
+  fc_fc {
+    link_bw_x: 50.0
+    link_bw_y: 50.0
+    x: 16
+    y: 4
+  }
+}
+cost {
+  link_unit_price: 2.0
+  switch_unit_price: 24.0
+  dram_unit_price: 1.0
+}
+training {
+  optimization: FLASHATTENTION
+  hpl {
+    n: 131072
+    b: 2048
+  }
+  num_config: 64
+  global_batch_size: 1
+  objective: PERFORMANCE
+  skip_inter_chip: true
+  micro_batch_size: 1
+}

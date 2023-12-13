@@ -811,7 +811,7 @@ dataflow_graph {
       output_tensor_size: 3456000.0
       sharding: NO_SHARDING
       shard_outer_M: 3375
-      shard_K: 3374
+      shard_K: 3375
       shard_N: 512
       tiling: NO_TILING
     }
@@ -1045,7 +1045,7 @@ dataflow_graph {
       communication_type: ALL_REDUCE_PERIODIC
       communication_size: 22781250.0
       shard_outer_M: 3375
-      shard_K: 511
+      shard_K: 512
       shard_N: 3375
       tiling: NO_TILING
     }
@@ -1309,7 +1309,7 @@ dataflow_graph {
       communication_type: ALL_REDUCE_PERIODIC
       communication_size: 22781250.0
       shard_outer_M: 3375
-      shard_K: 511
+      shard_K: 512
       shard_N: 3375
       tiling: NO_TILING
     }

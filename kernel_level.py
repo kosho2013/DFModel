@@ -47,7 +47,8 @@ class Communication(Enum):
     ALL_TO_ALL = 2
     ALL_GATHER = 3
     ALL_REDUCE_PERIODIC = 4
-    
+    POINT_TO_POINT = 5
+    BROADCAST = 6
     
 class Optimization(Enum):
     NO_OPTIMIZATION = 0
@@ -109,9 +110,6 @@ for kernel in dse.dataflow_graph.kernels:
         
         memory_size.append(kernel.gemm_input1_weight.memory_size)
         
-        if M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or weight_tensor_size[-1] == 0:
-            raise Exception('Wrong!')
-        
     elif kernel.WhichOneof('kernel_variant') == 'gemm_input1_input2':
         M.append(kernel.gemm_input1_input2.outer * kernel.gemm_input1_input2.M)
         K.append(kernel.gemm_input1_input2.K)
@@ -126,10 +124,7 @@ for kernel in dse.dataflow_graph.kernels:
         tiling.append(kernel.gemm_input1_input2.tiling)
         
         memory_size.append(kernel.gemm_input1_input2.memory_size)
-        
-        if M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or weight_tensor_size[-1] == 0:
-            raise Exception('Wrong!')
-            
+
     elif kernel.WhichOneof('kernel_variant') == 'elementwise_input1':
         M.append(kernel.elementwise_input1.outer * kernel.elementwise_input1.M)
         K.append(1)
@@ -145,9 +140,6 @@ for kernel in dse.dataflow_graph.kernels:
         
         memory_size.append(kernel.elementwise_input1.memory_size)
         
-        if M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or weight_tensor_size[-1] == 0:
-            raise Exception('Wrong!')
-        
     elif kernel.WhichOneof('kernel_variant') == 'elementwise_input1_input2':
         M.append(kernel.elementwise_input1_input2.outer * kernel.elementwise_input1_input2.M)
         K.append(1)
@@ -162,9 +154,6 @@ for kernel in dse.dataflow_graph.kernels:
         tiling.append(kernel.elementwise_input1_input2.tiling)
         
         memory_size.append(kernel.elementwise_input1_input2.memory_size)
-        
-        if M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or weight_tensor_size[-1] == 0:
-            raise Exception('Wrong!')
             
     else:
         raise Exception('Wrong!')
@@ -213,6 +202,11 @@ elif dse.training.WhichOneof('workload_variant') == 'dlrm':
     num_table = dse.training.dlrm.num_table
     emb = dse.training.dlrm.emb
     num_layer = 1
+
+elif dse.training.WhichOneof('workload_variant') == 'hpl':
+    n = dse.training.hpl.n
+    b = dse.training.hpl.b
+    num_layer = 1
     
 elif dse.training.WhichOneof('workload_variant') == 'other':
     pass
@@ -240,7 +234,7 @@ if dse.training.WhichOneof('workload_variant') == 'llm':
     if num_head * head_dim != hidden_dim:
         raise Exception('Wrong!')
 
-elif dse.training.WhichOneof('workload_variant') == 'dlrm':
+elif dse.training.WhichOneof('workload_variant') == 'dlrm' or dse.training.WhichOneof('workload_variant') == 'hpl':
     Intermediate = 0
      
 elif dse.training.WhichOneof('workload_variant') == 'other':
@@ -261,11 +255,6 @@ for i in range(num_kernel):
     if fwd_bwd[i] == FWD_BWD.BWD.value:
         first_bwd_kernel = i
         break
-
-
-
-
-
 
 
 
@@ -303,6 +292,7 @@ net_bw_dse = dse.system.net_bw_dse
 GFLOPS = 2*VecWidth*StageWidth*Core*Freq
 
 
+
 class BasicTopology(Enum):
     NO_BASICTOPOLOGY = 0
     R = 1
@@ -315,95 +305,111 @@ if dse.system.WhichOneof('topology_variant') == 'single_chip': # single chip
     link_bw = []
     dimension = []
     
-    bisection = []
-    factor = []
+    a2a_bw_factor = []
+    a2a_msg_factor = []
 
 elif dse.system.WhichOneof('topology_variant') == 'sw': # 1D SW
     topology = [BasicTopology.SW.value]
     link_bw = [dse.system.sw.link_bw_x]
     dimension = [dse.system.sw.x]
     
-    bisection = [dse.system.sw.x]
-    factor = [dse.system.sw.x**2 / 4]
+    a2a_bw_factor = [dse.system.sw.x]
+    a2a_msg_factor = [dse.system.sw.x**2 / 4]
     
 elif dse.system.WhichOneof('topology_variant') == 'fc': # 1D FC
     topology = [BasicTopology.FC.value]
     link_bw = [dse.system.fc.link_bw_x]
     dimension = [dse.system.fc.x]
     
-    bisection = [dse.system.fc.x**2 / 4]
-    factor = [dse.system.fc.x**2 / 4]
+    a2a_bw_factor = [dse.system.fc.x**2 / 4]
+    a2a_msg_factor = [dse.system.fc.x**2 / 4]
   
 elif dse.system.WhichOneof('topology_variant') == 'r': # 1D Ring
     topology = [BasicTopology.R.value]
     link_bw = [dse.system.r.link_bw_x]
     dimension = [dse.system.r.x]    
     
-    bisection = [2]
-    factor = [dse.system.r.x**2 / 4]
+    a2a_bw_factor = [2]
+    a2a_msg_factor = [dse.system.r.x**2 / 4]
   
 elif dse.system.WhichOneof('topology_variant') == 'r_r': # 2D Torus
     topology = [BasicTopology.R.value, BasicTopology.R.value]
     link_bw = [dse.system.r_r.link_bw_x, dse.system.r_r.link_bw_y]
     dimension = [dse.system.r_r.x, dse.system.r_r.y]
 
-    bisection = [dse.system.r_r.x, dse.system.r_r.y]
-    factor = [num_chip**2 / 4, num_chip**2 / 4]
+    a2a_bw_factor = [dse.system.r_r.x, dse.system.r_r.y]
+    a2a_msg_factor = [num_chip**2 / 4, num_chip**2 / 4]
+    
+    p2p_bw_factor = 1
+    p2p_msg_factor = 1
+    bcast_bw_factor = 1
+    bcast_msg_factor = (dse.system.r_r.y-1)/2
     
 elif dse.system.WhichOneof('topology_variant') == 'fc_fc': # 2D Dragonfly
     topology = [BasicTopology.FC.value, BasicTopology.FC.value]
     link_bw = [dse.system.fc_fc.link_bw_x, dse.system.fc_fc.link_bw_y]
     dimension = [dse.system.fc_fc.x, dse.system.fc_fc.y]
     
-    bisection = [dse.system.fc_fc.x**2 / 4, dse.system.fc_fc.y**2 / 4]
-    factor = [dse.system.fc_fc.x**2 / 4, num_chip**2 / 4]
+    a2a_bw_factor = [dse.system.fc_fc.x**2 / 4, dse.system.fc_fc.y**2 / 4]
+    a2a_msg_factor = [dse.system.fc_fc.x**2 / 4, num_chip**2 / 4]
+    
+    p2p_bw_factor = 1
+    p2p_msg_factor = 1
+    bcast_bw_factor = 1
+    bcast_msg_factor = 1/2
     
 elif dse.system.WhichOneof('topology_variant') == 'r_sw': # 2D DGX-1
     topology = [BasicTopology.R.value, BasicTopology.SW.value]
     link_bw = [dse.system.r_sw.link_bw_x, dse.system.r_sw.link_bw_y]
     dimension = [dse.system.r_sw.x, dse.system.r_sw.y]
     
-    bisection = [2, dse.system.r_sw.y]
-    factor = [dse.system.r_sw.x**2 / 4, num_chip**2 / 4]
+    a2a_bw_factor = [2, dse.system.r_sw.y]
+    a2a_msg_factor = [dse.system.r_sw.x**2 / 4, num_chip**2 / 4]
+    
+    p2p_bw_factor = 1
+    p2p_msg_factor = 1
+    bcast_bw_factor = 1
+    bcast_msg_factor = 1/2
     
 elif dse.system.WhichOneof('topology_variant') == 'sw_sw': # 2D DGX-2
     topology = [BasicTopology.SW.value, BasicTopology.SW.value]
     link_bw = [dse.system.sw_sw.link_bw_x, dse.system.sw_sw.link_bw_y]
     dimension = [dse.system.sw_sw.x, dse.system.sw_sw.y]
     
-    bisection = [dse.system.sw_sw.x, dse.system.sw_sw.y]
-    factor = [dse.system.sw_sw.x**2 / 4, num_chip**2 / 4]
-
+    a2a_bw_factor = [dse.system.sw_sw.x, dse.system.sw_sw.y]
+    a2a_msg_factor = [dse.system.sw_sw.x**2 / 4, num_chip**2 / 4]
+    
+    p2p_bw_factor = 1
+    p2p_msg_factor = 1
+    bcast_bw_factor = 1
+    bcast_msg_factor = 1/2
+    
 elif dse.system.WhichOneof('topology_variant') == 'r_fc': # Ring-FC
     topology = [BasicTopology.R.value, BasicTopology.FC.value]
     link_bw = [dse.system.r_fc.link_bw_x, dse.system.r_fc.link_bw_y]
     dimension = [dse.system.r_fc.x, dse.system.r_fc.y]
     
-    bisection = [2, dse.system.r_fc.y**2 / 4]
-    factor = [dse.system.r_fc.x**2 / 4, num_chip**2 / 4]
+    a2a_bw_factor = [2, dse.system.r_fc.y**2 / 4]
+    a2a_msg_factor = [dse.system.r_fc.x**2 / 4, num_chip**2 / 4]
+    
+    p2p_bw_factor = 1
+    p2p_msg_factor = 1
     
 elif dse.system.WhichOneof('topology_variant') == 'r_r_r': # 3D Torus
     topology = [BasicTopology.R.value, BasicTopology.R.value, BasicTopology.R.value]
     link_bw = [dse.system.r_r_r.link_bw_x, dse.system.r_r_r.link_bw_y, dse.system.r_r_r.link_bw_z]
     dimension = [dse.system.r_r_r.x, dse.system.r_r_r.y, dse.system.r_r_r.z]
     
-    bisection = [dse.system.r_r_r.x, dse.system.r_r_r.y, dse.system.r_r_r.z]
-    factor = [num_chip**2 / 4, num_chip**2 / 4, num_chip**2 / 4]
+    a2a_bw_factor = [dse.system.r_r_r.x, dse.system.r_r_r.y, dse.system.r_r_r.z]
+    a2a_msg_factor = [num_chip**2 / 4, num_chip**2 / 4, num_chip**2 / 4]
     
 else:
     raise Exception('Wrong!')
 
 
-
-
-
-
-
-
-
 model = gp.Model()
 model.params.NonConvex = 2
-model.Params.Threads = 9
+model.Params.Threads = 140
 model.params.MIPGap = 1e-50
 model.params.TimeLimit = 36000
 
@@ -417,7 +423,25 @@ TP = model.addVar(name='TP', vtype=gp.GRB.INTEGER)
 PP = model.addVar(name='PP', vtype=gp.GRB.INTEGER)
 DP = model.addVar(name='DP', vtype=gp.GRB.INTEGER)
 
-if dse.training.WhichOneof('workload_variant') == 'dlrm':
+
+if dse.training.WhichOneof('workload_variant') == 'hpl':
+    Shape = model.addMVar(len(topology), name='Shape', vtype=gp.GRB.INTEGER, lb=0)
+    for i in range(len(topology)):
+        model.addConstr(Shape[i] == dimension[i])
+    
+    model.addConstr(TP == 1)
+    model.addConstr(PP == 1)
+    model.addConstr(DP == num_chip)
+
+    Link_BW = model.addMVar(len(topology), name='Link_BW', vtype=gp.GRB.CONTINUOUS, lb=0)
+    if net_bw_dse == True: # DSE
+        for i in range(len(topology)):
+            model.addConstr(Link_BW[i] <= link_bw[i])
+    else:
+        for i in range(len(topology)):
+            model.addConstr(Link_BW[i] == link_bw[i])
+            
+elif dse.training.WhichOneof('workload_variant') == 'dlrm':
     Shape = model.addMVar(len(topology), name='Shape', vtype=gp.GRB.INTEGER, lb=0)
     for i in range(len(topology)):
         model.addConstr(Shape[i] == dimension[i])
@@ -577,7 +601,7 @@ if dse.training.WhichOneof('workload_variant') == 'llm':
     else:
         model.addConstr(tile_size == seq_tile_size)
 
-elif dse.training.WhichOneof('workload_variant') == 'dlrm':
+elif dse.training.WhichOneof('workload_variant') == 'dlrm' or dse.training.WhichOneof('workload_variant') == 'hpl':
     model.addConstr(num_tile == 1)
      
 elif dse.training.WhichOneof('workload_variant') == 'other':
@@ -707,6 +731,9 @@ for i in range(num_weight):
 ALL_REDUCE_communication_size = model.addMVar(num_kernel, name='ALL_REDUCE_communication_size', vtype=gp.GRB.CONTINUOUS, lb=0)
 ALL_REDUCE_PERIODIC_communication_size = model.addMVar(num_kernel, name='ALL_REDUCE_PERIODIC_communication_size', vtype=gp.GRB.CONTINUOUS, lb=0)
 ALL_TO_ALL_communication_size = model.addMVar(num_kernel, name='ALL_TO_ALL_communication_size', vtype=gp.GRB.CONTINUOUS, lb=0)
+POINT_TO_POINT_communication_size = model.addMVar(num_kernel, name='POINT_TO_POINT_communication_size', vtype=gp.GRB.CONTINUOUS, lb=0)
+BROADCAST_communication_size = model.addMVar(num_kernel, name='BROADCAST_communication_size', vtype=gp.GRB.CONTINUOUS, lb=0)
+
 
 Micro_Batch_Size = model.addVar(name='Micro_Batch_Size', vtype=gp.GRB.INTEGER, lb=1)
 if micro_batch_size == 0: # DSE
@@ -725,10 +752,19 @@ for i in range(num_kernel):
         
     elif node_communication_type[i] == Communication.ALL_TO_ALL.value:
         model.addConstr(ALL_TO_ALL_communication_size[i] == node_communication_size[i])
+    
+    elif node_communication_type[i] == Communication.POINT_TO_POINT.value:
+        model.addConstr(POINT_TO_POINT_communication_size[i] == node_communication_size[i])
+    
+    elif node_communication_type[i] == Communication.BROADCAST.value:
+        model.addConstr(BROADCAST_communication_size[i] == node_communication_size[i])
         
     else:
         model.addConstr(ALL_REDUCE_communication_size[i] == 0)
         model.addConstr(ALL_REDUCE_PERIODIC_communication_size[i] == 0)
+        model.addConstr(ALL_TO_ALL_communication_size[i] == 0)
+        model.addConstr(POINT_TO_POINT_communication_size[i] == 0)
+        model.addConstr(BROADCAST_communication_size[i] == 0)
 
 
 
@@ -864,8 +900,18 @@ for i in range(num_weight):
     
     model.addConstr(shard_initiation_buffer_size_depth_one[i] * weight_tiling[node_idx] >= shard_initiation_buffer_size[i] * 1)
 
+
+SRAM_Per_Config_total = model.addMVar(C, name='SRAM_Per_Config', vtype=gp.GRB.CONTINUOUS, lb=0)
+SRAM_Per_Config_intermediate_dram = model.addMVar(C, name='SRAM_Per_Config_intermediate_dram', vtype=gp.GRB.CONTINUOUS, lb=0)
+SRAM_Per_Config_intermediate_onchip = model.addMVar(C, name='SRAM_Per_Config_intermediate_onchip', vtype=gp.GRB.CONTINUOUS, lb=0)
+SRAM_Per_Config_initiation = model.addMVar(C, name='SRAM_Per_Config_initiation', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
-    model.addConstr(shard_intermediate_buffer_size_depth_original @ Ab_onchip[:, i] + shard_intermediate_buffer_size_depth_two @ Ab_dram[:, i] + shard_initiation_buffer_size_depth_one @ Ad[:, i] <= SRAM_Cap)
+    model.addConstr(SRAM_Per_Config_intermediate_dram[i] == shard_intermediate_buffer_size_depth_two @ Ab_dram[:, i])
+    model.addConstr(SRAM_Per_Config_intermediate_onchip[i] == shard_intermediate_buffer_size_depth_original @ Ab_onchip[:, i])
+    model.addConstr(SRAM_Per_Config_initiation[i] == shard_initiation_buffer_size_depth_one @ Ad[:, i])
+    model.addConstr(SRAM_Per_Config_total[i] == SRAM_Per_Config_intermediate_dram[i] + SRAM_Per_Config_intermediate_onchip[i] + SRAM_Per_Config_initiation[i])
+    
+    # model.addConstr(SRAM_Per_Config_total[i] <= SRAM_Cap)
 
 
 
@@ -888,7 +934,7 @@ model.addConstr(dram_bytes_intermediate == np.ones((C)) @ dram_bytes_per_config_
 if dse.training.WhichOneof('workload_variant') == 'llm':
     model.addConstr((dram_bytes_initiation + dram_bytes_intermediate * Micro_Batch_Size) * num_layer <= DRAM_Cap * PP)
 
-elif dse.training.WhichOneof('workload_variant') == 'dlrm':
+elif dse.training.WhichOneof('workload_variant') == 'dlrm' or dse.training.WhichOneof('workload_variant') == 'hpl':
     model.addConstr((dram_bytes_initiation + dram_bytes_intermediate * 1) * num_layer <= DRAM_Cap * PP)
      
 elif dse.training.WhichOneof('workload_variant') == 'other':
@@ -1093,7 +1139,7 @@ elif dse.training.WhichOneof('workload_variant') == 'dlrm':
             aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
             model.addConstr(aaa == Ac[:, i] @ ALL_TO_ALL_communication_size) # per-chip bytes
             
-            model.addConstr(Network_Latency_ALL_TO_ALL_tmp[i, j] * Link_BW[j] * bisection[j] == aaa * factor[j])
+            model.addConstr(Network_Latency_ALL_TO_ALL_tmp[i, j] * Link_BW[j] * a2a_bw_factor[j] == aaa * a2a_msg_factor[j])
             model.addConstr(Network_Bytes_ALL_TO_ALL_tmp[i, j] == Network_Latency_ALL_TO_ALL_tmp[i, j] * Link_BW[j])
      
     
@@ -1107,6 +1153,39 @@ elif dse.training.WhichOneof('workload_variant') == 'dlrm':
         
     
     
+elif dse.training.WhichOneof('workload_variant') == 'hpl':
+    Network_Latency_POINT_TO_POINT = model.addMVar(C, name='Network_Latency_POINT_TO_POINT', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Network_Bytes_POINT_TO_POINT = model.addMVar(C, name='Network_Bytes_POINT_TO_POINT', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Network_Latency_BROADCAST = model.addMVar(C, name='Network_Latency_BROADCAST', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Network_Bytes_BROADCAST = model.addMVar(C, name='Network_Bytes_BROADCAST', vtype=gp.GRB.CONTINUOUS, lb=0)
+    
+    print('aaa'*100)
+    print(p2p_bw_factor)
+    print(p2p_msg_factor)
+    print(bcast_bw_factor)
+    print(bcast_msg_factor)
+    print('aaa'*100)
+    
+    for i in range(C):
+        # X dim
+        aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
+        model.addConstr(aaa == Ac[:, i] @ POINT_TO_POINT_communication_size)
+        
+        # Y dim
+        bbb = model.addVar(vtype=gp.GRB.CONTINUOUS)
+        model.addConstr(bbb == Ac[:, i] @ BROADCAST_communication_size)
+        
+        model.addConstr(Network_Latency_POINT_TO_POINT[i] * Link_BW[0] * p2p_bw_factor == aaa * p2p_msg_factor)
+        model.addConstr(Network_Bytes_POINT_TO_POINT[i] == Link_BW[0] * Network_Latency_POINT_TO_POINT[i])
+        model.addConstr(Network_Latency_BROADCAST[i] * Link_BW[1] * bcast_bw_factor == bbb * bcast_msg_factor)
+        model.addConstr(Network_Bytes_BROADCAST[i] == Link_BW[1] * Network_Latency_BROADCAST[i])
+        
+    for i in range(C):
+        model.addConstr(Network_Latency[i] == gp.max_(Network_Latency_POINT_TO_POINT[i], Network_Latency_BROADCAST[i]))
+        # model.addConstr(Network_Latency[i] == Network_Latency_POINT_TO_POINT[i])
+    model.addConstr(total_Network_bytes == np.ones((C)) @ Network_Bytes_POINT_TO_POINT + np.ones((C)) @ Network_Bytes_BROADCAST)
+    model.addConstr(total_Network_bytes == np.ones((C)) @ Network_Bytes_POINT_TO_POINT + np.ones((C)) @ Network_Bytes_BROADCAST)
+
 elif dse.training.WhichOneof('workload_variant') == 'other':
     pass
     
@@ -1155,7 +1234,7 @@ if dse.training.WhichOneof('workload_variant') == 'llm':
     model.addConstr(aaa == np.ones((C)) @ Per_Config_II)
     model.addConstr(II == gp.max_(aaa, p2p_latency))
 
-elif dse.training.WhichOneof('workload_variant') == 'dlrm':
+elif dse.training.WhichOneof('workload_variant') == 'dlrm' or dse.training.WhichOneof('workload_variant') == 'hpl':
     model.addConstr(II == np.ones((C)) @ Per_Config_II)
     
 elif dse.training.WhichOneof('workload_variant') == 'other':
@@ -1317,6 +1396,7 @@ II *= layers_per_stage
 
 
 
+print('FLOP', FLOP)
 print('total_cost', total_cost)
 print('DRAM_BW', DRAM_BW)
 print('Link_BW', Link_BW)

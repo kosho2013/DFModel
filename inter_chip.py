@@ -59,9 +59,6 @@ for kernel in dse.dataflow_graph.kernels:
         
         tiling.append(kernel.gemm_input1_weight.tiling)
         
-        if outer[-1] == 0 or M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or input_tensor_1_size[-1] == 0 or input_tensor_2_size[-1] == 0 or weight_tensor_size[-1] == 0 or output_tensor_size[-1] == 0:
-            raise Exception('Wrong!')
-        
     elif kernel.WhichOneof('kernel_variant') == 'gemm_input1_input2':
         outer.append(kernel.gemm_input1_input2.outer)
         M.append(kernel.gemm_input1_input2.M)
@@ -74,9 +71,6 @@ for kernel in dse.dataflow_graph.kernels:
         output_tensor_size.append(kernel.gemm_input1_input2.output_tensor_size)
         
         tiling.append(kernel.gemm_input1_input2.tiling)
-        
-        if outer[-1] == 0 or M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or input_tensor_1_size[-1] == 0 or input_tensor_2_size[-1] == 0 or weight_tensor_size[-1] == 0 or output_tensor_size[-1] == 0:
-            raise Exception('Wrong!')
             
     elif kernel.WhichOneof('kernel_variant') == 'elementwise_input1':
         outer.append(kernel.elementwise_input1.outer)
@@ -91,9 +85,6 @@ for kernel in dse.dataflow_graph.kernels:
         
         tiling.append(kernel.elementwise_input1.tiling)
         
-        if outer[-1] == 0 or M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or input_tensor_1_size[-1] == 0 or input_tensor_2_size[-1] == 0 or weight_tensor_size[-1] == 0 or output_tensor_size[-1] == 0:
-            raise Exception('Wrong!')
-        
     elif kernel.WhichOneof('kernel_variant') == 'elementwise_input1_input2':
         outer.append(kernel.elementwise_input1_input2.outer)
         M.append(kernel.elementwise_input1_input2.M)
@@ -106,10 +97,7 @@ for kernel in dse.dataflow_graph.kernels:
         output_tensor_size.append(kernel.elementwise_input1_input2.output_tensor_size)
         
         tiling.append(kernel.elementwise_input1_input2.tiling)
-        
-        if outer[-1] == 0 or M[-1] == 0 or K[-1] == 0 or N[-1] == 0 or input_tensor_1_size[-1] == 0 or input_tensor_2_size[-1] == 0 or weight_tensor_size[-1] == 0 or output_tensor_size[-1] == 0:
-            raise Exception('Wrong!')
-            
+
     else:
         raise Exception('Wrong!')
     

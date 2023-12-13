@@ -58,6 +58,8 @@ message GEMM_Input1_Weight {
 		ALL_TO_ALL = 2;
 		ALL_GATHER = 3;
 		ALL_REDUCE_PERIODIC = 4;
+		POINT_TO_POINT = 5;
+		BROADCAST = 6;
 	}
 
 	enum Sharding {
@@ -109,6 +111,8 @@ message GEMM_Input1_Input2 {
 		ALL_TO_ALL = 2;
 		ALL_GATHER = 3;
 		ALL_REDUCE_PERIODIC = 4;
+		POINT_TO_POINT = 5;
+		BROADCAST = 6;
 	}
 
 	enum Sharding {
@@ -156,6 +160,8 @@ message ElementWise_Input1 {
 		ALL_TO_ALL = 2;
 		ALL_GATHER = 3;
 		ALL_REDUCE_PERIODIC = 4;
+		POINT_TO_POINT = 5;
+		BROADCAST = 6;
 	}
 
 	enum Sharding {
@@ -204,6 +210,8 @@ message ElementWise_Input1_Input2 {
 		ALL_TO_ALL = 2;
 		ALL_GATHER = 3;
 		ALL_REDUCE_PERIODIC = 4;
+		POINT_TO_POINT = 5;
+		BROADCAST = 6;
 	}
 
 	enum Sharding {
@@ -382,7 +390,8 @@ message Training {
 	oneof workload_variant {
 		LLM llm = 7;
 		DLRM dlrm = 8;
-		Other other = 9;
+		HPL hpl = 9;
+		Other other = 10;
 	}
 		
 	int32 global_batch_size = 30;
@@ -413,6 +422,12 @@ message DLRM {
 	int32 num_table = 6;
 	int32 emb = 7;
 }
+
+message HPL {
+	int32 n = 1;
+	int32 b = 2;
+}
+
 
 message Other {
 }
