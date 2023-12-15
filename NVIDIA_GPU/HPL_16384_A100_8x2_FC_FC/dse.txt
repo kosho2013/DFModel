@@ -1,0 +1,6294 @@
+dataflow_graph {
+  kernels {
+    name: "Iteration_1_FACT"
+    id: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2048
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 4194304.0
+      output_tensor_size: 4194304.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_1_BCAST"
+    id: 2
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 4194304.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_1_SWAP"
+    id: 3
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 16777216.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_1_UPDATE"
+    id: 4
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2048
+      K: 256
+      N: 8192
+      input_tensor_size: 16777216.0
+      weight_tensor_size: 4194304.0
+      output_tensor_size: 134217730.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_2_FACT"
+    id: 5
+    config: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2016
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 4128768.0
+      output_tensor_size: 4128768.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_2_BCAST"
+    id: 6
+    config: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 4128768.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_2_SWAP"
+    id: 7
+    config: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 16515072.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_2_UPDATE"
+    id: 8
+    config: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 2016
+      K: 256
+      N: 8064
+      input_tensor_size: 16515072.0
+      weight_tensor_size: 4128768.0
+      output_tensor_size: 130056190.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_3_FACT"
+    id: 9
+    config: 2
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1984
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 4063232.0
+      output_tensor_size: 4063232.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_3_BCAST"
+    id: 10
+    config: 2
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 4063232.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_3_SWAP"
+    id: 11
+    config: 2
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 16252928.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_3_UPDATE"
+    id: 12
+    config: 2
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1984
+      K: 256
+      N: 7936
+      input_tensor_size: 16252928.0
+      weight_tensor_size: 4063232.0
+      output_tensor_size: 125960190.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_4_FACT"
+    id: 13
+    config: 3
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1952
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 3997696.0
+      output_tensor_size: 3997696.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_4_BCAST"
+    id: 14
+    config: 3
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 3997696.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_4_SWAP"
+    id: 15
+    config: 3
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 15990784.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_4_UPDATE"
+    id: 16
+    config: 3
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1952
+      K: 256
+      N: 7808
+      input_tensor_size: 15990784.0
+      weight_tensor_size: 3997696.0
+      output_tensor_size: 121929730.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_5_FACT"
+    id: 17
+    config: 4
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1920
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 3932160.0
+      output_tensor_size: 3932160.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_5_BCAST"
+    id: 18
+    config: 4
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 3932160.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_5_SWAP"
+    id: 19
+    config: 4
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 15728640.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_5_UPDATE"
+    id: 20
+    config: 4
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1920
+      K: 256
+      N: 7680
+      input_tensor_size: 15728640.0
+      weight_tensor_size: 3932160.0
+      output_tensor_size: 117964800.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_6_FACT"
+    id: 21
+    config: 5
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1888
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 3866624.0
+      output_tensor_size: 3866624.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_6_BCAST"
+    id: 22
+    config: 5
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 3866624.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_6_SWAP"
+    id: 23
+    config: 5
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 15466496.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_6_UPDATE"
+    id: 24
+    config: 5
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1888
+      K: 256
+      N: 7552
+      input_tensor_size: 15466496.0
+      weight_tensor_size: 3866624.0
+      output_tensor_size: 114065410.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_7_FACT"
+    id: 25
+    config: 6
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1856
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 3801088.0
+      output_tensor_size: 3801088.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_7_BCAST"
+    id: 26
+    config: 6
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 3801088.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_7_SWAP"
+    id: 27
+    config: 6
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 15204352.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_7_UPDATE"
+    id: 28
+    config: 6
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1856
+      K: 256
+      N: 7424
+      input_tensor_size: 15204352.0
+      weight_tensor_size: 3801088.0
+      output_tensor_size: 110231550.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_8_FACT"
+    id: 29
+    config: 7
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1824
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 3735552.0
+      output_tensor_size: 3735552.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_8_BCAST"
+    id: 30
+    config: 7
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 3735552.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_8_SWAP"
+    id: 31
+    config: 7
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 14942208.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_8_UPDATE"
+    id: 32
+    config: 7
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1824
+      K: 256
+      N: 7296
+      input_tensor_size: 14942208.0
+      weight_tensor_size: 3735552.0
+      output_tensor_size: 106463230.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_9_FACT"
+    id: 33
+    config: 8
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1792
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 3670016.0
+      output_tensor_size: 3670016.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_9_BCAST"
+    id: 34
+    config: 8
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 3670016.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_9_SWAP"
+    id: 35
+    config: 8
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 14680064.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_9_UPDATE"
+    id: 36
+    config: 8
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1792
+      K: 256
+      N: 7168
+      input_tensor_size: 14680064.0
+      weight_tensor_size: 3670016.0
+      output_tensor_size: 102760450.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_10_FACT"
+    id: 37
+    config: 9
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1760
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 3604480.0
+      output_tensor_size: 3604480.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_10_BCAST"
+    id: 38
+    config: 9
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 3604480.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_10_SWAP"
+    id: 39
+    config: 9
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 14417920.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_10_UPDATE"
+    id: 40
+    config: 9
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1760
+      K: 256
+      N: 7040
+      input_tensor_size: 14417920.0
+      weight_tensor_size: 3604480.0
+      output_tensor_size: 99123200.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_11_FACT"
+    id: 41
+    config: 10
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1728
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 3538944.0
+      output_tensor_size: 3538944.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_11_BCAST"
+    id: 42
+    config: 10
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 3538944.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_11_SWAP"
+    id: 43
+    config: 10
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 14155776.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_11_UPDATE"
+    id: 44
+    config: 10
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1728
+      K: 256
+      N: 6912
+      input_tensor_size: 14155776.0
+      weight_tensor_size: 3538944.0
+      output_tensor_size: 95551490.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_12_FACT"
+    id: 45
+    config: 11
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1696
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 3473408.0
+      output_tensor_size: 3473408.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_12_BCAST"
+    id: 46
+    config: 11
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 3473408.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_12_SWAP"
+    id: 47
+    config: 11
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 13893632.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_12_UPDATE"
+    id: 48
+    config: 11
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1696
+      K: 256
+      N: 6784
+      input_tensor_size: 13893632.0
+      weight_tensor_size: 3473408.0
+      output_tensor_size: 92045310.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_13_FACT"
+    id: 49
+    config: 12
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1664
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 3407872.0
+      output_tensor_size: 3407872.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_13_BCAST"
+    id: 50
+    config: 12
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 3407872.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_13_SWAP"
+    id: 51
+    config: 12
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 13631488.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_13_UPDATE"
+    id: 52
+    config: 12
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1664
+      K: 256
+      N: 6656
+      input_tensor_size: 13631488.0
+      weight_tensor_size: 3407872.0
+      output_tensor_size: 88604670.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_14_FACT"
+    id: 53
+    config: 13
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1632
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 3342336.0
+      output_tensor_size: 3342336.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_14_BCAST"
+    id: 54
+    config: 13
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 3342336.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_14_SWAP"
+    id: 55
+    config: 13
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 13369344.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_14_UPDATE"
+    id: 56
+    config: 13
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1632
+      K: 256
+      N: 6528
+      input_tensor_size: 13369344.0
+      weight_tensor_size: 3342336.0
+      output_tensor_size: 85229570.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_15_FACT"
+    id: 57
+    config: 14
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1600
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 3276800.0
+      output_tensor_size: 3276800.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_15_BCAST"
+    id: 58
+    config: 14
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 3276800.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_15_SWAP"
+    id: 59
+    config: 14
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 13107200.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_15_UPDATE"
+    id: 60
+    config: 14
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1600
+      K: 256
+      N: 6400
+      input_tensor_size: 13107200.0
+      weight_tensor_size: 3276800.0
+      output_tensor_size: 81920000.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_16_FACT"
+    id: 61
+    config: 15
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1568
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 3211264.0
+      output_tensor_size: 3211264.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_16_BCAST"
+    id: 62
+    config: 15
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 3211264.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_16_SWAP"
+    id: 63
+    config: 15
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 12845056.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_16_UPDATE"
+    id: 64
+    config: 15
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1568
+      K: 256
+      N: 6272
+      input_tensor_size: 12845056.0
+      weight_tensor_size: 3211264.0
+      output_tensor_size: 78675970.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_17_FACT"
+    id: 65
+    config: 16
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1536
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 3145728.0
+      output_tensor_size: 3145728.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_17_BCAST"
+    id: 66
+    config: 16
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 3145728.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_17_SWAP"
+    id: 67
+    config: 16
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 12582912.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_17_UPDATE"
+    id: 68
+    config: 16
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1536
+      K: 256
+      N: 6144
+      input_tensor_size: 12582912.0
+      weight_tensor_size: 3145728.0
+      output_tensor_size: 75497470.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_18_FACT"
+    id: 69
+    config: 17
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1504
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 3080192.0
+      output_tensor_size: 3080192.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_18_BCAST"
+    id: 70
+    config: 17
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 3080192.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_18_SWAP"
+    id: 71
+    config: 17
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 12320768.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_18_UPDATE"
+    id: 72
+    config: 17
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1504
+      K: 256
+      N: 6016
+      input_tensor_size: 12320768.0
+      weight_tensor_size: 3080192.0
+      output_tensor_size: 72384510.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_19_FACT"
+    id: 73
+    config: 18
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1472
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 3014656.0
+      output_tensor_size: 3014656.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_19_BCAST"
+    id: 74
+    config: 18
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 3014656.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_19_SWAP"
+    id: 75
+    config: 18
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 12058624.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_19_UPDATE"
+    id: 76
+    config: 18
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1472
+      K: 256
+      N: 5888
+      input_tensor_size: 12058624.0
+      weight_tensor_size: 3014656.0
+      output_tensor_size: 69337090.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_20_FACT"
+    id: 77
+    config: 19
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1440
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 2949120.0
+      output_tensor_size: 2949120.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_20_BCAST"
+    id: 78
+    config: 19
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 2949120.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_20_SWAP"
+    id: 79
+    config: 19
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 11796480.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_20_UPDATE"
+    id: 80
+    config: 19
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1440
+      K: 256
+      N: 5760
+      input_tensor_size: 11796480.0
+      weight_tensor_size: 2949120.0
+      output_tensor_size: 66355200.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_21_FACT"
+    id: 81
+    config: 20
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1408
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 2883584.0
+      output_tensor_size: 2883584.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_21_BCAST"
+    id: 82
+    config: 20
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 2883584.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_21_SWAP"
+    id: 83
+    config: 20
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 11534336.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_21_UPDATE"
+    id: 84
+    config: 20
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1408
+      K: 256
+      N: 5632
+      input_tensor_size: 11534336.0
+      weight_tensor_size: 2883584.0
+      output_tensor_size: 63438850.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_22_FACT"
+    id: 85
+    config: 21
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1376
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 2818048.0
+      output_tensor_size: 2818048.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_22_BCAST"
+    id: 86
+    config: 21
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 2818048.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_22_SWAP"
+    id: 87
+    config: 21
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 11272192.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_22_UPDATE"
+    id: 88
+    config: 21
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1376
+      K: 256
+      N: 5504
+      input_tensor_size: 11272192.0
+      weight_tensor_size: 2818048.0
+      output_tensor_size: 60588030.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_23_FACT"
+    id: 89
+    config: 22
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1344
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 2752512.0
+      output_tensor_size: 2752512.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_23_BCAST"
+    id: 90
+    config: 22
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 2752512.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_23_SWAP"
+    id: 91
+    config: 22
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 11010048.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_23_UPDATE"
+    id: 92
+    config: 22
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1344
+      K: 256
+      N: 5376
+      input_tensor_size: 11010048.0
+      weight_tensor_size: 2752512.0
+      output_tensor_size: 57802750.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_24_FACT"
+    id: 93
+    config: 23
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1312
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 2686976.0
+      output_tensor_size: 2686976.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_24_BCAST"
+    id: 94
+    config: 23
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 2686976.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_24_SWAP"
+    id: 95
+    config: 23
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 10747904.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_24_UPDATE"
+    id: 96
+    config: 23
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1312
+      K: 256
+      N: 5248
+      input_tensor_size: 10747904.0
+      weight_tensor_size: 2686976.0
+      output_tensor_size: 55083010.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_25_FACT"
+    id: 97
+    config: 24
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1280
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 2621440.0
+      output_tensor_size: 2621440.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_25_BCAST"
+    id: 98
+    config: 24
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 2621440.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_25_SWAP"
+    id: 99
+    config: 24
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 10485760.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_25_UPDATE"
+    id: 100
+    config: 24
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1280
+      K: 256
+      N: 5120
+      input_tensor_size: 10485760.0
+      weight_tensor_size: 2621440.0
+      output_tensor_size: 52428800.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_26_FACT"
+    id: 101
+    config: 25
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1248
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 2555904.0
+      output_tensor_size: 2555904.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_26_BCAST"
+    id: 102
+    config: 25
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 2555904.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_26_SWAP"
+    id: 103
+    config: 25
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 10223616.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_26_UPDATE"
+    id: 104
+    config: 25
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1248
+      K: 256
+      N: 4992
+      input_tensor_size: 10223616.0
+      weight_tensor_size: 2555904.0
+      output_tensor_size: 49840130.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_27_FACT"
+    id: 105
+    config: 26
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1216
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 2490368.0
+      output_tensor_size: 2490368.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_27_BCAST"
+    id: 106
+    config: 26
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 2490368.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_27_SWAP"
+    id: 107
+    config: 26
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 9961472.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_27_UPDATE"
+    id: 108
+    config: 26
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1216
+      K: 256
+      N: 4864
+      input_tensor_size: 9961472.0
+      weight_tensor_size: 2490368.0
+      output_tensor_size: 47316990.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_28_FACT"
+    id: 109
+    config: 27
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1184
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 2424832.0
+      output_tensor_size: 2424832.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_28_BCAST"
+    id: 110
+    config: 27
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 2424832.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_28_SWAP"
+    id: 111
+    config: 27
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 9699328.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_28_UPDATE"
+    id: 112
+    config: 27
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1184
+      K: 256
+      N: 4736
+      input_tensor_size: 9699328.0
+      weight_tensor_size: 2424832.0
+      output_tensor_size: 44859390.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_29_FACT"
+    id: 113
+    config: 28
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1152
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 2359296.0
+      output_tensor_size: 2359296.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_29_BCAST"
+    id: 114
+    config: 28
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 2359296.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_29_SWAP"
+    id: 115
+    config: 28
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 9437184.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_29_UPDATE"
+    id: 116
+    config: 28
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1152
+      K: 256
+      N: 4608
+      input_tensor_size: 9437184.0
+      weight_tensor_size: 2359296.0
+      output_tensor_size: 42467330.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_30_FACT"
+    id: 117
+    config: 29
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1120
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 2293760.0
+      output_tensor_size: 2293760.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_30_BCAST"
+    id: 118
+    config: 29
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 2293760.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_30_SWAP"
+    id: 119
+    config: 29
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 9175040.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_30_UPDATE"
+    id: 120
+    config: 29
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1120
+      K: 256
+      N: 4480
+      input_tensor_size: 9175040.0
+      weight_tensor_size: 2293760.0
+      output_tensor_size: 40140800.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_31_FACT"
+    id: 121
+    config: 30
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1088
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 2228224.0
+      output_tensor_size: 2228224.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_31_BCAST"
+    id: 122
+    config: 30
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 2228224.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_31_SWAP"
+    id: 123
+    config: 30
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 8912896.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_31_UPDATE"
+    id: 124
+    config: 30
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1088
+      K: 256
+      N: 4352
+      input_tensor_size: 8912896.0
+      weight_tensor_size: 2228224.0
+      output_tensor_size: 37879810.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_32_FACT"
+    id: 125
+    config: 31
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1056
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 2162688.0
+      output_tensor_size: 2162688.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_32_BCAST"
+    id: 126
+    config: 31
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 2162688.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_32_SWAP"
+    id: 127
+    config: 31
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 8650752.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_32_UPDATE"
+    id: 128
+    config: 31
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1056
+      K: 256
+      N: 4224
+      input_tensor_size: 8650752.0
+      weight_tensor_size: 2162688.0
+      output_tensor_size: 35684350.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_33_FACT"
+    id: 129
+    config: 32
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1024
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 2097152.0
+      output_tensor_size: 2097152.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_33_BCAST"
+    id: 130
+    config: 32
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 2097152.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_33_SWAP"
+    id: 131
+    config: 32
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_33_UPDATE"
+    id: 132
+    config: 32
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1024
+      K: 256
+      N: 4096
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 2097152.0
+      output_tensor_size: 33554432.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_34_FACT"
+    id: 133
+    config: 33
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 992
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 2031616.0
+      output_tensor_size: 2031616.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_34_BCAST"
+    id: 134
+    config: 33
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 2031616.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_34_SWAP"
+    id: 135
+    config: 33
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 8126464.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_34_UPDATE"
+    id: 136
+    config: 33
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 992
+      K: 256
+      N: 3968
+      input_tensor_size: 8126464.0
+      weight_tensor_size: 2031616.0
+      output_tensor_size: 31490048.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_35_FACT"
+    id: 137
+    config: 34
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 960
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 1966080.0
+      output_tensor_size: 1966080.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_35_BCAST"
+    id: 138
+    config: 34
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 1966080.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_35_SWAP"
+    id: 139
+    config: 34
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 7864320.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_35_UPDATE"
+    id: 140
+    config: 34
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 960
+      K: 256
+      N: 3840
+      input_tensor_size: 7864320.0
+      weight_tensor_size: 1966080.0
+      output_tensor_size: 29491200.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_36_FACT"
+    id: 141
+    config: 35
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 928
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 1900544.0
+      output_tensor_size: 1900544.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_36_BCAST"
+    id: 142
+    config: 35
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 1900544.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_36_SWAP"
+    id: 143
+    config: 35
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 7602176.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_36_UPDATE"
+    id: 144
+    config: 35
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 928
+      K: 256
+      N: 3712
+      input_tensor_size: 7602176.0
+      weight_tensor_size: 1900544.0
+      output_tensor_size: 27557888.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_37_FACT"
+    id: 145
+    config: 36
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 896
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 1835008.0
+      output_tensor_size: 1835008.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_37_BCAST"
+    id: 146
+    config: 36
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 1835008.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_37_SWAP"
+    id: 147
+    config: 36
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 7340032.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_37_UPDATE"
+    id: 148
+    config: 36
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 896
+      K: 256
+      N: 3584
+      input_tensor_size: 7340032.0
+      weight_tensor_size: 1835008.0
+      output_tensor_size: 25690112.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_38_FACT"
+    id: 149
+    config: 37
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 864
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 1769472.0
+      output_tensor_size: 1769472.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_38_BCAST"
+    id: 150
+    config: 37
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 1769472.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_38_SWAP"
+    id: 151
+    config: 37
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 7077888.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_38_UPDATE"
+    id: 152
+    config: 37
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 864
+      K: 256
+      N: 3456
+      input_tensor_size: 7077888.0
+      weight_tensor_size: 1769472.0
+      output_tensor_size: 23887872.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_39_FACT"
+    id: 153
+    config: 38
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 832
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 1703936.0
+      output_tensor_size: 1703936.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_39_BCAST"
+    id: 154
+    config: 38
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 1703936.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_39_SWAP"
+    id: 155
+    config: 38
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 6815744.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_39_UPDATE"
+    id: 156
+    config: 38
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 832
+      K: 256
+      N: 3328
+      input_tensor_size: 6815744.0
+      weight_tensor_size: 1703936.0
+      output_tensor_size: 22151168.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_40_FACT"
+    id: 157
+    config: 39
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 800
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 1638400.0
+      output_tensor_size: 1638400.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_40_BCAST"
+    id: 158
+    config: 39
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 1638400.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_40_SWAP"
+    id: 159
+    config: 39
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 6553600.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_40_UPDATE"
+    id: 160
+    config: 39
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 800
+      K: 256
+      N: 3200
+      input_tensor_size: 6553600.0
+      weight_tensor_size: 1638400.0
+      output_tensor_size: 20480000.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_41_FACT"
+    id: 161
+    config: 40
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 768
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 1572864.0
+      output_tensor_size: 1572864.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_41_BCAST"
+    id: 162
+    config: 40
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 1572864.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_41_SWAP"
+    id: 163
+    config: 40
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 6291456.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_41_UPDATE"
+    id: 164
+    config: 40
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 768
+      K: 256
+      N: 3072
+      input_tensor_size: 6291456.0
+      weight_tensor_size: 1572864.0
+      output_tensor_size: 18874368.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_42_FACT"
+    id: 165
+    config: 41
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 736
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 1507328.0
+      output_tensor_size: 1507328.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_42_BCAST"
+    id: 166
+    config: 41
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 1507328.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_42_SWAP"
+    id: 167
+    config: 41
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 6029312.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_42_UPDATE"
+    id: 168
+    config: 41
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 736
+      K: 256
+      N: 2944
+      input_tensor_size: 6029312.0
+      weight_tensor_size: 1507328.0
+      output_tensor_size: 17334272.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_43_FACT"
+    id: 169
+    config: 42
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 704
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 1441792.0
+      output_tensor_size: 1441792.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_43_BCAST"
+    id: 170
+    config: 42
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 1441792.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_43_SWAP"
+    id: 171
+    config: 42
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 5767168.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_43_UPDATE"
+    id: 172
+    config: 42
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 704
+      K: 256
+      N: 2816
+      input_tensor_size: 5767168.0
+      weight_tensor_size: 1441792.0
+      output_tensor_size: 15859712.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_44_FACT"
+    id: 173
+    config: 43
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 672
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 1376256.0
+      output_tensor_size: 1376256.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_44_BCAST"
+    id: 174
+    config: 43
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 1376256.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_44_SWAP"
+    id: 175
+    config: 43
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 5505024.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_44_UPDATE"
+    id: 176
+    config: 43
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 672
+      K: 256
+      N: 2688
+      input_tensor_size: 5505024.0
+      weight_tensor_size: 1376256.0
+      output_tensor_size: 14450688.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_45_FACT"
+    id: 177
+    config: 44
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 640
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 1310720.0
+      output_tensor_size: 1310720.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_45_BCAST"
+    id: 178
+    config: 44
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 1310720.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_45_SWAP"
+    id: 179
+    config: 44
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 5242880.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_45_UPDATE"
+    id: 180
+    config: 44
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 640
+      K: 256
+      N: 2560
+      input_tensor_size: 5242880.0
+      weight_tensor_size: 1310720.0
+      output_tensor_size: 13107200.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_46_FACT"
+    id: 181
+    config: 45
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 608
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 1245184.0
+      output_tensor_size: 1245184.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_46_BCAST"
+    id: 182
+    config: 45
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 1245184.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_46_SWAP"
+    id: 183
+    config: 45
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 4980736.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_46_UPDATE"
+    id: 184
+    config: 45
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 608
+      K: 256
+      N: 2432
+      input_tensor_size: 4980736.0
+      weight_tensor_size: 1245184.0
+      output_tensor_size: 11829248.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_47_FACT"
+    id: 185
+    config: 46
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 576
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 1179648.0
+      output_tensor_size: 1179648.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_47_BCAST"
+    id: 186
+    config: 46
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 1179648.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_47_SWAP"
+    id: 187
+    config: 46
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 4718592.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_47_UPDATE"
+    id: 188
+    config: 46
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 576
+      K: 256
+      N: 2304
+      input_tensor_size: 4718592.0
+      weight_tensor_size: 1179648.0
+      output_tensor_size: 10616832.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_48_FACT"
+    id: 189
+    config: 47
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 544
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 1114112.0
+      output_tensor_size: 1114112.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_48_BCAST"
+    id: 190
+    config: 47
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 1114112.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_48_SWAP"
+    id: 191
+    config: 47
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 4456448.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_48_UPDATE"
+    id: 192
+    config: 47
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 544
+      K: 256
+      N: 2176
+      input_tensor_size: 4456448.0
+      weight_tensor_size: 1114112.0
+      output_tensor_size: 9469952.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_49_FACT"
+    id: 193
+    config: 48
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 512
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 1048576.0
+      output_tensor_size: 1048576.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_49_BCAST"
+    id: 194
+    config: 48
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 1048576.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_49_SWAP"
+    id: 195
+    config: 48
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 4194304.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_49_UPDATE"
+    id: 196
+    config: 48
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 512
+      K: 256
+      N: 2048
+      input_tensor_size: 4194304.0
+      weight_tensor_size: 1048576.0
+      output_tensor_size: 8388608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_50_FACT"
+    id: 197
+    config: 49
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 480
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 983040.0
+      output_tensor_size: 983040.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_50_BCAST"
+    id: 198
+    config: 49
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 983040.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_50_SWAP"
+    id: 199
+    config: 49
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 3932160.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_50_UPDATE"
+    id: 200
+    config: 49
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 480
+      K: 256
+      N: 1920
+      input_tensor_size: 3932160.0
+      weight_tensor_size: 983040.0
+      output_tensor_size: 7372800.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_51_FACT"
+    id: 201
+    config: 50
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 448
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 917504.0
+      output_tensor_size: 917504.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_51_BCAST"
+    id: 202
+    config: 50
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 917504.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_51_SWAP"
+    id: 203
+    config: 50
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 3670016.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_51_UPDATE"
+    id: 204
+    config: 50
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 448
+      K: 256
+      N: 1792
+      input_tensor_size: 3670016.0
+      weight_tensor_size: 917504.0
+      output_tensor_size: 6422528.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_52_FACT"
+    id: 205
+    config: 51
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 416
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 851968.0
+      output_tensor_size: 851968.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_52_BCAST"
+    id: 206
+    config: 51
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 851968.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_52_SWAP"
+    id: 207
+    config: 51
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 3407872.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_52_UPDATE"
+    id: 208
+    config: 51
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 416
+      K: 256
+      N: 1664
+      input_tensor_size: 3407872.0
+      weight_tensor_size: 851968.0
+      output_tensor_size: 5537792.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_53_FACT"
+    id: 209
+    config: 52
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 384
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 786432.0
+      output_tensor_size: 786432.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_53_BCAST"
+    id: 210
+    config: 52
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 786432.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_53_SWAP"
+    id: 211
+    config: 52
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 3145728.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_53_UPDATE"
+    id: 212
+    config: 52
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 384
+      K: 256
+      N: 1536
+      input_tensor_size: 3145728.0
+      weight_tensor_size: 786432.0
+      output_tensor_size: 4718592.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_54_FACT"
+    id: 213
+    config: 53
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 352
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 720896.0
+      output_tensor_size: 720896.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_54_BCAST"
+    id: 214
+    config: 53
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 720896.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_54_SWAP"
+    id: 215
+    config: 53
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 2883584.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_54_UPDATE"
+    id: 216
+    config: 53
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 352
+      K: 256
+      N: 1408
+      input_tensor_size: 2883584.0
+      weight_tensor_size: 720896.0
+      output_tensor_size: 3964928.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_55_FACT"
+    id: 217
+    config: 54
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 320
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 655360.0
+      output_tensor_size: 655360.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_55_BCAST"
+    id: 218
+    config: 54
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 655360.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_55_SWAP"
+    id: 219
+    config: 54
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 2621440.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_55_UPDATE"
+    id: 220
+    config: 54
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 320
+      K: 256
+      N: 1280
+      input_tensor_size: 2621440.0
+      weight_tensor_size: 655360.0
+      output_tensor_size: 3276800.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_56_FACT"
+    id: 221
+    config: 55
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 288
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 589824.0
+      output_tensor_size: 589824.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_56_BCAST"
+    id: 222
+    config: 55
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 589824.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_56_SWAP"
+    id: 223
+    config: 55
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 2359296.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_56_UPDATE"
+    id: 224
+    config: 55
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 288
+      K: 256
+      N: 1152
+      input_tensor_size: 2359296.0
+      weight_tensor_size: 589824.0
+      output_tensor_size: 2654208.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_57_FACT"
+    id: 225
+    config: 56
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 256
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 524288.0
+      output_tensor_size: 524288.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_57_BCAST"
+    id: 226
+    config: 56
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 524288.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_57_SWAP"
+    id: 227
+    config: 56
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 2097152.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_57_UPDATE"
+    id: 228
+    config: 56
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 256
+      K: 256
+      N: 1024
+      input_tensor_size: 2097152.0
+      weight_tensor_size: 524288.0
+      output_tensor_size: 2097152.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_58_FACT"
+    id: 229
+    config: 57
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 224
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 458752.0
+      output_tensor_size: 458752.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_58_BCAST"
+    id: 230
+    config: 57
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 458752.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_58_SWAP"
+    id: 231
+    config: 57
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 1835008.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_58_UPDATE"
+    id: 232
+    config: 57
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 224
+      K: 256
+      N: 896
+      input_tensor_size: 1835008.0
+      weight_tensor_size: 458752.0
+      output_tensor_size: 1605632.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_59_FACT"
+    id: 233
+    config: 58
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 192
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 393216.0
+      output_tensor_size: 393216.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_59_BCAST"
+    id: 234
+    config: 58
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 393216.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_59_SWAP"
+    id: 235
+    config: 58
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 1572864.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_59_UPDATE"
+    id: 236
+    config: 58
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 192
+      K: 256
+      N: 768
+      input_tensor_size: 1572864.0
+      weight_tensor_size: 393216.0
+      output_tensor_size: 1179648.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_60_FACT"
+    id: 237
+    config: 59
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 160
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 327680.0
+      output_tensor_size: 327680.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_60_BCAST"
+    id: 238
+    config: 59
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 327680.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_60_SWAP"
+    id: 239
+    config: 59
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 1310720.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_60_UPDATE"
+    id: 240
+    config: 59
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 160
+      K: 256
+      N: 640
+      input_tensor_size: 1310720.0
+      weight_tensor_size: 327680.0
+      output_tensor_size: 819200.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_61_FACT"
+    id: 241
+    config: 60
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 128
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 262144.0
+      output_tensor_size: 262144.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_61_BCAST"
+    id: 242
+    config: 60
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 262144.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_61_SWAP"
+    id: 243
+    config: 60
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 1048576.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_61_UPDATE"
+    id: 244
+    config: 60
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 128
+      K: 256
+      N: 512
+      input_tensor_size: 1048576.0
+      weight_tensor_size: 262144.0
+      output_tensor_size: 524288.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_62_FACT"
+    id: 245
+    config: 61
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 96
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 196608.0
+      output_tensor_size: 196608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_62_BCAST"
+    id: 246
+    config: 61
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 196608.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_62_SWAP"
+    id: 247
+    config: 61
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 786432.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_62_UPDATE"
+    id: 248
+    config: 61
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 96
+      K: 256
+      N: 384
+      input_tensor_size: 786432.0
+      weight_tensor_size: 196608.0
+      output_tensor_size: 294912.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_63_FACT"
+    id: 249
+    config: 62
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 64
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 131072.0
+      output_tensor_size: 131072.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_63_BCAST"
+    id: 250
+    config: 62
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 131072.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_63_SWAP"
+    id: 251
+    config: 62
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 524288.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_63_UPDATE"
+    id: 252
+    config: 62
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 64
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 131072.0
+      output_tensor_size: 131072.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_64_FACT"
+    id: 253
+    config: 63
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 32
+      K: 256
+      N: 256
+      input_tensor_size: 524288.0
+      weight_tensor_size: 65536.0
+      output_tensor_size: 65536.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_64_BCAST"
+    id: 254
+    config: 63
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: BROADCAST
+      communication_size: 65536.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_64_SWAP"
+    id: 255
+    config: 63
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 1
+      K: 1
+      N: 1
+      input_tensor_size: 8.0
+      weight_tensor_size: 8.0
+      output_tensor_size: 8.0
+      communication_type: POINT_TO_POINT
+      communication_size: 262144.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_64_UPDATE"
+    id: 256
+    config: 63
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 32
+      K: 256
+      N: 128
+      input_tensor_size: 262144.0
+      weight_tensor_size: 65536.0
+      output_tensor_size: 32768.0
+      tiling: NO_TILING
+    }
+  }
+  connections {
+    startIdx: 1
+    endIdx: 2
+    id: 1
+  }
+  connections {
+    startIdx: 1
+    endIdx: 3
+    id: 2
+  }
+  connections {
+    startIdx: 1
+    endIdx: 4
+    id: 3
+  }
+  connections {
+    startIdx: 5
+    endIdx: 6
+    id: 4
+  }
+  connections {
+    startIdx: 5
+    endIdx: 7
+    id: 5
+  }
+  connections {
+    startIdx: 5
+    endIdx: 8
+    id: 6
+  }
+  connections {
+    startIdx: 9
+    endIdx: 10
+    id: 7
+  }
+  connections {
+    startIdx: 9
+    endIdx: 11
+    id: 8
+  }
+  connections {
+    startIdx: 9
+    endIdx: 12
+    id: 9
+  }
+  connections {
+    startIdx: 13
+    endIdx: 14
+    id: 10
+  }
+  connections {
+    startIdx: 13
+    endIdx: 15
+    id: 11
+  }
+  connections {
+    startIdx: 13
+    endIdx: 16
+    id: 12
+  }
+  connections {
+    startIdx: 17
+    endIdx: 18
+    id: 13
+  }
+  connections {
+    startIdx: 17
+    endIdx: 19
+    id: 14
+  }
+  connections {
+    startIdx: 17
+    endIdx: 20
+    id: 15
+  }
+  connections {
+    startIdx: 21
+    endIdx: 22
+    id: 16
+  }
+  connections {
+    startIdx: 21
+    endIdx: 23
+    id: 17
+  }
+  connections {
+    startIdx: 21
+    endIdx: 24
+    id: 18
+  }
+  connections {
+    startIdx: 25
+    endIdx: 26
+    id: 19
+  }
+  connections {
+    startIdx: 25
+    endIdx: 27
+    id: 20
+  }
+  connections {
+    startIdx: 25
+    endIdx: 28
+    id: 21
+  }
+  connections {
+    startIdx: 29
+    endIdx: 30
+    id: 22
+  }
+  connections {
+    startIdx: 29
+    endIdx: 31
+    id: 23
+  }
+  connections {
+    startIdx: 29
+    endIdx: 32
+    id: 24
+  }
+  connections {
+    startIdx: 33
+    endIdx: 34
+    id: 25
+  }
+  connections {
+    startIdx: 33
+    endIdx: 35
+    id: 26
+  }
+  connections {
+    startIdx: 33
+    endIdx: 36
+    id: 27
+  }
+  connections {
+    startIdx: 37
+    endIdx: 38
+    id: 28
+  }
+  connections {
+    startIdx: 37
+    endIdx: 39
+    id: 29
+  }
+  connections {
+    startIdx: 37
+    endIdx: 40
+    id: 30
+  }
+  connections {
+    startIdx: 41
+    endIdx: 42
+    id: 31
+  }
+  connections {
+    startIdx: 41
+    endIdx: 43
+    id: 32
+  }
+  connections {
+    startIdx: 41
+    endIdx: 44
+    id: 33
+  }
+  connections {
+    startIdx: 45
+    endIdx: 46
+    id: 34
+  }
+  connections {
+    startIdx: 45
+    endIdx: 47
+    id: 35
+  }
+  connections {
+    startIdx: 45
+    endIdx: 48
+    id: 36
+  }
+  connections {
+    startIdx: 49
+    endIdx: 50
+    id: 37
+  }
+  connections {
+    startIdx: 49
+    endIdx: 51
+    id: 38
+  }
+  connections {
+    startIdx: 49
+    endIdx: 52
+    id: 39
+  }
+  connections {
+    startIdx: 53
+    endIdx: 54
+    id: 40
+  }
+  connections {
+    startIdx: 53
+    endIdx: 55
+    id: 41
+  }
+  connections {
+    startIdx: 53
+    endIdx: 56
+    id: 42
+  }
+  connections {
+    startIdx: 57
+    endIdx: 58
+    id: 43
+  }
+  connections {
+    startIdx: 57
+    endIdx: 59
+    id: 44
+  }
+  connections {
+    startIdx: 57
+    endIdx: 60
+    id: 45
+  }
+  connections {
+    startIdx: 61
+    endIdx: 62
+    id: 46
+  }
+  connections {
+    startIdx: 61
+    endIdx: 63
+    id: 47
+  }
+  connections {
+    startIdx: 61
+    endIdx: 64
+    id: 48
+  }
+  connections {
+    startIdx: 65
+    endIdx: 66
+    id: 49
+  }
+  connections {
+    startIdx: 65
+    endIdx: 67
+    id: 50
+  }
+  connections {
+    startIdx: 65
+    endIdx: 68
+    id: 51
+  }
+  connections {
+    startIdx: 69
+    endIdx: 70
+    id: 52
+  }
+  connections {
+    startIdx: 69
+    endIdx: 71
+    id: 53
+  }
+  connections {
+    startIdx: 69
+    endIdx: 72
+    id: 54
+  }
+  connections {
+    startIdx: 73
+    endIdx: 74
+    id: 55
+  }
+  connections {
+    startIdx: 73
+    endIdx: 75
+    id: 56
+  }
+  connections {
+    startIdx: 73
+    endIdx: 76
+    id: 57
+  }
+  connections {
+    startIdx: 77
+    endIdx: 78
+    id: 58
+  }
+  connections {
+    startIdx: 77
+    endIdx: 79
+    id: 59
+  }
+  connections {
+    startIdx: 77
+    endIdx: 80
+    id: 60
+  }
+  connections {
+    startIdx: 81
+    endIdx: 82
+    id: 61
+  }
+  connections {
+    startIdx: 81
+    endIdx: 83
+    id: 62
+  }
+  connections {
+    startIdx: 81
+    endIdx: 84
+    id: 63
+  }
+  connections {
+    startIdx: 85
+    endIdx: 86
+    id: 64
+  }
+  connections {
+    startIdx: 85
+    endIdx: 87
+    id: 65
+  }
+  connections {
+    startIdx: 85
+    endIdx: 88
+    id: 66
+  }
+  connections {
+    startIdx: 89
+    endIdx: 90
+    id: 67
+  }
+  connections {
+    startIdx: 89
+    endIdx: 91
+    id: 68
+  }
+  connections {
+    startIdx: 89
+    endIdx: 92
+    id: 69
+  }
+  connections {
+    startIdx: 93
+    endIdx: 94
+    id: 70
+  }
+  connections {
+    startIdx: 93
+    endIdx: 95
+    id: 71
+  }
+  connections {
+    startIdx: 93
+    endIdx: 96
+    id: 72
+  }
+  connections {
+    startIdx: 97
+    endIdx: 98
+    id: 73
+  }
+  connections {
+    startIdx: 97
+    endIdx: 99
+    id: 74
+  }
+  connections {
+    startIdx: 97
+    endIdx: 100
+    id: 75
+  }
+  connections {
+    startIdx: 101
+    endIdx: 102
+    id: 76
+  }
+  connections {
+    startIdx: 101
+    endIdx: 103
+    id: 77
+  }
+  connections {
+    startIdx: 101
+    endIdx: 104
+    id: 78
+  }
+  connections {
+    startIdx: 105
+    endIdx: 106
+    id: 79
+  }
+  connections {
+    startIdx: 105
+    endIdx: 107
+    id: 80
+  }
+  connections {
+    startIdx: 105
+    endIdx: 108
+    id: 81
+  }
+  connections {
+    startIdx: 109
+    endIdx: 110
+    id: 82
+  }
+  connections {
+    startIdx: 109
+    endIdx: 111
+    id: 83
+  }
+  connections {
+    startIdx: 109
+    endIdx: 112
+    id: 84
+  }
+  connections {
+    startIdx: 113
+    endIdx: 114
+    id: 85
+  }
+  connections {
+    startIdx: 113
+    endIdx: 115
+    id: 86
+  }
+  connections {
+    startIdx: 113
+    endIdx: 116
+    id: 87
+  }
+  connections {
+    startIdx: 117
+    endIdx: 118
+    id: 88
+  }
+  connections {
+    startIdx: 117
+    endIdx: 119
+    id: 89
+  }
+  connections {
+    startIdx: 117
+    endIdx: 120
+    id: 90
+  }
+  connections {
+    startIdx: 121
+    endIdx: 122
+    id: 91
+  }
+  connections {
+    startIdx: 121
+    endIdx: 123
+    id: 92
+  }
+  connections {
+    startIdx: 121
+    endIdx: 124
+    id: 93
+  }
+  connections {
+    startIdx: 125
+    endIdx: 126
+    id: 94
+  }
+  connections {
+    startIdx: 125
+    endIdx: 127
+    id: 95
+  }
+  connections {
+    startIdx: 125
+    endIdx: 128
+    id: 96
+  }
+  connections {
+    startIdx: 129
+    endIdx: 130
+    id: 97
+  }
+  connections {
+    startIdx: 129
+    endIdx: 131
+    id: 98
+  }
+  connections {
+    startIdx: 129
+    endIdx: 132
+    id: 99
+  }
+  connections {
+    startIdx: 133
+    endIdx: 134
+    id: 100
+  }
+  connections {
+    startIdx: 133
+    endIdx: 135
+    id: 101
+  }
+  connections {
+    startIdx: 133
+    endIdx: 136
+    id: 102
+  }
+  connections {
+    startIdx: 137
+    endIdx: 138
+    id: 103
+  }
+  connections {
+    startIdx: 137
+    endIdx: 139
+    id: 104
+  }
+  connections {
+    startIdx: 137
+    endIdx: 140
+    id: 105
+  }
+  connections {
+    startIdx: 141
+    endIdx: 142
+    id: 106
+  }
+  connections {
+    startIdx: 141
+    endIdx: 143
+    id: 107
+  }
+  connections {
+    startIdx: 141
+    endIdx: 144
+    id: 108
+  }
+  connections {
+    startIdx: 145
+    endIdx: 146
+    id: 109
+  }
+  connections {
+    startIdx: 145
+    endIdx: 147
+    id: 110
+  }
+  connections {
+    startIdx: 145
+    endIdx: 148
+    id: 111
+  }
+  connections {
+    startIdx: 149
+    endIdx: 150
+    id: 112
+  }
+  connections {
+    startIdx: 149
+    endIdx: 151
+    id: 113
+  }
+  connections {
+    startIdx: 149
+    endIdx: 152
+    id: 114
+  }
+  connections {
+    startIdx: 153
+    endIdx: 154
+    id: 115
+  }
+  connections {
+    startIdx: 153
+    endIdx: 155
+    id: 116
+  }
+  connections {
+    startIdx: 153
+    endIdx: 156
+    id: 117
+  }
+  connections {
+    startIdx: 157
+    endIdx: 158
+    id: 118
+  }
+  connections {
+    startIdx: 157
+    endIdx: 159
+    id: 119
+  }
+  connections {
+    startIdx: 157
+    endIdx: 160
+    id: 120
+  }
+  connections {
+    startIdx: 161
+    endIdx: 162
+    id: 121
+  }
+  connections {
+    startIdx: 161
+    endIdx: 163
+    id: 122
+  }
+  connections {
+    startIdx: 161
+    endIdx: 164
+    id: 123
+  }
+  connections {
+    startIdx: 165
+    endIdx: 166
+    id: 124
+  }
+  connections {
+    startIdx: 165
+    endIdx: 167
+    id: 125
+  }
+  connections {
+    startIdx: 165
+    endIdx: 168
+    id: 126
+  }
+  connections {
+    startIdx: 169
+    endIdx: 170
+    id: 127
+  }
+  connections {
+    startIdx: 169
+    endIdx: 171
+    id: 128
+  }
+  connections {
+    startIdx: 169
+    endIdx: 172
+    id: 129
+  }
+  connections {
+    startIdx: 173
+    endIdx: 174
+    id: 130
+  }
+  connections {
+    startIdx: 173
+    endIdx: 175
+    id: 131
+  }
+  connections {
+    startIdx: 173
+    endIdx: 176
+    id: 132
+  }
+  connections {
+    startIdx: 177
+    endIdx: 178
+    id: 133
+  }
+  connections {
+    startIdx: 177
+    endIdx: 179
+    id: 134
+  }
+  connections {
+    startIdx: 177
+    endIdx: 180
+    id: 135
+  }
+  connections {
+    startIdx: 181
+    endIdx: 182
+    id: 136
+  }
+  connections {
+    startIdx: 181
+    endIdx: 183
+    id: 137
+  }
+  connections {
+    startIdx: 181
+    endIdx: 184
+    id: 138
+  }
+  connections {
+    startIdx: 185
+    endIdx: 186
+    id: 139
+  }
+  connections {
+    startIdx: 185
+    endIdx: 187
+    id: 140
+  }
+  connections {
+    startIdx: 185
+    endIdx: 188
+    id: 141
+  }
+  connections {
+    startIdx: 189
+    endIdx: 190
+    id: 142
+  }
+  connections {
+    startIdx: 189
+    endIdx: 191
+    id: 143
+  }
+  connections {
+    startIdx: 189
+    endIdx: 192
+    id: 144
+  }
+  connections {
+    startIdx: 193
+    endIdx: 194
+    id: 145
+  }
+  connections {
+    startIdx: 193
+    endIdx: 195
+    id: 146
+  }
+  connections {
+    startIdx: 193
+    endIdx: 196
+    id: 147
+  }
+  connections {
+    startIdx: 197
+    endIdx: 198
+    id: 148
+  }
+  connections {
+    startIdx: 197
+    endIdx: 199
+    id: 149
+  }
+  connections {
+    startIdx: 197
+    endIdx: 200
+    id: 150
+  }
+  connections {
+    startIdx: 201
+    endIdx: 202
+    id: 151
+  }
+  connections {
+    startIdx: 201
+    endIdx: 203
+    id: 152
+  }
+  connections {
+    startIdx: 201
+    endIdx: 204
+    id: 153
+  }
+  connections {
+    startIdx: 205
+    endIdx: 206
+    id: 154
+  }
+  connections {
+    startIdx: 205
+    endIdx: 207
+    id: 155
+  }
+  connections {
+    startIdx: 205
+    endIdx: 208
+    id: 156
+  }
+  connections {
+    startIdx: 209
+    endIdx: 210
+    id: 157
+  }
+  connections {
+    startIdx: 209
+    endIdx: 211
+    id: 158
+  }
+  connections {
+    startIdx: 209
+    endIdx: 212
+    id: 159
+  }
+  connections {
+    startIdx: 213
+    endIdx: 214
+    id: 160
+  }
+  connections {
+    startIdx: 213
+    endIdx: 215
+    id: 161
+  }
+  connections {
+    startIdx: 213
+    endIdx: 216
+    id: 162
+  }
+  connections {
+    startIdx: 217
+    endIdx: 218
+    id: 163
+  }
+  connections {
+    startIdx: 217
+    endIdx: 219
+    id: 164
+  }
+  connections {
+    startIdx: 217
+    endIdx: 220
+    id: 165
+  }
+  connections {
+    startIdx: 221
+    endIdx: 222
+    id: 166
+  }
+  connections {
+    startIdx: 221
+    endIdx: 223
+    id: 167
+  }
+  connections {
+    startIdx: 221
+    endIdx: 224
+    id: 168
+  }
+  connections {
+    startIdx: 225
+    endIdx: 226
+    id: 169
+  }
+  connections {
+    startIdx: 225
+    endIdx: 227
+    id: 170
+  }
+  connections {
+    startIdx: 225
+    endIdx: 228
+    id: 171
+  }
+  connections {
+    startIdx: 229
+    endIdx: 230
+    id: 172
+  }
+  connections {
+    startIdx: 229
+    endIdx: 231
+    id: 173
+  }
+  connections {
+    startIdx: 229
+    endIdx: 232
+    id: 174
+  }
+  connections {
+    startIdx: 233
+    endIdx: 234
+    id: 175
+  }
+  connections {
+    startIdx: 233
+    endIdx: 235
+    id: 176
+  }
+  connections {
+    startIdx: 233
+    endIdx: 236
+    id: 177
+  }
+  connections {
+    startIdx: 237
+    endIdx: 238
+    id: 178
+  }
+  connections {
+    startIdx: 237
+    endIdx: 239
+    id: 179
+  }
+  connections {
+    startIdx: 237
+    endIdx: 240
+    id: 180
+  }
+  connections {
+    startIdx: 241
+    endIdx: 242
+    id: 181
+  }
+  connections {
+    startIdx: 241
+    endIdx: 243
+    id: 182
+  }
+  connections {
+    startIdx: 241
+    endIdx: 244
+    id: 183
+  }
+  connections {
+    startIdx: 245
+    endIdx: 246
+    id: 184
+  }
+  connections {
+    startIdx: 245
+    endIdx: 247
+    id: 185
+  }
+  connections {
+    startIdx: 245
+    endIdx: 248
+    id: 186
+  }
+  connections {
+    startIdx: 249
+    endIdx: 250
+    id: 187
+  }
+  connections {
+    startIdx: 249
+    endIdx: 251
+    id: 188
+  }
+  connections {
+    startIdx: 249
+    endIdx: 252
+    id: 189
+  }
+  connections {
+    startIdx: 253
+    endIdx: 254
+    id: 190
+  }
+  connections {
+    startIdx: 253
+    endIdx: 255
+    id: 191
+  }
+  connections {
+    startIdx: 253
+    endIdx: 256
+    id: 192
+  }
+  connections {
+    startIdx: 2
+    endIdx: 5
+    id: 193
+  }
+  connections {
+    startIdx: 3
+    endIdx: 5
+    id: 194
+  }
+  connections {
+    startIdx: 4
+    endIdx: 5
+    id: 195
+  }
+  connections {
+    startIdx: 6
+    endIdx: 9
+    id: 196
+  }
+  connections {
+    startIdx: 7
+    endIdx: 9
+    id: 197
+  }
+  connections {
+    startIdx: 8
+    endIdx: 9
+    id: 198
+  }
+  connections {
+    startIdx: 10
+    endIdx: 13
+    id: 199
+  }
+  connections {
+    startIdx: 11
+    endIdx: 13
+    id: 200
+  }
+  connections {
+    startIdx: 12
+    endIdx: 13
+    id: 201
+  }
+  connections {
+    startIdx: 14
+    endIdx: 17
+    id: 202
+  }
+  connections {
+    startIdx: 15
+    endIdx: 17
+    id: 203
+  }
+  connections {
+    startIdx: 16
+    endIdx: 17
+    id: 204
+  }
+  connections {
+    startIdx: 18
+    endIdx: 21
+    id: 205
+  }
+  connections {
+    startIdx: 19
+    endIdx: 21
+    id: 206
+  }
+  connections {
+    startIdx: 20
+    endIdx: 21
+    id: 207
+  }
+  connections {
+    startIdx: 22
+    endIdx: 25
+    id: 208
+  }
+  connections {
+    startIdx: 23
+    endIdx: 25
+    id: 209
+  }
+  connections {
+    startIdx: 24
+    endIdx: 25
+    id: 210
+  }
+  connections {
+    startIdx: 26
+    endIdx: 29
+    id: 211
+  }
+  connections {
+    startIdx: 27
+    endIdx: 29
+    id: 212
+  }
+  connections {
+    startIdx: 28
+    endIdx: 29
+    id: 213
+  }
+  connections {
+    startIdx: 30
+    endIdx: 33
+    id: 214
+  }
+  connections {
+    startIdx: 31
+    endIdx: 33
+    id: 215
+  }
+  connections {
+    startIdx: 32
+    endIdx: 33
+    id: 216
+  }
+  connections {
+    startIdx: 34
+    endIdx: 37
+    id: 217
+  }
+  connections {
+    startIdx: 35
+    endIdx: 37
+    id: 218
+  }
+  connections {
+    startIdx: 36
+    endIdx: 37
+    id: 219
+  }
+  connections {
+    startIdx: 38
+    endIdx: 41
+    id: 220
+  }
+  connections {
+    startIdx: 39
+    endIdx: 41
+    id: 221
+  }
+  connections {
+    startIdx: 40
+    endIdx: 41
+    id: 222
+  }
+  connections {
+    startIdx: 42
+    endIdx: 45
+    id: 223
+  }
+  connections {
+    startIdx: 43
+    endIdx: 45
+    id: 224
+  }
+  connections {
+    startIdx: 44
+    endIdx: 45
+    id: 225
+  }
+  connections {
+    startIdx: 46
+    endIdx: 49
+    id: 226
+  }
+  connections {
+    startIdx: 47
+    endIdx: 49
+    id: 227
+  }
+  connections {
+    startIdx: 48
+    endIdx: 49
+    id: 228
+  }
+  connections {
+    startIdx: 50
+    endIdx: 53
+    id: 229
+  }
+  connections {
+    startIdx: 51
+    endIdx: 53
+    id: 230
+  }
+  connections {
+    startIdx: 52
+    endIdx: 53
+    id: 231
+  }
+  connections {
+    startIdx: 54
+    endIdx: 57
+    id: 232
+  }
+  connections {
+    startIdx: 55
+    endIdx: 57
+    id: 233
+  }
+  connections {
+    startIdx: 56
+    endIdx: 57
+    id: 234
+  }
+  connections {
+    startIdx: 58
+    endIdx: 61
+    id: 235
+  }
+  connections {
+    startIdx: 59
+    endIdx: 61
+    id: 236
+  }
+  connections {
+    startIdx: 60
+    endIdx: 61
+    id: 237
+  }
+  connections {
+    startIdx: 62
+    endIdx: 65
+    id: 238
+  }
+  connections {
+    startIdx: 63
+    endIdx: 65
+    id: 239
+  }
+  connections {
+    startIdx: 64
+    endIdx: 65
+    id: 240
+  }
+  connections {
+    startIdx: 66
+    endIdx: 69
+    id: 241
+  }
+  connections {
+    startIdx: 67
+    endIdx: 69
+    id: 242
+  }
+  connections {
+    startIdx: 68
+    endIdx: 69
+    id: 243
+  }
+  connections {
+    startIdx: 70
+    endIdx: 73
+    id: 244
+  }
+  connections {
+    startIdx: 71
+    endIdx: 73
+    id: 245
+  }
+  connections {
+    startIdx: 72
+    endIdx: 73
+    id: 246
+  }
+  connections {
+    startIdx: 74
+    endIdx: 77
+    id: 247
+  }
+  connections {
+    startIdx: 75
+    endIdx: 77
+    id: 248
+  }
+  connections {
+    startIdx: 76
+    endIdx: 77
+    id: 249
+  }
+  connections {
+    startIdx: 78
+    endIdx: 81
+    id: 250
+  }
+  connections {
+    startIdx: 79
+    endIdx: 81
+    id: 251
+  }
+  connections {
+    startIdx: 80
+    endIdx: 81
+    id: 252
+  }
+  connections {
+    startIdx: 82
+    endIdx: 85
+    id: 253
+  }
+  connections {
+    startIdx: 83
+    endIdx: 85
+    id: 254
+  }
+  connections {
+    startIdx: 84
+    endIdx: 85
+    id: 255
+  }
+  connections {
+    startIdx: 86
+    endIdx: 89
+    id: 256
+  }
+  connections {
+    startIdx: 87
+    endIdx: 89
+    id: 257
+  }
+  connections {
+    startIdx: 88
+    endIdx: 89
+    id: 258
+  }
+  connections {
+    startIdx: 90
+    endIdx: 93
+    id: 259
+  }
+  connections {
+    startIdx: 91
+    endIdx: 93
+    id: 260
+  }
+  connections {
+    startIdx: 92
+    endIdx: 93
+    id: 261
+  }
+  connections {
+    startIdx: 94
+    endIdx: 97
+    id: 262
+  }
+  connections {
+    startIdx: 95
+    endIdx: 97
+    id: 263
+  }
+  connections {
+    startIdx: 96
+    endIdx: 97
+    id: 264
+  }
+  connections {
+    startIdx: 98
+    endIdx: 101
+    id: 265
+  }
+  connections {
+    startIdx: 99
+    endIdx: 101
+    id: 266
+  }
+  connections {
+    startIdx: 100
+    endIdx: 101
+    id: 267
+  }
+  connections {
+    startIdx: 102
+    endIdx: 105
+    id: 268
+  }
+  connections {
+    startIdx: 103
+    endIdx: 105
+    id: 269
+  }
+  connections {
+    startIdx: 104
+    endIdx: 105
+    id: 270
+  }
+  connections {
+    startIdx: 106
+    endIdx: 109
+    id: 271
+  }
+  connections {
+    startIdx: 107
+    endIdx: 109
+    id: 272
+  }
+  connections {
+    startIdx: 108
+    endIdx: 109
+    id: 273
+  }
+  connections {
+    startIdx: 110
+    endIdx: 113
+    id: 274
+  }
+  connections {
+    startIdx: 111
+    endIdx: 113
+    id: 275
+  }
+  connections {
+    startIdx: 112
+    endIdx: 113
+    id: 276
+  }
+  connections {
+    startIdx: 114
+    endIdx: 117
+    id: 277
+  }
+  connections {
+    startIdx: 115
+    endIdx: 117
+    id: 278
+  }
+  connections {
+    startIdx: 116
+    endIdx: 117
+    id: 279
+  }
+  connections {
+    startIdx: 118
+    endIdx: 121
+    id: 280
+  }
+  connections {
+    startIdx: 119
+    endIdx: 121
+    id: 281
+  }
+  connections {
+    startIdx: 120
+    endIdx: 121
+    id: 282
+  }
+  connections {
+    startIdx: 122
+    endIdx: 125
+    id: 283
+  }
+  connections {
+    startIdx: 123
+    endIdx: 125
+    id: 284
+  }
+  connections {
+    startIdx: 124
+    endIdx: 125
+    id: 285
+  }
+  connections {
+    startIdx: 126
+    endIdx: 129
+    id: 286
+  }
+  connections {
+    startIdx: 127
+    endIdx: 129
+    id: 287
+  }
+  connections {
+    startIdx: 128
+    endIdx: 129
+    id: 288
+  }
+  connections {
+    startIdx: 130
+    endIdx: 133
+    id: 289
+  }
+  connections {
+    startIdx: 131
+    endIdx: 133
+    id: 290
+  }
+  connections {
+    startIdx: 132
+    endIdx: 133
+    id: 291
+  }
+  connections {
+    startIdx: 134
+    endIdx: 137
+    id: 292
+  }
+  connections {
+    startIdx: 135
+    endIdx: 137
+    id: 293
+  }
+  connections {
+    startIdx: 136
+    endIdx: 137
+    id: 294
+  }
+  connections {
+    startIdx: 138
+    endIdx: 141
+    id: 295
+  }
+  connections {
+    startIdx: 139
+    endIdx: 141
+    id: 296
+  }
+  connections {
+    startIdx: 140
+    endIdx: 141
+    id: 297
+  }
+  connections {
+    startIdx: 142
+    endIdx: 145
+    id: 298
+  }
+  connections {
+    startIdx: 143
+    endIdx: 145
+    id: 299
+  }
+  connections {
+    startIdx: 144
+    endIdx: 145
+    id: 300
+  }
+  connections {
+    startIdx: 146
+    endIdx: 149
+    id: 301
+  }
+  connections {
+    startIdx: 147
+    endIdx: 149
+    id: 302
+  }
+  connections {
+    startIdx: 148
+    endIdx: 149
+    id: 303
+  }
+  connections {
+    startIdx: 150
+    endIdx: 153
+    id: 304
+  }
+  connections {
+    startIdx: 151
+    endIdx: 153
+    id: 305
+  }
+  connections {
+    startIdx: 152
+    endIdx: 153
+    id: 306
+  }
+  connections {
+    startIdx: 154
+    endIdx: 157
+    id: 307
+  }
+  connections {
+    startIdx: 155
+    endIdx: 157
+    id: 308
+  }
+  connections {
+    startIdx: 156
+    endIdx: 157
+    id: 309
+  }
+  connections {
+    startIdx: 158
+    endIdx: 161
+    id: 310
+  }
+  connections {
+    startIdx: 159
+    endIdx: 161
+    id: 311
+  }
+  connections {
+    startIdx: 160
+    endIdx: 161
+    id: 312
+  }
+  connections {
+    startIdx: 162
+    endIdx: 165
+    id: 313
+  }
+  connections {
+    startIdx: 163
+    endIdx: 165
+    id: 314
+  }
+  connections {
+    startIdx: 164
+    endIdx: 165
+    id: 315
+  }
+  connections {
+    startIdx: 166
+    endIdx: 169
+    id: 316
+  }
+  connections {
+    startIdx: 167
+    endIdx: 169
+    id: 317
+  }
+  connections {
+    startIdx: 168
+    endIdx: 169
+    id: 318
+  }
+  connections {
+    startIdx: 170
+    endIdx: 173
+    id: 319
+  }
+  connections {
+    startIdx: 171
+    endIdx: 173
+    id: 320
+  }
+  connections {
+    startIdx: 172
+    endIdx: 173
+    id: 321
+  }
+  connections {
+    startIdx: 174
+    endIdx: 177
+    id: 322
+  }
+  connections {
+    startIdx: 175
+    endIdx: 177
+    id: 323
+  }
+  connections {
+    startIdx: 176
+    endIdx: 177
+    id: 324
+  }
+  connections {
+    startIdx: 178
+    endIdx: 181
+    id: 325
+  }
+  connections {
+    startIdx: 179
+    endIdx: 181
+    id: 326
+  }
+  connections {
+    startIdx: 180
+    endIdx: 181
+    id: 327
+  }
+  connections {
+    startIdx: 182
+    endIdx: 185
+    id: 328
+  }
+  connections {
+    startIdx: 183
+    endIdx: 185
+    id: 329
+  }
+  connections {
+    startIdx: 184
+    endIdx: 185
+    id: 330
+  }
+  connections {
+    startIdx: 186
+    endIdx: 189
+    id: 331
+  }
+  connections {
+    startIdx: 187
+    endIdx: 189
+    id: 332
+  }
+  connections {
+    startIdx: 188
+    endIdx: 189
+    id: 333
+  }
+  connections {
+    startIdx: 190
+    endIdx: 193
+    id: 334
+  }
+  connections {
+    startIdx: 191
+    endIdx: 193
+    id: 335
+  }
+  connections {
+    startIdx: 192
+    endIdx: 193
+    id: 336
+  }
+  connections {
+    startIdx: 194
+    endIdx: 197
+    id: 337
+  }
+  connections {
+    startIdx: 195
+    endIdx: 197
+    id: 338
+  }
+  connections {
+    startIdx: 196
+    endIdx: 197
+    id: 339
+  }
+  connections {
+    startIdx: 198
+    endIdx: 201
+    id: 340
+  }
+  connections {
+    startIdx: 199
+    endIdx: 201
+    id: 341
+  }
+  connections {
+    startIdx: 200
+    endIdx: 201
+    id: 342
+  }
+  connections {
+    startIdx: 202
+    endIdx: 205
+    id: 343
+  }
+  connections {
+    startIdx: 203
+    endIdx: 205
+    id: 344
+  }
+  connections {
+    startIdx: 204
+    endIdx: 205
+    id: 345
+  }
+  connections {
+    startIdx: 206
+    endIdx: 209
+    id: 346
+  }
+  connections {
+    startIdx: 207
+    endIdx: 209
+    id: 347
+  }
+  connections {
+    startIdx: 208
+    endIdx: 209
+    id: 348
+  }
+  connections {
+    startIdx: 210
+    endIdx: 213
+    id: 349
+  }
+  connections {
+    startIdx: 211
+    endIdx: 213
+    id: 350
+  }
+  connections {
+    startIdx: 212
+    endIdx: 213
+    id: 351
+  }
+  connections {
+    startIdx: 214
+    endIdx: 217
+    id: 352
+  }
+  connections {
+    startIdx: 215
+    endIdx: 217
+    id: 353
+  }
+  connections {
+    startIdx: 216
+    endIdx: 217
+    id: 354
+  }
+  connections {
+    startIdx: 218
+    endIdx: 221
+    id: 355
+  }
+  connections {
+    startIdx: 219
+    endIdx: 221
+    id: 356
+  }
+  connections {
+    startIdx: 220
+    endIdx: 221
+    id: 357
+  }
+  connections {
+    startIdx: 222
+    endIdx: 225
+    id: 358
+  }
+  connections {
+    startIdx: 223
+    endIdx: 225
+    id: 359
+  }
+  connections {
+    startIdx: 224
+    endIdx: 225
+    id: 360
+  }
+  connections {
+    startIdx: 226
+    endIdx: 229
+    id: 361
+  }
+  connections {
+    startIdx: 227
+    endIdx: 229
+    id: 362
+  }
+  connections {
+    startIdx: 228
+    endIdx: 229
+    id: 363
+  }
+  connections {
+    startIdx: 230
+    endIdx: 233
+    id: 364
+  }
+  connections {
+    startIdx: 231
+    endIdx: 233
+    id: 365
+  }
+  connections {
+    startIdx: 232
+    endIdx: 233
+    id: 366
+  }
+  connections {
+    startIdx: 234
+    endIdx: 237
+    id: 367
+  }
+  connections {
+    startIdx: 235
+    endIdx: 237
+    id: 368
+  }
+  connections {
+    startIdx: 236
+    endIdx: 237
+    id: 369
+  }
+  connections {
+    startIdx: 238
+    endIdx: 241
+    id: 370
+  }
+  connections {
+    startIdx: 239
+    endIdx: 241
+    id: 371
+  }
+  connections {
+    startIdx: 240
+    endIdx: 241
+    id: 372
+  }
+  connections {
+    startIdx: 242
+    endIdx: 245
+    id: 373
+  }
+  connections {
+    startIdx: 243
+    endIdx: 245
+    id: 374
+  }
+  connections {
+    startIdx: 244
+    endIdx: 245
+    id: 375
+  }
+  connections {
+    startIdx: 246
+    endIdx: 249
+    id: 376
+  }
+  connections {
+    startIdx: 247
+    endIdx: 249
+    id: 377
+  }
+  connections {
+    startIdx: 248
+    endIdx: 249
+    id: 378
+  }
+  connections {
+    startIdx: 250
+    endIdx: 253
+    id: 379
+  }
+  connections {
+    startIdx: 251
+    endIdx: 253
+    id: 380
+  }
+  connections {
+    startIdx: 252
+    endIdx: 253
+    id: 381
+  }
+}
+system {
+  name: "16_Chip_A100_GPU"
+  num_chip: 16
+  accelerator {
+    name: "A100_GPU"
+    core: 3456
+    systolic_width: 1
+    systolic_height: 1
+    sram_cap: 88080380.0
+    freq: 1.41
+    dram_bw: 1555.0
+    dram_cap: 42949673000.0
+  }
+  fc_fc {
+    link_bw_x: 25.0
+    link_bw_y: 25.0
+    x: 8
+    y: 2
+  }
+}
+cost {
+  link_unit_price: 2.0
+  switch_unit_price: 24.0
+  dram_unit_price: 1.0
+}
+training {
+  optimization: FLASHATTENTION
+  hpl {
+    n: 16384
+    b: 256
+  }
+  num_config: 64
+  global_batch_size: 1
+  objective: PERFORMANCE
+  skip_inter_chip: true
+  pydot: true
+  word: 8
+  micro_batch_size: 1
+}

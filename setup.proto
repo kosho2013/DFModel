@@ -404,6 +404,8 @@ message Training {
 	bool skip_inter_chip = 42;
 	
 	bool pydot = 43;
+	
+	int32 word = 44;
 }
 
 

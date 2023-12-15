@@ -17,7 +17,6 @@ args = parser.parse_args()
 name = args.name
 
 
-word = 2
 
 # read in pd file
 dse = setup_pb2.DSE()
@@ -221,7 +220,11 @@ num_config = dse.training.num_config
 optimization = dse.training.optimization
 objective = dse.training.objective
 util_threshold = dse.training.util_threshold
+word = dse.training.word
 
+
+if word == 0:
+    raise Exception('Wrong!')
 
 
 link_unit_price = dse.cost.link_unit_price
@@ -913,7 +916,7 @@ for i in range(C):
     model.addConstr(SRAM_Per_Config_initiation[i] == shard_initiation_buffer_size_depth_one @ Ad[:, i])
     model.addConstr(SRAM_Per_Config_total[i] == SRAM_Per_Config_intermediate_dram[i] + SRAM_Per_Config_intermediate_onchip[i] + SRAM_Per_Config_initiation[i])
     
-    model.addConstr(SRAM_Per_Config_total[i] <= SRAM_Cap)
+    # model.addConstr(SRAM_Per_Config_total[i] <= SRAM_Cap)
 
 
 
@@ -1184,7 +1187,6 @@ elif dse.training.WhichOneof('workload_variant') == 'hpl':
         
     for i in range(C):
         model.addConstr(Network_Latency[i] == gp.max_(Network_Latency_POINT_TO_POINT[i], Network_Latency_BROADCAST[i]))
-        # model.addConstr(Network_Latency[i] == Network_Latency_POINT_TO_POINT[i])
     model.addConstr(total_Network_bytes == np.ones((C)) @ Network_Bytes_POINT_TO_POINT + np.ones((C)) @ Network_Bytes_BROADCAST)
     model.addConstr(total_Network_bytes == np.ones((C)) @ Network_Bytes_POINT_TO_POINT + np.ones((C)) @ Network_Bytes_BROADCAST)
 

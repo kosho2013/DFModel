@@ -1,0 +1,837 @@
+Iteration_1_FACT 0
+Iteration_1_BCAST 1
+Iteration_1_SWAP 2
+Iteration_1_UPDATE 3
+Iteration_2_FACT 4
+Iteration_2_BCAST 5
+Iteration_2_SWAP 6
+Iteration_2_UPDATE 7
+Iteration_3_FACT 8
+Iteration_3_BCAST 9
+Iteration_3_SWAP 10
+Iteration_3_UPDATE 11
+Iteration_4_FACT 12
+Iteration_4_BCAST 13
+Iteration_4_SWAP 14
+Iteration_4_UPDATE 15
+Iteration_5_FACT 16
+Iteration_5_BCAST 17
+Iteration_5_SWAP 18
+Iteration_5_UPDATE 19
+Iteration_6_FACT 20
+Iteration_6_BCAST 21
+Iteration_6_SWAP 22
+Iteration_6_UPDATE 23
+Iteration_7_FACT 24
+Iteration_7_BCAST 25
+Iteration_7_SWAP 26
+Iteration_7_UPDATE 27
+Iteration_8_FACT 28
+Iteration_8_BCAST 29
+Iteration_8_SWAP 30
+Iteration_8_UPDATE 31
+Iteration_9_FACT 32
+Iteration_9_BCAST 33
+Iteration_9_SWAP 34
+Iteration_9_UPDATE 35
+Iteration_10_FACT 36
+Iteration_10_BCAST 37
+Iteration_10_SWAP 38
+Iteration_10_UPDATE 39
+Iteration_11_FACT 40
+Iteration_11_BCAST 41
+Iteration_11_SWAP 42
+Iteration_11_UPDATE 43
+Iteration_12_FACT 44
+Iteration_12_BCAST 45
+Iteration_12_SWAP 46
+Iteration_12_UPDATE 47
+Iteration_13_FACT 48
+Iteration_13_BCAST 49
+Iteration_13_SWAP 50
+Iteration_13_UPDATE 51
+Iteration_14_FACT 52
+Iteration_14_BCAST 53
+Iteration_14_SWAP 54
+Iteration_14_UPDATE 55
+Iteration_15_FACT 56
+Iteration_15_BCAST 57
+Iteration_15_SWAP 58
+Iteration_15_UPDATE 59
+Iteration_16_FACT 60
+Iteration_16_BCAST 61
+Iteration_16_SWAP 62
+Iteration_16_UPDATE 63
+Iteration_17_FACT 64
+Iteration_17_BCAST 65
+Iteration_17_SWAP 66
+Iteration_17_UPDATE 67
+Iteration_18_FACT 68
+Iteration_18_BCAST 69
+Iteration_18_SWAP 70
+Iteration_18_UPDATE 71
+Iteration_19_FACT 72
+Iteration_19_BCAST 73
+Iteration_19_SWAP 74
+Iteration_19_UPDATE 75
+Iteration_20_FACT 76
+Iteration_20_BCAST 77
+Iteration_20_SWAP 78
+Iteration_20_UPDATE 79
+Iteration_21_FACT 80
+Iteration_21_BCAST 81
+Iteration_21_SWAP 82
+Iteration_21_UPDATE 83
+Iteration_22_FACT 84
+Iteration_22_BCAST 85
+Iteration_22_SWAP 86
+Iteration_22_UPDATE 87
+Iteration_23_FACT 88
+Iteration_23_BCAST 89
+Iteration_23_SWAP 90
+Iteration_23_UPDATE 91
+Iteration_24_FACT 92
+Iteration_24_BCAST 93
+Iteration_24_SWAP 94
+Iteration_24_UPDATE 95
+Iteration_25_FACT 96
+Iteration_25_BCAST 97
+Iteration_25_SWAP 98
+Iteration_25_UPDATE 99
+Iteration_26_FACT 100
+Iteration_26_BCAST 101
+Iteration_26_SWAP 102
+Iteration_26_UPDATE 103
+Iteration_27_FACT 104
+Iteration_27_BCAST 105
+Iteration_27_SWAP 106
+Iteration_27_UPDATE 107
+Iteration_28_FACT 108
+Iteration_28_BCAST 109
+Iteration_28_SWAP 110
+Iteration_28_UPDATE 111
+Iteration_29_FACT 112
+Iteration_29_BCAST 113
+Iteration_29_SWAP 114
+Iteration_29_UPDATE 115
+Iteration_30_FACT 116
+Iteration_30_BCAST 117
+Iteration_30_SWAP 118
+Iteration_30_UPDATE 119
+Iteration_31_FACT 120
+Iteration_31_BCAST 121
+Iteration_31_SWAP 122
+Iteration_31_UPDATE 123
+Iteration_32_FACT 124
+Iteration_32_BCAST 125
+Iteration_32_SWAP 126
+Iteration_32_UPDATE 127
+Iteration_33_FACT 128
+Iteration_33_BCAST 129
+Iteration_33_SWAP 130
+Iteration_33_UPDATE 131
+Iteration_34_FACT 132
+Iteration_34_BCAST 133
+Iteration_34_SWAP 134
+Iteration_34_UPDATE 135
+Iteration_35_FACT 136
+Iteration_35_BCAST 137
+Iteration_35_SWAP 138
+Iteration_35_UPDATE 139
+Iteration_36_FACT 140
+Iteration_36_BCAST 141
+Iteration_36_SWAP 142
+Iteration_36_UPDATE 143
+Iteration_37_FACT 144
+Iteration_37_BCAST 145
+Iteration_37_SWAP 146
+Iteration_37_UPDATE 147
+Iteration_38_FACT 148
+Iteration_38_BCAST 149
+Iteration_38_SWAP 150
+Iteration_38_UPDATE 151
+Iteration_39_FACT 152
+Iteration_39_BCAST 153
+Iteration_39_SWAP 154
+Iteration_39_UPDATE 155
+Iteration_40_FACT 156
+Iteration_40_BCAST 157
+Iteration_40_SWAP 158
+Iteration_40_UPDATE 159
+Iteration_41_FACT 160
+Iteration_41_BCAST 161
+Iteration_41_SWAP 162
+Iteration_41_UPDATE 163
+Iteration_42_FACT 164
+Iteration_42_BCAST 165
+Iteration_42_SWAP 166
+Iteration_42_UPDATE 167
+Iteration_43_FACT 168
+Iteration_43_BCAST 169
+Iteration_43_SWAP 170
+Iteration_43_UPDATE 171
+Iteration_44_FACT 172
+Iteration_44_BCAST 173
+Iteration_44_SWAP 174
+Iteration_44_UPDATE 175
+Iteration_45_FACT 176
+Iteration_45_BCAST 177
+Iteration_45_SWAP 178
+Iteration_45_UPDATE 179
+Iteration_46_FACT 180
+Iteration_46_BCAST 181
+Iteration_46_SWAP 182
+Iteration_46_UPDATE 183
+Iteration_47_FACT 184
+Iteration_47_BCAST 185
+Iteration_47_SWAP 186
+Iteration_47_UPDATE 187
+Iteration_48_FACT 188
+Iteration_48_BCAST 189
+Iteration_48_SWAP 190
+Iteration_48_UPDATE 191
+Iteration_49_FACT 192
+Iteration_49_BCAST 193
+Iteration_49_SWAP 194
+Iteration_49_UPDATE 195
+Iteration_50_FACT 196
+Iteration_50_BCAST 197
+Iteration_50_SWAP 198
+Iteration_50_UPDATE 199
+Iteration_51_FACT 200
+Iteration_51_BCAST 201
+Iteration_51_SWAP 202
+Iteration_51_UPDATE 203
+Iteration_52_FACT 204
+Iteration_52_BCAST 205
+Iteration_52_SWAP 206
+Iteration_52_UPDATE 207
+Iteration_53_FACT 208
+Iteration_53_BCAST 209
+Iteration_53_SWAP 210
+Iteration_53_UPDATE 211
+Iteration_54_FACT 212
+Iteration_54_BCAST 213
+Iteration_54_SWAP 214
+Iteration_54_UPDATE 215
+Iteration_55_FACT 216
+Iteration_55_BCAST 217
+Iteration_55_SWAP 218
+Iteration_55_UPDATE 219
+Iteration_56_FACT 220
+Iteration_56_BCAST 221
+Iteration_56_SWAP 222
+Iteration_56_UPDATE 223
+Iteration_57_FACT 224
+Iteration_57_BCAST 225
+Iteration_57_SWAP 226
+Iteration_57_UPDATE 227
+Iteration_58_FACT 228
+Iteration_58_BCAST 229
+Iteration_58_SWAP 230
+Iteration_58_UPDATE 231
+Iteration_59_FACT 232
+Iteration_59_BCAST 233
+Iteration_59_SWAP 234
+Iteration_59_UPDATE 235
+Iteration_60_FACT 236
+Iteration_60_BCAST 237
+Iteration_60_SWAP 238
+Iteration_60_UPDATE 239
+Iteration_61_FACT 240
+Iteration_61_BCAST 241
+Iteration_61_SWAP 242
+Iteration_61_UPDATE 243
+Iteration_62_FACT 244
+Iteration_62_BCAST 245
+Iteration_62_SWAP 246
+Iteration_62_UPDATE 247
+Iteration_63_FACT 248
+Iteration_63_BCAST 249
+Iteration_63_SWAP 250
+Iteration_63_UPDATE 251
+Iteration_64_FACT 252
+Iteration_64_BCAST 253
+Iteration_64_SWAP 254
+Iteration_64_UPDATE 255
+Iteration_1_FACT Iteration_1_BCAST 0
+Iteration_1_FACT Iteration_1_SWAP 1
+Iteration_1_FACT Iteration_1_UPDATE 2
+Iteration_2_FACT Iteration_2_BCAST 3
+Iteration_2_FACT Iteration_2_SWAP 4
+Iteration_2_FACT Iteration_2_UPDATE 5
+Iteration_3_FACT Iteration_3_BCAST 6
+Iteration_3_FACT Iteration_3_SWAP 7
+Iteration_3_FACT Iteration_3_UPDATE 8
+Iteration_4_FACT Iteration_4_BCAST 9
+Iteration_4_FACT Iteration_4_SWAP 10
+Iteration_4_FACT Iteration_4_UPDATE 11
+Iteration_5_FACT Iteration_5_BCAST 12
+Iteration_5_FACT Iteration_5_SWAP 13
+Iteration_5_FACT Iteration_5_UPDATE 14
+Iteration_6_FACT Iteration_6_BCAST 15
+Iteration_6_FACT Iteration_6_SWAP 16
+Iteration_6_FACT Iteration_6_UPDATE 17
+Iteration_7_FACT Iteration_7_BCAST 18
+Iteration_7_FACT Iteration_7_SWAP 19
+Iteration_7_FACT Iteration_7_UPDATE 20
+Iteration_8_FACT Iteration_8_BCAST 21
+Iteration_8_FACT Iteration_8_SWAP 22
+Iteration_8_FACT Iteration_8_UPDATE 23
+Iteration_9_FACT Iteration_9_BCAST 24
+Iteration_9_FACT Iteration_9_SWAP 25
+Iteration_9_FACT Iteration_9_UPDATE 26
+Iteration_10_FACT Iteration_10_BCAST 27
+Iteration_10_FACT Iteration_10_SWAP 28
+Iteration_10_FACT Iteration_10_UPDATE 29
+Iteration_11_FACT Iteration_11_BCAST 30
+Iteration_11_FACT Iteration_11_SWAP 31
+Iteration_11_FACT Iteration_11_UPDATE 32
+Iteration_12_FACT Iteration_12_BCAST 33
+Iteration_12_FACT Iteration_12_SWAP 34
+Iteration_12_FACT Iteration_12_UPDATE 35
+Iteration_13_FACT Iteration_13_BCAST 36
+Iteration_13_FACT Iteration_13_SWAP 37
+Iteration_13_FACT Iteration_13_UPDATE 38
+Iteration_14_FACT Iteration_14_BCAST 39
+Iteration_14_FACT Iteration_14_SWAP 40
+Iteration_14_FACT Iteration_14_UPDATE 41
+Iteration_15_FACT Iteration_15_BCAST 42
+Iteration_15_FACT Iteration_15_SWAP 43
+Iteration_15_FACT Iteration_15_UPDATE 44
+Iteration_16_FACT Iteration_16_BCAST 45
+Iteration_16_FACT Iteration_16_SWAP 46
+Iteration_16_FACT Iteration_16_UPDATE 47
+Iteration_17_FACT Iteration_17_BCAST 48
+Iteration_17_FACT Iteration_17_SWAP 49
+Iteration_17_FACT Iteration_17_UPDATE 50
+Iteration_18_FACT Iteration_18_BCAST 51
+Iteration_18_FACT Iteration_18_SWAP 52
+Iteration_18_FACT Iteration_18_UPDATE 53
+Iteration_19_FACT Iteration_19_BCAST 54
+Iteration_19_FACT Iteration_19_SWAP 55
+Iteration_19_FACT Iteration_19_UPDATE 56
+Iteration_20_FACT Iteration_20_BCAST 57
+Iteration_20_FACT Iteration_20_SWAP 58
+Iteration_20_FACT Iteration_20_UPDATE 59
+Iteration_21_FACT Iteration_21_BCAST 60
+Iteration_21_FACT Iteration_21_SWAP 61
+Iteration_21_FACT Iteration_21_UPDATE 62
+Iteration_22_FACT Iteration_22_BCAST 63
+Iteration_22_FACT Iteration_22_SWAP 64
+Iteration_22_FACT Iteration_22_UPDATE 65
+Iteration_23_FACT Iteration_23_BCAST 66
+Iteration_23_FACT Iteration_23_SWAP 67
+Iteration_23_FACT Iteration_23_UPDATE 68
+Iteration_24_FACT Iteration_24_BCAST 69
+Iteration_24_FACT Iteration_24_SWAP 70
+Iteration_24_FACT Iteration_24_UPDATE 71
+Iteration_25_FACT Iteration_25_BCAST 72
+Iteration_25_FACT Iteration_25_SWAP 73
+Iteration_25_FACT Iteration_25_UPDATE 74
+Iteration_26_FACT Iteration_26_BCAST 75
+Iteration_26_FACT Iteration_26_SWAP 76
+Iteration_26_FACT Iteration_26_UPDATE 77
+Iteration_27_FACT Iteration_27_BCAST 78
+Iteration_27_FACT Iteration_27_SWAP 79
+Iteration_27_FACT Iteration_27_UPDATE 80
+Iteration_28_FACT Iteration_28_BCAST 81
+Iteration_28_FACT Iteration_28_SWAP 82
+Iteration_28_FACT Iteration_28_UPDATE 83
+Iteration_29_FACT Iteration_29_BCAST 84
+Iteration_29_FACT Iteration_29_SWAP 85
+Iteration_29_FACT Iteration_29_UPDATE 86
+Iteration_30_FACT Iteration_30_BCAST 87
+Iteration_30_FACT Iteration_30_SWAP 88
+Iteration_30_FACT Iteration_30_UPDATE 89
+Iteration_31_FACT Iteration_31_BCAST 90
+Iteration_31_FACT Iteration_31_SWAP 91
+Iteration_31_FACT Iteration_31_UPDATE 92
+Iteration_32_FACT Iteration_32_BCAST 93
+Iteration_32_FACT Iteration_32_SWAP 94
+Iteration_32_FACT Iteration_32_UPDATE 95
+Iteration_33_FACT Iteration_33_BCAST 96
+Iteration_33_FACT Iteration_33_SWAP 97
+Iteration_33_FACT Iteration_33_UPDATE 98
+Iteration_34_FACT Iteration_34_BCAST 99
+Iteration_34_FACT Iteration_34_SWAP 100
+Iteration_34_FACT Iteration_34_UPDATE 101
+Iteration_35_FACT Iteration_35_BCAST 102
+Iteration_35_FACT Iteration_35_SWAP 103
+Iteration_35_FACT Iteration_35_UPDATE 104
+Iteration_36_FACT Iteration_36_BCAST 105
+Iteration_36_FACT Iteration_36_SWAP 106
+Iteration_36_FACT Iteration_36_UPDATE 107
+Iteration_37_FACT Iteration_37_BCAST 108
+Iteration_37_FACT Iteration_37_SWAP 109
+Iteration_37_FACT Iteration_37_UPDATE 110
+Iteration_38_FACT Iteration_38_BCAST 111
+Iteration_38_FACT Iteration_38_SWAP 112
+Iteration_38_FACT Iteration_38_UPDATE 113
+Iteration_39_FACT Iteration_39_BCAST 114
+Iteration_39_FACT Iteration_39_SWAP 115
+Iteration_39_FACT Iteration_39_UPDATE 116
+Iteration_40_FACT Iteration_40_BCAST 117
+Iteration_40_FACT Iteration_40_SWAP 118
+Iteration_40_FACT Iteration_40_UPDATE 119
+Iteration_41_FACT Iteration_41_BCAST 120
+Iteration_41_FACT Iteration_41_SWAP 121
+Iteration_41_FACT Iteration_41_UPDATE 122
+Iteration_42_FACT Iteration_42_BCAST 123
+Iteration_42_FACT Iteration_42_SWAP 124
+Iteration_42_FACT Iteration_42_UPDATE 125
+Iteration_43_FACT Iteration_43_BCAST 126
+Iteration_43_FACT Iteration_43_SWAP 127
+Iteration_43_FACT Iteration_43_UPDATE 128
+Iteration_44_FACT Iteration_44_BCAST 129
+Iteration_44_FACT Iteration_44_SWAP 130
+Iteration_44_FACT Iteration_44_UPDATE 131
+Iteration_45_FACT Iteration_45_BCAST 132
+Iteration_45_FACT Iteration_45_SWAP 133
+Iteration_45_FACT Iteration_45_UPDATE 134
+Iteration_46_FACT Iteration_46_BCAST 135
+Iteration_46_FACT Iteration_46_SWAP 136
+Iteration_46_FACT Iteration_46_UPDATE 137
+Iteration_47_FACT Iteration_47_BCAST 138
+Iteration_47_FACT Iteration_47_SWAP 139
+Iteration_47_FACT Iteration_47_UPDATE 140
+Iteration_48_FACT Iteration_48_BCAST 141
+Iteration_48_FACT Iteration_48_SWAP 142
+Iteration_48_FACT Iteration_48_UPDATE 143
+Iteration_49_FACT Iteration_49_BCAST 144
+Iteration_49_FACT Iteration_49_SWAP 145
+Iteration_49_FACT Iteration_49_UPDATE 146
+Iteration_50_FACT Iteration_50_BCAST 147
+Iteration_50_FACT Iteration_50_SWAP 148
+Iteration_50_FACT Iteration_50_UPDATE 149
+Iteration_51_FACT Iteration_51_BCAST 150
+Iteration_51_FACT Iteration_51_SWAP 151
+Iteration_51_FACT Iteration_51_UPDATE 152
+Iteration_52_FACT Iteration_52_BCAST 153
+Iteration_52_FACT Iteration_52_SWAP 154
+Iteration_52_FACT Iteration_52_UPDATE 155
+Iteration_53_FACT Iteration_53_BCAST 156
+Iteration_53_FACT Iteration_53_SWAP 157
+Iteration_53_FACT Iteration_53_UPDATE 158
+Iteration_54_FACT Iteration_54_BCAST 159
+Iteration_54_FACT Iteration_54_SWAP 160
+Iteration_54_FACT Iteration_54_UPDATE 161
+Iteration_55_FACT Iteration_55_BCAST 162
+Iteration_55_FACT Iteration_55_SWAP 163
+Iteration_55_FACT Iteration_55_UPDATE 164
+Iteration_56_FACT Iteration_56_BCAST 165
+Iteration_56_FACT Iteration_56_SWAP 166
+Iteration_56_FACT Iteration_56_UPDATE 167
+Iteration_57_FACT Iteration_57_BCAST 168
+Iteration_57_FACT Iteration_57_SWAP 169
+Iteration_57_FACT Iteration_57_UPDATE 170
+Iteration_58_FACT Iteration_58_BCAST 171
+Iteration_58_FACT Iteration_58_SWAP 172
+Iteration_58_FACT Iteration_58_UPDATE 173
+Iteration_59_FACT Iteration_59_BCAST 174
+Iteration_59_FACT Iteration_59_SWAP 175
+Iteration_59_FACT Iteration_59_UPDATE 176
+Iteration_60_FACT Iteration_60_BCAST 177
+Iteration_60_FACT Iteration_60_SWAP 178
+Iteration_60_FACT Iteration_60_UPDATE 179
+Iteration_61_FACT Iteration_61_BCAST 180
+Iteration_61_FACT Iteration_61_SWAP 181
+Iteration_61_FACT Iteration_61_UPDATE 182
+Iteration_62_FACT Iteration_62_BCAST 183
+Iteration_62_FACT Iteration_62_SWAP 184
+Iteration_62_FACT Iteration_62_UPDATE 185
+Iteration_63_FACT Iteration_63_BCAST 186
+Iteration_63_FACT Iteration_63_SWAP 187
+Iteration_63_FACT Iteration_63_UPDATE 188
+Iteration_64_FACT Iteration_64_BCAST 189
+Iteration_64_FACT Iteration_64_SWAP 190
+Iteration_64_FACT Iteration_64_UPDATE 191
+Iteration_1_BCAST Iteration_2_FACT 192
+Iteration_1_SWAP Iteration_2_FACT 193
+Iteration_1_UPDATE Iteration_2_FACT 194
+Iteration_2_BCAST Iteration_3_FACT 195
+Iteration_2_SWAP Iteration_3_FACT 196
+Iteration_2_UPDATE Iteration_3_FACT 197
+Iteration_3_BCAST Iteration_4_FACT 198
+Iteration_3_SWAP Iteration_4_FACT 199
+Iteration_3_UPDATE Iteration_4_FACT 200
+Iteration_4_BCAST Iteration_5_FACT 201
+Iteration_4_SWAP Iteration_5_FACT 202
+Iteration_4_UPDATE Iteration_5_FACT 203
+Iteration_5_BCAST Iteration_6_FACT 204
+Iteration_5_SWAP Iteration_6_FACT 205
+Iteration_5_UPDATE Iteration_6_FACT 206
+Iteration_6_BCAST Iteration_7_FACT 207
+Iteration_6_SWAP Iteration_7_FACT 208
+Iteration_6_UPDATE Iteration_7_FACT 209
+Iteration_7_BCAST Iteration_8_FACT 210
+Iteration_7_SWAP Iteration_8_FACT 211
+Iteration_7_UPDATE Iteration_8_FACT 212
+Iteration_8_BCAST Iteration_9_FACT 213
+Iteration_8_SWAP Iteration_9_FACT 214
+Iteration_8_UPDATE Iteration_9_FACT 215
+Iteration_9_BCAST Iteration_10_FACT 216
+Iteration_9_SWAP Iteration_10_FACT 217
+Iteration_9_UPDATE Iteration_10_FACT 218
+Iteration_10_BCAST Iteration_11_FACT 219
+Iteration_10_SWAP Iteration_11_FACT 220
+Iteration_10_UPDATE Iteration_11_FACT 221
+Iteration_11_BCAST Iteration_12_FACT 222
+Iteration_11_SWAP Iteration_12_FACT 223
+Iteration_11_UPDATE Iteration_12_FACT 224
+Iteration_12_BCAST Iteration_13_FACT 225
+Iteration_12_SWAP Iteration_13_FACT 226
+Iteration_12_UPDATE Iteration_13_FACT 227
+Iteration_13_BCAST Iteration_14_FACT 228
+Iteration_13_SWAP Iteration_14_FACT 229
+Iteration_13_UPDATE Iteration_14_FACT 230
+Iteration_14_BCAST Iteration_15_FACT 231
+Iteration_14_SWAP Iteration_15_FACT 232
+Iteration_14_UPDATE Iteration_15_FACT 233
+Iteration_15_BCAST Iteration_16_FACT 234
+Iteration_15_SWAP Iteration_16_FACT 235
+Iteration_15_UPDATE Iteration_16_FACT 236
+Iteration_16_BCAST Iteration_17_FACT 237
+Iteration_16_SWAP Iteration_17_FACT 238
+Iteration_16_UPDATE Iteration_17_FACT 239
+Iteration_17_BCAST Iteration_18_FACT 240
+Iteration_17_SWAP Iteration_18_FACT 241
+Iteration_17_UPDATE Iteration_18_FACT 242
+Iteration_18_BCAST Iteration_19_FACT 243
+Iteration_18_SWAP Iteration_19_FACT 244
+Iteration_18_UPDATE Iteration_19_FACT 245
+Iteration_19_BCAST Iteration_20_FACT 246
+Iteration_19_SWAP Iteration_20_FACT 247
+Iteration_19_UPDATE Iteration_20_FACT 248
+Iteration_20_BCAST Iteration_21_FACT 249
+Iteration_20_SWAP Iteration_21_FACT 250
+Iteration_20_UPDATE Iteration_21_FACT 251
+Iteration_21_BCAST Iteration_22_FACT 252
+Iteration_21_SWAP Iteration_22_FACT 253
+Iteration_21_UPDATE Iteration_22_FACT 254
+Iteration_22_BCAST Iteration_23_FACT 255
+Iteration_22_SWAP Iteration_23_FACT 256
+Iteration_22_UPDATE Iteration_23_FACT 257
+Iteration_23_BCAST Iteration_24_FACT 258
+Iteration_23_SWAP Iteration_24_FACT 259
+Iteration_23_UPDATE Iteration_24_FACT 260
+Iteration_24_BCAST Iteration_25_FACT 261
+Iteration_24_SWAP Iteration_25_FACT 262
+Iteration_24_UPDATE Iteration_25_FACT 263
+Iteration_25_BCAST Iteration_26_FACT 264
+Iteration_25_SWAP Iteration_26_FACT 265
+Iteration_25_UPDATE Iteration_26_FACT 266
+Iteration_26_BCAST Iteration_27_FACT 267
+Iteration_26_SWAP Iteration_27_FACT 268
+Iteration_26_UPDATE Iteration_27_FACT 269
+Iteration_27_BCAST Iteration_28_FACT 270
+Iteration_27_SWAP Iteration_28_FACT 271
+Iteration_27_UPDATE Iteration_28_FACT 272
+Iteration_28_BCAST Iteration_29_FACT 273
+Iteration_28_SWAP Iteration_29_FACT 274
+Iteration_28_UPDATE Iteration_29_FACT 275
+Iteration_29_BCAST Iteration_30_FACT 276
+Iteration_29_SWAP Iteration_30_FACT 277
+Iteration_29_UPDATE Iteration_30_FACT 278
+Iteration_30_BCAST Iteration_31_FACT 279
+Iteration_30_SWAP Iteration_31_FACT 280
+Iteration_30_UPDATE Iteration_31_FACT 281
+Iteration_31_BCAST Iteration_32_FACT 282
+Iteration_31_SWAP Iteration_32_FACT 283
+Iteration_31_UPDATE Iteration_32_FACT 284
+Iteration_32_BCAST Iteration_33_FACT 285
+Iteration_32_SWAP Iteration_33_FACT 286
+Iteration_32_UPDATE Iteration_33_FACT 287
+Iteration_33_BCAST Iteration_34_FACT 288
+Iteration_33_SWAP Iteration_34_FACT 289
+Iteration_33_UPDATE Iteration_34_FACT 290
+Iteration_34_BCAST Iteration_35_FACT 291
+Iteration_34_SWAP Iteration_35_FACT 292
+Iteration_34_UPDATE Iteration_35_FACT 293
+Iteration_35_BCAST Iteration_36_FACT 294
+Iteration_35_SWAP Iteration_36_FACT 295
+Iteration_35_UPDATE Iteration_36_FACT 296
+Iteration_36_BCAST Iteration_37_FACT 297
+Iteration_36_SWAP Iteration_37_FACT 298
+Iteration_36_UPDATE Iteration_37_FACT 299
+Iteration_37_BCAST Iteration_38_FACT 300
+Iteration_37_SWAP Iteration_38_FACT 301
+Iteration_37_UPDATE Iteration_38_FACT 302
+Iteration_38_BCAST Iteration_39_FACT 303
+Iteration_38_SWAP Iteration_39_FACT 304
+Iteration_38_UPDATE Iteration_39_FACT 305
+Iteration_39_BCAST Iteration_40_FACT 306
+Iteration_39_SWAP Iteration_40_FACT 307
+Iteration_39_UPDATE Iteration_40_FACT 308
+Iteration_40_BCAST Iteration_41_FACT 309
+Iteration_40_SWAP Iteration_41_FACT 310
+Iteration_40_UPDATE Iteration_41_FACT 311
+Iteration_41_BCAST Iteration_42_FACT 312
+Iteration_41_SWAP Iteration_42_FACT 313
+Iteration_41_UPDATE Iteration_42_FACT 314
+Iteration_42_BCAST Iteration_43_FACT 315
+Iteration_42_SWAP Iteration_43_FACT 316
+Iteration_42_UPDATE Iteration_43_FACT 317
+Iteration_43_BCAST Iteration_44_FACT 318
+Iteration_43_SWAP Iteration_44_FACT 319
+Iteration_43_UPDATE Iteration_44_FACT 320
+Iteration_44_BCAST Iteration_45_FACT 321
+Iteration_44_SWAP Iteration_45_FACT 322
+Iteration_44_UPDATE Iteration_45_FACT 323
+Iteration_45_BCAST Iteration_46_FACT 324
+Iteration_45_SWAP Iteration_46_FACT 325
+Iteration_45_UPDATE Iteration_46_FACT 326
+Iteration_46_BCAST Iteration_47_FACT 327
+Iteration_46_SWAP Iteration_47_FACT 328
+Iteration_46_UPDATE Iteration_47_FACT 329
+Iteration_47_BCAST Iteration_48_FACT 330
+Iteration_47_SWAP Iteration_48_FACT 331
+Iteration_47_UPDATE Iteration_48_FACT 332
+Iteration_48_BCAST Iteration_49_FACT 333
+Iteration_48_SWAP Iteration_49_FACT 334
+Iteration_48_UPDATE Iteration_49_FACT 335
+Iteration_49_BCAST Iteration_50_FACT 336
+Iteration_49_SWAP Iteration_50_FACT 337
+Iteration_49_UPDATE Iteration_50_FACT 338
+Iteration_50_BCAST Iteration_51_FACT 339
+Iteration_50_SWAP Iteration_51_FACT 340
+Iteration_50_UPDATE Iteration_51_FACT 341
+Iteration_51_BCAST Iteration_52_FACT 342
+Iteration_51_SWAP Iteration_52_FACT 343
+Iteration_51_UPDATE Iteration_52_FACT 344
+Iteration_52_BCAST Iteration_53_FACT 345
+Iteration_52_SWAP Iteration_53_FACT 346
+Iteration_52_UPDATE Iteration_53_FACT 347
+Iteration_53_BCAST Iteration_54_FACT 348
+Iteration_53_SWAP Iteration_54_FACT 349
+Iteration_53_UPDATE Iteration_54_FACT 350
+Iteration_54_BCAST Iteration_55_FACT 351
+Iteration_54_SWAP Iteration_55_FACT 352
+Iteration_54_UPDATE Iteration_55_FACT 353
+Iteration_55_BCAST Iteration_56_FACT 354
+Iteration_55_SWAP Iteration_56_FACT 355
+Iteration_55_UPDATE Iteration_56_FACT 356
+Iteration_56_BCAST Iteration_57_FACT 357
+Iteration_56_SWAP Iteration_57_FACT 358
+Iteration_56_UPDATE Iteration_57_FACT 359
+Iteration_57_BCAST Iteration_58_FACT 360
+Iteration_57_SWAP Iteration_58_FACT 361
+Iteration_57_UPDATE Iteration_58_FACT 362
+Iteration_58_BCAST Iteration_59_FACT 363
+Iteration_58_SWAP Iteration_59_FACT 364
+Iteration_58_UPDATE Iteration_59_FACT 365
+Iteration_59_BCAST Iteration_60_FACT 366
+Iteration_59_SWAP Iteration_60_FACT 367
+Iteration_59_UPDATE Iteration_60_FACT 368
+Iteration_60_BCAST Iteration_61_FACT 369
+Iteration_60_SWAP Iteration_61_FACT 370
+Iteration_60_UPDATE Iteration_61_FACT 371
+Iteration_61_BCAST Iteration_62_FACT 372
+Iteration_61_SWAP Iteration_62_FACT 373
+Iteration_61_UPDATE Iteration_62_FACT 374
+Iteration_62_BCAST Iteration_63_FACT 375
+Iteration_62_SWAP Iteration_63_FACT 376
+Iteration_62_UPDATE Iteration_63_FACT 377
+Iteration_63_BCAST Iteration_64_FACT 378
+Iteration_63_SWAP Iteration_64_FACT 379
+Iteration_63_UPDATE Iteration_64_FACT 380
+Set parameter Username
+Academic license - for non-commercial use only - expires 2024-11-05
+Set parameter NonConvex to value 2
+Set parameter Threads to value 140
+Set parameter MIPGap to value 1e-50
+Set parameter TimeLimit to value 36000
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+1
+1
+1
+0.5
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (linux64)
+
+CPU model: Intel(R) Xeon(R) CPU E7-8890 v3 @ 2.50GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 72 physical cores, 144 logical processors, using up to 140 threads
+
+Optimize a model with 28299 rows, 203085 columns and 87048 nonzeros
+Model fingerprint: 0x195392be
+Model has 19840 quadratic constraints
+Model has 203648 general constraints
+Variable types: 3531 continuous, 199554 integer (179072 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 4e+10]
+  QMatrix range    [7e-01, 3e+01]
+  QLMatrix range   [5e-01, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 2e+07]
+  QRHS range       [3e+03, 3e+03]
+  GenCon rhs range [1e+00, 1e+00]
+  GenCon coe range [1e+00, 1e+00]
+Warning: Model contains large matrix coefficients
+         Consider reformulating model or setting NumericFocus parameter
+         to avoid numerical issues.
+Presolve removed 27724 rows and 199317 columns
+Presolve time: 3.79s
+Presolved: 6701 rows, 3769 columns, 18236 nonzeros
+Presolved model has 256 SOS constraint(s)
+Presolved model has 1 quadratic constraint(s)
+Presolved model has 1786 bilinear constraint(s)
+Variable types: 956 continuous, 2813 integer (256 binary)
+
+Root relaxation: objective 1.160649e+07, 639 iterations, 0.01 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1.1606e+07    0  535          - 1.1606e+07      -     -    4s
+H    0     0                    5.923634e+07 1.1606e+07  80.4%     -    4s
+     0     0 1.1606e+07    0  238 5.9236e+07 1.1606e+07  80.4%     -    4s
+     0     0 1.1606e+07    0  242 5.9236e+07 1.1606e+07  80.4%     -    4s
+     0     0 1.1606e+07    0  203 5.9236e+07 1.1606e+07  80.4%     -    4s
+     0     0 1.1606e+07    0  204 5.9236e+07 1.1606e+07  80.4%     -    4s
+     0     0 1.1606e+07    0  189 5.9236e+07 1.1606e+07  80.4%     -    4s
+H    0     0                    5.192309e+07 1.1606e+07  77.6%     -    4s
+     0     0 1.1606e+07    0  189 5.1923e+07 1.1606e+07  77.6%     -    4s
+     0     0 1.1606e+07    0  190 5.1923e+07 1.1606e+07  77.6%     -    4s
+     0     0 1.1606e+07    0  193 5.1923e+07 1.1606e+07  77.6%     -    4s
+     0     0 1.1606e+07    0  188 5.1923e+07 1.1606e+07  77.6%     -    4s
+     0     0 1.1606e+07    0  188 5.1923e+07 1.1606e+07  77.6%     -    4s
+     0     0 1.1606e+07    0  180 5.1923e+07 1.1606e+07  77.6%     -    4s
+     0     0 1.1606e+07    0  174 5.1923e+07 1.1606e+07  77.6%     -    5s
+     0     0 1.1606e+07    0  180 5.1923e+07 1.1606e+07  77.6%     -    5s
+     0     0 1.1606e+07    0  181 5.1923e+07 1.1606e+07  77.6%     -    5s
+     0     0 1.1606e+07    0  181 5.1923e+07 1.1606e+07  77.6%     -    5s
+     0     0 1.1606e+07    0  185 5.1923e+07 1.1606e+07  77.6%     -    5s
+     0     0 1.1606e+07    0  180 5.1923e+07 1.1606e+07  77.6%     -    5s
+     0     0 1.1606e+07    0  180 5.1923e+07 1.1606e+07  77.6%     -    5s
+     0     2 1.1606e+07    0  180 5.1923e+07 1.1606e+07  77.6%     -    7s
+  1103  1691 1.1714e+07   15  176 5.1923e+07 1.1606e+07  77.6%   2.1   10s
+H 6588  5443                    5.128254e+07 1.1606e+07  77.4%   1.1   13s
+  6595  5447 1.2108e+07   33    0 5.1283e+07 1.1606e+07  77.4%   1.1   17s
+  6851  5759 1.1606e+07   19  380 5.1283e+07 1.1606e+07  77.4%   1.4   20s
+ 10912 10787 1.1606e+07   34  375 5.1283e+07 1.1606e+07  77.4%   2.8   25s
+ 13832 13201 1.1606e+07   52  369 5.1283e+07 1.1606e+07  77.4%   5.4   32s
+ 17148 18978 1.1606e+07   98  355 5.1283e+07 1.1606e+07  77.4%   4.8   38s
+ 24345 24728 1.1606e+07  153  355 5.1283e+07 1.1606e+07  77.4%   4.0   45s
+ 32494 29925 1.1606e+07  213  355 5.1283e+07 1.1606e+07  77.4%   3.3   54s
+ 38312 42412 1.1606e+07  249  355 5.1283e+07 1.1606e+07  77.4%   3.1   62s
+ 51178 55035 1.1625e+07  314  355 5.1283e+07 1.1606e+07  77.4%   2.7   68s
+ 64218 67995 1.1843e+07  376  348 5.1283e+07 1.1606e+07  77.4%   2.5   75s
+ 77816 80201 1.2218e+07  428  344 5.1283e+07 1.1606e+07  77.4%   2.2   81s
+ 90463 91380 1.2233e+07  476  341 5.1283e+07 1.1606e+07  77.4%   2.1   87s
+ 101824 102860 1.2242e+07  521  337 5.1283e+07 1.1606e+07  77.4%   2.0   92s
+ 113795 112764 1.2411e+07  579  342 5.1283e+07 1.1606e+07  77.4%   1.9   97s
+ 124118 127460 1.2476e+07  617  337 5.1283e+07 1.1606e+07  77.4%   1.9  105s
+ 139399 142058 1.2587e+07  674  327 5.1283e+07 1.1606e+07  77.4%   1.9  112s
+ 154496 156492 1.2879e+07  728  326 5.1283e+07 1.1606e+07  77.4%   1.8  119s
+ 169393 170364 1.2879e+07  732  321 5.1283e+07 1.1606e+07  77.4%   1.8  125s
+ 198498 199443 1.2879e+07  737  321 5.1283e+07 1.1606e+07  77.4%   1.7  135s
+ 214120 215580 1.2879e+07  740  321 5.1283e+07 1.1606e+07  77.4%   1.7  143s
+ 231273 232890 1.2879e+07  744  321 5.1283e+07 1.1606e+07  77.4%   1.6  151s
+ 249292 253076 1.2879e+07  750  322 5.1283e+07 1.1606e+07  77.4%   1.6  157s
+ 270199 272283 1.2879e+07  789  321 5.1283e+07 1.1606e+07  77.4%   1.5  164s
+ 290279 288341 1.2879e+07  836  321 5.1283e+07 1.1606e+07  77.4%   1.5  170s
+ 306946 310174 1.2879e+07  875  321 5.1283e+07 1.1606e+07  77.4%   1.5  178s
+ 329269 331989 1.2879e+07  931  321 5.1283e+07 1.1606e+07  77.4%   1.4  185s
+ 351751 354405 1.3195e+07 1013  326 5.1283e+07 1.1606e+07  77.4%   1.4  194s
+ 374952 376478 1.3123e+07 1100  318 5.1283e+07 1.1606e+07  77.4%   1.4  198s
+ 397735 398362 1.3123e+07 1181  318 5.1283e+07 1.1606e+07  77.4%   1.4  206s
+ 420681 420661 1.3224e+07 1251  329 5.1283e+07 1.1606e+07  77.4%   1.3  213s
+ 443586 441475 1.3123e+07 1318  318 5.1283e+07 1.1606e+07  77.4%   1.3  220s
+ 465089 463419 1.3123e+07 1378  318 5.1283e+07 1.1606e+07  77.4%   1.3  228s
+ 488209 485947 1.3123e+07 1457  316 5.1283e+07 1.1606e+07  77.4%   1.3  237s
+ 511604 508111 1.3123e+07 1529  316 5.1283e+07 1.1606e+07  77.4%   1.3  245s
+ 534431 530556 1.3123e+07 1603  316 5.1283e+07 1.1606e+07  77.4%   1.3  253s
+ 557556 552572 1.3123e+07 1671  316 5.1283e+07 1.1606e+07  77.4%   1.3  260s
+ 580268 576065 1.3123e+07 1738  316 5.1283e+07 1.1606e+07  77.4%   1.3  267s
+ 605084 597020 1.3219e+07 1806  320 5.1283e+07 1.1606e+07  77.4%   1.3  275s
+ 626937 612884 1.3123e+07 1865  316 5.1283e+07 1.1606e+07  77.4%   1.2  280s
+ 643620 636778 1.3188e+07 1914  320 5.1283e+07 1.1606e+07  77.4%   1.3  289s
+ 668561 660022 1.3157e+07 1988  320 5.1283e+07 1.1606e+07  77.4%   1.2  294s
+ 692843 678412 1.3123e+07 2056  316 5.1283e+07 1.1606e+07  77.4%   1.2  301s
+ 712110 705356 1.3123e+07 2109  316 5.1283e+07 1.1606e+07  77.4%   1.2  313s
+ 739972 728038 1.3123e+07 2179  316 5.1283e+07 1.1606e+07  77.4%   1.2  319s
+H744583 703432                    4.782388e+07 1.1606e+07  75.7%   1.2  320s
+ 763407 721562 1.3274e+07 2236  320 4.7824e+07 1.1606e+07  75.7%   1.2  327s
+ 783971 741646 1.3123e+07 2284  316 4.7824e+07 1.1606e+07  75.7%   1.2  334s
+ 804757 763939 1.3123e+07 2341  316 4.7824e+07 1.1606e+07  75.7%   1.2  342s
+ 827867 785286 1.3123e+07 2398  316 4.7824e+07 1.1606e+07  75.7%   1.2  349s
+ 849821 808999 1.3123e+07 2453  316 4.7824e+07 1.1606e+07  75.7%   1.2  355s
+ 873984 831189 1.3123e+07 2507  316 4.7824e+07 1.1606e+07  75.7%   1.1  363s
+ 896929 852634 1.3123e+07 2562  316 4.7824e+07 1.1606e+07  75.7%   1.1  371s
+ 919207 872282 1.3123e+07 2615  316 4.7824e+07 1.1606e+07  75.7%   1.1  380s
+ 939867 894487 1.3123e+07 2666  316 4.7824e+07 1.1606e+07  75.7%   1.1  392s
+ 963090 911182 1.3123e+07 2720  316 4.7824e+07 1.1606e+07  75.7%   1.1  402s
+ 980559 937217 1.3123e+07 2765  316 4.7824e+07 1.1606e+07  75.7%   1.1  417s
+ 1007391 960098 1.3123e+07 2826  316 4.7824e+07 1.1606e+07  75.7%   1.1  430s
+ 1030941 982548 1.3123e+07 2880  316 4.7824e+07 1.1606e+07  75.7%   1.1  440s
+ 1053924 1005258 1.3123e+07 2933  316 4.7824e+07 1.1606e+07  75.7%   1.1  447s
+ 1077167 1026042 1.3123e+07 2986  316 4.7824e+07 1.1606e+07  75.7%   1.1  455s
+ 1098447 1046932 1.3380e+07 3012  317 4.7824e+07 1.1606e+07  75.7%   1.1  465s
+ 1119717 1068633 1.3385e+07 3043  317 4.7824e+07 1.1606e+07  75.7%   1.0  478s
+ 1141990 1089936 1.3123e+07 3078  316 4.7824e+07 1.1606e+07  75.7%   1.0  486s
+ 1163981 1112803 1.3123e+07 3138  316 4.7824e+07 1.1606e+07  75.7%   1.0  499s
+ 1187403 1134374 1.3123e+07 3174  316 4.7824e+07 1.1606e+07  75.7%   1.0  511s
+ 1209654 1157453 1.3123e+07 3200  316 4.7824e+07 1.1606e+07  75.7%   1.0  528s
+ 1233388 1179314 1.3123e+07 3222  316 4.7824e+07 1.1606e+07  75.7%   1.0  539s
+ 1255815 1201237 1.3123e+07 3260  316 4.7824e+07 1.1606e+07  75.7%   1.0  550s
+ 1278358 1221169 1.3123e+07 3285  316 4.7824e+07 1.1606e+07  75.7%   1.0  562s
+ 1298674 1244151 1.3123e+07 3321  316 4.7824e+07 1.1606e+07  75.7%   1.0  580s
+ 1322149 1267135 1.3123e+07 3365  316 4.7824e+07 1.1606e+07  75.7%   1.0  598s
+ 1345759 1288893 1.3123e+07 3407  316 4.7824e+07 1.1606e+07  75.7%   1.0  613s
+ 1367905 1310925 1.3320e+07 3447  320 4.7824e+07 1.1606e+07  75.7%   1.0  628s
+ 1390405 1328001 1.3123e+07 3488  316 4.7824e+07 1.1606e+07  75.7%   1.0  643s
+ 1408072 1353694 1.3123e+07 3523  314 4.7824e+07 1.1606e+07  75.7%   1.0  675s
+ 1434242 1374256 1.3123e+07 3582  317 4.7824e+07 1.1606e+07  75.7%   1.0  689s
+ 1455141 1399760 1.3123e+07 3625  317 4.7824e+07 1.1606e+07  75.7%   1.0  708s
+ 1481121 1423020 1.3123e+07 3677  317 4.7824e+07 1.1606e+07  75.7%   1.0  723s
+ 1504676 1445251 1.3123e+07 3722  317 4.7824e+07 1.1606e+07  75.7%   1.0  745s
+ 1527184 1467213 1.3123e+07 3767  317 4.7824e+07 1.1606e+07  75.7%   1.0  759s
+ 1531587 1467213 3.0489e+07 2270  268 4.7824e+07 1.1606e+07  75.7%   1.0  760s
+ 1549833 1489720 1.3123e+07 3811  317 4.7824e+07 1.1606e+07  75.7%   1.0  781s
+ 1572866 1511482 1.3130e+07 3870  317 4.7824e+07 1.1606e+07  75.7%   0.9  797s
+ 1595239 1533653 1.3130e+07 3931  317 4.7824e+07 1.1606e+07  75.7%   0.9  815s
+ 1617797 1555743 1.3130e+07 3992  317 4.7824e+07 1.1606e+07  75.7%   0.9  836s
+ 1640208 1576951 1.3130e+07 4052  317 4.7824e+07 1.1606e+07  75.7%   0.9  858s
+ 1661731 1598967 1.3130e+07 4111  325 4.7824e+07 1.1606e+07  75.7%   0.9  875s
+ 1684095 1620184 1.3429e+07 4136  314 4.7824e+07 1.1606e+07  75.7%   0.9  893s
+ 1705508 1642500 1.3429e+07 4138  314 4.7824e+07 1.1606e+07  75.7%   0.9  917s
+ 1728116 1665232 1.3429e+07 4144  314 4.7824e+07 1.1606e+07  75.7%   0.9  938s
+ 1751157 1688101 1.3429e+07 4146  314 4.7824e+07 1.1606e+07  75.7%   0.9  954s
+ 1763620 1688101 1.4290e+07  739  164 4.7824e+07 1.1606e+07  75.7%   0.9  955s
+ 1774269 1705300 1.3429e+07 4150  314 4.7824e+07 1.1606e+07  75.7%   0.9  973s
+ 1791989 1731686 1.3429e+07 4152  314 4.7824e+07 1.1606e+07  75.7%   0.9 1017s
+ 1818645 1755161 1.3429e+07 4154  314 4.7824e+07 1.1606e+07  75.7%   0.9 1040s
+ 1842611 1776674 1.3429e+07 4157  314 4.7824e+07 1.1606e+07  75.7%   0.9 1059s
+ 1864626 1798387 1.3429e+07 4160  314 4.7824e+07 1.1606e+07  75.7%   0.9 1079s
+ 1886947 1820758 1.3429e+07 4162  314 4.7824e+07 1.1606e+07  75.7%   0.9 1095s
+ 1909760 1842295 1.3429e+07 4166  314 4.7824e+07 1.1606e+07  75.7%   0.9 1109s
+ 1931845 1863708 1.3429e+07 4170  314 4.7824e+07 1.1606e+07  75.7%   0.9 1130s
+ 1953731 1886318 1.3429e+07 4172  314 4.7824e+07 1.1606e+07  75.7%   0.9 1150s
+ 1976484 1908330 1.3429e+07 4175  314 4.7824e+07 1.1606e+07  75.7%   0.9 1173s
+ 1998634 1930779 1.3429e+07 4181  314 4.7824e+07 1.1606e+07  75.7%   0.9 1195s
+ 2021273 1952974 1.3429e+07 4183  314 4.7824e+07 1.1606e+07  75.7%   0.9 1213s
+ 2043711 1974721 1.3429e+07 4186  314 4.7824e+07 1.1606e+07  75.7%   0.9 1236s
+ 2065638 1990324 1.3429e+07 4190  314 4.7824e+07 1.1606e+07  75.7%   0.9 1259s
+ 2081421 2017526 1.3429e+07 4196  314 4.7824e+07 1.1606e+07  75.7%   0.9 1318s
+ 2108819 2041359 1.3429e+07 4202  314 4.7824e+07 1.1606e+07  75.7%   0.9 1351s
+ 2132779 2064624 1.3429e+07 4205  314 4.7824e+07 1.1606e+07  75.7%   0.9 1389s
+ 2156278 2082016 1.3429e+07 4208  314 4.7824e+07 1.1606e+07  75.7%   0.9 1424s
+ 2174143 2108369 1.3429e+07 4210  314 4.7824e+07 1.1606e+07  75.7%   0.9 1467s
+ 2200642 2130683 1.3429e+07 4215  314 4.7824e+07 1.1606e+07  75.7%   0.9 1502s
+ 2223113 2152814 1.3429e+07 4217  314 4.7824e+07 1.1606e+07  75.7%   0.9 1539s
+ 2245348 2176275 1.3429e+07 4222  314 4.7824e+07 1.1606e+07  75.7%   0.9 1564s
+ 2268931 2199417 1.3429e+07 4225  314 4.7824e+07 1.1606e+07  75.7%   0.9 1596s
+ 2292181 2221641 1.3429e+07 4231  314 4.7824e+07 1.1606e+07  75.7%   0.8 1627s
+ 2314521 2243727 1.3429e+07 4234  314 4.7824e+07 1.1606e+07  75.7%   0.8 1653s
+ 2336877 2265492 1.3429e+07 4236  314 4.7824e+07 1.1606e+07  75.7%   0.8 1678s
+ 2358878 2288130 1.3429e+07 4240  314 4.7824e+07 1.1606e+07  75.7%   0.8 1709s
+ 2375206 2288130 4.7111e+07 1652  510 4.7824e+07 1.1606e+07  75.7%   0.8 1710s
+ 2382012 2311108 1.3429e+07 4243  314 4.7824e+07 1.1606e+07  75.7%   0.8 1738s
+ 2405263 2334015 1.3429e+07 4245  314 4.7824e+07 1.1606e+07  75.7%   0.8 1764s
+ 2407261 2334015 3.4077e+07 1472  144 4.7824e+07 1.1606e+07  75.7%   0.8 1765s
+ 2428391 2356268 1.3429e+07 4247  314 4.7824e+07 1.1606e+07  75.7%   0.8 1794s
+ 2430241 2356268 3.4077e+07 1475  144 4.7824e+07 1.1606e+07  75.7%   0.8 1795s
+ 2450873 2378519 1.3429e+07 4251  314 4.7824e+07 1.1606e+07  75.7%   0.8 1823s
+ 2473353 2399832 1.3429e+07 4253  314 4.7824e+07 1.1606e+07  75.7%   0.8 1856s
+ 2494892 2421970 1.3429e+07 4256  314 4.7824e+07 1.1606e+07  75.7%   0.8 1888s

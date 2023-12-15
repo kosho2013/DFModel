@@ -1,3 +1,4 @@
+dataflow_graph {
 kernels {
   name: "Iteration_1_FACT"
   id: 1
@@ -6250,4 +6251,58 @@ connections {
   startIdx: 252
   endIdx: 253
   id: 381
+}
+
+
+
+
+
+}
+system {
+  name: "16_Chip_A100_GPU"
+  num_chip: 16
+  
+  r_sw {
+	x: 8
+	y: 2
+	
+	link_bw_x: 25.0
+	link_bw_y: 25.0
+  }
+  
+  accelerator {
+    name: "A100_GPU"
+    core: 3456
+    systolic_width: 1
+    systolic_height: 1
+    sram_cap: 88080384.0
+    freq: 1.41
+    dram_bw: 1555.0
+    dram_cap: 42949672960.0
+  }
+  
+  dram_bw_dse: False
+  net_bw_dse: False
+}
+cost {
+  link_unit_price: 2.0
+  switch_unit_price: 24.0
+  dram_unit_price: 1.0
+}
+training {
+	hpl {
+		n: 16384
+		b: 256
+	}
+  
+  global_batch_size: 1
+  micro_batch_size: 1
+  
+  optimization: 1
+  num_config: 64
+  objective: 1
+  
+  skip_inter_chip: True
+  pydot: True
+  word: 8
 }
