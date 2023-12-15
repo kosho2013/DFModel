@@ -13,6 +13,7 @@ parser.add_argument('--N', type=int, required=True)
 parser.add_argument('--B', type=int, required=True)
 parser.add_argument('--X', type=int, required=True)
 parser.add_argument('--Y', type=int, required=True)
+parser.add_argument('--word', type=int, required=True)
 args = parser.parse_args()
 
 
@@ -20,13 +21,12 @@ N = args.N
 B = args.B
 X = args.X
 Y = args.Y
+word = args.word
 
 
-word = 2
-
-        #X
+        #Y
     ###########
-#Y  ###########
+#X  ###########
     ###########
     
 
@@ -51,10 +51,8 @@ for i in range(iterations):
     kernel.gemm_input1_weight.N = B
     kernel.gemm_input1_weight.input_tensor_size = B*B*word
     kernel.gemm_input1_weight.weight_tensor_size = P*B*word
-    kernel.gemm_input1_weight.output_tensor_size = 0
+    kernel.gemm_input1_weight.output_tensor_size = P*B*word
     kernel.gemm_input1_weight.tiling = 5
-    kernel.gemm_input1_weight.communication_type = 5
-    kernel.gemm_input1_weight.communication_size = B*B*word
     
     
     kernel = dataflow_graph.kernels.add()
@@ -66,13 +64,16 @@ for i in range(iterations):
     kernel.gemm_input1_weight.M = 1
     kernel.gemm_input1_weight.K = 1
     kernel.gemm_input1_weight.N = 1
-    kernel.gemm_input1_weight.input_tensor_size = 0
-    kernel.gemm_input1_weight.weight_tensor_size = 0
-    kernel.gemm_input1_weight.output_tensor_size = 0
+    kernel.gemm_input1_weight.input_tensor_size = word
+    kernel.gemm_input1_weight.weight_tensor_size = word
+    kernel.gemm_input1_weight.output_tensor_size = word
     kernel.gemm_input1_weight.tiling = 5
-    kernel.gemm_input1_weight.communication_type = 6
-    kernel.gemm_input1_weight.communication_size = P*B*word
     
+    if Y == 1:
+        kernel.gemm_input1_weight.communication_size = 0
+    else:
+        kernel.gemm_input1_weight.communication_type = 6
+        kernel.gemm_input1_weight.communication_size = P*B*word
     
     
     kernel = dataflow_graph.kernels.add()
@@ -84,12 +85,16 @@ for i in range(iterations):
     kernel.gemm_input1_weight.M = 1
     kernel.gemm_input1_weight.K = 1
     kernel.gemm_input1_weight.N = 1
-    kernel.gemm_input1_weight.input_tensor_size = 0
-    kernel.gemm_input1_weight.weight_tensor_size = 0
-    kernel.gemm_input1_weight.output_tensor_size = 0
+    kernel.gemm_input1_weight.input_tensor_size = word
+    kernel.gemm_input1_weight.weight_tensor_size = word
+    kernel.gemm_input1_weight.output_tensor_size = word
     kernel.gemm_input1_weight.tiling = 5
-    kernel.gemm_input1_weight.communication_type = 5
-    kernel.gemm_input1_weight.communication_size = Q*B*word
+    
+    if X == 1:
+        kernel.gemm_input1_weight.communication_size = 0
+    else:
+        kernel.gemm_input1_weight.communication_type = 5
+        kernel.gemm_input1_weight.communication_size = Q*B*word
     
     
     
@@ -104,7 +109,7 @@ for i in range(iterations):
     kernel.gemm_input1_weight.N = Q
     kernel.gemm_input1_weight.input_tensor_size = B*Q*word
     kernel.gemm_input1_weight.weight_tensor_size = P*B*word
-    kernel.gemm_input1_weight.output_tensor_size = 0
+    kernel.gemm_input1_weight.output_tensor_size = P*Q*word
     kernel.gemm_input1_weight.tiling = 5
     
     

@@ -10,6 +10,7 @@ parser.add_argument('--hidden', type=int, required=True)
 parser.add_argument('--seq', type=int, required=True)
 parser.add_argument('--num_head', type=int, required=True)
 parser.add_argument('--head_dim', type=int, required=True)
+parser.add_argument('--word', type=int, required=True)
 args = parser.parse_args()
 
 
@@ -17,13 +18,12 @@ hidden = args.hidden
 seq = args.seq
 num_head = args.num_head
 head_dim = args.head_dim
+word = args.word
 
 
 if num_head * head_dim != hidden:
     raise Exception('Wrong!')
 
-
-word = 2
 
 dataflow_graph = setup_pb2.Dataflow_Graph()
 

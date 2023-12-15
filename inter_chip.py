@@ -533,21 +533,23 @@ with open('./'+name+'/'+'dse_sharded.txt', "w") as file:
     text_format.PrintMessage(dse, file)
 
 
-# create dot graph
-node_list = []
-edge_list = []
-dict = {}
-graph = pydot.Dot(graph_type='digraph')
-for kernel in dse.dataflow_graph.kernels:  
-    label = text_format.MessageToString(kernel)
-    pydot_node = pydot.Node(kernel.name, style="filled", fillcolor="red", label=label)
-    dict[kernel.id] = pydot_node
-    graph.add_node(pydot_node)
 
-for connection in dse.dataflow_graph.connections:
-    label = text_format.MessageToString(connection)
-    pydot_edge = pydot.Edge(dict[connection.startIdx], dict[connection.endIdx], label=label)
-    graph.add_edge(pydot_edge)
+if dse.training.pydot:
+    # create dot graph
+    node_list = []
+    edge_list = []
+    dict = {}
+    graph = pydot.Dot(graph_type='digraph')
+    for kernel in dse.dataflow_graph.kernels:  
+        label = text_format.MessageToString(kernel)
+        pydot_node = pydot.Node(kernel.name, style="filled", fillcolor="red", label=label)
+        dict[kernel.id] = pydot_node
+        graph.add_node(pydot_node)
+
+    for connection in dse.dataflow_graph.connections:
+        label = text_format.MessageToString(connection)
+        pydot_edge = pydot.Edge(dict[connection.startIdx], dict[connection.endIdx], label=label)
+        graph.add_edge(pydot_edge)
 
 
-graph.write_png('./'+name+'/'+'dataflow_graph_sharded.png') 
+    graph.write_png('./'+name+'/'+'dataflow_graph_sharded.png') 

@@ -14,6 +14,7 @@ parser.add_argument('--num_table', type=int, required=True)
 parser.add_argument('--emb', type=int, required=True)
 parser.add_argument('--num_chip', type=int, required=True)
 parser.add_argument('--micro_batch_size', type=int, required=True)
+parser.add_argument('--word', type=int, required=True)
 args = parser.parse_args()
 
 
@@ -25,9 +26,10 @@ num_table = args.num_table
 emb = args.emb
 num_chip = args.num_chip
 micro_batch_size = args.micro_batch_size
+word = args.word
 
 
-word = 2
+
 memory_bytes = num_table * pooled_row * emb / num_chip * micro_batch_size * num_chip * word
 network_bytes = num_table * pooled_row * emb / num_chip * micro_batch_size * word
 

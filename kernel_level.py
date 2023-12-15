@@ -394,6 +394,8 @@ elif dse.system.WhichOneof('topology_variant') == 'r_fc': # Ring-FC
     
     p2p_bw_factor = 1
     p2p_msg_factor = 1
+    bcast_bw_factor = 1
+    bcast_msg_factor = 1/2
     
 elif dse.system.WhichOneof('topology_variant') == 'r_r_r': # 3D Torus
     topology = [BasicTopology.R.value, BasicTopology.R.value, BasicTopology.R.value]
@@ -901,7 +903,7 @@ for i in range(num_weight):
     model.addConstr(shard_initiation_buffer_size_depth_one[i] * weight_tiling[node_idx] >= shard_initiation_buffer_size[i] * 1)
 
 
-SRAM_Per_Config_total = model.addMVar(C, name='SRAM_Per_Config', vtype=gp.GRB.CONTINUOUS, lb=0)
+SRAM_Per_Config_total = model.addMVar(C, name='SRAM_Per_Config_total', vtype=gp.GRB.CONTINUOUS, lb=0)
 SRAM_Per_Config_intermediate_dram = model.addMVar(C, name='SRAM_Per_Config_intermediate_dram', vtype=gp.GRB.CONTINUOUS, lb=0)
 SRAM_Per_Config_intermediate_onchip = model.addMVar(C, name='SRAM_Per_Config_intermediate_onchip', vtype=gp.GRB.CONTINUOUS, lb=0)
 SRAM_Per_Config_initiation = model.addMVar(C, name='SRAM_Per_Config_initiation', vtype=gp.GRB.CONTINUOUS, lb=0)
@@ -911,7 +913,7 @@ for i in range(C):
     model.addConstr(SRAM_Per_Config_initiation[i] == shard_initiation_buffer_size_depth_one @ Ad[:, i])
     model.addConstr(SRAM_Per_Config_total[i] == SRAM_Per_Config_intermediate_dram[i] + SRAM_Per_Config_intermediate_onchip[i] + SRAM_Per_Config_initiation[i])
     
-    # model.addConstr(SRAM_Per_Config_total[i] <= SRAM_Cap)
+    model.addConstr(SRAM_Per_Config_total[i] <= SRAM_Cap)
 
 
 
@@ -1470,22 +1472,24 @@ with open('./'+name+'/'+'dse_final.txt', "w") as file:
     text_format.PrintMessage(dse, file)
 
 
-# create dot graph
-node_list = []
-edge_list = []
-dict = {}
-graph = pydot.Dot(graph_type='digraph')
-for kernel in dse.dataflow_graph.kernels:  
-    label = text_format.MessageToString(kernel)
-    pydot_node = pydot.Node(kernel.name, style="filled", fillcolor="red", label=label)
-    dict[kernel.id] = pydot_node
-    graph.add_node(pydot_node)
 
-for connection in dse.dataflow_graph.connections:
-    label = text_format.MessageToString(connection)
-    pydot_edge = pydot.Edge(dict[connection.startIdx], dict[connection.endIdx], label=label)
-    graph.add_edge(pydot_edge)
+if dse.training.pydot:
+    # create dot graph
+    node_list = []
+    edge_list = []
+    dict = {}
+    graph = pydot.Dot(graph_type='digraph')
+    for kernel in dse.dataflow_graph.kernels:  
+        label = text_format.MessageToString(kernel)
+        pydot_node = pydot.Node(kernel.name, style="filled", fillcolor="red", label=label)
+        dict[kernel.id] = pydot_node
+        graph.add_node(pydot_node)
+
+    for connection in dse.dataflow_graph.connections:
+        label = text_format.MessageToString(connection)
+        pydot_edge = pydot.Edge(dict[connection.startIdx], dict[connection.endIdx], label=label)
+        graph.add_edge(pydot_edge)
 
 
-graph.write_png('./'+name+'/'+'dataflow_graph_final.png') 
+    graph.write_png('./'+name+'/'+'dataflow_graph_final.png')
 

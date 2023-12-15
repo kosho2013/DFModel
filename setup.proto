@@ -402,6 +402,8 @@ message Training {
 	
 	float util_threshold = 40;
 	bool skip_inter_chip = 42;
+	
+	bool pydot = 43;
 }
 
 
@@ -437,4 +439,5 @@ message DSE {
 	System system = 2;
 	Cost cost = 3;
 	Training training = 4;
+	
 }
