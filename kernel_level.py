@@ -404,7 +404,7 @@ else:
 model = gp.Model()
 model.params.NonConvex = 2
 model.Params.Threads = 140
-model.params.MIPGap = 1e-50
+model.params.MIPGap = 1e-200
 model.params.TimeLimit = 36000
 
 
@@ -1242,21 +1242,44 @@ for i in range(C):
 
 
 II = model.addVar(name='II', vtype=gp.GRB.CONTINUOUS)
-
-if dse.training.WhichOneof('workload_variant') == 'llm':
-    aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
-    model.addConstr(aaa == np.ones((C)) @ Per_Config_II)
-    model.addConstr(II == gp.max_(aaa, p2p_latency))
-
-elif dse.training.WhichOneof('workload_variant') == 'dlrm' or dse.training.WhichOneof('workload_variant') == 'hpl':
+if dse.training.sync_async == Sync_Async.NO_TRAINING.value:
     model.addConstr(II == np.ones((C)) @ Per_Config_II)
     
-elif dse.training.WhichOneof('workload_variant') == 'other':
-    pass
-    
 else:
-    raise Exception('Wrong!')
-
+    # mid = int(C/2)
+    # II_fwd = model.addVar(name='II_fwd', vtype=gp.GRB.CONTINUOUS)
+    # II_bwd = model.addVar(name='II_bwd', vtype=gp.GRB.CONTINUOUS)
+    
+    # aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    # bbb = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    
+    # model.addConstr(aaa == np.ones((mid)) @ Per_Config_II[0:mid])
+    # model.addConstr(bbb == np.ones((C-mid)) @ Per_Config_II[mid:])
+    
+    # if dse.training.WhichOneof('workload_variant') == 'llm':
+        # model.addConstr(II_fwd == gp.max_(aaa, p2p_latency))
+        # model.addConstr(II_bwd == gp.max_(bbb, p2p_latency))
+    # else:
+        # model.addConstr(II_fwd == aaa)
+        # model.addConstr(II_bwd == bbb)
+    
+    
+    ccc = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    model.addConstr(ccc == np.ones((C)) @ Per_Config_II)
+    model.addConstr(II == gp.max_(ccc, p2p_latency))
+    
+        
+    # if dse.training.sync_async == Sync_Async.SYNC.value:  
+        # II = (PP + Micro_Batch_Size - 1) / Micro_Batch_Size * (II_fwd + II_bwd)
+        # print('sync II:', II)
+    
+    # elif dse.training.sync_async == Sync_Async.ASYNC.value:
+        # II = (Micro_Batch_Size-1) * max(II_fwd, II_bwd) + PP * (II_fwd+II_bwd)
+        # print('async:', II)
+        
+    # else:
+        # raise Exception('Wrong!')
+    
 
 
 
@@ -1400,8 +1423,10 @@ for v in model.getVars():
         Micro_Batch_Size = v.X 
     if v.varName.startswith('Link_BW['):
         Link_BW.append(v.X)
-    if v.varName.startswith('num_config'):
-        num_config = v.X
+    if v.varName.startswith('II_fwd'):
+        II_fwd = v.X
+    if v.varName.startswith('II_bwd'):
+        II_bwd = v.X
     if v.varName.startswith('Per_Config_II'):
         Per_Config_II.append(v.X)
         
@@ -1417,6 +1442,8 @@ FLOP *= num_layer
         
 layers_per_stage = num_layer / PP
 II *= layers_per_stage
+II_fwd *= layers_per_stage
+II_bwd *= layers_per_stage
 
 
 
@@ -1426,46 +1453,19 @@ print('TP', TP)
 print('PP', PP)   
 print('DP', DP)  
 print('Micro_Batch_Size', Micro_Batch_Size)  
-print('layers_per_stage', layers_per_stage) 
-print('II', II)
-        
+print('layers_per_stage', layers_per_stage)
 
 if dse.training.sync_async == Sync_Async.NO_TRAINING.value:
-    print('No training, same II')
-    
+    print('no training')
+elif dse.training.sync_async == Sync_Async.SYNC.value:
+    print('sync')
+elif dse.training.sync_async == Sync_Async.ASYNC.value:
+    print('async')
 else:
-    print('num_config', C)
-    
-    II_fwd = 0
-    II_bwd = 0
-    for i in range(0, int(C/2)):
-        II_fwd += Per_Config_II[i]
-            
-    for i in range(int(C/2), C):
-        II_bwd += Per_Config_II[i]
-        
-    II_fwd *= layers_per_stage
-    II_bwd *= layers_per_stage
-    
-    print('II_fwd', II_fwd)
-    print('II_bwd', II_bwd)
-
-    if dse.training.sync_async == Sync_Async.SYNC.value:
-        II = (PP + Micro_Batch_Size - 1) / Micro_Batch_Size * (II_fwd + II_bwd)
-        print('sync II:', II)
-        
-    elif dse.training.sync_async == Sync_Async.ASYNC.value:
-        II = (Micro_Batch_Size-1) * max(II_fwd, II_bwd) + PP * (II_fwd+II_bwd)
-        print('async:', II)
-        
-    else:
-        raise Exception('Wrong!')
-    
-    
-
-
-
-
+    raise Exception('Wrong!')
+print('II', II)
+print('II_fwd', II_fwd)
+print('II_bwd', II_bwd)
     
 print('GFLOPS', GFLOPS) 
 print('FLOP', FLOP)
