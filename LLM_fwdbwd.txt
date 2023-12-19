@@ -1,5 +1,4 @@
-dataflow_graph {
-  kernels {
+kernels {
   name: "Add_Prev_Layer"
   id: 1
   config: -1
@@ -940,63 +939,4 @@ connections {
   startIdx: 2
   endIdx: 41
   id: 53
-}
-
-
-
-}
-system {
-  name: "128_Chip_RDU"
-  num_chip: 128
-  
-  r_r_r {
-	x: 32
-	y: 2
-	z: 2
-	
-	link_bw_x: 25.0
-	link_bw_y: 25.0
-	link_bw_z: 25.0
-  }
-  
-  accelerator {
-    name: "SN10_RDU"
-    core: 640
-    systolic_width: 32
-    systolic_height: 6
-    sram_cap: 335544320.0
-    freq: 1.25
-    dram_bw: 100.0
-    dram_cap: 1649267441664.0
-  }
-  
-  dram_bw_dse: False
-  net_bw_dse: False
-}
-cost {
-  link_unit_price: 2.0
-  switch_unit_price: 24.0
-  dram_unit_price: 1.0
-}
-training {
-	llm {
-		hidden_dim: 25600
-		head_dim: 160
-		num_head: 160
-		seq_len: 2048
-		num_layer: 128
-		seq_tile_size: 16
-	}
-
-	global_batch_size: 1536
-  
-	optimization: FLASHATTENTION
-	num_config: 8
-	objective: PERFORMANCE
-  
-	skip_inter_chip: False
-	pydot: True
-	word: 2
-	
-	sync_async: SYNC
 }

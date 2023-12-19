@@ -1,17 +1,17 @@
 dataflow_graph {
+
 kernels {
   name: "Iteration_1_FACT"
   id: 1
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 8192
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 33554432.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 4096
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 8388608.0
+    output_tensor_size: 8388608.0
     tiling: NO_TILING
   }
 }
@@ -24,8 +24,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 33554432.0
+    communication_size: 8388608.0
     tiling: NO_TILING
   }
 }
@@ -38,8 +41,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 134217730.0
+    communication_size: 8388608.0
     tiling: NO_TILING
   }
 }
@@ -49,11 +55,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 8192
-    K: 2048
-    N: 32768
-    input_tensor_size: 134217730.0
-    weight_tensor_size: 33554432.0
+    M: 4096
+    K: 256
+    N: 4096
+    input_tensor_size: 8388608.0
+    weight_tensor_size: 8388608.0
+    output_tensor_size: 134217730.0
     tiling: NO_TILING
   }
 }
@@ -64,13 +71,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 8064
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 33030144.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 4032
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 8257536.0
+    output_tensor_size: 8257536.0
     tiling: NO_TILING
   }
 }
@@ -84,8 +90,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 33030144.0
+    communication_size: 8257536.0
     tiling: NO_TILING
   }
 }
@@ -99,8 +108,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 132120580.0
+    communication_size: 8257536.0
     tiling: NO_TILING
   }
 }
@@ -111,11 +123,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 8064
-    K: 2048
-    N: 32256
-    input_tensor_size: 132120580.0
-    weight_tensor_size: 33030144.0
+    M: 4032
+    K: 256
+    N: 4032
+    input_tensor_size: 8257536.0
+    weight_tensor_size: 8257536.0
+    output_tensor_size: 130056190.0
     tiling: NO_TILING
   }
 }
@@ -126,13 +139,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 7936
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 32505856.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 3968
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 8126464.0
+    output_tensor_size: 8126464.0
     tiling: NO_TILING
   }
 }
@@ -146,8 +158,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 32505856.0
+    communication_size: 8126464.0
     tiling: NO_TILING
   }
 }
@@ -161,8 +176,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 130023420.0
+    communication_size: 8126464.0
     tiling: NO_TILING
   }
 }
@@ -173,11 +191,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 7936
-    K: 2048
-    N: 31744
-    input_tensor_size: 130023420.0
-    weight_tensor_size: 32505856.0
+    M: 3968
+    K: 256
+    N: 3968
+    input_tensor_size: 8126464.0
+    weight_tensor_size: 8126464.0
+    output_tensor_size: 125960190.0
     tiling: NO_TILING
   }
 }
@@ -188,13 +207,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 7808
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 31981568.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 3904
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 7995392.0
+    output_tensor_size: 7995392.0
     tiling: NO_TILING
   }
 }
@@ -208,8 +226,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 31981568.0
+    communication_size: 7995392.0
     tiling: NO_TILING
   }
 }
@@ -223,8 +244,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 127926270.0
+    communication_size: 7995392.0
     tiling: NO_TILING
   }
 }
@@ -235,11 +259,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 7808
-    K: 2048
-    N: 31232
-    input_tensor_size: 127926270.0
-    weight_tensor_size: 31981568.0
+    M: 3904
+    K: 256
+    N: 3904
+    input_tensor_size: 7995392.0
+    weight_tensor_size: 7995392.0
+    output_tensor_size: 121929730.0
     tiling: NO_TILING
   }
 }
@@ -250,13 +275,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 7680
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 31457280.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 3840
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 7864320.0
+    output_tensor_size: 7864320.0
     tiling: NO_TILING
   }
 }
@@ -270,8 +294,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 31457280.0
+    communication_size: 7864320.0
     tiling: NO_TILING
   }
 }
@@ -285,8 +312,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 125829120.0
+    communication_size: 7864320.0
     tiling: NO_TILING
   }
 }
@@ -297,11 +327,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 7680
-    K: 2048
-    N: 30720
-    input_tensor_size: 125829120.0
-    weight_tensor_size: 31457280.0
+    M: 3840
+    K: 256
+    N: 3840
+    input_tensor_size: 7864320.0
+    weight_tensor_size: 7864320.0
+    output_tensor_size: 117964800.0
     tiling: NO_TILING
   }
 }
@@ -312,13 +343,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 7552
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 30932992.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 3776
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 7733248.0
+    output_tensor_size: 7733248.0
     tiling: NO_TILING
   }
 }
@@ -332,8 +362,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 30932992.0
+    communication_size: 7733248.0
     tiling: NO_TILING
   }
 }
@@ -347,8 +380,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 123731970.0
+    communication_size: 7733248.0
     tiling: NO_TILING
   }
 }
@@ -359,11 +395,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 7552
-    K: 2048
-    N: 30208
-    input_tensor_size: 123731970.0
-    weight_tensor_size: 30932992.0
+    M: 3776
+    K: 256
+    N: 3776
+    input_tensor_size: 7733248.0
+    weight_tensor_size: 7733248.0
+    output_tensor_size: 114065410.0
     tiling: NO_TILING
   }
 }
@@ -374,13 +411,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 7424
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 30408704.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 3712
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 7602176.0
+    output_tensor_size: 7602176.0
     tiling: NO_TILING
   }
 }
@@ -394,8 +430,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 30408704.0
+    communication_size: 7602176.0
     tiling: NO_TILING
   }
 }
@@ -409,8 +448,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 121634820.0
+    communication_size: 7602176.0
     tiling: NO_TILING
   }
 }
@@ -421,11 +463,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 7424
-    K: 2048
-    N: 29696
-    input_tensor_size: 121634820.0
-    weight_tensor_size: 30408704.0
+    M: 3712
+    K: 256
+    N: 3712
+    input_tensor_size: 7602176.0
+    weight_tensor_size: 7602176.0
+    output_tensor_size: 110231550.0
     tiling: NO_TILING
   }
 }
@@ -436,13 +479,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 7296
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 29884416.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 3648
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 7471104.0
+    output_tensor_size: 7471104.0
     tiling: NO_TILING
   }
 }
@@ -456,8 +498,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 29884416.0
+    communication_size: 7471104.0
     tiling: NO_TILING
   }
 }
@@ -471,8 +516,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 119537660.0
+    communication_size: 7471104.0
     tiling: NO_TILING
   }
 }
@@ -483,11 +531,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 7296
-    K: 2048
-    N: 29184
-    input_tensor_size: 119537660.0
-    weight_tensor_size: 29884416.0
+    M: 3648
+    K: 256
+    N: 3648
+    input_tensor_size: 7471104.0
+    weight_tensor_size: 7471104.0
+    output_tensor_size: 106463230.0
     tiling: NO_TILING
   }
 }
@@ -498,13 +547,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 7168
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 29360128.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 3584
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 7340032.0
+    output_tensor_size: 7340032.0
     tiling: NO_TILING
   }
 }
@@ -518,8 +566,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 29360128.0
+    communication_size: 7340032.0
     tiling: NO_TILING
   }
 }
@@ -533,8 +584,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 117440510.0
+    communication_size: 7340032.0
     tiling: NO_TILING
   }
 }
@@ -545,11 +599,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 7168
-    K: 2048
-    N: 28672
-    input_tensor_size: 117440510.0
-    weight_tensor_size: 29360128.0
+    M: 3584
+    K: 256
+    N: 3584
+    input_tensor_size: 7340032.0
+    weight_tensor_size: 7340032.0
+    output_tensor_size: 102760450.0
     tiling: NO_TILING
   }
 }
@@ -560,13 +615,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 7040
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 28835840.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 3520
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 7208960.0
+    output_tensor_size: 7208960.0
     tiling: NO_TILING
   }
 }
@@ -580,8 +634,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 28835840.0
+    communication_size: 7208960.0
     tiling: NO_TILING
   }
 }
@@ -595,8 +652,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 115343360.0
+    communication_size: 7208960.0
     tiling: NO_TILING
   }
 }
@@ -607,11 +667,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 7040
-    K: 2048
-    N: 28160
-    input_tensor_size: 115343360.0
-    weight_tensor_size: 28835840.0
+    M: 3520
+    K: 256
+    N: 3520
+    input_tensor_size: 7208960.0
+    weight_tensor_size: 7208960.0
+    output_tensor_size: 99123200.0
     tiling: NO_TILING
   }
 }
@@ -622,13 +683,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 6912
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 28311552.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 3456
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 7077888.0
+    output_tensor_size: 7077888.0
     tiling: NO_TILING
   }
 }
@@ -642,8 +702,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 28311552.0
+    communication_size: 7077888.0
     tiling: NO_TILING
   }
 }
@@ -657,8 +720,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 113246210.0
+    communication_size: 7077888.0
     tiling: NO_TILING
   }
 }
@@ -669,11 +735,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 6912
-    K: 2048
-    N: 27648
-    input_tensor_size: 113246210.0
-    weight_tensor_size: 28311552.0
+    M: 3456
+    K: 256
+    N: 3456
+    input_tensor_size: 7077888.0
+    weight_tensor_size: 7077888.0
+    output_tensor_size: 95551490.0
     tiling: NO_TILING
   }
 }
@@ -684,13 +751,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 6784
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 27787264.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 3392
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 6946816.0
+    output_tensor_size: 6946816.0
     tiling: NO_TILING
   }
 }
@@ -704,8 +770,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 27787264.0
+    communication_size: 6946816.0
     tiling: NO_TILING
   }
 }
@@ -719,8 +788,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 111149060.0
+    communication_size: 6946816.0
     tiling: NO_TILING
   }
 }
@@ -731,11 +803,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 6784
-    K: 2048
-    N: 27136
-    input_tensor_size: 111149060.0
-    weight_tensor_size: 27787264.0
+    M: 3392
+    K: 256
+    N: 3392
+    input_tensor_size: 6946816.0
+    weight_tensor_size: 6946816.0
+    output_tensor_size: 92045310.0
     tiling: NO_TILING
   }
 }
@@ -746,13 +819,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 6656
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 27262976.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 3328
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 6815744.0
+    output_tensor_size: 6815744.0
     tiling: NO_TILING
   }
 }
@@ -766,8 +838,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 27262976.0
+    communication_size: 6815744.0
     tiling: NO_TILING
   }
 }
@@ -781,8 +856,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 109051900.0
+    communication_size: 6815744.0
     tiling: NO_TILING
   }
 }
@@ -793,11 +871,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 6656
-    K: 2048
-    N: 26624
-    input_tensor_size: 109051900.0
-    weight_tensor_size: 27262976.0
+    M: 3328
+    K: 256
+    N: 3328
+    input_tensor_size: 6815744.0
+    weight_tensor_size: 6815744.0
+    output_tensor_size: 88604670.0
     tiling: NO_TILING
   }
 }
@@ -808,13 +887,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 6528
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 26738688.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 3264
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 6684672.0
+    output_tensor_size: 6684672.0
     tiling: NO_TILING
   }
 }
@@ -828,8 +906,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 26738688.0
+    communication_size: 6684672.0
     tiling: NO_TILING
   }
 }
@@ -843,8 +924,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 106954750.0
+    communication_size: 6684672.0
     tiling: NO_TILING
   }
 }
@@ -855,11 +939,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 6528
-    K: 2048
-    N: 26112
-    input_tensor_size: 106954750.0
-    weight_tensor_size: 26738688.0
+    M: 3264
+    K: 256
+    N: 3264
+    input_tensor_size: 6684672.0
+    weight_tensor_size: 6684672.0
+    output_tensor_size: 85229570.0
     tiling: NO_TILING
   }
 }
@@ -870,13 +955,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 6400
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 26214400.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 3200
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 6553600.0
+    output_tensor_size: 6553600.0
     tiling: NO_TILING
   }
 }
@@ -890,8 +974,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 26214400.0
+    communication_size: 6553600.0
     tiling: NO_TILING
   }
 }
@@ -905,8 +992,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 104857600.0
+    communication_size: 6553600.0
     tiling: NO_TILING
   }
 }
@@ -917,11 +1007,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 6400
-    K: 2048
-    N: 25600
-    input_tensor_size: 104857600.0
-    weight_tensor_size: 26214400.0
+    M: 3200
+    K: 256
+    N: 3200
+    input_tensor_size: 6553600.0
+    weight_tensor_size: 6553600.0
+    output_tensor_size: 81920000.0
     tiling: NO_TILING
   }
 }
@@ -932,13 +1023,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 6272
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 25690112.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 3136
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 6422528.0
+    output_tensor_size: 6422528.0
     tiling: NO_TILING
   }
 }
@@ -952,8 +1042,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 25690112.0
+    communication_size: 6422528.0
     tiling: NO_TILING
   }
 }
@@ -967,8 +1060,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 102760450.0
+    communication_size: 6422528.0
     tiling: NO_TILING
   }
 }
@@ -979,11 +1075,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 6272
-    K: 2048
-    N: 25088
-    input_tensor_size: 102760450.0
-    weight_tensor_size: 25690112.0
+    M: 3136
+    K: 256
+    N: 3136
+    input_tensor_size: 6422528.0
+    weight_tensor_size: 6422528.0
+    output_tensor_size: 78675970.0
     tiling: NO_TILING
   }
 }
@@ -994,13 +1091,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 6144
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 25165824.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 3072
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 6291456.0
+    output_tensor_size: 6291456.0
     tiling: NO_TILING
   }
 }
@@ -1014,8 +1110,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 25165824.0
+    communication_size: 6291456.0
     tiling: NO_TILING
   }
 }
@@ -1029,8 +1128,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 100663300.0
+    communication_size: 6291456.0
     tiling: NO_TILING
   }
 }
@@ -1041,11 +1143,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 6144
-    K: 2048
-    N: 24576
-    input_tensor_size: 100663300.0
-    weight_tensor_size: 25165824.0
+    M: 3072
+    K: 256
+    N: 3072
+    input_tensor_size: 6291456.0
+    weight_tensor_size: 6291456.0
+    output_tensor_size: 75497470.0
     tiling: NO_TILING
   }
 }
@@ -1056,13 +1159,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 6016
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 24641536.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 3008
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 6160384.0
+    output_tensor_size: 6160384.0
     tiling: NO_TILING
   }
 }
@@ -1076,8 +1178,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 24641536.0
+    communication_size: 6160384.0
     tiling: NO_TILING
   }
 }
@@ -1091,8 +1196,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 98566140.0
+    communication_size: 6160384.0
     tiling: NO_TILING
   }
 }
@@ -1103,11 +1211,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 6016
-    K: 2048
-    N: 24064
-    input_tensor_size: 98566140.0
-    weight_tensor_size: 24641536.0
+    M: 3008
+    K: 256
+    N: 3008
+    input_tensor_size: 6160384.0
+    weight_tensor_size: 6160384.0
+    output_tensor_size: 72384510.0
     tiling: NO_TILING
   }
 }
@@ -1118,13 +1227,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 5888
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 24117248.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 2944
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 6029312.0
+    output_tensor_size: 6029312.0
     tiling: NO_TILING
   }
 }
@@ -1138,8 +1246,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 24117248.0
+    communication_size: 6029312.0
     tiling: NO_TILING
   }
 }
@@ -1153,8 +1264,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 96468990.0
+    communication_size: 6029312.0
     tiling: NO_TILING
   }
 }
@@ -1165,11 +1279,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 5888
-    K: 2048
-    N: 23552
-    input_tensor_size: 96468990.0
-    weight_tensor_size: 24117248.0
+    M: 2944
+    K: 256
+    N: 2944
+    input_tensor_size: 6029312.0
+    weight_tensor_size: 6029312.0
+    output_tensor_size: 69337090.0
     tiling: NO_TILING
   }
 }
@@ -1180,13 +1295,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 5760
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 23592960.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 2880
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 5898240.0
+    output_tensor_size: 5898240.0
     tiling: NO_TILING
   }
 }
@@ -1200,8 +1314,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 23592960.0
+    communication_size: 5898240.0
     tiling: NO_TILING
   }
 }
@@ -1215,8 +1332,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 94371840.0
+    communication_size: 5898240.0
     tiling: NO_TILING
   }
 }
@@ -1227,11 +1347,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 5760
-    K: 2048
-    N: 23040
-    input_tensor_size: 94371840.0
-    weight_tensor_size: 23592960.0
+    M: 2880
+    K: 256
+    N: 2880
+    input_tensor_size: 5898240.0
+    weight_tensor_size: 5898240.0
+    output_tensor_size: 66355200.0
     tiling: NO_TILING
   }
 }
@@ -1242,13 +1363,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 5632
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 23068672.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 2816
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 5767168.0
+    output_tensor_size: 5767168.0
     tiling: NO_TILING
   }
 }
@@ -1262,8 +1382,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 23068672.0
+    communication_size: 5767168.0
     tiling: NO_TILING
   }
 }
@@ -1277,8 +1400,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 92274690.0
+    communication_size: 5767168.0
     tiling: NO_TILING
   }
 }
@@ -1289,11 +1415,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 5632
-    K: 2048
-    N: 22528
-    input_tensor_size: 92274690.0
-    weight_tensor_size: 23068672.0
+    M: 2816
+    K: 256
+    N: 2816
+    input_tensor_size: 5767168.0
+    weight_tensor_size: 5767168.0
+    output_tensor_size: 63438850.0
     tiling: NO_TILING
   }
 }
@@ -1304,13 +1431,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 5504
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 22544384.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 2752
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 5636096.0
+    output_tensor_size: 5636096.0
     tiling: NO_TILING
   }
 }
@@ -1324,8 +1450,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 22544384.0
+    communication_size: 5636096.0
     tiling: NO_TILING
   }
 }
@@ -1339,8 +1468,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 90177540.0
+    communication_size: 5636096.0
     tiling: NO_TILING
   }
 }
@@ -1351,11 +1483,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 5504
-    K: 2048
-    N: 22016
-    input_tensor_size: 90177540.0
-    weight_tensor_size: 22544384.0
+    M: 2752
+    K: 256
+    N: 2752
+    input_tensor_size: 5636096.0
+    weight_tensor_size: 5636096.0
+    output_tensor_size: 60588030.0
     tiling: NO_TILING
   }
 }
@@ -1366,13 +1499,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 5376
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 22020096.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 2688
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 5505024.0
+    output_tensor_size: 5505024.0
     tiling: NO_TILING
   }
 }
@@ -1386,8 +1518,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 22020096.0
+    communication_size: 5505024.0
     tiling: NO_TILING
   }
 }
@@ -1401,8 +1536,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 88080380.0
+    communication_size: 5505024.0
     tiling: NO_TILING
   }
 }
@@ -1413,11 +1551,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 5376
-    K: 2048
-    N: 21504
-    input_tensor_size: 88080380.0
-    weight_tensor_size: 22020096.0
+    M: 2688
+    K: 256
+    N: 2688
+    input_tensor_size: 5505024.0
+    weight_tensor_size: 5505024.0
+    output_tensor_size: 57802750.0
     tiling: NO_TILING
   }
 }
@@ -1428,13 +1567,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 5248
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 21495808.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 2624
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 5373952.0
+    output_tensor_size: 5373952.0
     tiling: NO_TILING
   }
 }
@@ -1448,8 +1586,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 21495808.0
+    communication_size: 5373952.0
     tiling: NO_TILING
   }
 }
@@ -1463,8 +1604,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 85983230.0
+    communication_size: 5373952.0
     tiling: NO_TILING
   }
 }
@@ -1475,11 +1619,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 5248
-    K: 2048
-    N: 20992
-    input_tensor_size: 85983230.0
-    weight_tensor_size: 21495808.0
+    M: 2624
+    K: 256
+    N: 2624
+    input_tensor_size: 5373952.0
+    weight_tensor_size: 5373952.0
+    output_tensor_size: 55083010.0
     tiling: NO_TILING
   }
 }
@@ -1490,13 +1635,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 5120
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 20971520.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 2560
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 5242880.0
+    output_tensor_size: 5242880.0
     tiling: NO_TILING
   }
 }
@@ -1510,8 +1654,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 20971520.0
+    communication_size: 5242880.0
     tiling: NO_TILING
   }
 }
@@ -1525,8 +1672,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 83886080.0
+    communication_size: 5242880.0
     tiling: NO_TILING
   }
 }
@@ -1537,11 +1687,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 5120
-    K: 2048
-    N: 20480
-    input_tensor_size: 83886080.0
-    weight_tensor_size: 20971520.0
+    M: 2560
+    K: 256
+    N: 2560
+    input_tensor_size: 5242880.0
+    weight_tensor_size: 5242880.0
+    output_tensor_size: 52428800.0
     tiling: NO_TILING
   }
 }
@@ -1552,13 +1703,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 4992
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 20447232.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 2496
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 5111808.0
+    output_tensor_size: 5111808.0
     tiling: NO_TILING
   }
 }
@@ -1572,8 +1722,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 20447232.0
+    communication_size: 5111808.0
     tiling: NO_TILING
   }
 }
@@ -1587,8 +1740,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 81788930.0
+    communication_size: 5111808.0
     tiling: NO_TILING
   }
 }
@@ -1599,11 +1755,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 4992
-    K: 2048
-    N: 19968
-    input_tensor_size: 81788930.0
-    weight_tensor_size: 20447232.0
+    M: 2496
+    K: 256
+    N: 2496
+    input_tensor_size: 5111808.0
+    weight_tensor_size: 5111808.0
+    output_tensor_size: 49840130.0
     tiling: NO_TILING
   }
 }
@@ -1614,13 +1771,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 4864
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 19922944.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 2432
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 4980736.0
+    output_tensor_size: 4980736.0
     tiling: NO_TILING
   }
 }
@@ -1634,8 +1790,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 19922944.0
+    communication_size: 4980736.0
     tiling: NO_TILING
   }
 }
@@ -1649,8 +1808,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 79691780.0
+    communication_size: 4980736.0
     tiling: NO_TILING
   }
 }
@@ -1661,11 +1823,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 4864
-    K: 2048
-    N: 19456
-    input_tensor_size: 79691780.0
-    weight_tensor_size: 19922944.0
+    M: 2432
+    K: 256
+    N: 2432
+    input_tensor_size: 4980736.0
+    weight_tensor_size: 4980736.0
+    output_tensor_size: 47316990.0
     tiling: NO_TILING
   }
 }
@@ -1676,13 +1839,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 4736
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 19398656.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 2368
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 4849664.0
+    output_tensor_size: 4849664.0
     tiling: NO_TILING
   }
 }
@@ -1696,8 +1858,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 19398656.0
+    communication_size: 4849664.0
     tiling: NO_TILING
   }
 }
@@ -1711,8 +1876,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 77594620.0
+    communication_size: 4849664.0
     tiling: NO_TILING
   }
 }
@@ -1723,11 +1891,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 4736
-    K: 2048
-    N: 18944
-    input_tensor_size: 77594620.0
-    weight_tensor_size: 19398656.0
+    M: 2368
+    K: 256
+    N: 2368
+    input_tensor_size: 4849664.0
+    weight_tensor_size: 4849664.0
+    output_tensor_size: 44859390.0
     tiling: NO_TILING
   }
 }
@@ -1738,13 +1907,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 4608
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 18874368.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 2304
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 4718592.0
+    output_tensor_size: 4718592.0
     tiling: NO_TILING
   }
 }
@@ -1758,8 +1926,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 18874368.0
+    communication_size: 4718592.0
     tiling: NO_TILING
   }
 }
@@ -1773,8 +1944,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 75497470.0
+    communication_size: 4718592.0
     tiling: NO_TILING
   }
 }
@@ -1785,11 +1959,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 4608
-    K: 2048
-    N: 18432
-    input_tensor_size: 75497470.0
-    weight_tensor_size: 18874368.0
+    M: 2304
+    K: 256
+    N: 2304
+    input_tensor_size: 4718592.0
+    weight_tensor_size: 4718592.0
+    output_tensor_size: 42467330.0
     tiling: NO_TILING
   }
 }
@@ -1800,13 +1975,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 4480
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 18350080.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 2240
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 4587520.0
+    output_tensor_size: 4587520.0
     tiling: NO_TILING
   }
 }
@@ -1820,8 +1994,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 18350080.0
+    communication_size: 4587520.0
     tiling: NO_TILING
   }
 }
@@ -1835,8 +2012,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 73400320.0
+    communication_size: 4587520.0
     tiling: NO_TILING
   }
 }
@@ -1847,11 +2027,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 4480
-    K: 2048
-    N: 17920
-    input_tensor_size: 73400320.0
-    weight_tensor_size: 18350080.0
+    M: 2240
+    K: 256
+    N: 2240
+    input_tensor_size: 4587520.0
+    weight_tensor_size: 4587520.0
+    output_tensor_size: 40140800.0
     tiling: NO_TILING
   }
 }
@@ -1862,13 +2043,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 4352
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 17825792.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 2176
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 4456448.0
+    output_tensor_size: 4456448.0
     tiling: NO_TILING
   }
 }
@@ -1882,8 +2062,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 17825792.0
+    communication_size: 4456448.0
     tiling: NO_TILING
   }
 }
@@ -1897,8 +2080,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 71303170.0
+    communication_size: 4456448.0
     tiling: NO_TILING
   }
 }
@@ -1909,11 +2095,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 4352
-    K: 2048
-    N: 17408
-    input_tensor_size: 71303170.0
-    weight_tensor_size: 17825792.0
+    M: 2176
+    K: 256
+    N: 2176
+    input_tensor_size: 4456448.0
+    weight_tensor_size: 4456448.0
+    output_tensor_size: 37879810.0
     tiling: NO_TILING
   }
 }
@@ -1924,13 +2111,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 4224
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 17301504.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 2112
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 4325376.0
+    output_tensor_size: 4325376.0
     tiling: NO_TILING
   }
 }
@@ -1944,8 +2130,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 17301504.0
+    communication_size: 4325376.0
     tiling: NO_TILING
   }
 }
@@ -1959,8 +2148,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 69206020.0
+    communication_size: 4325376.0
     tiling: NO_TILING
   }
 }
@@ -1971,11 +2163,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 4224
-    K: 2048
-    N: 16896
-    input_tensor_size: 69206020.0
-    weight_tensor_size: 17301504.0
+    M: 2112
+    K: 256
+    N: 2112
+    input_tensor_size: 4325376.0
+    weight_tensor_size: 4325376.0
+    output_tensor_size: 35684350.0
     tiling: NO_TILING
   }
 }
@@ -1986,13 +2179,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 4096
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 16777216.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 2048
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 4194304.0
+    output_tensor_size: 4194304.0
     tiling: NO_TILING
   }
 }
@@ -2006,8 +2198,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 16777216.0
+    communication_size: 4194304.0
     tiling: NO_TILING
   }
 }
@@ -2021,8 +2216,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 67108864.0
+    communication_size: 4194304.0
     tiling: NO_TILING
   }
 }
@@ -2033,11 +2231,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 4096
-    K: 2048
-    N: 16384
-    input_tensor_size: 67108864.0
-    weight_tensor_size: 16777216.0
+    M: 2048
+    K: 256
+    N: 2048
+    input_tensor_size: 4194304.0
+    weight_tensor_size: 4194304.0
+    output_tensor_size: 33554432.0
     tiling: NO_TILING
   }
 }
@@ -2048,13 +2247,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 3968
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 16252928.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 1984
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 4063232.0
+    output_tensor_size: 4063232.0
     tiling: NO_TILING
   }
 }
@@ -2068,8 +2266,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 16252928.0
+    communication_size: 4063232.0
     tiling: NO_TILING
   }
 }
@@ -2083,8 +2284,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 65011710.0
+    communication_size: 4063232.0
     tiling: NO_TILING
   }
 }
@@ -2095,11 +2299,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 3968
-    K: 2048
-    N: 15872
-    input_tensor_size: 65011710.0
-    weight_tensor_size: 16252928.0
+    M: 1984
+    K: 256
+    N: 1984
+    input_tensor_size: 4063232.0
+    weight_tensor_size: 4063232.0
+    output_tensor_size: 31490048.0
     tiling: NO_TILING
   }
 }
@@ -2110,13 +2315,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 3840
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 15728640.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 1920
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 3932160.0
+    output_tensor_size: 3932160.0
     tiling: NO_TILING
   }
 }
@@ -2130,8 +2334,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 15728640.0
+    communication_size: 3932160.0
     tiling: NO_TILING
   }
 }
@@ -2145,8 +2352,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 62914560.0
+    communication_size: 3932160.0
     tiling: NO_TILING
   }
 }
@@ -2157,11 +2367,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 3840
-    K: 2048
-    N: 15360
-    input_tensor_size: 62914560.0
-    weight_tensor_size: 15728640.0
+    M: 1920
+    K: 256
+    N: 1920
+    input_tensor_size: 3932160.0
+    weight_tensor_size: 3932160.0
+    output_tensor_size: 29491200.0
     tiling: NO_TILING
   }
 }
@@ -2172,13 +2383,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 3712
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 15204352.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 1856
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 3801088.0
+    output_tensor_size: 3801088.0
     tiling: NO_TILING
   }
 }
@@ -2192,8 +2402,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 15204352.0
+    communication_size: 3801088.0
     tiling: NO_TILING
   }
 }
@@ -2207,8 +2420,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 60817410.0
+    communication_size: 3801088.0
     tiling: NO_TILING
   }
 }
@@ -2219,11 +2435,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 3712
-    K: 2048
-    N: 14848
-    input_tensor_size: 60817410.0
-    weight_tensor_size: 15204352.0
+    M: 1856
+    K: 256
+    N: 1856
+    input_tensor_size: 3801088.0
+    weight_tensor_size: 3801088.0
+    output_tensor_size: 27557888.0
     tiling: NO_TILING
   }
 }
@@ -2234,13 +2451,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 3584
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 14680064.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 1792
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 3670016.0
+    output_tensor_size: 3670016.0
     tiling: NO_TILING
   }
 }
@@ -2254,8 +2470,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 14680064.0
+    communication_size: 3670016.0
     tiling: NO_TILING
   }
 }
@@ -2269,8 +2488,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 58720256.0
+    communication_size: 3670016.0
     tiling: NO_TILING
   }
 }
@@ -2281,11 +2503,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 3584
-    K: 2048
-    N: 14336
-    input_tensor_size: 58720256.0
-    weight_tensor_size: 14680064.0
+    M: 1792
+    K: 256
+    N: 1792
+    input_tensor_size: 3670016.0
+    weight_tensor_size: 3670016.0
+    output_tensor_size: 25690112.0
     tiling: NO_TILING
   }
 }
@@ -2296,13 +2519,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 3456
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 14155776.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 1728
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 3538944.0
+    output_tensor_size: 3538944.0
     tiling: NO_TILING
   }
 }
@@ -2316,8 +2538,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 14155776.0
+    communication_size: 3538944.0
     tiling: NO_TILING
   }
 }
@@ -2331,8 +2556,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 56623104.0
+    communication_size: 3538944.0
     tiling: NO_TILING
   }
 }
@@ -2343,11 +2571,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 3456
-    K: 2048
-    N: 13824
-    input_tensor_size: 56623104.0
-    weight_tensor_size: 14155776.0
+    M: 1728
+    K: 256
+    N: 1728
+    input_tensor_size: 3538944.0
+    weight_tensor_size: 3538944.0
+    output_tensor_size: 23887872.0
     tiling: NO_TILING
   }
 }
@@ -2358,13 +2587,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 3328
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 13631488.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 1664
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 3407872.0
+    output_tensor_size: 3407872.0
     tiling: NO_TILING
   }
 }
@@ -2378,8 +2606,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 13631488.0
+    communication_size: 3407872.0
     tiling: NO_TILING
   }
 }
@@ -2393,8 +2624,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 54525950.0
+    communication_size: 3407872.0
     tiling: NO_TILING
   }
 }
@@ -2405,11 +2639,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 3328
-    K: 2048
-    N: 13312
-    input_tensor_size: 54525950.0
-    weight_tensor_size: 13631488.0
+    M: 1664
+    K: 256
+    N: 1664
+    input_tensor_size: 3407872.0
+    weight_tensor_size: 3407872.0
+    output_tensor_size: 22151168.0
     tiling: NO_TILING
   }
 }
@@ -2420,13 +2655,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 3200
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 13107200.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 1600
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 3276800.0
+    output_tensor_size: 3276800.0
     tiling: NO_TILING
   }
 }
@@ -2440,8 +2674,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 13107200.0
+    communication_size: 3276800.0
     tiling: NO_TILING
   }
 }
@@ -2455,8 +2692,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 52428800.0
+    communication_size: 3276800.0
     tiling: NO_TILING
   }
 }
@@ -2467,11 +2707,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 3200
-    K: 2048
-    N: 12800
-    input_tensor_size: 52428800.0
-    weight_tensor_size: 13107200.0
+    M: 1600
+    K: 256
+    N: 1600
+    input_tensor_size: 3276800.0
+    weight_tensor_size: 3276800.0
+    output_tensor_size: 20480000.0
     tiling: NO_TILING
   }
 }
@@ -2482,13 +2723,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 3072
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 12582912.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 1536
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 3145728.0
+    output_tensor_size: 3145728.0
     tiling: NO_TILING
   }
 }
@@ -2502,8 +2742,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 12582912.0
+    communication_size: 3145728.0
     tiling: NO_TILING
   }
 }
@@ -2517,8 +2760,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 50331650.0
+    communication_size: 3145728.0
     tiling: NO_TILING
   }
 }
@@ -2529,11 +2775,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 3072
-    K: 2048
-    N: 12288
-    input_tensor_size: 50331650.0
-    weight_tensor_size: 12582912.0
+    M: 1536
+    K: 256
+    N: 1536
+    input_tensor_size: 3145728.0
+    weight_tensor_size: 3145728.0
+    output_tensor_size: 18874368.0
     tiling: NO_TILING
   }
 }
@@ -2544,13 +2791,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 2944
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 12058624.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 1472
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 3014656.0
+    output_tensor_size: 3014656.0
     tiling: NO_TILING
   }
 }
@@ -2564,8 +2810,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 12058624.0
+    communication_size: 3014656.0
     tiling: NO_TILING
   }
 }
@@ -2579,8 +2828,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 48234496.0
+    communication_size: 3014656.0
     tiling: NO_TILING
   }
 }
@@ -2591,11 +2843,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 2944
-    K: 2048
-    N: 11776
-    input_tensor_size: 48234496.0
-    weight_tensor_size: 12058624.0
+    M: 1472
+    K: 256
+    N: 1472
+    input_tensor_size: 3014656.0
+    weight_tensor_size: 3014656.0
+    output_tensor_size: 17334272.0
     tiling: NO_TILING
   }
 }
@@ -2606,13 +2859,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 2816
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 11534336.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 1408
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 2883584.0
+    output_tensor_size: 2883584.0
     tiling: NO_TILING
   }
 }
@@ -2626,8 +2878,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 11534336.0
+    communication_size: 2883584.0
     tiling: NO_TILING
   }
 }
@@ -2641,8 +2896,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 46137344.0
+    communication_size: 2883584.0
     tiling: NO_TILING
   }
 }
@@ -2653,11 +2911,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 2816
-    K: 2048
-    N: 11264
-    input_tensor_size: 46137344.0
-    weight_tensor_size: 11534336.0
+    M: 1408
+    K: 256
+    N: 1408
+    input_tensor_size: 2883584.0
+    weight_tensor_size: 2883584.0
+    output_tensor_size: 15859712.0
     tiling: NO_TILING
   }
 }
@@ -2668,13 +2927,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 2688
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 11010048.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 1344
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 2752512.0
+    output_tensor_size: 2752512.0
     tiling: NO_TILING
   }
 }
@@ -2688,8 +2946,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 11010048.0
+    communication_size: 2752512.0
     tiling: NO_TILING
   }
 }
@@ -2703,8 +2964,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 44040190.0
+    communication_size: 2752512.0
     tiling: NO_TILING
   }
 }
@@ -2715,11 +2979,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 2688
-    K: 2048
-    N: 10752
-    input_tensor_size: 44040190.0
-    weight_tensor_size: 11010048.0
+    M: 1344
+    K: 256
+    N: 1344
+    input_tensor_size: 2752512.0
+    weight_tensor_size: 2752512.0
+    output_tensor_size: 14450688.0
     tiling: NO_TILING
   }
 }
@@ -2730,13 +2995,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 2560
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 10485760.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 1280
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 2621440.0
+    output_tensor_size: 2621440.0
     tiling: NO_TILING
   }
 }
@@ -2750,8 +3014,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 10485760.0
+    communication_size: 2621440.0
     tiling: NO_TILING
   }
 }
@@ -2765,8 +3032,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 41943040.0
+    communication_size: 2621440.0
     tiling: NO_TILING
   }
 }
@@ -2777,11 +3047,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 2560
-    K: 2048
-    N: 10240
-    input_tensor_size: 41943040.0
-    weight_tensor_size: 10485760.0
+    M: 1280
+    K: 256
+    N: 1280
+    input_tensor_size: 2621440.0
+    weight_tensor_size: 2621440.0
+    output_tensor_size: 13107200.0
     tiling: NO_TILING
   }
 }
@@ -2792,13 +3063,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 2432
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 9961472.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 1216
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 2490368.0
+    output_tensor_size: 2490368.0
     tiling: NO_TILING
   }
 }
@@ -2812,8 +3082,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 9961472.0
+    communication_size: 2490368.0
     tiling: NO_TILING
   }
 }
@@ -2827,8 +3100,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 39845890.0
+    communication_size: 2490368.0
     tiling: NO_TILING
   }
 }
@@ -2839,11 +3115,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 2432
-    K: 2048
-    N: 9728
-    input_tensor_size: 39845890.0
-    weight_tensor_size: 9961472.0
+    M: 1216
+    K: 256
+    N: 1216
+    input_tensor_size: 2490368.0
+    weight_tensor_size: 2490368.0
+    output_tensor_size: 11829248.0
     tiling: NO_TILING
   }
 }
@@ -2854,13 +3131,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 2304
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 9437184.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 1152
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 2359296.0
+    output_tensor_size: 2359296.0
     tiling: NO_TILING
   }
 }
@@ -2874,8 +3150,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 9437184.0
+    communication_size: 2359296.0
     tiling: NO_TILING
   }
 }
@@ -2889,8 +3168,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 37748736.0
+    communication_size: 2359296.0
     tiling: NO_TILING
   }
 }
@@ -2901,11 +3183,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 2304
-    K: 2048
-    N: 9216
-    input_tensor_size: 37748736.0
-    weight_tensor_size: 9437184.0
+    M: 1152
+    K: 256
+    N: 1152
+    input_tensor_size: 2359296.0
+    weight_tensor_size: 2359296.0
+    output_tensor_size: 10616832.0
     tiling: NO_TILING
   }
 }
@@ -2916,13 +3199,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 2176
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 8912896.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 1088
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 2228224.0
+    output_tensor_size: 2228224.0
     tiling: NO_TILING
   }
 }
@@ -2936,8 +3218,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 8912896.0
+    communication_size: 2228224.0
     tiling: NO_TILING
   }
 }
@@ -2951,8 +3236,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 35651584.0
+    communication_size: 2228224.0
     tiling: NO_TILING
   }
 }
@@ -2963,11 +3251,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 2176
-    K: 2048
-    N: 8704
-    input_tensor_size: 35651584.0
-    weight_tensor_size: 8912896.0
+    M: 1088
+    K: 256
+    N: 1088
+    input_tensor_size: 2228224.0
+    weight_tensor_size: 2228224.0
+    output_tensor_size: 9469952.0
     tiling: NO_TILING
   }
 }
@@ -2978,13 +3267,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 2048
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 8388608.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 1024
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 2097152.0
+    output_tensor_size: 2097152.0
     tiling: NO_TILING
   }
 }
@@ -2998,8 +3286,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 8388608.0
+    communication_size: 2097152.0
     tiling: NO_TILING
   }
 }
@@ -3013,8 +3304,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 33554432.0
+    communication_size: 2097152.0
     tiling: NO_TILING
   }
 }
@@ -3025,11 +3319,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 2048
-    K: 2048
-    N: 8192
-    input_tensor_size: 33554432.0
-    weight_tensor_size: 8388608.0
+    M: 1024
+    K: 256
+    N: 1024
+    input_tensor_size: 2097152.0
+    weight_tensor_size: 2097152.0
+    output_tensor_size: 8388608.0
     tiling: NO_TILING
   }
 }
@@ -3040,13 +3335,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 1920
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 7864320.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 960
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 1966080.0
+    output_tensor_size: 1966080.0
     tiling: NO_TILING
   }
 }
@@ -3060,8 +3354,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 7864320.0
+    communication_size: 1966080.0
     tiling: NO_TILING
   }
 }
@@ -3075,8 +3372,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 31457280.0
+    communication_size: 1966080.0
     tiling: NO_TILING
   }
 }
@@ -3087,11 +3387,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 1920
-    K: 2048
-    N: 7680
-    input_tensor_size: 31457280.0
-    weight_tensor_size: 7864320.0
+    M: 960
+    K: 256
+    N: 960
+    input_tensor_size: 1966080.0
+    weight_tensor_size: 1966080.0
+    output_tensor_size: 7372800.0
     tiling: NO_TILING
   }
 }
@@ -3102,13 +3403,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 1792
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 7340032.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 896
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 1835008.0
+    output_tensor_size: 1835008.0
     tiling: NO_TILING
   }
 }
@@ -3122,8 +3422,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 7340032.0
+    communication_size: 1835008.0
     tiling: NO_TILING
   }
 }
@@ -3137,8 +3440,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 29360128.0
+    communication_size: 1835008.0
     tiling: NO_TILING
   }
 }
@@ -3149,11 +3455,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 1792
-    K: 2048
-    N: 7168
-    input_tensor_size: 29360128.0
-    weight_tensor_size: 7340032.0
+    M: 896
+    K: 256
+    N: 896
+    input_tensor_size: 1835008.0
+    weight_tensor_size: 1835008.0
+    output_tensor_size: 6422528.0
     tiling: NO_TILING
   }
 }
@@ -3164,13 +3471,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 1664
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 6815744.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 832
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 1703936.0
+    output_tensor_size: 1703936.0
     tiling: NO_TILING
   }
 }
@@ -3184,8 +3490,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 6815744.0
+    communication_size: 1703936.0
     tiling: NO_TILING
   }
 }
@@ -3199,8 +3508,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 27262976.0
+    communication_size: 1703936.0
     tiling: NO_TILING
   }
 }
@@ -3211,11 +3523,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 1664
-    K: 2048
-    N: 6656
-    input_tensor_size: 27262976.0
-    weight_tensor_size: 6815744.0
+    M: 832
+    K: 256
+    N: 832
+    input_tensor_size: 1703936.0
+    weight_tensor_size: 1703936.0
+    output_tensor_size: 5537792.0
     tiling: NO_TILING
   }
 }
@@ -3226,13 +3539,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 1536
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 6291456.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 768
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 1572864.0
+    output_tensor_size: 1572864.0
     tiling: NO_TILING
   }
 }
@@ -3246,8 +3558,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 6291456.0
+    communication_size: 1572864.0
     tiling: NO_TILING
   }
 }
@@ -3261,8 +3576,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 25165824.0
+    communication_size: 1572864.0
     tiling: NO_TILING
   }
 }
@@ -3273,11 +3591,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 1536
-    K: 2048
-    N: 6144
-    input_tensor_size: 25165824.0
-    weight_tensor_size: 6291456.0
+    M: 768
+    K: 256
+    N: 768
+    input_tensor_size: 1572864.0
+    weight_tensor_size: 1572864.0
+    output_tensor_size: 4718592.0
     tiling: NO_TILING
   }
 }
@@ -3288,13 +3607,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 1408
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 5767168.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 704
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 1441792.0
+    output_tensor_size: 1441792.0
     tiling: NO_TILING
   }
 }
@@ -3308,8 +3626,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 5767168.0
+    communication_size: 1441792.0
     tiling: NO_TILING
   }
 }
@@ -3323,8 +3644,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 23068672.0
+    communication_size: 1441792.0
     tiling: NO_TILING
   }
 }
@@ -3335,11 +3659,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 1408
-    K: 2048
-    N: 5632
-    input_tensor_size: 23068672.0
-    weight_tensor_size: 5767168.0
+    M: 704
+    K: 256
+    N: 704
+    input_tensor_size: 1441792.0
+    weight_tensor_size: 1441792.0
+    output_tensor_size: 3964928.0
     tiling: NO_TILING
   }
 }
@@ -3350,13 +3675,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 1280
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 5242880.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 640
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 1310720.0
+    output_tensor_size: 1310720.0
     tiling: NO_TILING
   }
 }
@@ -3370,8 +3694,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 5242880.0
+    communication_size: 1310720.0
     tiling: NO_TILING
   }
 }
@@ -3385,8 +3712,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 20971520.0
+    communication_size: 1310720.0
     tiling: NO_TILING
   }
 }
@@ -3397,11 +3727,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 1280
-    K: 2048
-    N: 5120
-    input_tensor_size: 20971520.0
-    weight_tensor_size: 5242880.0
+    M: 640
+    K: 256
+    N: 640
+    input_tensor_size: 1310720.0
+    weight_tensor_size: 1310720.0
+    output_tensor_size: 3276800.0
     tiling: NO_TILING
   }
 }
@@ -3412,13 +3743,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 1152
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 4718592.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 576
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 1179648.0
+    output_tensor_size: 1179648.0
     tiling: NO_TILING
   }
 }
@@ -3432,8 +3762,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 4718592.0
+    communication_size: 1179648.0
     tiling: NO_TILING
   }
 }
@@ -3447,8 +3780,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 18874368.0
+    communication_size: 1179648.0
     tiling: NO_TILING
   }
 }
@@ -3459,11 +3795,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 1152
-    K: 2048
-    N: 4608
-    input_tensor_size: 18874368.0
-    weight_tensor_size: 4718592.0
+    M: 576
+    K: 256
+    N: 576
+    input_tensor_size: 1179648.0
+    weight_tensor_size: 1179648.0
+    output_tensor_size: 2654208.0
     tiling: NO_TILING
   }
 }
@@ -3474,13 +3811,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 1024
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 4194304.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 512
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 1048576.0
+    output_tensor_size: 1048576.0
     tiling: NO_TILING
   }
 }
@@ -3494,8 +3830,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 4194304.0
+    communication_size: 1048576.0
     tiling: NO_TILING
   }
 }
@@ -3509,8 +3848,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 16777216.0
+    communication_size: 1048576.0
     tiling: NO_TILING
   }
 }
@@ -3521,11 +3863,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 1024
-    K: 2048
-    N: 4096
-    input_tensor_size: 16777216.0
-    weight_tensor_size: 4194304.0
+    M: 512
+    K: 256
+    N: 512
+    input_tensor_size: 1048576.0
+    weight_tensor_size: 1048576.0
+    output_tensor_size: 2097152.0
     tiling: NO_TILING
   }
 }
@@ -3536,13 +3879,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 896
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 3670016.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 448
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 917504.0
+    output_tensor_size: 917504.0
     tiling: NO_TILING
   }
 }
@@ -3556,8 +3898,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 3670016.0
+    communication_size: 917504.0
     tiling: NO_TILING
   }
 }
@@ -3571,8 +3916,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 14680064.0
+    communication_size: 917504.0
     tiling: NO_TILING
   }
 }
@@ -3583,11 +3931,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 896
-    K: 2048
-    N: 3584
-    input_tensor_size: 14680064.0
-    weight_tensor_size: 3670016.0
+    M: 448
+    K: 256
+    N: 448
+    input_tensor_size: 917504.0
+    weight_tensor_size: 917504.0
+    output_tensor_size: 1605632.0
     tiling: NO_TILING
   }
 }
@@ -3598,13 +3947,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 768
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 3145728.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 384
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 786432.0
+    output_tensor_size: 786432.0
     tiling: NO_TILING
   }
 }
@@ -3618,8 +3966,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 3145728.0
+    communication_size: 786432.0
     tiling: NO_TILING
   }
 }
@@ -3633,8 +3984,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 12582912.0
+    communication_size: 786432.0
     tiling: NO_TILING
   }
 }
@@ -3645,11 +3999,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 768
-    K: 2048
-    N: 3072
-    input_tensor_size: 12582912.0
-    weight_tensor_size: 3145728.0
+    M: 384
+    K: 256
+    N: 384
+    input_tensor_size: 786432.0
+    weight_tensor_size: 786432.0
+    output_tensor_size: 1179648.0
     tiling: NO_TILING
   }
 }
@@ -3660,13 +4015,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 640
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 2621440.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 320
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 655360.0
+    output_tensor_size: 655360.0
     tiling: NO_TILING
   }
 }
@@ -3680,8 +4034,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 2621440.0
+    communication_size: 655360.0
     tiling: NO_TILING
   }
 }
@@ -3695,8 +4052,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 10485760.0
+    communication_size: 655360.0
     tiling: NO_TILING
   }
 }
@@ -3707,11 +4067,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 640
-    K: 2048
-    N: 2560
-    input_tensor_size: 10485760.0
-    weight_tensor_size: 2621440.0
+    M: 320
+    K: 256
+    N: 320
+    input_tensor_size: 655360.0
+    weight_tensor_size: 655360.0
+    output_tensor_size: 819200.0
     tiling: NO_TILING
   }
 }
@@ -3722,13 +4083,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 512
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 2097152.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 256
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 524288.0
+    output_tensor_size: 524288.0
     tiling: NO_TILING
   }
 }
@@ -3742,8 +4102,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 2097152.0
+    communication_size: 524288.0
     tiling: NO_TILING
   }
 }
@@ -3757,8 +4120,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    communication_size: 524288.0
     tiling: NO_TILING
   }
 }
@@ -3769,11 +4135,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 512
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 2097152.0
+    M: 256
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 524288.0
+    output_tensor_size: 524288.0
     tiling: NO_TILING
   }
 }
@@ -3784,13 +4151,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 384
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 1572864.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 192
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 393216.0
+    output_tensor_size: 393216.0
     tiling: NO_TILING
   }
 }
@@ -3804,8 +4170,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 1572864.0
+    communication_size: 393216.0
     tiling: NO_TILING
   }
 }
@@ -3819,8 +4188,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 6291456.0
+    communication_size: 393216.0
     tiling: NO_TILING
   }
 }
@@ -3831,11 +4203,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 384
-    K: 2048
-    N: 1536
-    input_tensor_size: 6291456.0
-    weight_tensor_size: 1572864.0
+    M: 192
+    K: 256
+    N: 192
+    input_tensor_size: 393216.0
+    weight_tensor_size: 393216.0
+    output_tensor_size: 294912.0
     tiling: NO_TILING
   }
 }
@@ -3846,13 +4219,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 256
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 1048576.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 128
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 262144.0
+    output_tensor_size: 262144.0
     tiling: NO_TILING
   }
 }
@@ -3866,8 +4238,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 1048576.0
+    communication_size: 262144.0
     tiling: NO_TILING
   }
 }
@@ -3881,8 +4256,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 4194304.0
+    communication_size: 262144.0
     tiling: NO_TILING
   }
 }
@@ -3893,11 +4271,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 256
-    K: 2048
-    N: 1024
-    input_tensor_size: 4194304.0
-    weight_tensor_size: 1048576.0
+    M: 128
+    K: 256
+    N: 128
+    input_tensor_size: 262144.0
+    weight_tensor_size: 262144.0
+    output_tensor_size: 131072.0
     tiling: NO_TILING
   }
 }
@@ -3908,13 +4287,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 128
-    K: 2048
-    N: 2048
-    input_tensor_size: 8388608.0
-    weight_tensor_size: 524288.0
-    communication_type: POINT_TO_POINT
-    communication_size: 8388608.0
+    M: 64
+    K: 256
+    N: 256
+    input_tensor_size: 524288.0
+    weight_tensor_size: 131072.0
+    output_tensor_size: 131072.0
     tiling: NO_TILING
   }
 }
@@ -3928,8 +4306,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: BROADCAST
-    communication_size: 524288.0
+    communication_size: 131072.0
     tiling: NO_TILING
   }
 }
@@ -3943,8 +4324,11 @@ kernels {
     M: 1
     K: 1
     N: 1
+    input_tensor_size: 8.0
+    weight_tensor_size: 8.0
+    output_tensor_size: 8.0
     communication_type: POINT_TO_POINT
-    communication_size: 2097152.0
+    communication_size: 131072.0
     tiling: NO_TILING
   }
 }
@@ -3955,11 +4339,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 128
-    K: 2048
-    N: 512
-    input_tensor_size: 2097152.0
-    weight_tensor_size: 524288.0
+    M: 64
+    K: 256
+    N: 64
+    input_tensor_size: 131072.0
+    weight_tensor_size: 131072.0
+    output_tensor_size: 32768.0
     tiling: NO_TILING
   }
 }
@@ -5870,32 +6255,28 @@ connections {
 }
 
 
-
 }
-
-
-
 system {
-  name: "64_Chip_TPU"
-  num_chip: 64
+  name: "16_Chip_A100_GPU"
+  num_chip: 16
   
   r_r {
-	x: 16
+	x: 4
 	y: 4
 	
-	link_bw_x: 50.0
-	link_bw_y: 50.0
+	link_bw_x: 25.0
+	link_bw_y: 25.0
   }
   
   accelerator {
-    name: "TPU_v4"
-    core: 8
-    systolic_width: 128
-    systolic_height: 128
-    sram_cap: 167772160.0
-    freq: 1.05
-    dram_bw: 1200.0
-    dram_cap: 34359738368.0
+    name: "A100_GPU"
+    core: 3456
+    systolic_width: 1
+    systolic_height: 1
+    sram_cap: 88080384.0
+    freq: 1.41
+    dram_bw: 1555.0
+    dram_cap: 42949672960.0
   }
   
   dram_bw_dse: True
@@ -5908,8 +6289,8 @@ cost {
 }
 training {
 	hpl {
-		n: 131072
-		b: 2048
+		n: 16384
+		b: 256
 	}
   
   global_batch_size: 1
@@ -5919,9 +6300,9 @@ training {
   num_config: 64
   objective: 2
   
-  util_threshold: 0.59
-  
   skip_inter_chip: True
+  pydot: True
+  word: 8
+  
+  util_threshold: 0.6
 }
-
-

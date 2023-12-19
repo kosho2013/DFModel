@@ -65,7 +65,18 @@ class Objective(Enum):
     PERFORMANCE = 1
     COST = 2
     
-
+class BasicTopology(Enum):
+    NO_BASICTOPOLOGY = 0
+    R = 1
+    FC = 2
+    SW = 3
+    
+class Sync_Async(Enum):
+    NO_TRAINING = 0;
+    SYNC = 1;
+    ASYNC = 2;
+    
+    
 kernel_id = []
 kernel_name = []   
 kernel_type = []
@@ -247,20 +258,6 @@ else:
     raise Exception('Wrong!')
 
 
-
-last_fwd_kernel = -1
-first_bwd_kernel = -1
-for i in range(num_kernel):
-    if fwd_bwd[i] == FWD_BWD.FWD.value:
-        last_fwd_kernel = i
-
-for i in range(num_kernel):       
-    if fwd_bwd[i] == FWD_BWD.BWD.value:
-        first_bwd_kernel = i
-        break
-
-
-
 # get edges
 startIdx = []
 endIdx = []
@@ -293,14 +290,6 @@ num_chip = dse.system.num_chip
 dram_bw_dse = dse.system.dram_bw_dse
 net_bw_dse = dse.system.net_bw_dse
 GFLOPS = 2*VecWidth*StageWidth*Core*Freq
-
-
-
-class BasicTopology(Enum):
-    NO_BASICTOPOLOGY = 0
-    R = 1
-    FC = 2
-    SW = 3
 
     
 if dse.system.WhichOneof('topology_variant') == 'single_chip': # single chip
@@ -552,7 +541,6 @@ elif dse.training.WhichOneof('workload_variant') == 'llm':
             model.addConstr(Link_BW[0] <= link_bw[0])
             model.addConstr(Link_BW[1] <= link_bw[1])
             model.addConstr(Link_BW[2] <= link_bw[2])
-            pass
         else:
             model.addConstr(Link_BW[0] == link_bw[0])
             model.addConstr(Link_BW[1] == link_bw[1])
@@ -752,8 +740,12 @@ for i in range(num_kernel):
 
     elif node_communication_type[i] == Communication.ALL_REDUCE_PERIODIC.value:
         aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
+        bbb = model.addVar(vtype=gp.GRB.CONTINUOUS)
+        ccc = model.addVar(vtype=gp.GRB.CONTINUOUS)
         model.addConstr(aaa == shard_M[i] * shard_N[i])
-        model.addConstr(ALL_REDUCE_PERIODIC_communication_size[i] == aaa * word * Micro_Batch_Size / global_batch_size)
+        model.addConstr(bbb == PP * DP)
+        model.addConstr(ccc == Micro_Batch_Size * bbb)
+        model.addConstr(ALL_REDUCE_PERIODIC_communication_size[i] == aaa * word * ccc / global_batch_size)
         
     elif node_communication_type[i] == Communication.ALL_TO_ALL.value:
         model.addConstr(ALL_TO_ALL_communication_size[i] == node_communication_size[i])
@@ -789,14 +781,20 @@ Ad = model.addMVar((num_weight, C), name='Ad', vtype=gp.GRB.BINARY)
 
 
 
-
-for i in range(len(configs)):
-    if configs[i] == -1: # not specified
+if optimization == Optimization.KERNEL_BY_KERNEL.value:
+    for i in range(len(configs)):
         model.addConstr(Config[i] == i) # tuning nobe
-        # pass
         
-    else:
-        model.addConstr(Config[i] == configs[i])
+elif optimization == Optimization.FLASHATTENTION.value:
+    for i in range(len(configs)):
+        if configs[i] == -1: # not specified
+            pass
+        else:
+            model.addConstr(Config[i] == configs[i])
+
+else:
+    raise Exception('Wrong!')
+
 
 
 
@@ -819,16 +817,26 @@ for i in range(num_edge):
 
 
 
-# fwd and bwd not in the same config
-if first_bwd_kernel == -1:
+if dse.training.sync_async == Sync_Async.NO_TRAINING.value:
     pass
-else:
-    model.addConstr(Config[first_bwd_kernel] - Config[last_fwd_kernel] >= 1)
-
-
     
+else:
+    mid = int(C/2)
+    
+    for i in range(num_kernel):
+        if fwd_bwd[i] == FWD_BWD.FWD.value: # first half of configs given to fwd
+            model.addConstr(Config[i] >= 0)
+            model.addConstr(Config[i] <= mid-1)
+            
+        elif fwd_bwd[i] == FWD_BWD.BWD.value: # second half of configs given to bwd
+            model.addConstr(Config[i] >= mid)
+            model.addConstr(Config[i] <= C-1)
+            
+        else:
+            raise Exception('Wrong!')
+            
 weight_tiling = model.addMVar(num_kernel, name='weight_tiling', vtype=gp.GRB.INTEGER, lb=1)   
-if optimization == Optimization.KERNEL_BY_KERNEL.value: # kernel-by-kernel
+if optimization == Optimization.KERNEL_BY_KERNEL.value:
     for i in range(C):
         model.addConstr(np.ones((num_kernel)) @ Ac[:, i] >= 1)
     model.addConstr(C == num_kernel)
@@ -893,12 +901,14 @@ for i in range(num_weight):
 # SRAM cap
 shard_intermediate_buffer_size_depth_original = model.addMVar(num_edge, name='shard_intermediate_buffer_size_depth_original', vtype=gp.GRB.INTEGER, lb=0)
 shard_intermediate_buffer_size_depth_two = model.addMVar(num_edge, name='shard_intermediate_buffer_size_depth_two', vtype=gp.GRB.INTEGER, lb=0)
+shard_intermediate_buffer_size_depth_one = model.addMVar(num_edge, name='shard_intermediate_buffer_size_depth_one', vtype=gp.GRB.INTEGER, lb=0)
 shard_initiation_buffer_size_depth_one = model.addMVar(num_weight, name='shard_initiation_buffer_size_depth_one', vtype=gp.GRB.INTEGER, lb=0)
 
 
 for i in range(num_edge):
     model.addConstr(shard_intermediate_buffer_size_depth_original[i] >= shard_intermediate_buffer_size[i] * depth[i])
     model.addConstr(shard_intermediate_buffer_size_depth_two[i] >= shard_intermediate_buffer_size[i] * 2)
+    model.addConstr(shard_intermediate_buffer_size_depth_one[i] >= shard_intermediate_buffer_size[i] * 1)
 
 for i in range(num_weight):
     node_idx = node_dict[weight_dict[i]]
@@ -911,13 +921,20 @@ SRAM_Per_Config_intermediate_dram = model.addMVar(C, name='SRAM_Per_Config_inter
 SRAM_Per_Config_intermediate_onchip = model.addMVar(C, name='SRAM_Per_Config_intermediate_onchip', vtype=gp.GRB.CONTINUOUS, lb=0)
 SRAM_Per_Config_initiation = model.addMVar(C, name='SRAM_Per_Config_initiation', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
-    model.addConstr(SRAM_Per_Config_intermediate_dram[i] == shard_intermediate_buffer_size_depth_two @ Ab_dram[:, i])
+    if optimization == Optimization.KERNEL_BY_KERNEL.value:
+        model.addConstr(SRAM_Per_Config_intermediate_dram[i] == shard_intermediate_buffer_size_depth_two @ Ab_dram[:, i])
+        
+    elif optimization == Optimization.FLASHATTENTION.value:
+        model.addConstr(SRAM_Per_Config_intermediate_dram[i] == shard_intermediate_buffer_size_depth_two @ Ab_dram[:, i])
+        
+    else:
+        raise Exception('Wrong!')
+    
     model.addConstr(SRAM_Per_Config_intermediate_onchip[i] == shard_intermediate_buffer_size_depth_original @ Ab_onchip[:, i])
     model.addConstr(SRAM_Per_Config_initiation[i] == shard_initiation_buffer_size_depth_one @ Ad[:, i])
     model.addConstr(SRAM_Per_Config_total[i] == SRAM_Per_Config_intermediate_dram[i] + SRAM_Per_Config_intermediate_onchip[i] + SRAM_Per_Config_initiation[i])
     
-    # model.addConstr(SRAM_Per_Config_total[i] <= SRAM_Cap)
-
+    model.addConstr(SRAM_Per_Config_total[i] <= SRAM_Cap)
 
 
 
@@ -1029,7 +1046,7 @@ Network_Latency = model.addMVar(C, name='Network_Latency', vtype=gp.GRB.CONTINUO
 total_Network_bytes = model.addVar(name='total_Network_bytes', vtype=gp.GRB.CONTINUOUS)
 
 if dse.training.WhichOneof('workload_variant') == 'llm':
-    # tensor parallelism
+    # tensor parallelism all-reduce
     ALL_REDUCE_ratio = model.addVar(name='ALL_REDUCE_ratio', vtype=gp.GRB.CONTINUOUS) 
     if len(topology) == 0: # single chip
         model.addConstr(ALL_REDUCE_ratio == 0)
@@ -1063,7 +1080,7 @@ if dse.training.WhichOneof('workload_variant') == 'llm':
 
 
 
-    # data parallelism
+    # data parallelism all-reduce
     ALL_REDUCE_PERIODIC_ratio = model.addVar(name='ALL_REDUCE_PERIODIC_ratio', vtype=gp.GRB.CONTINUOUS) 
     if 0 <= len(topology) <= 2: # single chip/1D/2D
         model.addConstr(ALL_REDUCE_PERIODIC_ratio == 0)
@@ -1111,7 +1128,7 @@ if dse.training.WhichOneof('workload_variant') == 'llm':
     
     
     
-    # pipeline parallelism
+    # pipeline parallelism point-to-point
     aaa = model.addVar(vtype=gp.GRB.BINARY)
     intermediate = model.addVar(name='intermediate', vtype=gp.GRB.CONTINUOUS, lb=0)
     model.addConstr((aaa == 1) >> (PP == 1))
@@ -1163,13 +1180,6 @@ elif dse.training.WhichOneof('workload_variant') == 'hpl':
     Network_Bytes_POINT_TO_POINT = model.addMVar(C, name='Network_Bytes_POINT_TO_POINT', vtype=gp.GRB.CONTINUOUS, lb=0)
     Network_Latency_BROADCAST = model.addMVar(C, name='Network_Latency_BROADCAST', vtype=gp.GRB.CONTINUOUS, lb=0)
     Network_Bytes_BROADCAST = model.addMVar(C, name='Network_Bytes_BROADCAST', vtype=gp.GRB.CONTINUOUS, lb=0)
-    
-    print('aaa'*100)
-    print(p2p_bw_factor)
-    print(p2p_msg_factor)
-    print(bcast_bw_factor)
-    print(bcast_msg_factor)
-    print('aaa'*100)
     
     for i in range(C):
         # X dim
@@ -1270,7 +1280,6 @@ else:
 
 
 
-
 # cost
 DRAM_cost = model.addVar(name='DRAM_cost', vtype=gp.GRB.CONTINUOUS, lb=0)
 model.addConstr(DRAM_cost == num_chip * DRAM_BW * dram_unit_price)
@@ -1284,12 +1293,13 @@ for i in range(len(topology)):
     else:
         model.addConstr(accumulated_shape[i] == accumulated_shape[i-1] * Shape[i])
     
-    
-    
+
+
+  
+Link_Switch_cost = model.addMVar(len(topology), name='Link_Switch_cost', vtype=gp.GRB.CONTINUOUS, lb=0)
 if len(topology) == 0:
     pass
 else:
-    Link_Switch_cost = model.addMVar(len(topology), name='Link_Switch_cost', vtype=gp.GRB.CONTINUOUS, lb=0)
     for i in range(len(topology)):
         if i == 0:
             if topology[i] == BasicTopology.R.value:
@@ -1326,7 +1336,9 @@ total_cost = model.addVar(name='total_cost', vtype=gp.GRB.CONTINUOUS, lb=0)
 if len(topology) == 0:
     model.addConstr(total_cost == DRAM_cost)
 else:
-    model.addConstr(total_cost == DRAM_cost + Link_Switch_cost[-1])
+    aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    model.addConstr(aaa == Link_Switch_cost[-1])
+    model.addConstr(total_cost == DRAM_cost + aaa)
 
 
 
@@ -1352,6 +1364,7 @@ shard_intermediate_buffer_size = []
 shard_initiation_buffer_size = []
 Config = []
 Link_BW = []
+Per_Config_II = []
 for v in model.getVars():
     print(v.varName, v.X)
     
@@ -1383,8 +1396,15 @@ for v in model.getVars():
         total_cost = v.X  
     if v.varName.startswith('DRAM_BW'):
         DRAM_BW = v.X 
+    if v.varName.startswith('Micro_Batch_Size'):
+        Micro_Batch_Size = v.X 
     if v.varName.startswith('Link_BW['):
         Link_BW.append(v.X)
+    if v.varName.startswith('num_config'):
+        num_config = v.X
+    if v.varName.startswith('Per_Config_II'):
+        Per_Config_II.append(v.X)
+        
         
 
 FLOP = 0.0
@@ -1400,16 +1420,58 @@ II *= layers_per_stage
 
 
 
+
+
+print('TP', TP)   
+print('PP', PP)   
+print('DP', DP)  
+print('Micro_Batch_Size', Micro_Batch_Size)  
+print('layers_per_stage', layers_per_stage) 
+print('II', II)
+        
+
+if dse.training.sync_async == Sync_Async.NO_TRAINING.value:
+    print('No training, same II')
+    
+else:
+    print('num_config', C)
+    
+    II_fwd = 0
+    II_bwd = 0
+    for i in range(0, int(C/2)):
+        II_fwd += Per_Config_II[i]
+            
+    for i in range(int(C/2), C):
+        II_bwd += Per_Config_II[i]
+        
+    II_fwd *= layers_per_stage
+    II_bwd *= layers_per_stage
+    
+    print('II_fwd', II_fwd)
+    print('II_bwd', II_bwd)
+
+    if dse.training.sync_async == Sync_Async.SYNC.value:
+        II = (PP + Micro_Batch_Size - 1) / Micro_Batch_Size * (II_fwd + II_bwd)
+        print('sync II:', II)
+        
+    elif dse.training.sync_async == Sync_Async.ASYNC.value:
+        II = (Micro_Batch_Size-1) * max(II_fwd, II_bwd) + PP * (II_fwd+II_bwd)
+        print('async:', II)
+        
+    else:
+        raise Exception('Wrong!')
+    
+    
+
+
+
+
+    
+print('GFLOPS', GFLOPS) 
 print('FLOP', FLOP)
 print('total_cost', total_cost)
 print('DRAM_BW', DRAM_BW)
 print('Link_BW', Link_BW)
-print('TP', TP)   
-print('PP', PP)   
-print('DP', DP)  
-print('layers_per_stage', layers_per_stage) 
-print('GFLOPS', GFLOPS)
-print('II', II)
 print('Samples/s', 1e9/II*DP)
 print('util', DP*FLOP/II/GFLOPS/num_chip)
 if total_DRAM_bytes == 0:

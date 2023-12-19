@@ -2,7 +2,7 @@ dataflow_graph {
   kernels {
     name: "Add_Prev_Layer"
     id: 1
-    config: 2
+    config: 1
     fwd_bwd: FWD
     type: SIMD
     elementwise_input1 {
@@ -21,7 +21,7 @@ dataflow_graph {
     name: "LayerNorm_1"
     id: 2
     topological_number: 1
-    config: 2
+    config: 1
     fwd_bwd: FWD
     type: SIMD
     elementwise_input1 {
@@ -40,7 +40,7 @@ dataflow_graph {
     name: "Q"
     id: 3
     topological_number: 2
-    config: 3
+    config: 1
     fwd_bwd: FWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -62,7 +62,7 @@ dataflow_graph {
     name: "K"
     id: 4
     topological_number: 2
-    config: 3
+    config: 1
     fwd_bwd: FWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -84,7 +84,7 @@ dataflow_graph {
     name: "V"
     id: 5
     topological_number: 2
-    config: 3
+    config: 1
     fwd_bwd: FWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -96,9 +96,9 @@ dataflow_graph {
       weight_tensor_size: 1310720000.0
       output_tensor_size: 104857600.0
       sharding: OUTER_SHARDING
-      shard_outer_M: 799
+      shard_outer_M: 800
       shard_K: 25600
-      shard_N: 15
+      shard_N: 16
       tiling: N_TILING
     }
   }
@@ -106,7 +106,7 @@ dataflow_graph {
     name: "MHA_GEMM_1"
     id: 6
     topological_number: 3
-    config: 3
+    config: 1
     fwd_bwd: FWD
     type: SYSTOLIC
     gemm_input1_input2 {
@@ -128,7 +128,7 @@ dataflow_graph {
     name: "SOFTMAX"
     id: 7
     topological_number: 4
-    config: 3
+    config: 1
     fwd_bwd: FWD
     type: SIMD
     elementwise_input1 {
@@ -147,7 +147,7 @@ dataflow_graph {
     name: "DropOut_1"
     id: 8
     topological_number: 5
-    config: 3
+    config: 1
     fwd_bwd: FWD
     type: SIMD
     elementwise_input1 {
@@ -158,7 +158,7 @@ dataflow_graph {
       output_tensor_size: 1342177300.0
       sharding: OUTER_SHARDING
       shard_outer_M: 10240
-      shard_N: 15
+      shard_N: 16
       tiling: N_TILING
     }
   }
@@ -166,7 +166,7 @@ dataflow_graph {
     name: "MHA_GEMM_2"
     id: 9
     topological_number: 6
-    config: 3
+    config: 1
     fwd_bwd: FWD
     type: SYSTOLIC
     gemm_input1_input2 {
@@ -188,7 +188,7 @@ dataflow_graph {
     name: "PROJ_GEMM"
     id: 10
     topological_number: 7
-    config: 3
+    config: 1
     fwd_bwd: FWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -203,7 +203,7 @@ dataflow_graph {
       communication_type: ALL_REDUCE
       communication_size: 104857600.0
       shard_outer_M: 25600
-      shard_K: 802
+      shard_K: 800
       shard_N: 16
       tiling: N_TILING
     }
@@ -212,7 +212,7 @@ dataflow_graph {
     name: "DropOut_2"
     id: 11
     topological_number: 8
-    config: 3
+    config: 1
     fwd_bwd: FWD
     type: SIMD
     elementwise_input1 {
@@ -231,7 +231,7 @@ dataflow_graph {
     name: "Add_1"
     id: 12
     topological_number: 9
-    config: 3
+    config: 1
     fwd_bwd: FWD
     type: SIMD
     elementwise_input1_input2 {
@@ -251,7 +251,7 @@ dataflow_graph {
     name: "LayerNorm_2"
     id: 13
     topological_number: 10
-    config: 3
+    config: 2
     fwd_bwd: FWD
     type: SIMD
     elementwise_input1 {
@@ -270,7 +270,7 @@ dataflow_graph {
     name: "FFN0"
     id: 14
     topological_number: 11
-    config: 4
+    config: 2
     fwd_bwd: FWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -293,7 +293,7 @@ dataflow_graph {
     name: "GeLU"
     id: 15
     topological_number: 12
-    config: 4
+    config: 2
     fwd_bwd: FWD
     type: SIMD
     elementwise_input1 {
@@ -312,7 +312,7 @@ dataflow_graph {
     name: "FFN1"
     id: 16
     topological_number: 13
-    config: 4
+    config: 2
     fwd_bwd: FWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -336,7 +336,7 @@ dataflow_graph {
     name: "DropOut_3"
     id: 17
     topological_number: 14
-    config: 4
+    config: 3
     fwd_bwd: FWD
     type: SIMD
     elementwise_input1 {
@@ -355,7 +355,7 @@ dataflow_graph {
     name: "Add_2"
     id: 18
     topological_number: 15
-    config: 4
+    config: 3
     fwd_bwd: FWD
     type: SIMD
     elementwise_input1_input2 {
@@ -366,7 +366,7 @@ dataflow_graph {
       output_tensor_size: 104857600.0
       sharding: M_SHARDING
       shard_outer_M: 800
-      shard_N: 31
+      shard_N: 16
       tiling: N_TILING
       input_tensor_2_size: 104857600.0
     }
@@ -374,7 +374,7 @@ dataflow_graph {
   kernels {
     name: "Loss_bwd"
     id: 19
-    config: 5
+    config: 4
     fwd_bwd: BWD
     type: SIMD
     elementwise_input1 {
@@ -393,7 +393,7 @@ dataflow_graph {
     name: "DropOut_3_bwd"
     id: 20
     topological_number: 1
-    config: 5
+    config: 4
     fwd_bwd: BWD
     type: SIMD
     elementwise_input1 {
@@ -404,7 +404,7 @@ dataflow_graph {
       output_tensor_size: 104857600.0
       sharding: NO_SHARDING
       shard_outer_M: 25600
-      shard_N: 15
+      shard_N: 16
       tiling: N_TILING
     }
   }
@@ -412,7 +412,7 @@ dataflow_graph {
     name: "FFN1_bwd"
     id: 21
     topological_number: 2
-    config: 5
+    config: 4
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -434,7 +434,7 @@ dataflow_graph {
     name: "GeLU_bwd"
     id: 22
     topological_number: 3
-    config: 6
+    config: 4
     fwd_bwd: BWD
     type: SIMD
     elementwise_input1 {
@@ -453,7 +453,7 @@ dataflow_graph {
     name: "FFN0_bwd"
     id: 23
     topological_number: 4
-    config: 6
+    config: 5
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -477,7 +477,7 @@ dataflow_graph {
     name: "LayerNorm_2_bwd"
     id: 24
     topological_number: 5
-    config: 6
+    config: 5
     fwd_bwd: BWD
     type: SIMD
     elementwise_input1 {
@@ -488,7 +488,7 @@ dataflow_graph {
       output_tensor_size: 104857600.0
       sharding: NO_SHARDING
       shard_outer_M: 25600
-      shard_N: 15
+      shard_N: 16
       tiling: N_TILING
     }
   }
@@ -496,7 +496,7 @@ dataflow_graph {
     name: "DropOut_2_bwd"
     id: 25
     topological_number: 6
-    config: 6
+    config: 5
     fwd_bwd: BWD
     type: SIMD
     elementwise_input1 {
@@ -559,7 +559,7 @@ dataflow_graph {
     name: "MHA_GEMM_2_bwd2"
     id: 28
     topological_number: 8
-    config: 7
+    config: 6
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_input2 {
@@ -581,7 +581,7 @@ dataflow_graph {
     name: "V_bwd"
     id: 29
     topological_number: 9
-    config: 7
+    config: 6
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -755,7 +755,7 @@ dataflow_graph {
     name: "FFN0_bwd_weight_update"
     id: 37
     topological_number: 11
-    config: 7
+    config: 6
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_input2 {
@@ -794,8 +794,8 @@ dataflow_graph {
       communication_type: ALL_REDUCE_PERIODIC
       communication_size: 1310720000.0
       shard_outer_M: 800
-      shard_K: 23
-      shard_N: 25601
+      shard_K: 16
+      shard_N: 25600
       tiling: K_TILING
     }
   }
@@ -803,7 +803,7 @@ dataflow_graph {
     name: "V_bwd_weight_update"
     id: 39
     topological_number: 9
-    config: 7
+    config: 6
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_input2 {
@@ -827,7 +827,7 @@ dataflow_graph {
     name: "K_bwd_weight_update"
     id: 40
     topological_number: 12
-    config: 7
+    config: 6
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_input2 {
@@ -851,7 +851,7 @@ dataflow_graph {
     name: "Q_bwd_weight_update"
     id: 41
     topological_number: 12
-    config: 7
+    config: 6
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_input2 {
@@ -1414,7 +1414,7 @@ dataflow_graph {
   }
 }
 system {
-  name: "128_Chip_TPU"
+  name: "128_Chip_RDU"
   num_chip: 128
   accelerator {
     name: "SN10_RDU"
@@ -1441,13 +1441,19 @@ cost {
   dram_unit_price: 1.0
 }
 training {
-  optimization: FLASHATTENTION
-  seq_len: 2048
-  num_layer: 128
-  seq_tile_size: 16
-  hidden_dim: 25600
-  head_dim: 160
-  num_head: 160
-  num_config: 8
+  llm {
+    hidden_dim: 25600
+    head_dim: 160
+    num_head: 160
+    seq_len: 2048
+    num_layer: 128
+    seq_tile_size: 16
+  }
   global_batch_size: 1536
+  num_config: 8
+  optimization: FLASHATTENTION
+  objective: PERFORMANCE
+  pydot: true
+  word: 2
+  sync_async: SYNC
 }

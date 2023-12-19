@@ -386,7 +386,6 @@ message Training {
 		COST = 2;
 	}
 	
-	
 	oneof workload_variant {
 		LLM llm = 7;
 		DLRM dlrm = 8;
@@ -394,18 +393,29 @@ message Training {
 		Other other = 10;
 	}
 		
-	int32 global_batch_size = 30;
-	int32 micro_batch_size = 50;
-	int32 num_config = 20;
-	Optimization optimization = 2;
-	Objective objective = 41;
+	int32 global_batch_size = 11;
+	int32 micro_batch_size = 12;
 	
-	float util_threshold = 40;
-	bool skip_inter_chip = 42;
 	
-	bool pydot = 43;
+	int32 num_config = 13;
+	Optimization optimization = 14;
+	Objective objective = 15;
+	float util_threshold = 16;
 	
-	int32 word = 44;
+	
+	bool skip_inter_chip = 17;
+	bool pydot = 18;
+	int32 word = 19;
+	
+	SYNC_ASYNC sync_async = 20; 
+	
+	
+	
+	enum SYNC_ASYNC {
+		NO_TRAINING = 0;
+		SYNC = 1;
+		ASYNC = 2;
+	}
 }
 
 

@@ -943,7 +943,7 @@ dataflow_graph {
   }
 }
 system {
-  name: "128_Chip_TPU"
+  name: "128_Chip_RDU"
   num_chip: 128
   accelerator {
     name: "SN10_RDU"
@@ -970,13 +970,19 @@ cost {
   dram_unit_price: 1.0
 }
 training {
-  optimization: FLASHATTENTION
-  seq_len: 2048
-  num_layer: 128
-  seq_tile_size: 16
-  hidden_dim: 25600
-  head_dim: 160
-  num_head: 160
-  num_config: 8
+  llm {
+    hidden_dim: 25600
+    head_dim: 160
+    num_head: 160
+    seq_len: 2048
+    num_layer: 128
+    seq_tile_size: 16
+  }
   global_batch_size: 1536
+  num_config: 8
+  optimization: FLASHATTENTION
+  objective: PERFORMANCE
+  pydot: true
+  word: 2
+  sync_async: SYNC
 }
