@@ -264,7 +264,6 @@ message Dataflow_Graph {
 }
 
 message Accelerator {
-	string name = 1;
 	int32 core = 2;
 	int32 systolic_width = 3;
 	int32 systolic_height = 4;
@@ -275,7 +274,6 @@ message Accelerator {
 }
 
 message System {
-    string name = 1; 
     int32 num_chip = 3;
 	Accelerator accelerator = 7;
 
@@ -403,19 +401,10 @@ message Training {
 	float util_threshold = 16;
 	
 	
-	bool skip_inter_chip = 17;
-	bool pydot = 18;
-	int32 word = 19;
-	
-	SYNC_ASYNC sync_async = 20; 
-	
-	
-	
-	enum SYNC_ASYNC {
-		NO_TRAINING = 0;
-		SYNC = 1;
-		ASYNC = 2;
-	}
+	bool training = 17;
+	bool skip_inter_chip = 18;
+	bool pydot = 19;
+	int32 word = 20;
 }
 
 

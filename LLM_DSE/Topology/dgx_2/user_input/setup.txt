@@ -1,0 +1,998 @@
+dataflow_graph {
+  kernels {
+  name: "Add_Prev_Layer"
+  id: 1
+  config: -1
+  fwd_bwd: FWD
+  type: SIMD
+  elementwise_input1 {
+    outer: 1
+    M: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "LayerNorm_1"
+  id: 2
+  config: -1
+  fwd_bwd: FWD
+  type: SIMD
+  elementwise_input1 {
+    outer: 1
+    M: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "Q"
+  id: 3
+  config: -1
+  fwd_bwd: FWD
+  type: SYSTOLIC
+  gemm_input1_weight {
+    outer: 160
+    M: 160
+    K: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    weight_tensor_size: 1310720000.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "K"
+  id: 4
+  config: -1
+  fwd_bwd: FWD
+  type: SYSTOLIC
+  gemm_input1_weight {
+    outer: 160
+    M: 160
+    K: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    weight_tensor_size: 1310720000.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "V"
+  id: 5
+  config: -1
+  fwd_bwd: FWD
+  type: SYSTOLIC
+  gemm_input1_weight {
+    outer: 160
+    M: 160
+    K: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    weight_tensor_size: 1310720000.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "MHA_GEMM_1"
+  id: 6
+  config: -1
+  fwd_bwd: FWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 160
+    M: 2048
+    K: 160
+    N: 2048
+    input_tensor_1_size: 104857600.0
+    input_tensor_2_size: 104857600.0
+    output_tensor_size: 1342177300.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "SOFTMAX"
+  id: 7
+  config: -1
+  fwd_bwd: FWD
+  type: SIMD
+  elementwise_input1 {
+    outer: 160
+    M: 2048
+    N: 2048
+    input_tensor_size: 1342177300.0
+    output_tensor_size: 1342177300.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "DropOut_1"
+  id: 8
+  config: -1
+  fwd_bwd: FWD
+  type: SIMD
+  elementwise_input1 {
+    outer: 160
+    M: 2048
+    N: 2048
+    input_tensor_size: 1342177300.0
+    output_tensor_size: 1342177300.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "MHA_GEMM_2"
+  id: 9
+  config: -1
+  fwd_bwd: FWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 160
+    M: 160
+    K: 2048
+    N: 2048
+    input_tensor_1_size: 104857600.0
+    input_tensor_2_size: 1342177300.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "PROJ_GEMM"
+  id: 10
+  config: -1
+  fwd_bwd: FWD
+  type: SYSTOLIC
+  gemm_input1_weight {
+    outer: 1
+    M: 25600
+    K: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    weight_tensor_size: 1310720000.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "DropOut_2"
+  id: 11
+  config: -1
+  fwd_bwd: FWD
+  type: SIMD
+  elementwise_input1 {
+    outer: 1
+    M: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "Add_1"
+  id: 12
+  config: -1
+  fwd_bwd: FWD
+  type: SIMD
+  elementwise_input1_input2 {
+    outer: 1
+    M: 25600
+    N: 2048
+    input_tensor_1_size: 104857600.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+    input_tensor_2_size: 104857600.0
+  }
+}
+kernels {
+  name: "LayerNorm_2"
+  id: 13
+  config: -1
+  fwd_bwd: FWD
+  type: SIMD
+  elementwise_input1 {
+    outer: 1
+    M: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "FFN0"
+  id: 14
+  config: -1
+  fwd_bwd: FWD
+  type: SYSTOLIC
+  gemm_input1_weight {
+    outer: 1
+    M: 102400
+    K: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    weight_tensor_size: 5242880000.0
+    output_tensor_size: 419430400.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "GeLU"
+  id: 15
+  config: -1
+  fwd_bwd: FWD
+  type: SIMD
+  elementwise_input1 {
+    outer: 1
+    M: 102400
+    N: 2048
+    input_tensor_size: 419430400.0
+    output_tensor_size: 419430400.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "FFN1"
+  id: 16
+  config: -1
+  fwd_bwd: FWD
+  type: SYSTOLIC
+  gemm_input1_weight {
+    outer: 1
+    M: 25600
+    K: 102400
+    N: 2048
+    input_tensor_size: 419430400.0
+    weight_tensor_size: 5242880000.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "DropOut_3"
+  id: 17
+  config: -1
+  fwd_bwd: FWD
+  type: SIMD
+  elementwise_input1 {
+    outer: 1
+    M: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "Add_2"
+  id: 18
+  config: -1
+  fwd_bwd: FWD
+  type: SIMD
+  elementwise_input1_input2 {
+    outer: 1
+    M: 25600
+    N: 2048
+    input_tensor_1_size: 104857600.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+    input_tensor_2_size: 104857600.0
+  }
+}
+kernels {
+  name: "Loss_bwd"
+  id: 19
+  config: -1
+  fwd_bwd: BWD
+  type: SIMD
+  elementwise_input1 {
+    outer: 1
+    M: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "DropOut_3_bwd"
+  id: 20
+  config: -1
+  fwd_bwd: BWD
+  type: SIMD
+  elementwise_input1 {
+    outer: 1
+    M: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "FFN1_bwd"
+  id: 21
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_weight {
+    outer: 1
+    M: 102400
+    K: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    weight_tensor_size: 5242880000.0
+    output_tensor_size: 419430400.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "GeLU_bwd"
+  id: 22
+  config: -1
+  fwd_bwd: BWD
+  type: SIMD
+  elementwise_input1 {
+    outer: 1
+    M: 102400
+    N: 2048
+    input_tensor_size: 419430400.0
+    output_tensor_size: 419430400.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "FFN0_bwd"
+  id: 23
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_weight {
+    outer: 1
+    M: 25600
+    K: 102400
+    N: 2048
+    input_tensor_size: 419430400.0
+    weight_tensor_size: 5242880000.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "LayerNorm_2_bwd"
+  id: 24
+  config: -1
+  fwd_bwd: BWD
+  type: SIMD
+  elementwise_input1 {
+    outer: 1
+    M: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "DropOut_2_bwd"
+  id: 25
+  config: -1
+  fwd_bwd: BWD
+  type: SIMD
+  elementwise_input1 {
+    outer: 1
+    M: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "PROJ_GEMM_bwd"
+  id: 26
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_weight {
+    outer: 1
+    M: 25600
+    K: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    weight_tensor_size: 1310720000.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "MHA_GEMM_2_bwd1"
+  id: 27
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 160
+    M: 2048
+    K: 160
+    N: 2048
+    input_tensor_1_size: 104857600.0
+    input_tensor_2_size: 104857600.0
+    output_tensor_size: 1342177300.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "MHA_GEMM_2_bwd2"
+  id: 28
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 160
+    M: 160
+    K: 2048
+    N: 2048
+    input_tensor_1_size: 104857600.0
+    input_tensor_2_size: 1342177300.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "V_bwd"
+  id: 29
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_weight {
+    outer: 1
+    M: 25600
+    K: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    weight_tensor_size: 1310720000.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "DropOut_1_bwd"
+  id: 30
+  config: -1
+  fwd_bwd: BWD
+  type: SIMD
+  elementwise_input1 {
+    outer: 160
+    M: 2048
+    N: 2048
+    input_tensor_size: 1342177300.0
+    output_tensor_size: 1342177300.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "SOFTMAX_bwd"
+  id: 31
+  config: -1
+  fwd_bwd: BWD
+  type: SIMD
+  elementwise_input1 {
+    outer: 160
+    M: 2048
+    N: 2048
+    input_tensor_size: 1342177300.0
+    output_tensor_size: 1342177300.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "MHA_GEMM_1_bwd1"
+  id: 32
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 160
+    M: 160
+    K: 2048
+    N: 2048
+    input_tensor_1_size: 1342177300.0
+    input_tensor_2_size: 104857600.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "MHA_GEMM_1_bwd2"
+  id: 33
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 160
+    M: 160
+    K: 2048
+    N: 2048
+    input_tensor_1_size: 1342177300.0
+    input_tensor_2_size: 104857600.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "Q_bwd"
+  id: 34
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_weight {
+    outer: 160
+    M: 160
+    K: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    weight_tensor_size: 1310720000.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "K_bwd"
+  id: 35
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_weight {
+    outer: 160
+    M: 160
+    K: 25600
+    N: 2048
+    input_tensor_size: 104857600.0
+    weight_tensor_size: 1310720000.0
+    output_tensor_size: 104857600.0
+    tiling: N_TILING
+  }
+}
+kernels {
+  name: "FFN1_bwd_weight_update"
+  id: 36
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 1
+    M: 102400
+    K: 2048
+    N: 25600
+    input_tensor_1_size: 104857600.0
+    input_tensor_2_size: 419430400.0
+    output_tensor_size: 5242880000.0
+    communication_type: ALL_REDUCE_PERIODIC
+    communication_size: 5242880000.0
+    tiling: K_TILING
+  }
+}
+kernels {
+  name: "FFN0_bwd_weight_update"
+  id: 37
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 1
+    M: 25600
+    K: 2048
+    N: 102400
+    input_tensor_1_size: 419430400.0
+    input_tensor_2_size: 104857600.0
+    output_tensor_size: 5242880000.0
+    communication_type: ALL_REDUCE_PERIODIC
+    communication_size: 5242880000.0
+    tiling: K_TILING
+  }
+}
+kernels {
+  name: "PROJ_GEMM_bwd_weight_update"
+  id: 38
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 1
+    M: 25600
+    K: 2048
+    N: 25600
+    input_tensor_1_size: 104857600.0
+    input_tensor_2_size: 104857600.0
+    output_tensor_size: 1310720000.0
+    communication_type: ALL_REDUCE_PERIODIC
+    communication_size: 1310720000.0
+    tiling: K_TILING
+  }
+}
+kernels {
+  name: "V_bwd_weight_update"
+  id: 39
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 1
+    M: 25600
+    K: 2048
+    N: 25600
+    input_tensor_1_size: 104857600.0
+    input_tensor_2_size: 104857600.0
+    output_tensor_size: 1310720000.0
+    communication_type: ALL_REDUCE_PERIODIC
+    communication_size: 1310720000.0
+    tiling: K_TILING
+  }
+}
+kernels {
+  name: "K_bwd_weight_update"
+  id: 40
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 1
+    M: 25600
+    K: 2048
+    N: 25600
+    input_tensor_1_size: 104857600.0
+    input_tensor_2_size: 104857600.0
+    output_tensor_size: 1310720000.0
+    communication_type: ALL_REDUCE_PERIODIC
+    communication_size: 1310720000.0
+    tiling: K_TILING
+  }
+}
+kernels {
+  name: "Q_bwd_weight_update"
+  id: 41
+  config: -1
+  fwd_bwd: BWD
+  type: SYSTOLIC
+  gemm_input1_input2 {
+    outer: 1
+    M: 25600
+    K: 2048
+    N: 25600
+    input_tensor_1_size: 104857600.0
+    input_tensor_2_size: 104857600.0
+    output_tensor_size: 1310720000.0
+    communication_type: ALL_REDUCE_PERIODIC
+    communication_size: 1310720000.0
+    tiling: K_TILING
+  }
+}
+connections {
+  startIdx: 1
+  endIdx: 2
+  id: 1
+}
+connections {
+  startIdx: 2
+  endIdx: 3
+  id: 2
+}
+connections {
+  startIdx: 2
+  endIdx: 4
+  id: 3
+}
+connections {
+  startIdx: 2
+  endIdx: 5
+  id: 4
+}
+connections {
+  startIdx: 3
+  endIdx: 6
+  id: 5
+}
+connections {
+  startIdx: 4
+  endIdx: 6
+  id: 6
+}
+connections {
+  startIdx: 6
+  endIdx: 7
+  id: 7
+}
+connections {
+  startIdx: 7
+  endIdx: 8
+  id: 8
+}
+connections {
+  startIdx: 5
+  endIdx: 9
+  id: 9
+}
+connections {
+  startIdx: 8
+  endIdx: 9
+  id: 10
+}
+connections {
+  startIdx: 9
+  endIdx: 10
+  id: 11
+}
+connections {
+  startIdx: 10
+  endIdx: 11
+  id: 12
+}
+connections {
+  startIdx: 11
+  endIdx: 12
+  id: 13
+}
+connections {
+  startIdx: 1
+  endIdx: 12
+  id: 14
+}
+connections {
+  startIdx: 12
+  endIdx: 13
+  id: 15
+}
+connections {
+  startIdx: 13
+  endIdx: 14
+  id: 16
+}
+connections {
+  startIdx: 14
+  endIdx: 15
+  id: 17
+}
+connections {
+  startIdx: 15
+  endIdx: 16
+  id: 18
+}
+connections {
+  startIdx: 16
+  endIdx: 17
+  id: 19
+}
+connections {
+  startIdx: 17
+  endIdx: 18
+  id: 20
+}
+connections {
+  startIdx: 12
+  endIdx: 18
+  id: 21
+}
+connections {
+  startIdx: 19
+  endIdx: 20
+  id: 22
+}
+connections {
+  startIdx: 20
+  endIdx: 21
+  id: 23
+}
+connections {
+  startIdx: 21
+  endIdx: 22
+  id: 24
+}
+connections {
+  startIdx: 22
+  endIdx: 23
+  id: 25
+}
+connections {
+  startIdx: 23
+  endIdx: 24
+  id: 26
+}
+connections {
+  startIdx: 24
+  endIdx: 25
+  id: 27
+}
+connections {
+  startIdx: 25
+  endIdx: 26
+  id: 28
+}
+connections {
+  startIdx: 26
+  endIdx: 27
+  id: 29
+}
+connections {
+  startIdx: 5
+  endIdx: 27
+  id: 30
+}
+connections {
+  startIdx: 26
+  endIdx: 28
+  id: 31
+}
+connections {
+  startIdx: 8
+  endIdx: 28
+  id: 32
+}
+connections {
+  startIdx: 27
+  endIdx: 30
+  id: 33
+}
+connections {
+  startIdx: 28
+  endIdx: 29
+  id: 34
+}
+connections {
+  startIdx: 30
+  endIdx: 31
+  id: 35
+}
+connections {
+  startIdx: 31
+  endIdx: 32
+  id: 36
+}
+connections {
+  startIdx: 31
+  endIdx: 33
+  id: 37
+}
+connections {
+  startIdx: 4
+  endIdx: 32
+  id: 38
+}
+connections {
+  startIdx: 3
+  endIdx: 33
+  id: 39
+}
+connections {
+  startIdx: 32
+  endIdx: 34
+  id: 40
+}
+connections {
+  startIdx: 33
+  endIdx: 35
+  id: 41
+}
+connections {
+  startIdx: 20
+  endIdx: 36
+  id: 42
+}
+connections {
+  startIdx: 15
+  endIdx: 36
+  id: 43
+}
+connections {
+  startIdx: 22
+  endIdx: 37
+  id: 44
+}
+connections {
+  startIdx: 13
+  endIdx: 37
+  id: 45
+}
+connections {
+  startIdx: 25
+  endIdx: 38
+  id: 46
+}
+connections {
+  startIdx: 9
+  endIdx: 38
+  id: 47
+}
+connections {
+  startIdx: 28
+  endIdx: 39
+  id: 48
+}
+connections {
+  startIdx: 2
+  endIdx: 39
+  id: 49
+}
+connections {
+  startIdx: 33
+  endIdx: 40
+  id: 50
+}
+connections {
+  startIdx: 2
+  endIdx: 40
+  id: 51
+}
+connections {
+  startIdx: 32
+  endIdx: 41
+  id: 52
+}
+connections {
+  startIdx: 2
+  endIdx: 41
+  id: 53
+}
+
+
+
+}
+system {
+  num_chip: 1024
+  
+  sw_sw {
+	x: 16
+	y: 64
+	
+	link_bw_x: 50.0
+	link_bw_y: 50.0
+  }
+  
+  accelerator {
+    core: 1280
+    systolic_width: 32
+    systolic_height: 6
+    sram_cap: 671088640.0
+    freq: 1.25
+    dram_bw: 200.0
+    dram_cap: 3298534883328.0
+  }
+  
+  dram_bw_dse: False
+  net_bw_dse: False
+}
+cost {
+  link_unit_price: 2.0
+  switch_unit_price: 24.0
+  dram_unit_price: 1.0
+}
+training {
+	llm {
+		hidden_dim: 25600
+		head_dim: 160
+		num_head: 160
+		seq_len: 2048
+		num_layer: 128
+		seq_tile_size: 32
+	}
+
+	global_batch_size: 8192
+	micro_batch_size: 4
+	
+	optimization: FLASHATTENTION
+	num_config: 4
+	objective: PERFORMANCE
+		
+	training: True
+	skip_inter_chip: False
+	pydot: True
+	word: 2
+}

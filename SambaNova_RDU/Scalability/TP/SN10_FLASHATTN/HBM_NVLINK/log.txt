@@ -1,0 +1,4209 @@
+Add_Prev_Layer 0
+LayerNorm_1 1
+Q 2
+K 3
+V 4
+MHA_GEMM_1 5
+SOFTMAX 6
+DropOut_1 7
+MHA_GEMM_2 8
+PROJ_GEMM 9
+DropOut_2 10
+Add_1 11
+LayerNorm_2 12
+FFN0 13
+GeLU 14
+FFN1 15
+DropOut_3 16
+Add_2 17
+Loss_bwd 18
+DropOut_3_bwd 19
+FFN1_bwd 20
+GeLU_bwd 21
+FFN0_bwd 22
+LayerNorm_2_bwd 23
+DropOut_2_bwd 24
+PROJ_GEMM_bwd 25
+MHA_GEMM_2_bwd1 26
+MHA_GEMM_2_bwd2 27
+V_bwd 28
+DropOut_1_bwd 29
+SOFTMAX_bwd 30
+MHA_GEMM_1_bwd1 31
+MHA_GEMM_1_bwd2 32
+Q_bwd 33
+K_bwd 34
+FFN1_bwd_weight_update 35
+FFN0_bwd_weight_update 36
+PROJ_GEMM_bwd_weight_update 37
+V_bwd_weight_update 38
+K_bwd_weight_update 39
+Q_bwd_weight_update 40
+Add_Prev_Layer LayerNorm_1 0
+LayerNorm_1 Q 1
+LayerNorm_1 K 2
+LayerNorm_1 V 3
+Q MHA_GEMM_1 4
+K MHA_GEMM_1 5
+MHA_GEMM_1 SOFTMAX 6
+SOFTMAX DropOut_1 7
+V MHA_GEMM_2 8
+DropOut_1 MHA_GEMM_2 9
+MHA_GEMM_2 PROJ_GEMM 10
+PROJ_GEMM DropOut_2 11
+DropOut_2 Add_1 12
+Add_Prev_Layer Add_1 13
+Add_1 LayerNorm_2 14
+LayerNorm_2 FFN0 15
+FFN0 GeLU 16
+GeLU FFN1 17
+FFN1 DropOut_3 18
+DropOut_3 Add_2 19
+Add_1 Add_2 20
+Loss_bwd DropOut_3_bwd 21
+DropOut_3_bwd FFN1_bwd 22
+FFN1_bwd GeLU_bwd 23
+GeLU_bwd FFN0_bwd 24
+FFN0_bwd LayerNorm_2_bwd 25
+LayerNorm_2_bwd DropOut_2_bwd 26
+DropOut_2_bwd PROJ_GEMM_bwd 27
+PROJ_GEMM_bwd MHA_GEMM_2_bwd1 28
+V MHA_GEMM_2_bwd1 29
+PROJ_GEMM_bwd MHA_GEMM_2_bwd2 30
+DropOut_1 MHA_GEMM_2_bwd2 31
+MHA_GEMM_2_bwd1 DropOut_1_bwd 32
+MHA_GEMM_2_bwd2 V_bwd 33
+DropOut_1_bwd SOFTMAX_bwd 34
+SOFTMAX_bwd MHA_GEMM_1_bwd1 35
+SOFTMAX_bwd MHA_GEMM_1_bwd2 36
+K MHA_GEMM_1_bwd1 37
+Q MHA_GEMM_1_bwd2 38
+MHA_GEMM_1_bwd1 Q_bwd 39
+MHA_GEMM_1_bwd2 K_bwd 40
+DropOut_3_bwd FFN1_bwd_weight_update 41
+GeLU FFN1_bwd_weight_update 42
+GeLU_bwd FFN0_bwd_weight_update 43
+LayerNorm_2 FFN0_bwd_weight_update 44
+DropOut_2_bwd PROJ_GEMM_bwd_weight_update 45
+MHA_GEMM_2 PROJ_GEMM_bwd_weight_update 46
+MHA_GEMM_2_bwd2 V_bwd_weight_update 47
+LayerNorm_1 V_bwd_weight_update 48
+MHA_GEMM_1_bwd2 K_bwd_weight_update 49
+LayerNorm_1 K_bwd_weight_update 50
+MHA_GEMM_1_bwd1 Q_bwd_weight_update 51
+LayerNorm_1 Q_bwd_weight_update 52
+Set parameter Username
+Academic license - for non-commercial use only - expires 2024-11-05
+Set parameter NonConvex to value 2
+Set parameter Threads to value 128
+Set parameter MIPGap to value 1e-10
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (linux64)
+
+CPU model: Intel(R) Xeon(R) CPU E7-8890 v3 @ 2.50GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 72 physical cores, 144 logical processors, using up to 128 threads
+
+Optimize a model with 259 rows, 712 columns and 729 nonzeros
+Model fingerprint: 0x92caa168
+Model has 106 quadratic constraints
+Model has 694 general constraints
+Variable types: 148 continuous, 564 integer (523 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  QMatrix range    [2e+00, 1e+09]
+  QLMatrix range   [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 3e+00]
+  RHS range        [1e+00, 1e+00]
+  GenCon rhs range [1e+00, 5e+09]
+  GenCon coe range [1e+00, 1e+00]
+Warning: Quadratic constraints contain large coefficients
+Warning: Model contains large rhs on indicator constraints
+         Consider reformulating model or setting NumericFocus parameter
+         to avoid numerical issues.
+Presolve removed 247 rows and 641 columns
+Presolve time: 0.01s
+Presolved: 118 rows, 97 columns, 278 nonzeros
+Presolved model has 12 SOS constraint(s)
+Variable types: 6 continuous, 91 integer (57 binary)
+Found heuristic solution: objective 9.437184e+08
+Found heuristic solution: objective 8.388608e+08
+
+Root relaxation: objective 2.097152e+08, 2 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 2.0972e+08    0    3 8.3886e+08 2.0972e+08  75.0%     -    0s
+H    0     0                    7.340032e+08 2.0972e+08  71.4%     -    0s
+     0     0 3.1457e+08    0    3 7.3400e+08 3.1457e+08  57.1%     -    0s
+     0     2 3.1457e+08    0    3 7.3400e+08 3.1457e+08  57.1%     -    0s
+*    3     0               2    5.242880e+08 3.1457e+08  40.0%   3.0    0s
+*    4     0               2    4.194304e+08 4.1943e+08  0.00%   2.8    0s
+
+Explored 5 nodes (13 simplex iterations) in 0.15 seconds (0.01 work units)
+Thread count was 128 (of 144 available processors)
+
+Solution count 5: 4.1943e+08 5.24288e+08 7.34003e+08 ... 9.43718e+08
+
+Optimal solution found (tolerance 1.00e-10)
+Best objective 4.194304000000e+08, best bound 4.194304000000e+08, gap 0.0000%
+sharding[0,0] 0.0
+sharding[0,1] 0.0
+sharding[0,2] 0.0
+sharding[0,3] 0.0
+sharding[0,4] 1.0
+sharding[1,0] 0.0
+sharding[1,1] 0.0
+sharding[1,2] 0.0
+sharding[1,3] 0.0
+sharding[1,4] 1.0
+sharding[2,0] 1.0
+sharding[2,1] 0.0
+sharding[2,2] 0.0
+sharding[2,3] 0.0
+sharding[2,4] 0.0
+sharding[3,0] 1.0
+sharding[3,1] 0.0
+sharding[3,2] 0.0
+sharding[3,3] 0.0
+sharding[3,4] 0.0
+sharding[4,0] 1.0
+sharding[4,1] 0.0
+sharding[4,2] 0.0
+sharding[4,3] 0.0
+sharding[4,4] 0.0
+sharding[5,0] 1.0
+sharding[5,1] 0.0
+sharding[5,2] 0.0
+sharding[5,3] 0.0
+sharding[5,4] 0.0
+sharding[6,0] 1.0
+sharding[6,1] 0.0
+sharding[6,2] 0.0
+sharding[6,3] 0.0
+sharding[6,4] 0.0
+sharding[7,0] 1.0
+sharding[7,1] 0.0
+sharding[7,2] 0.0
+sharding[7,3] 0.0
+sharding[7,4] 0.0
+sharding[8,0] 1.0
+sharding[8,1] 0.0
+sharding[8,2] 0.0
+sharding[8,3] 0.0
+sharding[8,4] 0.0
+sharding[9,0] 0.0
+sharding[9,1] 0.0
+sharding[9,2] 1.0
+sharding[9,3] 0.0
+sharding[9,4] 0.0
+sharding[10,0] 0.0
+sharding[10,1] 0.0
+sharding[10,2] 0.0
+sharding[10,3] 0.0
+sharding[10,4] 1.0
+sharding[11,0] 0.0
+sharding[11,1] 0.0
+sharding[11,2] 0.0
+sharding[11,3] 0.0
+sharding[11,4] 1.0
+sharding[12,0] 0.0
+sharding[12,1] 0.0
+sharding[12,2] 0.0
+sharding[12,3] 0.0
+sharding[12,4] 1.0
+sharding[13,0] 0.0
+sharding[13,1] 1.0
+sharding[13,2] 0.0
+sharding[13,3] 0.0
+sharding[13,4] 0.0
+sharding[14,0] 0.0
+sharding[14,1] 1.0
+sharding[14,2] 0.0
+sharding[14,3] 0.0
+sharding[14,4] 0.0
+sharding[15,0] 0.0
+sharding[15,1] 0.0
+sharding[15,2] 1.0
+sharding[15,3] 0.0
+sharding[15,4] 0.0
+sharding[16,0] 0.0
+sharding[16,1] 0.0
+sharding[16,2] 0.0
+sharding[16,3] 0.0
+sharding[16,4] 1.0
+sharding[17,0] 0.0
+sharding[17,1] 1.0
+sharding[17,2] 0.0
+sharding[17,3] 0.0
+sharding[17,4] 0.0
+sharding[18,0] 0.0
+sharding[18,1] 0.0
+sharding[18,2] 0.0
+sharding[18,3] 0.0
+sharding[18,4] 1.0
+sharding[19,0] 0.0
+sharding[19,1] 0.0
+sharding[19,2] 0.0
+sharding[19,3] 0.0
+sharding[19,4] 1.0
+sharding[20,0] 0.0
+sharding[20,1] 1.0
+sharding[20,2] 0.0
+sharding[20,3] 0.0
+sharding[20,4] 0.0
+sharding[21,0] 0.0
+sharding[21,1] 1.0
+sharding[21,2] 0.0
+sharding[21,3] 0.0
+sharding[21,4] 0.0
+sharding[22,0] 0.0
+sharding[22,1] 0.0
+sharding[22,2] 1.0
+sharding[22,3] 0.0
+sharding[22,4] 0.0
+sharding[23,0] 0.0
+sharding[23,1] 0.0
+sharding[23,2] 0.0
+sharding[23,3] 0.0
+sharding[23,4] 1.0
+sharding[24,0] 0.0
+sharding[24,1] 0.0
+sharding[24,2] 0.0
+sharding[24,3] 0.0
+sharding[24,4] 1.0
+sharding[25,0] 0.0
+sharding[25,1] 1.0
+sharding[25,2] 0.0
+sharding[25,3] 0.0
+sharding[25,4] 0.0
+sharding[26,0] 1.0
+sharding[26,1] 0.0
+sharding[26,2] 0.0
+sharding[26,3] 0.0
+sharding[26,4] 0.0
+sharding[27,0] 1.0
+sharding[27,1] 0.0
+sharding[27,2] 0.0
+sharding[27,3] 0.0
+sharding[27,4] 0.0
+sharding[28,0] 0.0
+sharding[28,1] 0.0
+sharding[28,2] 1.0
+sharding[28,3] 0.0
+sharding[28,4] 0.0
+sharding[29,0] 1.0
+sharding[29,1] 0.0
+sharding[29,2] 0.0
+sharding[29,3] 0.0
+sharding[29,4] 0.0
+sharding[30,0] 1.0
+sharding[30,1] 0.0
+sharding[30,2] 0.0
+sharding[30,3] 0.0
+sharding[30,4] 0.0
+sharding[31,0] 1.0
+sharding[31,1] 0.0
+sharding[31,2] 0.0
+sharding[31,3] 0.0
+sharding[31,4] 0.0
+sharding[32,0] 1.0
+sharding[32,1] 0.0
+sharding[32,2] 0.0
+sharding[32,3] 0.0
+sharding[32,4] 0.0
+sharding[33,0] 1.0
+sharding[33,1] 0.0
+sharding[33,2] 0.0
+sharding[33,3] 0.0
+sharding[33,4] 0.0
+sharding[34,0] 1.0
+sharding[34,1] 0.0
+sharding[34,2] 0.0
+sharding[34,3] 0.0
+sharding[34,4] 0.0
+sharding[35,0] 0.0
+sharding[35,1] 1.0
+sharding[35,2] 0.0
+sharding[35,3] 0.0
+sharding[35,4] 0.0
+sharding[36,0] 0.0
+sharding[36,1] 1.0
+sharding[36,2] 0.0
+sharding[36,3] 0.0
+sharding[36,4] 0.0
+sharding[37,0] 0.0
+sharding[37,1] 1.0
+sharding[37,2] 0.0
+sharding[37,3] 0.0
+sharding[37,4] 0.0
+sharding[38,0] 0.0
+sharding[38,1] 1.0
+sharding[38,2] 0.0
+sharding[38,3] 0.0
+sharding[38,4] 0.0
+sharding[39,0] 0.0
+sharding[39,1] 1.0
+sharding[39,2] 0.0
+sharding[39,3] 0.0
+sharding[39,4] 0.0
+sharding[40,0] 0.0
+sharding[40,1] 1.0
+sharding[40,2] 0.0
+sharding[40,3] 0.0
+sharding[40,4] 0.0
+communication_type[0] 0.0
+communication_type[1] 0.0
+communication_type[2] 0.0
+communication_type[3] 0.0
+communication_type[4] 0.0
+communication_type[5] 0.0
+communication_type[6] 0.0
+communication_type[7] 0.0
+communication_type[8] 0.0
+communication_type[9] 1.0
+communication_type[10] 0.0
+communication_type[11] 0.0
+communication_type[12] 0.0
+communication_type[13] 0.0
+communication_type[14] 0.0
+communication_type[15] 1.0
+communication_type[16] 0.0
+communication_type[17] 0.0
+communication_type[18] 0.0
+communication_type[19] 0.0
+communication_type[20] 0.0
+communication_type[21] 0.0
+communication_type[22] 1.0
+communication_type[23] 0.0
+communication_type[24] 0.0
+communication_type[25] 0.0
+communication_type[26] 0.0
+communication_type[27] 0.0
+communication_type[28] 1.0
+communication_type[29] 0.0
+communication_type[30] 0.0
+communication_type[31] 0.0
+communication_type[32] 0.0
+communication_type[33] 0.0
+communication_type[34] 0.0
+communication_type[35] 0.0
+communication_type[36] 0.0
+communication_type[37] 0.0
+communication_type[38] 0.0
+communication_type[39] 0.0
+communication_type[40] 0.0
+communication_size[0] 0.0
+communication_size[1] 0.0
+communication_size[2] 0.0
+communication_size[3] 0.0
+communication_size[4] 0.0
+communication_size[5] 0.0
+communication_size[6] 0.0
+communication_size[7] 0.0
+communication_size[8] 0.0
+communication_size[9] 104857600.0
+communication_size[10] 0.0
+communication_size[11] 0.0
+communication_size[12] 0.0
+communication_size[13] -0.0
+communication_size[14] 0.0
+communication_size[15] 104857600.0
+communication_size[16] 0.0
+communication_size[17] 0.0
+communication_size[18] 0.0
+communication_size[19] 0.0
+communication_size[20] 0.0
+communication_size[21] 0.0
+communication_size[22] 104857600.0
+communication_size[23] 0.0
+communication_size[24] 0.0
+communication_size[25] 0.0
+communication_size[26] 0.0
+communication_size[27] 0.0
+communication_size[28] 104857600.0
+communication_size[29] 0.0
+communication_size[30] 0.0
+communication_size[31] 0.0
+communication_size[32] 0.0
+communication_size[33] 0.0
+communication_size[34] 0.0
+communication_size[35] 0.0
+communication_size[36] 0.0
+communication_size[37] 0.0
+communication_size[38] 0.0
+communication_size[39] 0.0
+communication_size[40] 0.0
+upstream_sharding[0,0] 1.0
+upstream_sharding[0,1] 0.0
+upstream_sharding[0,2] 0.0
+upstream_sharding[1,0] 1.0
+upstream_sharding[1,1] 0.0
+upstream_sharding[1,2] 0.0
+upstream_sharding[2,0] 1.0
+upstream_sharding[2,1] 0.0
+upstream_sharding[2,2] 0.0
+upstream_sharding[3,0] 1.0
+upstream_sharding[3,1] 0.0
+upstream_sharding[3,2] 0.0
+upstream_sharding[4,0] 0.0
+upstream_sharding[4,1] 0.0
+upstream_sharding[4,2] 1.0
+upstream_sharding[5,0] 0.0
+upstream_sharding[5,1] 0.0
+upstream_sharding[5,2] 1.0
+upstream_sharding[6,0] 0.0
+upstream_sharding[6,1] 0.0
+upstream_sharding[6,2] 1.0
+upstream_sharding[7,0] 0.0
+upstream_sharding[7,1] 0.0
+upstream_sharding[7,2] 1.0
+upstream_sharding[8,0] 0.0
+upstream_sharding[8,1] 0.0
+upstream_sharding[8,2] 1.0
+upstream_sharding[9,0] 0.0
+upstream_sharding[9,1] 0.0
+upstream_sharding[9,2] 1.0
+upstream_sharding[10,0] 0.0
+upstream_sharding[10,1] 0.0
+upstream_sharding[10,2] 1.0
+upstream_sharding[11,0] 1.0
+upstream_sharding[11,1] 0.0
+upstream_sharding[11,2] 0.0
+upstream_sharding[12,0] 1.0
+upstream_sharding[12,1] 0.0
+upstream_sharding[12,2] 0.0
+upstream_sharding[13,0] 1.0
+upstream_sharding[13,1] 0.0
+upstream_sharding[13,2] 0.0
+upstream_sharding[14,0] 1.0
+upstream_sharding[14,1] 0.0
+upstream_sharding[14,2] 0.0
+upstream_sharding[15,0] 1.0
+upstream_sharding[15,1] 0.0
+upstream_sharding[15,2] 0.0
+upstream_sharding[16,0] 0.0
+upstream_sharding[16,1] 0.0
+upstream_sharding[16,2] 1.0
+upstream_sharding[17,0] 0.0
+upstream_sharding[17,1] 0.0
+upstream_sharding[17,2] 1.0
+upstream_sharding[18,0] 1.0
+upstream_sharding[18,1] 0.0
+upstream_sharding[18,2] 0.0
+upstream_sharding[19,0] 1.0
+upstream_sharding[19,1] 0.0
+upstream_sharding[19,2] 0.0
+upstream_sharding[20,0] 1.0
+upstream_sharding[20,1] 0.0
+upstream_sharding[20,2] 0.0
+upstream_sharding[21,0] 1.0
+upstream_sharding[21,1] 0.0
+upstream_sharding[21,2] 0.0
+upstream_sharding[22,0] 1.0
+upstream_sharding[22,1] 0.0
+upstream_sharding[22,2] 0.0
+upstream_sharding[23,0] 0.0
+upstream_sharding[23,1] 0.0
+upstream_sharding[23,2] 1.0
+upstream_sharding[24,0] 0.0
+upstream_sharding[24,1] 0.0
+upstream_sharding[24,2] 1.0
+upstream_sharding[25,0] 1.0
+upstream_sharding[25,1] 0.0
+upstream_sharding[25,2] 0.0
+upstream_sharding[26,0] 1.0
+upstream_sharding[26,1] 0.0
+upstream_sharding[26,2] 0.0
+upstream_sharding[27,0] 1.0
+upstream_sharding[27,1] 0.0
+upstream_sharding[27,2] 0.0
+upstream_sharding[28,0] 0.0
+upstream_sharding[28,1] 0.0
+upstream_sharding[28,2] 1.0
+upstream_sharding[29,0] 0.0
+upstream_sharding[29,1] 0.0
+upstream_sharding[29,2] 1.0
+upstream_sharding[30,0] 0.0
+upstream_sharding[30,1] 0.0
+upstream_sharding[30,2] 1.0
+upstream_sharding[31,0] 0.0
+upstream_sharding[31,1] 0.0
+upstream_sharding[31,2] 1.0
+upstream_sharding[32,0] 0.0
+upstream_sharding[32,1] 0.0
+upstream_sharding[32,2] 1.0
+upstream_sharding[33,0] 0.0
+upstream_sharding[33,1] 0.0
+upstream_sharding[33,2] 1.0
+upstream_sharding[34,0] 0.0
+upstream_sharding[34,1] 0.0
+upstream_sharding[34,2] 1.0
+upstream_sharding[35,0] 0.0
+upstream_sharding[35,1] 0.0
+upstream_sharding[35,2] 1.0
+upstream_sharding[36,0] 0.0
+upstream_sharding[36,1] 0.0
+upstream_sharding[36,2] 1.0
+upstream_sharding[37,0] 0.0
+upstream_sharding[37,1] 0.0
+upstream_sharding[37,2] 1.0
+upstream_sharding[38,0] 0.0
+upstream_sharding[38,1] 0.0
+upstream_sharding[38,2] 1.0
+upstream_sharding[39,0] 0.0
+upstream_sharding[39,1] 0.0
+upstream_sharding[39,2] 1.0
+upstream_sharding[40,0] 0.0
+upstream_sharding[40,1] 0.0
+upstream_sharding[40,2] 1.0
+upstream_sharding[41,0] 1.0
+upstream_sharding[41,1] 0.0
+upstream_sharding[41,2] 0.0
+upstream_sharding[42,0] 0.0
+upstream_sharding[42,1] 0.0
+upstream_sharding[42,2] 1.0
+upstream_sharding[43,0] 0.0
+upstream_sharding[43,1] 0.0
+upstream_sharding[43,2] 1.0
+upstream_sharding[44,0] 1.0
+upstream_sharding[44,1] 0.0
+upstream_sharding[44,2] 0.0
+upstream_sharding[45,0] 1.0
+upstream_sharding[45,1] 0.0
+upstream_sharding[45,2] 0.0
+upstream_sharding[46,0] 0.0
+upstream_sharding[46,1] 0.0
+upstream_sharding[46,2] 1.0
+upstream_sharding[47,0] 0.0
+upstream_sharding[47,1] 0.0
+upstream_sharding[47,2] 1.0
+upstream_sharding[48,0] 1.0
+upstream_sharding[48,1] 0.0
+upstream_sharding[48,2] 0.0
+upstream_sharding[49,0] 0.0
+upstream_sharding[49,1] 0.0
+upstream_sharding[49,2] 1.0
+upstream_sharding[50,0] 1.0
+upstream_sharding[50,1] 0.0
+upstream_sharding[50,2] 0.0
+upstream_sharding[51,0] 0.0
+upstream_sharding[51,1] 0.0
+upstream_sharding[51,2] 1.0
+upstream_sharding[52,0] 1.0
+upstream_sharding[52,1] 0.0
+upstream_sharding[52,2] 0.0
+downstream_sharding[0,0] 1.0
+downstream_sharding[0,1] 0.0
+downstream_sharding[0,2] 0.0
+downstream_sharding[1,0] 0.0
+downstream_sharding[1,1] 0.0
+downstream_sharding[1,2] 1.0
+downstream_sharding[2,0] 0.0
+downstream_sharding[2,1] 0.0
+downstream_sharding[2,2] 1.0
+downstream_sharding[3,0] 0.0
+downstream_sharding[3,1] 0.0
+downstream_sharding[3,2] 1.0
+downstream_sharding[4,0] 0.0
+downstream_sharding[4,1] 0.0
+downstream_sharding[4,2] 1.0
+downstream_sharding[5,0] 0.0
+downstream_sharding[5,1] 0.0
+downstream_sharding[5,2] 1.0
+downstream_sharding[6,0] 0.0
+downstream_sharding[6,1] 0.0
+downstream_sharding[6,2] 1.0
+downstream_sharding[7,0] 0.0
+downstream_sharding[7,1] 0.0
+downstream_sharding[7,2] 1.0
+downstream_sharding[8,0] 0.0
+downstream_sharding[8,1] 0.0
+downstream_sharding[8,2] 1.0
+downstream_sharding[9,0] 0.0
+downstream_sharding[9,1] 0.0
+downstream_sharding[9,2] 1.0
+downstream_sharding[10,0] 0.0
+downstream_sharding[10,1] 0.0
+downstream_sharding[10,2] 1.0
+downstream_sharding[11,0] 1.0
+downstream_sharding[11,1] 0.0
+downstream_sharding[11,2] 0.0
+downstream_sharding[12,0] 1.0
+downstream_sharding[12,1] 0.0
+downstream_sharding[12,2] 0.0
+downstream_sharding[13,0] 1.0
+downstream_sharding[13,1] 0.0
+downstream_sharding[13,2] 0.0
+downstream_sharding[14,0] 1.0
+downstream_sharding[14,1] 0.0
+downstream_sharding[14,2] 0.0
+downstream_sharding[15,0] 1.0
+downstream_sharding[15,1] 0.0
+downstream_sharding[15,2] 0.0
+downstream_sharding[16,0] 0.0
+downstream_sharding[16,1] 0.0
+downstream_sharding[16,2] 1.0
+downstream_sharding[17,0] 0.0
+downstream_sharding[17,1] 0.0
+downstream_sharding[17,2] 1.0
+downstream_sharding[18,0] 1.0
+downstream_sharding[18,1] 0.0
+downstream_sharding[18,2] 0.0
+downstream_sharding[19,0] 0.0
+downstream_sharding[19,1] 0.0
+downstream_sharding[19,2] 1.0
+downstream_sharding[20,0] 0.0
+downstream_sharding[20,1] 0.0
+downstream_sharding[20,2] 1.0
+downstream_sharding[21,0] 1.0
+downstream_sharding[21,1] 0.0
+downstream_sharding[21,2] 0.0
+downstream_sharding[22,0] 1.0
+downstream_sharding[22,1] 0.0
+downstream_sharding[22,2] 0.0
+downstream_sharding[23,0] 0.0
+downstream_sharding[23,1] 0.0
+downstream_sharding[23,2] 1.0
+downstream_sharding[24,0] 0.0
+downstream_sharding[24,1] 0.0
+downstream_sharding[24,2] 1.0
+downstream_sharding[25,0] 1.0
+downstream_sharding[25,1] 0.0
+downstream_sharding[25,2] 0.0
+downstream_sharding[26,0] 1.0
+downstream_sharding[26,1] 0.0
+downstream_sharding[26,2] 0.0
+downstream_sharding[27,0] 1.0
+downstream_sharding[27,1] 0.0
+downstream_sharding[27,2] 0.0
+downstream_sharding[28,0] 0.0
+downstream_sharding[28,1] 0.0
+downstream_sharding[28,2] 1.0
+downstream_sharding[29,0] 0.0
+downstream_sharding[29,1] 0.0
+downstream_sharding[29,2] 1.0
+downstream_sharding[30,0] 0.0
+downstream_sharding[30,1] 0.0
+downstream_sharding[30,2] 1.0
+downstream_sharding[31,0] 0.0
+downstream_sharding[31,1] 0.0
+downstream_sharding[31,2] 1.0
+downstream_sharding[32,0] 0.0
+downstream_sharding[32,1] 0.0
+downstream_sharding[32,2] 1.0
+downstream_sharding[33,0] 0.0
+downstream_sharding[33,1] 0.0
+downstream_sharding[33,2] 1.0
+downstream_sharding[34,0] 0.0
+downstream_sharding[34,1] 0.0
+downstream_sharding[34,2] 1.0
+downstream_sharding[35,0] 0.0
+downstream_sharding[35,1] 0.0
+downstream_sharding[35,2] 1.0
+downstream_sharding[36,0] 0.0
+downstream_sharding[36,1] 0.0
+downstream_sharding[36,2] 1.0
+downstream_sharding[37,0] 0.0
+downstream_sharding[37,1] 0.0
+downstream_sharding[37,2] 1.0
+downstream_sharding[38,0] 0.0
+downstream_sharding[38,1] 0.0
+downstream_sharding[38,2] 1.0
+downstream_sharding[39,0] 0.0
+downstream_sharding[39,1] 0.0
+downstream_sharding[39,2] 1.0
+downstream_sharding[40,0] 0.0
+downstream_sharding[40,1] 0.0
+downstream_sharding[40,2] 1.0
+downstream_sharding[41,0] 0.0
+downstream_sharding[41,1] 0.0
+downstream_sharding[41,2] 1.0
+downstream_sharding[42,0] 0.0
+downstream_sharding[42,1] 0.0
+downstream_sharding[42,2] 1.0
+downstream_sharding[43,0] 0.0
+downstream_sharding[43,1] 0.0
+downstream_sharding[43,2] 1.0
+downstream_sharding[44,0] 0.0
+downstream_sharding[44,1] 0.0
+downstream_sharding[44,2] 1.0
+downstream_sharding[45,0] 0.0
+downstream_sharding[45,1] 0.0
+downstream_sharding[45,2] 1.0
+downstream_sharding[46,0] 0.0
+downstream_sharding[46,1] 0.0
+downstream_sharding[46,2] 1.0
+downstream_sharding[47,0] 0.0
+downstream_sharding[47,1] 0.0
+downstream_sharding[47,2] 1.0
+downstream_sharding[48,0] 0.0
+downstream_sharding[48,1] 0.0
+downstream_sharding[48,2] 1.0
+downstream_sharding[49,0] 0.0
+downstream_sharding[49,1] 0.0
+downstream_sharding[49,2] 1.0
+downstream_sharding[50,0] 0.0
+downstream_sharding[50,1] 0.0
+downstream_sharding[50,2] 1.0
+downstream_sharding[51,0] 0.0
+downstream_sharding[51,1] 0.0
+downstream_sharding[51,2] 1.0
+downstream_sharding[52,0] 0.0
+downstream_sharding[52,1] 0.0
+downstream_sharding[52,2] 1.0
+edge_communication_type[0] 0.0
+edge_communication_type[1] 0.0
+edge_communication_type[2] 0.0
+edge_communication_type[3] 0.0
+edge_communication_type[4] 0.0
+edge_communication_type[5] 0.0
+edge_communication_type[6] 0.0
+edge_communication_type[7] 0.0
+edge_communication_type[8] 0.0
+edge_communication_type[9] 0.0
+edge_communication_type[10] 0.0
+edge_communication_type[11] 0.0
+edge_communication_type[12] 0.0
+edge_communication_type[13] 0.0
+edge_communication_type[14] 0.0
+edge_communication_type[15] 0.0
+edge_communication_type[16] 0.0
+edge_communication_type[17] 0.0
+edge_communication_type[18] 0.0
+edge_communication_type[19] 0.0
+edge_communication_type[20] 0.0
+edge_communication_type[21] 0.0
+edge_communication_type[22] 0.0
+edge_communication_type[23] 0.0
+edge_communication_type[24] 0.0
+edge_communication_type[25] 0.0
+edge_communication_type[26] 0.0
+edge_communication_type[27] 0.0
+edge_communication_type[28] 0.0
+edge_communication_type[29] 0.0
+edge_communication_type[30] 0.0
+edge_communication_type[31] 0.0
+edge_communication_type[32] 0.0
+edge_communication_type[33] 0.0
+edge_communication_type[34] 0.0
+edge_communication_type[35] 0.0
+edge_communication_type[36] 0.0
+edge_communication_type[37] 0.0
+edge_communication_type[38] 0.0
+edge_communication_type[39] 0.0
+edge_communication_type[40] 0.0
+edge_communication_type[41] 0.0
+edge_communication_type[42] 0.0
+edge_communication_type[43] 0.0
+edge_communication_type[44] 0.0
+edge_communication_type[45] 0.0
+edge_communication_type[46] 0.0
+edge_communication_type[47] 0.0
+edge_communication_type[48] 0.0
+edge_communication_type[49] 0.0
+edge_communication_type[50] 0.0
+edge_communication_type[51] 0.0
+edge_communication_type[52] 0.0
+edge_communication_size[0] -0.0
+edge_communication_size[1] 0.0
+edge_communication_size[2] 0.0
+edge_communication_size[3] 0.0
+edge_communication_size[4] 0.0
+edge_communication_size[5] 0.0
+edge_communication_size[6] 0.0
+edge_communication_size[7] 0.0
+edge_communication_size[8] 0.0
+edge_communication_size[9] 0.0
+edge_communication_size[10] 0.0
+edge_communication_size[11] -0.0
+edge_communication_size[12] -0.0
+edge_communication_size[13] -0.0
+edge_communication_size[14] -0.0
+edge_communication_size[15] 0.0
+edge_communication_size[16] -0.0
+edge_communication_size[17] 0.0
+edge_communication_size[18] -0.0
+edge_communication_size[19] 0.0
+edge_communication_size[20] 0.0
+edge_communication_size[21] 0.0
+edge_communication_size[22] 0.0
+edge_communication_size[23] -0.0
+edge_communication_size[24] 0.0
+edge_communication_size[25] -0.0
+edge_communication_size[26] -0.0
+edge_communication_size[27] 0.0
+edge_communication_size[28] 0.0
+edge_communication_size[29] 0.0
+edge_communication_size[30] 0.0
+edge_communication_size[31] 0.0
+edge_communication_size[32] 0.0
+edge_communication_size[33] 0.0
+edge_communication_size[34] 0.0
+edge_communication_size[35] 0.0
+edge_communication_size[36] 0.0
+edge_communication_size[37] 0.0
+edge_communication_size[38] 0.0
+edge_communication_size[39] 0.0
+edge_communication_size[40] 0.0
+edge_communication_size[41] 0.0
+edge_communication_size[42] 0.0
+edge_communication_size[43] 0.0
+edge_communication_size[44] 0.0
+edge_communication_size[45] 0.0
+edge_communication_size[46] 0.0
+edge_communication_size[47] 0.0
+edge_communication_size[48] -0.0
+edge_communication_size[49] 0.0
+edge_communication_size[50] 0.0
+edge_communication_size[51] 0.0
+edge_communication_size[52] 0.0
+total_communication_size 419430400.0
+Set parameter Username
+Academic license - for non-commercial use only - expires 2024-11-05
+Set parameter NonConvex to value 2
+Set parameter Threads to value 140
+Set parameter MIPGap to value 1e-200
+Set parameter TimeLimit to value 36000
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (linux64)
+
+CPU model: Intel(R) Xeon(R) CPU E7-8890 v3 @ 2.50GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 72 physical cores, 144 logical processors, using up to 140 threads
+
+Optimize a model with 818 rows, 2734 columns and 1565 nonzeros
+Model fingerprint: 0xb412bdc1
+Model has 602 quadratic constraints
+Model has 1593 general constraints
+Variable types: 430 continuous, 2304 integer (1485 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+02]
+  QMatrix range    [8e-01, 1e+02]
+  QLMatrix range   [1e+00, 2e+12]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+08]
+  QRHS range       [1e+00, 3e+05]
+  GenCon rhs range [1e+00, 1e+08]
+  GenCon coe range [1e+00, 1e+00]
+Warning: Quadratic constraints contain large coefficient range on linear part
+         Consider reformulating model or setting NumericFocus parameter
+         to avoid numerical issues.
+Presolve added 90 rows and 0 columns
+Presolve removed 0 rows and 1319 columns
+Presolve time: 0.32s
+Presolved: 3527 rows, 3949 columns, 9574 nonzeros
+Presolved model has 1864 SOS constraint(s)
+Presolved model has 43 quadratic constraint(s)
+Presolved model has 229 bilinear constraint(s)
+Variable types: 817 continuous, 3132 integer (1379 binary)
+
+Root relaxation: objective 4.197035e+06, 997 iterations, 0.01 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 4197034.67    0  423          - 4197034.67      -     -    0s
+     0     0 4197034.67    0  330          - 4197034.67      -     -    0s
+     0     0 4197034.67    0  325          - 4197034.67      -     -    0s
+     0     0 4197034.67    0  330          - 4197034.67      -     -    0s
+     0     0 4197034.67    0  164          - 4197034.67      -     -    0s
+     0     0 4197034.67    0  199          - 4197034.67      -     -    1s
+     0     0 4197034.67    0  196          - 4197034.67      -     -    1s
+     0     0 4197034.67    0  503          - 4197034.67      -     -    1s
+     0     0 4197034.67    0  503          - 4197034.67      -     -    1s
+     0     0 4197034.67    0  520          - 4197034.67      -     -    1s
+     0     0 4197034.67    0  401          - 4197034.67      -     -    1s
+     0     0 4197034.67    0  306          - 4197034.67      -     -    1s
+H    0     0                    5.988307e+09 4197034.67   100%     -    2s
+     0     0 4197034.67    0  382 5.9883e+09 4197034.67   100%     -    2s
+     0     0 5148353.29    0  368 5.9883e+09 5148353.29   100%     -    2s
+     0     0 6967733.55    0  379 5.9883e+09 6967733.55   100%     -    2s
+     0     0 9761070.98    0  372 5.9883e+09 9761070.98   100%     -    2s
+     0     0 1.0493e+07    0  313 5.9883e+09 1.0493e+07   100%     -    2s
+     0     0 1.0493e+07    0  362 5.9883e+09 1.0493e+07   100%     -    2s
+     0     0 1.0493e+07    0  382 5.9883e+09 1.0493e+07   100%     -    2s
+     0     0 1.0493e+07    0  421 5.9883e+09 1.0493e+07   100%     -    2s
+     0     0 1.0493e+07    0  421 5.9883e+09 1.0493e+07   100%     -    2s
+     0     0 1.0493e+07    0  368 5.9883e+09 1.0493e+07   100%     -    2s
+     0     0 1.0493e+07    0  278 5.9883e+09 1.0493e+07   100%     -    2s
+     0     0 1.0493e+07    0  363 5.9883e+09 1.0493e+07   100%     -    2s
+     0     0 1.0493e+07    0  381 5.9883e+09 1.0493e+07   100%     -    2s
+     0     0 1.0493e+07    0  357 5.9883e+09 1.0493e+07   100%     -    3s
+     0     0 1.0493e+07    0  281 5.9883e+09 1.0493e+07   100%     -    3s
+     0     0 1.0493e+07    0  375 5.9883e+09 1.0493e+07   100%     -    3s
+     0     0 1.0493e+07    0  393 5.9883e+09 1.0493e+07   100%     -    3s
+     0     0 1.0493e+07    0  399 5.9883e+09 1.0493e+07   100%     -    4s
+     0     0 1.0493e+07    0  380 5.9883e+09 1.0493e+07   100%     -    4s
+     0     0 1.0493e+07    0  359 5.9883e+09 1.0493e+07   100%     -    4s
+     0     0 1.0493e+07    0  287 5.9883e+09 1.0493e+07   100%     -    4s
+     0     2 1.0493e+07    0  263 5.9883e+09 1.0493e+07   100%     -    4s
+    33    56 4.1973e+07    6  145 5.9883e+09 1.0493e+07   100%   132    5s
+   505   463 4.2022e+07   10  132 5.9883e+09 1.0493e+07   100%  71.9   13s
+H  692   567                    4.317003e+09 1.0493e+07   100%  60.4   14s
+  1066   994 1.3980e+07   14  427 4.3170e+09 1.0493e+07   100%  46.1   15s
+H 1631  1509                    4.314737e+09 1.0493e+07   100%  36.3   16s
+H 1697  1509                    3.631799e+09 1.0493e+07   100%  35.3   16s
+H 1820  1509                    2.026964e+09 1.0493e+07  99.5%  34.2   16s
+H 2446  2209                    2.025652e+09 1.0493e+07  99.5%  29.4   17s
+H 4334  3211                    1.254616e+09 1.0493e+07  99.2%  21.4   18s
+  5205  3886 8.4920e+07   26   17 1.2546e+09 1.0493e+07  99.2%  19.7   21s
+H 5208  3693                    1.253804e+09 1.0493e+07  99.2%  19.7   23s
+  5213  3699 1.0493e+07   14  260 1.2538e+09 1.0493e+07  99.2%  20.0   25s
+  5570  3996 4.2099e+07   22  193 1.2538e+09 1.0493e+07  99.2%  22.2   30s
+  6222  4294 1.7159e+07   24  217 1.2538e+09 1.0493e+07  99.2%  22.5   35s
+  7512  4836 2.1114e+07   27  210 1.2538e+09 1.0493e+07  99.2%  21.7   43s
+H 7661  4601                    7.762696e+08 1.0493e+07  98.6%  21.8   43s
+  8992  5483 2.1114e+07   37  211 7.7627e+08 1.0493e+07  98.6%  20.0   47s
+H 9057  5285                    7.752748e+08 1.0493e+07  98.6%  19.9   47s
+H 9110  5101                    7.733011e+08 1.0493e+07  98.6%  19.8   47s
+ 12430  7119 2.1114e+07   66  211 7.7330e+08 1.0493e+07  98.6%  16.7   52s
+H12527  6927                    5.495599e+08 1.0493e+07  98.1%  16.7   52s
+H14389  9105                    5.468397e+08 1.0493e+07  98.1%  15.4   53s
+H14701  9105                    3.241380e+08 1.0493e+07  96.8%  15.1   53s
+ 15949  8892 2.1114e+07   94  205 3.2414e+08 1.0493e+07  96.8%  14.2   55s
+H16897  8383                    1.987654e+08 1.0493e+07  94.7%  13.8   58s
+H17071  8314                    1.814743e+08 1.0493e+07  94.2%  13.8   58s
+ 21038 12224 2.1114e+07  119  280 1.8147e+08 1.0493e+07  94.2%  12.1   63s
+ 25148 16212 2.1114e+07  132  302 1.8147e+08 1.0493e+07  94.2%  11.2   68s
+ 28850 19510 2.1114e+07  141  299 1.8147e+08 1.0493e+07  94.2%  11.1   72s
+H29727 18810                    1.257476e+08 1.0493e+07  91.7%  11.3   73s
+H30316 18450                    1.020928e+08 1.0493e+07  89.7%  11.3   73s
+ 32683 19729 2.3737e+07  164  296 1.0209e+08 1.0493e+07  89.7%  10.9   76s
+H32693 19047                    8.238890e+07 1.0493e+07  87.3%  10.9   76s
+H32792 19045                    8.231387e+07 1.0493e+07  87.3%  11.0   76s
+H32818 18883                    7.570770e+07 1.0493e+07  86.1%  11.0   76s
+ 34666 20551 2.1114e+07  173  297 7.5708e+07 1.0493e+07  86.1%  10.7   80s
+ 37411 24310 2.1114e+07  186  295 7.5708e+07 1.0493e+07  86.1%  10.4   85s
+H42654 26343                    6.581330e+07 1.0493e+07  84.1%  10.1   89s
+ 43432 27812 2.1770e+07  211  286 6.5813e+07 1.0493e+07  84.1%  10.0   90s
+ 45454 27962 2.1114e+07  213  279 6.5813e+07 1.0493e+07  84.1%  10.4   96s
+H47387 30260                    6.231728e+07 1.0493e+07  83.2%  10.8   97s
+ 48665 30388 2.1114e+07  232  279 6.2317e+07 1.0493e+07  83.2%  10.7  112s
+ 52797 34215 2.8983e+07  251  272 6.2317e+07 1.0493e+07  83.2%  10.5  123s
+ 53225 38316 2.3737e+07  254  270 6.2317e+07 1.0493e+07  83.2%  10.6  125s
+ 60557 41527 2.3737e+07  283  247 6.2317e+07 1.0493e+07  83.2%   9.8  143s
+ 62439 47080 2.3737e+07  292  241 6.2317e+07 1.0493e+07  83.2%   9.8  145s
+ 69855 50224 5.9587e+07  317  148 6.2317e+07 1.0493e+07  83.2%   9.1  167s
+ 74932 58436 5.9587e+07  339  141 6.2317e+07 1.0493e+07  83.2%   8.9  171s
+ 79096 58511 5.9587e+07  358  131 6.2317e+07 1.0493e+07  83.2%   8.5  195s
+H80826 58977                    5.636357e+07 1.0493e+07  81.4%   8.6  198s
+ 84397 61248     cutoff  382      5.6364e+07 1.0493e+07  81.4%   8.4  200s
+H84457 61246                    5.632709e+07 1.0493e+07  81.4%   8.4  200s
+ 88213 61349 1.0604e+07   55  321 5.6327e+07 1.0493e+07  81.4%   8.2  208s
+ 88634 65835 1.0604e+07   56  321 5.6327e+07 1.0493e+07  81.4%   8.3  210s
+ 93307 66149 1.0604e+07  102  321 5.6327e+07 1.0493e+07  81.4%   8.1  221s
+ 99578 71747 4.2213e+07  153  248 5.6327e+07 1.0493e+07  81.4%   7.9  231s
+H100140 72302                    5.279662e+07 1.0493e+07  80.1%   8.0  236s
+ 106318 75578 4.2213e+07  211  261 5.2797e+07 1.0493e+07  80.1%   7.6  240s
+H106523 75512                    5.276245e+07 1.0493e+07  80.1%   7.6  240s
+ 110850 75659 4.2213e+07  255  268 5.2762e+07 1.0493e+07  80.1%   7.4  247s
+ 111288 81933 4.2213e+07  262  264 5.2762e+07 1.0493e+07  80.1%   7.5  250s
+H111509 66727                    4.226463e+07 1.0493e+07  75.2%   7.5  250s
+ 117694 66097     cutoff  308      4.2265e+07 1.0493e+07  75.2%   7.2  257s
+ 118615 71712 4.2213e+07  310  250 4.2265e+07 1.0493e+07  75.2%   7.3  264s
+ 124475 72105 4.2213e+07  354  210 4.2265e+07 1.0493e+07  75.2%   7.1  273s
+ 125172 79858 4.2213e+07  358  218 4.2265e+07 1.0493e+07  75.2%   7.2  277s
+ 133201 86601 4.2213e+07  437  198 4.2265e+07 1.0493e+07  75.2%   6.9  281s
+ 140258 86892 4.2213e+07  503  190 4.2265e+07 1.0493e+07  75.2%   6.7  289s
+ 140877 93849 4.2213e+07  516  190 4.2265e+07 1.0493e+07  75.2%   6.8  293s
+ 148586 94211 4.2213e+07  595  163 4.2265e+07 1.0493e+07  75.2%   6.7  312s
+ 149354 101973 4.2213e+07  613  163 4.2265e+07 1.0493e+07  75.2%   6.8  316s
+ 157819 102382 infeasible  703      4.2265e+07 1.0493e+07  75.2%   6.6  322s
+ 158672 111212 1.0493e+07   24  331 4.2265e+07 1.0493e+07  75.2%   6.7  326s
+ 176853 119103 infeasible  131      4.2265e+07 1.0493e+07  75.2%   6.4  354s
+ 177686 128589 1.0493e+07   26  340 4.2265e+07 1.0493e+07  75.2%   6.6  359s
+ 187383 128589 2.1300e+07  563  184 4.2265e+07 1.0493e+07  75.2%   6.4  360s
+ 187868 129186 1.5857e+07  103  283 4.2265e+07 1.0493e+07  75.2%   6.4  370s
+ 188834 137891 2.0248e+07  108  299 4.2265e+07 1.0493e+07  75.2%   6.5  375s
+*192664 137589             440    4.225290e+07 1.0493e+07  75.2%   6.4  376s
+ 198117 138365 2.2883e+07  168  289 4.2253e+07 1.0493e+07  75.2%   6.3  393s
+*198610 138177             440    4.224527e+07 1.0493e+07  75.2%   6.4  394s
+ 199343 147690 2.2883e+07  173  279 4.2245e+07 1.0493e+07  75.2%   6.4  410s
+ 209677 158411 2.2883e+07  234  346 4.2245e+07 1.0493e+07  75.2%   6.3  415s
+ 221493 158972 2.2892e+07  306  361 4.2245e+07 1.0493e+07  75.2%   6.1  427s
+ 222756 172604 2.2892e+07  307  351 4.2245e+07 1.0493e+07  75.2%   6.2  439s
+ 237835 173288 3.6944e+07   38  332 4.2245e+07 1.0493e+07  75.2%   6.0  449s
+ 239296 186318 3.6944e+07   39  321 4.2245e+07 1.0493e+07  75.2%   6.1  458s
+ 253827 186996 infeasible  149      4.2245e+07 1.0493e+07  75.2%   6.0  556s
+ 255425 200622 4.2213e+07   48  229 4.2245e+07 1.0493e+07  75.2%   6.1  573s
+ 271273 211090 4.2213e+07  192   93 4.2245e+07 1.0493e+07  75.2%   6.0  583s
+ 284551 211760 2.9952e+07  281  260 4.2245e+07 1.0493e+07  75.2%   6.0  624s
+ 286078 225746 2.1157e+07  282  252 4.2245e+07 1.0493e+07  75.2%   6.1  640s
+H293946 224120                    4.219867e+07 1.0493e+07  75.1%   6.1  640s
+H293949 224035                    4.213271e+07 1.0493e+07  75.1%   6.1  641s
+H293952 223912                    4.209437e+07 1.0493e+07  75.1%   6.1  641s
+*293983 223818             911    4.206674e+07 1.0493e+07  75.1%   6.1  641s
+ 303073 224204 2.1157e+07  361  212 4.2067e+07 1.0493e+07  75.1%   6.1  745s
+H303506 224194                    4.206345e+07 1.0493e+07  75.1%   6.1  747s
+ 304739 243459 2.1157e+07  366  237 4.2063e+07 1.0493e+07  75.1%   6.2  775s
+ 327444 244141     cutoff  406      4.2063e+07 1.0493e+07  75.1%   6.2  837s
+H327919 243830                    4.205932e+07 1.0493e+07  75.1%   6.2  840s
+ 329118 263063 3.1711e+07  230  276 4.2059e+07 1.0493e+07  75.1%   6.3  860s
+H337415 255843                    4.147308e+07 1.0493e+07  74.7%   6.3  860s
+ 352491 255353 infeasible  384      4.1473e+07 1.0493e+07  74.7%   6.2  911s
+H352861 239448                    3.936228e+07 1.0493e+07  73.3%   6.3  913s
+H353804 171567                    3.172670e+07 1.0493e+07  66.9%   6.3  914s
+ 354399 177851 1.5880e+07  230  291 3.1727e+07 1.0493e+07  66.9%   6.4  922s
+H356460 140336                    2.644628e+07 1.0493e+07  60.3%   6.4  924s
+H360285 126841                    2.409475e+07 1.0493e+07  56.5%   6.4  924s
+ 363828 124569     cutoff  331      2.4095e+07 1.0493e+07  56.5%   6.5  955s
+ 366232 159734 1.3241e+07  100  282 2.4095e+07 1.0493e+07  56.5%   6.8 1017s
+ 415098 159775     cutoff  154      2.4095e+07 1.0493e+07  56.5%   6.7 1051s
+ 416830 180018 2.0316e+07  157  356 2.4095e+07 1.0493e+07  56.5%   6.9 1068s
+ 442914 192428 1.8552e+07  230  301 2.4095e+07 1.0493e+07  56.5%   6.9 1075s
+H452558 187559                    2.393087e+07 1.0493e+07  56.2%   6.9 1076s
+ 460073 185692 infeasible  270      2.3931e+07 1.0493e+07  56.2%   6.9 1094s
+ 462583 200795 2.1134e+07  192  297 2.3931e+07 1.0493e+07  56.2%   7.2 1106s
+ 485818 200693 infeasible  374      2.3931e+07 1.0493e+07  56.2%   7.3 1147s
+*487581 199150            1319    2.389634e+07 1.0493e+07  56.1%   7.4 1148s
+ 487920 216707 1.3944e+07  135  273 2.3896e+07 1.0493e+07  56.1%   7.5 1166s
+ 514328 217232 infeasible  298      2.3896e+07 1.0493e+07  56.1%   7.6 1190s
+H515222 216267                    2.387517e+07 1.0493e+07  56.1%   7.6 1190s
+H515225 210374                    2.384227e+07 1.0493e+07  56.0%   7.6 1191s
+ 516514 232454 1.2970e+07   78  298 2.3842e+07 1.0493e+07  56.0%   7.7 1209s
+*528416 224353            1599    2.380937e+07 1.0493e+07  55.9%   7.7 1210s
+ 547515 224767 1.4994e+07  197  362 2.3809e+07 1.0493e+07  55.9%   7.7 1236s
+*548795 209005             322    2.361963e+07 1.0493e+07  55.6%   7.7 1238s
+ 549477 211248 2.3218e+07  221  205 2.3620e+07 1.0493e+07  55.6%   7.8 1267s
+ 552462 245629 2.3218e+07  279  188 2.3620e+07 1.0493e+07  55.6%   7.8 1312s
+ 599003 257647 2.1592e+07  386  197 2.3620e+07 1.0594e+07  55.1%   7.8 1323s
+ 618284 257759 infeasible  251      2.3620e+07 1.0594e+07  55.1%   7.7 1356s
+ 620769 275316 1.0658e+07  211  341 2.3620e+07 1.0595e+07  55.1%   7.8 1366s
+*632803 273838            1536    2.355854e+07 1.0596e+07  55.0%   7.8 1367s
+ 644417 273911 infeasible  243      2.3559e+07 1.0596e+07  55.0%   7.7 1382s
+ 647523 293966 1.0596e+07  135  288 2.3559e+07 1.0596e+07  55.0%   7.8 1394s
+ 674748 296314 infeasible  262      2.3559e+07 1.0596e+07  55.0%   7.7 1414s
+ 678744 328468 1.8500e+07   47  238 2.3559e+07 1.0596e+07  55.0%   7.7 1436s
+*688129 328424             994    2.355782e+07 1.0596e+07  55.0%   7.6 1438s
+ 717174 330074 infeasible   90      2.3558e+07 1.0596e+07  55.0%   7.5 1455s
+ 720277 359189 2.1624e+07   65  204 2.3558e+07 1.0596e+07  55.0%   7.5 1472s
+*745346 358274             415    2.354070e+07 1.0596e+07  55.0%   7.5 1474s
+H755111 280789                    2.127697e+07 1.0596e+07  50.2%   7.4 1478s
+ 760173 271891 infeasible  221      2.1277e+07 1.0596e+07  50.2%   7.4 1501s
+H762131 240564                    2.115502e+07 1.0596e+07  49.9%   7.4 1501s
+ 763176 269561 1.0596e+07  254  247 2.1155e+07 1.0596e+07  49.9%   7.4 1517s
+H763183 268969                    2.114133e+07 1.0596e+07  49.9%   7.4 1518s
+H764935 140405                    1.588142e+07 1.0596e+07  33.3%   7.4 1519s
+ 803314 126934     cutoff  223      1.5881e+07 1.0596e+07  33.3%   7.4 1534s
+H803320 115982                    1.587114e+07 1.0596e+07  33.2%   7.4 1535s
+ 806000 119378 1.4624e+07  260  179 1.5871e+07 1.0596e+07  33.2%   7.4 1556s
+ 810820 155126 1.5207e+07  287  128 1.5871e+07 1.0596e+07  33.2%   7.5 1614s
+ 878072 155259 1.3368e+07  200  239 1.5871e+07 1.0596e+07  33.2%   7.5 1634s
+H878617 114141                    1.530462e+07 1.0596e+07  30.8%   7.5 1636s
+H880900 70917                    1.324462e+07 1.0596e+07  20.0%   7.6 1638s
+ 882263 68303     cutoff   91      1.3245e+07 1.0596e+07  20.0%   7.6 1656s
+H882300 60736                    1.323605e+07 1.0596e+07  19.9%   7.6 1657s
+ 888485 63026 1.3231e+07  105  134 1.3236e+07 1.0596e+07  19.9%   7.8 1686s
+ 897937 71495 1.3231e+07  193  209 1.3236e+07 1.0596e+07  19.9%   8.0 1722s
+ 917747 119003 1.3231e+07  245  198 1.3236e+07 1.0596e+07  19.9%   8.2 1892s
+ 1050458 119431 infeasible  264      1.3236e+07 1.0596e+07  19.9%   8.1 1922s
+ 1053011 123081 1.0596e+07  624  174 1.3236e+07 1.0596e+07  19.9%   8.1 1941s
+ 1059909 153529 1.3231e+07  627  180 1.3236e+07 1.0596e+07  19.9%   8.2 1965s
+ 1134266 153805 infeasible  658      1.3236e+07 1.0596e+07  19.9%   8.1 1976s
+ 1136418 156760 infeasible  654      1.3236e+07 1.0596e+07  19.9%   8.1 1988s
+ 1141195 163336 1.0596e+07 1078  176 1.3236e+07 1.0596e+07  19.9%   8.1 2002s
+ 1151671 206053 1.0794e+07 1078  206 1.3236e+07 1.0596e+07  19.9%   8.2 2031s
+ 1254242 206026 infeasible  812      1.3236e+07 1.0596e+07  19.9%   8.0 2047s
+ 1255783 207478 1.0596e+07  677  174 1.3236e+07 1.0596e+07  19.9%   8.0 2061s
+ 1259200 210252 1.3231e+07  720  141 1.3236e+07 1.0596e+07  19.9%   8.1 2080s
+ 1265163 216986 infeasible  739      1.3236e+07 1.0596e+07  19.9%   8.1 2106s
+ 1282028 225337 1.0596e+07 2302  189 1.3236e+07 1.0596e+07  19.9%   8.2 2134s
+ 1298384 225337 1.3231e+07 2545  181 1.3236e+07 1.0596e+07  19.9%   8.2 2135s
+ 1299676 279820 1.0596e+07 2306  199 1.3236e+07 1.0596e+07  19.9%   8.2 2180s
+ 1436308 280066 infeasible  593      1.3236e+07 1.0596e+07  19.9%   8.0 2203s
+ 1438572 282421 1.3231e+07  593  152 1.3236e+07 1.0596e+07  19.9%   8.0 2216s
+ 1442884 287514 infeasible  597      1.3236e+07 1.0596e+07  19.9%   8.0 2234s
+ 1450973 287514 1.0596e+07 1076  173 1.3236e+07 1.0596e+07  19.9%   8.1 2235s
+ 1454879 292814 1.0596e+07 2216  188 1.3236e+07 1.0596e+07  19.9%   8.1 2261s
+ 1468547 337219 1.3231e+07 2220  192 1.3236e+07 1.0596e+07  19.9%   8.1 2296s
+ 1509563 337219 1.0596e+07 1262  184 1.3236e+07 1.0596e+07  19.9%   8.0 2302s
+ 1591379 336943 1.3233e+07 1862  112 1.3236e+07 1.0596e+07  19.9%   7.9 2326s
+ 1593200 337583 1.3233e+07 1861  112 1.3236e+07 1.0596e+07  19.9%   8.0 2341s
+ 1595170 341496 1.3233e+07 1868   89 1.3236e+07 1.0596e+07  19.9%   8.0 2361s
+ 1601732 347424 1.3233e+07 1878   52 1.3236e+07 1.0596e+07  19.9%   8.0 2387s
+ 1613254 355685 infeasible  272      1.3236e+07 1.0596e+07  19.9%   8.1 2425s
+ 1631533 363753 1.3231e+07 1892  156 1.3236e+07 1.0596e+07  19.9%   8.2 2471s
+ 1652140 412393 1.3231e+07 1896  115 1.3236e+07 1.0596e+07  19.9%   8.3 2517s
+ 1778230 412393 1.0596e+07  309  159 1.3236e+07 1.0596e+07  19.9%   8.1 2533s
+ 1791078 412216 infeasible 2248      1.3236e+07 1.0596e+07  19.9%   8.1 2548s
+ 1792544 412381 infeasible  501      1.3236e+07 1.0596e+07  19.9%   8.1 2565s
+ 1793974 412473 infeasible  548      1.3236e+07 1.0596e+07  19.9%   8.1 2586s
+ 1795549 412966 infeasible  667      1.3236e+07 1.0596e+07  19.9%   8.2 2612s
+ 1798151 413005 infeasible  470      1.3236e+07 1.0596e+07  19.9%   8.3 2648s
+ 1801182 412813 infeasible  523      1.3236e+07 1.0596e+07  19.9%   8.4 2698s
+ 1805318 422699 1.0843e+07  179  158 1.3236e+07 1.0596e+07  19.9%   8.6 2772s
+ 1830806 466481 1.3231e+07 2143  142 1.3236e+07 1.0596e+07  19.9%   8.8 2809s
+ 1834810 466481 1.3106e+07 2152  155 1.3236e+07 1.0596e+07  19.9%   8.8 2810s
+ 1970946 466540 infeasible 2459      1.3236e+07 1.0596e+07  19.9%   8.6 2838s
+ 1973249 468416 1.3231e+07 2533  163 1.3236e+07 1.0596e+07  19.9%   8.6 2854s
+ 1976842 474686 1.3231e+07 2554  154 1.3236e+07 1.0596e+07  19.9%   8.6 2876s
+ 1990068 483469 1.3231e+07 2565  142 1.3236e+07 1.0596e+07  19.9%   8.7 2900s
+ 2011363 512739 1.3231e+07 2570  138 1.3236e+07 1.0596e+07  19.9%   8.6 2925s
+ 2107787 512709 1.0623e+07 2475  175 1.3236e+07 1.0596e+07  19.9%   8.5 2941s
+ 2110498 514979 1.2568e+07 2475  217 1.3236e+07 1.0596e+07  19.9%   8.5 2952s
+ 2114666 524146 1.3231e+07 2463  172 1.3236e+07 1.0596e+07  19.9%   8.5 2971s
+ 2128486 536880 1.3231e+07 2478  141 1.3236e+07 1.0596e+07  19.9%   8.5 2998s
+ 2150436 567332 1.3233e+07 2842   16 1.3236e+07 1.0596e+07  19.9%   8.5 3019s
+ 2241639 567401 infeasible 2034      1.3236e+07 1.0596e+07  19.9%   8.4 3039s
+ 2244396 569541 1.3231e+07 2036  166 1.3236e+07 1.0596e+07  19.9%   8.4 3052s
+ 2248527 573406 1.3231e+07 2042  145 1.3236e+07 1.0596e+07  19.9%   8.4 3072s
+ 2256725 607162 1.3233e+07 2042  159 1.3236e+07 1.0596e+07  19.9%   8.4 3098s
+ 2364667 607086 infeasible 2416      1.3236e+07 1.0596e+07  19.9%   8.4 3115s
+ 2366887 608650 1.3231e+07 2459  158 1.3236e+07 1.0596e+07  19.9%   8.4 3128s
+ 2370062 611800 1.3231e+07 2502  118 1.3236e+07 1.0596e+07  19.9%   8.4 3148s
+ 2376219 615471 1.0596e+07 2299  182 1.3236e+07 1.0596e+07  19.9%   8.4 3175s
+ 2386636 637858 1.0622e+07 1988  187 1.3236e+07 1.0596e+07  19.9%   8.5 3213s
+ 2459152 638091 1.0596e+07 2362  158 1.3236e+07 1.0596e+07  19.9%   8.5 3232s
+ 2463056 641477 1.3231e+07 2329  130 1.3236e+07 1.0596e+07  19.9%   8.6 3255s
+ 2473502 649830 1.0596e+07 2336  144 1.3236e+07 1.0596e+07  19.9%   8.6 3288s
+ 2492023 663811 infeasible 2366      1.3236e+07 1.0596e+07  19.9%   8.7 3328s
+ 2516571 702579 1.3232e+07 2860    7 1.3236e+07 1.0596e+07  19.9%   8.7 3370s
+ 2652184 702365 infeasible 2388      1.3236e+07 1.0596e+07  19.9%   8.6 3396s
+ 2653936 703224 1.3231e+07 2532  143 1.3236e+07 1.0596e+07  19.9%   8.6 3408s
+ 2655727 705647 1.3231e+07 2539  125 1.3236e+07 1.0596e+07  19.9%   8.7 3427s
+ 2661013 713319 1.3234e+07 2774   18 1.3236e+07 1.0596e+07  19.9%   8.7 3452s
+ 2676534 752432 1.3231e+07 2155  179 1.3236e+07 1.0596e+07  19.9%   8.7 3482s
+ 2798813 752727 infeasible  752      1.3236e+07 1.0596e+07  19.9%   8.6 3505s
+ 2801011 753972 1.3231e+07 1805  181 1.3236e+07 1.0596e+07  19.9%   8.6 3518s
+ 2803480 757148 infeasible 1814      1.3236e+07 1.0596e+07  19.9%   8.6 3535s
+ 2809369 766527 1.3231e+07 1822  150 1.3236e+07 1.0596e+07  19.9%   8.6 3558s
+ 2826522 808452 1.1476e+07 1897  223 1.3236e+07 1.0596e+07  19.9%   8.6 3588s
+ 2944814 808363 1.3231e+07 2171  141 1.3236e+07 1.0596e+07  19.9%   8.5 3611s
+ 2946404 809769 1.3231e+07 2185  160 1.3236e+07 1.0596e+07  19.9%   8.5 3623s
+ 2948798 813796 1.3231e+07 2194  155 1.3236e+07 1.0596e+07  19.9%   8.5 3639s
+ 2953812 813796 infeasible 2196      1.3236e+07 1.0596e+07  19.9%   8.5 3640s
+ 2956092 822855 1.3234e+07 2309    8 1.3236e+07 1.0596e+07  19.9%   8.5 3658s
+ 2970824 863969 1.3231e+07 2457  186 1.3236e+07 1.0596e+07  19.9%   8.6 3687s
+ 3090719 863976 1.0604e+07 1524  199 1.3236e+07 1.0596e+07  19.9%   8.4 3708s
+ 3092538 865070 1.3231e+07 1525  178 1.3236e+07 1.0596e+07  19.9%   8.5 3719s
+ 3095224 868852 1.3231e+07 1360  178 1.3236e+07 1.0596e+07  19.9%   8.5 3735s
+ 3103771 892880 1.3231e+07 1375  141 1.3236e+07 1.0596e+07  19.9%   8.5 3755s
+ 3194303 892286 infeasible  948      1.3236e+07 1.0596e+07  19.9%   8.5 3768s
+ 3196978 892916 infeasible 1414      1.3236e+07 1.0596e+07  19.9%   8.5 3780s
+ 3200260 895762 infeasible 2130      1.3236e+07 1.0596e+07  19.9%   8.5 3797s
+ 3207091 902655 infeasible 2140      1.3236e+07 1.0596e+07  19.9%   8.5 3823s
+ 3222646 932617 1.3231e+07  793  120 1.3236e+07 1.0596e+07  19.9%   8.6 3874s
+ 3347970 931823 infeasible  698      1.3236e+07 1.0596e+07  19.9%   8.6 3889s
+ 3350729 932336 1.3231e+07  702  161 1.3236e+07 1.0596e+07  19.9%   8.6 3903s
+ 3354938 936061 1.3231e+07  713  157 1.3236e+07 1.0596e+07  19.9%   8.6 3923s
+ 3363870 942806 1.3073e+07  608  197 1.3236e+07 1.0596e+07  19.9%   8.7 3950s
+ 3381392 969947 1.3231e+07  634  152 1.3236e+07 1.0596e+07  19.9%   8.7 3982s
+ 3501009 970063 infeasible 2372      1.3236e+07 1.0596e+07  19.9%   8.7 3996s
+ 3504304 970532 1.2583e+07 1847  159 1.3236e+07 1.0596e+07  19.9%   8.7 4007s
+ 3510740 974465 infeasible 1482      1.3236e+07 1.0596e+07  19.9%   8.7 4025s
+ 3521550 981925 infeasible  244      1.3236e+07 1.0596e+07  19.9%   8.8 4051s
+ 3539152 1015651 1.3231e+07 2488  165 1.3236e+07 1.0596e+07  19.9%   8.8 4085s
+ 3660943 1015642 infeasible  727      1.3236e+07 1.0596e+07  19.9%   8.8 4105s
+ 3663441 1018130 1.3231e+07 2158  184 1.3236e+07 1.0596e+07  19.9%   8.8 4114s
+ 3668390 1024836 1.3231e+07 2165  183 1.3236e+07 1.0596e+07  19.9%   8.8 4133s
+ 3682135 1034586 1.3231e+07 2181  169 1.3236e+07 1.0596e+07  19.9%   8.8 4156s
+ 3700954 1065371 1.3231e+07 2183  169 1.3236e+07 1.0596e+07  19.9%   8.8 4181s
+ 3805571 1065749 infeasible 2475      1.3236e+07 1.0596e+07  19.9%   8.8 4196s
+ 3808598 1068321 infeasible 1895      1.3236e+07 1.0596e+07  19.9%   8.8 4210s
+ 3813612 1074007 1.3231e+07 2236  183 1.3236e+07 1.0596e+07  19.9%   8.8 4226s
+ 3824528 1105683 1.3231e+07 2272  125 1.3236e+07 1.0596e+07  19.9%   8.8 4250s
+ 3930727 1105524 1.3231e+07 2195  149 1.3236e+07 1.0596e+07  19.9%   8.7 4263s
+ 3933325 1106929 1.3231e+07 2198  141 1.3236e+07 1.0596e+07  19.9%   8.8 4273s
+ 3936771 1113966 1.3233e+07 2300   25 1.3236e+07 1.0596e+07  19.9%   8.8 4285s
+ 3948151 1124330 1.0596e+07 1699  185 1.3236e+07 1.0596e+07  19.9%   8.8 4301s
+ 3968221 1157147 1.3231e+07 1705  187 1.3236e+07 1.0596e+07  19.9%   8.8 4324s
+ 4073361 1157911 infeasible 2028      1.3236e+07 1.0596e+07  19.9%   8.7 4341s
+ 4076539 1160450 infeasible 2025      1.3236e+07 1.0596e+07  19.9%   8.7 4353s
+ 4082062 1169156 1.3231e+07 1762  128 1.3236e+07 1.0596e+07  19.9%   8.8 4367s
+ 4096966 1196090 1.3231e+07 2090  197 1.3236e+07 1.0596e+07  19.9%   8.8 4389s
+ 4186305 1196195 infeasible 1978      1.3236e+07 1.0596e+07  19.9%   8.7 4403s
+ 4189582 1198506 1.0596e+07 1899  173 1.3236e+07 1.0596e+07  19.9%   8.7 4420s
+ 4194522 1202644 1.3231e+07 1396  174 1.3236e+07 1.0596e+07  19.9%   8.7 4433s
+ 4204386 1229756 1.3231e+07 1405  145 1.3236e+07 1.0596e+07  19.9%   8.7 4456s
+ 4309429 1229070 infeasible 1534      1.3236e+07 1.0596e+07  19.9%   8.7 4475s
+ 4311835 1230296 infeasible 1531      1.3236e+07 1.0596e+07  19.9%   8.7 4490s
+ 4315825 1235307 1.3231e+07 1559  164 1.3236e+07 1.0596e+07  19.9%   8.7 4504s
+ 4320240 1235307 1.0611e+07  166  177 1.3236e+07 1.0596e+07  19.9%   8.8 4505s
+ 4326249 1244349 1.3231e+07 1672   41 1.3236e+07 1.0596e+07  19.9%   8.8 4525s
+ 4344249 1264695     cutoff  196      1.3236e+07 1.0596e+07  19.9%   8.8 4547s
+ 4415131 1265166 infeasible  806      1.3236e+07 1.0596e+07  19.9%   8.8 4563s
+ 4418844 1268360 infeasible 2558      1.3236e+07 1.0596e+07  19.9%   8.8 4576s
+ 4425939 1276979 1.3233e+07 1629  123 1.3236e+07 1.0596e+07  19.9%   8.8 4604s
+ 4445991 1300434 1.3231e+07 1488  120 1.3236e+07 1.0596e+07  19.9%   8.9 4637s
+ 4545236 1300362 infeasible  337      1.3236e+07 1.0596e+07  19.9%   8.9 4656s
+ 4548246 1300862 1.3231e+07 1479  162 1.3236e+07 1.0596e+07  19.9%   9.0 4674s
+ 4553829 1302036 1.3231e+07 1496  137 1.3236e+07 1.0596e+07  19.9%   9.0 4696s
+ 4564847 1318794 1.0596e+07  185  192 1.3236e+07 1.0596e+07  19.9%   9.1 4731s
+ 4595209 1318794 infeasible 2518      1.3236e+07 1.0596e+07  19.9%   9.2 4735s
+ 4658043 1317065 infeasible  184      1.3236e+07 1.0596e+07  19.9%   9.3 4752s
+ 4662838 1319274 1.0884e+07  596  242 1.3236e+07 1.0596e+07  19.9%   9.4 4773s
+ 4671916 1322038 1.0596e+07  315  177 1.3236e+07 1.0596e+07  19.9%   9.5 4799s
+ 4685093 1322722 infeasible 2328      1.3236e+07 1.0596e+07  19.9%   9.5 4833s
+ 4702651 1342973 1.1702e+07 2545  209 1.3236e+07 1.0596e+07  19.9%   9.7 4924s
+ 4725330 1342973 1.3231e+07 1413  214 1.3236e+07 1.0596e+07  19.9%   9.7 4926s
+ 4829972 1342443 infeasible  207      1.3236e+07 1.0596e+07  19.9%   9.8 4946s
+ 4833413 1342882 infeasible  182      1.3236e+07 1.0596e+07  19.9%   9.9 4962s
+ 4839562 1344822 1.0596e+07  183  162 1.3236e+07 1.0596e+07  19.9%   9.9 4991s
+ 4845308 1347207 infeasible  449      1.3236e+07 1.0596e+07  19.9%   9.9 5023s
+ 4857069 1380223 1.0608e+07  192  211 1.3236e+07 1.0596e+07  19.9%  10.0 5094s
+ 4860072 1380223     cutoff  209      1.3236e+07 1.0596e+07  19.9%  10.0 5095s
+ 4951163 1380223 1.0596e+07  112  208 1.3236e+07 1.0596e+07  19.9%  10.1 5101s
+ 4997209 1379847 infeasible  552      1.3236e+07 1.0596e+07  19.9%  10.2 5114s
+ 5001502 1381005 1.0596e+07  764  184 1.3236e+07 1.0596e+07  19.9%  10.2 5131s
+ 5005758 1383475 1.3231e+07  774  161 1.3236e+07 1.0596e+07  19.9%  10.2 5156s
+ 5014002 1434643 1.3231e+07  774  163 1.3236e+07 1.0596e+07  19.9%  10.2 5208s
+ 5153044 1434542 infeasible  181      1.3236e+07 1.0596e+07  19.9%  10.2 5233s
+ 5154553 1435127 1.1099e+07  184  197 1.3236e+07 1.0596e+07  19.9%  10.3 5244s
+ 5156344 1435730 1.2298e+07  187  205 1.3236e+07 1.0596e+07  19.9%  10.3 5260s
+ 5158247 1436255 1.2175e+07  187  183 1.3236e+07 1.0596e+07  19.9%  10.3 5285s
+ 5161789 1439493 infeasible  535      1.3236e+07 1.0596e+07  19.9%  10.4 5321s
+ 5170486 1449990 1.0609e+07  719  188 1.3236e+07 1.0596e+07  19.9%  10.4 5373s
+ 5191448 1486974 1.0603e+07  345  221 1.3236e+07 1.0596e+07  19.9%  10.5 5405s
+ 5331588 1486827 infeasible 1046      1.3236e+07 1.0596e+07  19.9%  10.5 5422s
+ 5333489 1494302 1.0602e+07  705  184 1.3236e+07 1.0596e+07  19.9%  10.5 5431s
+ 5361752 1494507 1.0596e+07  146  185 1.3236e+07 1.0596e+07  19.9%  10.5 5441s
+ 5364609 1496507 1.3231e+07  152  190 1.3236e+07 1.0596e+07  19.9%  10.5 5454s
+ 5368427 1534937 1.3231e+07  167  168 1.3236e+07 1.0596e+07  19.9%  10.5 5478s
+ 5491189 1535168 infeasible  246      1.3236e+07 1.0596e+07  19.9%  10.5 5494s
+ 5493829 1537369 1.3231e+07  396  162 1.3236e+07 1.0596e+07  19.9%  10.5 5506s
+ 5497571 1542610 1.3231e+07  397  162 1.3236e+07 1.0596e+07  19.9%  10.5 5523s
+ 5506286 1594108 1.3231e+07  175  160 1.3236e+07 1.0596e+07  19.9%  10.5 5553s
+ 5635643 1594199 infeasible  211      1.3236e+07 1.0596e+07  19.9%  10.5 5574s
+ 5637695 1595025 1.0702e+07  648  180 1.3236e+07 1.0596e+07  19.9%  10.5 5586s
+ 5640108 1595728 1.0702e+07  650  179 1.3236e+07 1.0596e+07  19.9%  10.5 5604s
+ 5643851 1596937 infeasible  655      1.3236e+07 1.0596e+07  19.9%  10.5 5630s
+ 5648794 1597004 1.3231e+07  909  140 1.3236e+07 1.0596e+07  19.9%  10.5 5663s
+ 5657649 1627527 1.3231e+07  623  156 1.3236e+07 1.0596e+07  19.9%  10.6 5712s
+ 5709701 1627527 1.3231e+07  982  152 1.3236e+07 1.0596e+07  19.9%  10.6 5717s
+ 5797789 1626702 infeasible  547      1.3236e+07 1.0596e+07  19.9%  10.6 5738s
+ 5800783 1626380 infeasible  519      1.3236e+07 1.0596e+07  19.9%  10.6 5756s
+ 5804467 1626214 1.3231e+07  496  162 1.3236e+07 1.0596e+07  19.9%  10.6 5785s
+ 5809797 1625939 1.1005e+07 1047  191 1.3236e+07 1.0596e+07  19.9%  10.7 5825s
+ 5818422 1625638 1.0596e+07  643  164 1.3236e+07 1.0596e+07  19.9%  10.7 5889s
+ 5831375 1648340 1.0633e+07  644  195 1.3236e+07 1.0596e+07  19.9%  10.9 5920s
+ 5971515 1648010 infeasible  764      1.3236e+07 1.0596e+07  19.9%  10.8 5948s
+ 5973643 1648023 1.3231e+07  616  136 1.3236e+07 1.0596e+07  19.9%  10.8 5963s
+ 5975451 1647996 1.0702e+07  645  167 1.3236e+07 1.0596e+07  19.9%  10.9 5983s
+ 5978574 1647892 infeasible  648      1.3236e+07 1.0596e+07  19.9%  10.9 6010s
+ 5983874 1670422 1.0618e+07  631  199 1.3236e+07 1.0596e+07  19.9%  10.9 6036s
+ 6061952 1670422 1.0632e+07  643  200 1.3236e+07 1.0596e+07  19.9%  10.9 6046s
+ 6124014 1670114 infeasible  598      1.3236e+07 1.0596e+07  19.9%  10.9 6069s
+ 6125855 1670189 1.3231e+07  643  138 1.3236e+07 1.0596e+07  19.9%  10.9 6083s
+ 6127658 1670089 1.3231e+07 1092  172 1.3236e+07 1.0596e+07  19.9%  10.9 6098s
+ 6130892 1670054 1.0614e+07 1051  182 1.3236e+07 1.0596e+07  19.9%  10.9 6125s
+ 6135112 1670032 1.3231e+07 1098  163 1.3236e+07 1.0596e+07  19.9%  11.0 6168s
+ 6141589 1693842 1.3231e+07  717  154 1.3236e+07 1.0596e+07  19.9%  11.0 6195s
+ 6281729 1693483 infeasible  986      1.3236e+07 1.0596e+07  19.9%  11.0 6221s
+ 6283520 1693577 1.0611e+07  604  183 1.3236e+07 1.0596e+07  19.9%  11.0 6236s
+ 6285105 1693476 infeasible  605      1.3236e+07 1.0596e+07  19.9%  11.0 6257s
+ 6287593 1693397 1.3231e+07  600  157 1.3236e+07 1.0596e+07  19.9%  11.0 6278s
+ 6291898 1716049 1.0646e+07 1037  203 1.3236e+07 1.0596e+07  19.9%  11.0 6303s
+ 6336943 1716049 1.3231e+07 1063  156 1.3236e+07 1.0596e+07  19.9%  11.0 6308s
+ 6432038 1715560 1.0596e+07 1285  208 1.3236e+07 1.0596e+07  19.9%  11.0 6330s
+ 6434389 1715542 1.0702e+07 1050  168 1.3236e+07 1.0596e+07  19.9%  11.0 6343s
+ 6436335 1715333 1.3231e+07 1051  173 1.3236e+07 1.0596e+07  19.9%  11.0 6362s
+ 6439976 1715082 1.3231e+07  609  145 1.3236e+07 1.0596e+07  19.9%  11.0 6385s
+ 6445082 1714954 infeasible  541      1.3236e+07 1.0596e+07  19.9%  11.1 6429s
+ 6452063 1714954 1.0702e+07  645  166 1.3236e+07 1.0596e+07  19.9%  11.1 6430s
+ 6452632 1740678 1.0604e+07  461  194 1.3236e+07 1.0596e+07  19.9%  11.1 6466s
+ 6486666 1740678 1.0997e+07  648  196 1.3236e+07 1.0596e+07  19.9%  11.1 6470s
+ 6536716 1740678 1.3231e+07  601  146 1.3236e+07 1.0596e+07  19.9%  11.1 6475s
+ 6592772 1740214 infeasible  467      1.3236e+07 1.0596e+07  19.9%  11.1 6488s
+ 6594976 1740158 1.1809e+07  780  206 1.3236e+07 1.0596e+07  19.9%  11.1 6505s
+ 6596522 1740119 infeasible  420      1.3236e+07 1.0596e+07  19.9%  11.1 6526s
+ 6598798 1740067 1.1981e+07  617  172 1.3236e+07 1.0596e+07  19.9%  11.1 6551s
+ 6601918 1763239 1.1151e+07  622  205 1.3236e+07 1.0596e+07  19.9%  11.2 6585s
+ 6731948 1763239 infeasible 1659      1.3236e+07 1.0596e+07  19.9%  11.1 6603s
+ 6741705 1762635 infeasible  240      1.3236e+07 1.0596e+07  19.9%  11.1 6618s
+ 6744208 1762545 infeasible  536      1.3236e+07 1.0596e+07  19.9%  11.2 6632s
+ 6745274 1762267 infeasible  398      1.3236e+07 1.0596e+07  19.9%  11.2 6652s
+ 6747421 1762075 1.0673e+07  616  178 1.3236e+07 1.0596e+07  19.9%  11.2 6673s
+ 6750091 1761816     cutoff  622      1.3236e+07 1.0596e+07  19.9%  11.2 6710s
+ 6754771 1794787 1.3231e+07  616  160 1.3236e+07 1.0596e+07  19.9%  11.3 6752s
+ 6779796 1794787 1.0609e+07  171  181 1.3236e+07 1.0596e+07  19.9%  11.3 6755s
+ 6894911 1794519 infeasible  563      1.3236e+07 1.0596e+07  19.9%  11.2 6782s
+ 6896924 1794938 1.0596e+07  153  175 1.3236e+07 1.0596e+07  19.9%  11.3 6798s
+ 6898738 1796028 1.0596e+07  152  175 1.3236e+07 1.0596e+07  19.9%  11.3 6818s
+ 6902803 1797857 1.3231e+07  484  162 1.3236e+07 1.0596e+07  19.9%  11.3 6843s
+ 6909649 1847876 1.3231e+07  624  153 1.3236e+07 1.0596e+07  19.9%  11.3 6898s
+ 7049471 1848074 infeasible  158      1.3236e+07 1.0596e+07  19.9%  11.3 6937s
+ 7051900 1849989 1.3231e+07  279  200 1.3236e+07 1.0596e+07  19.9%  11.3 6955s
+ 7055561 1855832 1.3231e+07  295  178 1.3236e+07 1.0596e+07  19.9%  11.3 6977s
+ 7064878 1911110 infeasible  311      1.3236e+07 1.0596e+07  19.9%  11.3 7014s
+ 7191787 1911455 1.3231e+07  363  185 1.3236e+07 1.0596e+07  19.9%  11.3 7045s
+ 7194673 1913504 1.0596e+07  366  190 1.3236e+07 1.0596e+07  19.9%  11.3 7057s
+ 7198581 1920967 1.3231e+07  369  192 1.3236e+07 1.0596e+07  19.9%  11.3 7078s
+ 7209521 1971948 infeasible  218      1.3236e+07 1.0596e+07  19.9%  11.3 7113s
+ 7329424 1972635 infeasible  189      1.3236e+07 1.0596e+07  19.9%  11.2 7135s
+ 7332084 1974666 1.0596e+07  331  194 1.3236e+07 1.0596e+07  19.9%  11.2 7153s
+ 7335810 1977469 infeasible  337      1.3236e+07 1.0596e+07  19.9%  11.2 7172s
+ 7342873 2037245 1.3231e+07  166  197 1.3236e+07 1.0596e+07  19.9%  11.3 7219s
+ 7471357 2037322 infeasible  141      1.3236e+07 1.0596e+07  19.9%  11.2 7245s
+ 7473350 2039274 1.0950e+07  426  213 1.3236e+07 1.0596e+07  19.9%  11.2 7258s
+ 7476746 2044232 1.0910e+07  280  222 1.3236e+07 1.0596e+07  19.9%  11.2 7280s
+ 7486076 2077092 1.0596e+07  469  171 1.3236e+07 1.0596e+07  19.9%  11.2 7310s
+ 7562322 2080147 1.3231e+07  267  175 1.3236e+07 1.0596e+07  19.9%  11.2 7332s
+ 7567500 2086518 1.3231e+07  355  175 1.3236e+07 1.0596e+07  19.9%  11.2 7354s
+ 7578560 2138640 1.3231e+07  528  175 1.3236e+07 1.0596e+07  19.9%  11.2 7393s
+ 7649937 2138640 infeasible  388      1.3236e+07 1.0596e+07  19.9%  11.2 7401s
+ 7689120 2138751 1.3231e+07 1521  175 1.3236e+07 1.0596e+07  19.9%  11.2 7421s
+ 7691568 2140653 1.3231e+07 1584  175 1.3236e+07 1.0596e+07  19.9%  11.2 7435s
+ 7695179 2145281 1.3073e+07  363  163 1.3236e+07 1.0596e+07  19.9%  11.2 7455s
+ 7704476 2193252 1.3233e+07  381  110 1.3236e+07 1.0596e+07  19.9%  11.2 7490s
+ 7821671 2193264 infeasible  166      1.3236e+07 1.0596e+07  19.9%  11.1 7518s
+ 7824035 2195583 1.0596e+07  238  191 1.3236e+07 1.0596e+07  19.9%  11.1 7528s
+ 7828423 2202293 infeasible  212      1.3236e+07 1.0596e+07  19.9%  11.2 7542s
+ 7839730 2249594 1.3231e+07  230  166 1.3236e+07 1.0596e+07  19.9%  11.2 7572s
+ 7952729 2249469 infeasible  424      1.3236e+07 1.0596e+07  19.9%  11.1 7591s
+ 7955264 2250929 1.0950e+07  325  223 1.3236e+07 1.0596e+07  19.9%  11.1 7601s
+ 7958272 2255943 1.0596e+07  336  196 1.3236e+07 1.0596e+07  19.9%  11.1 7617s
+ 7966425 2304173 1.3231e+07  341  194 1.3236e+07 1.0596e+07  19.9%  11.1 7650s
+ 8072512 2304646 1.0596e+07  248  194 1.3236e+07 1.0596e+07  19.9%  11.1 7674s
+ 8075683 2306673 1.3231e+07  249  189 1.3236e+07 1.0596e+07  19.9%  11.1 7691s
+ 8080463 2311135 1.0596e+07  295  197 1.3236e+07 1.0596e+07  19.9%  11.1 7710s
+ 8089693 2355706 1.0642e+07  228  204 1.3236e+07 1.0596e+07  19.9%  11.1 7741s
+ 8210886 2355957 infeasible  925      1.3236e+07 1.0596e+07  19.9%  11.1 7758s
+ 8213702 2356353 infeasible  185      1.3236e+07 1.0596e+07  19.9%  11.1 7773s
+ 8217278 2357766 1.3231e+07  217  175 1.3236e+07 1.0596e+07  19.9%  11.1 7793s
+ 8223569 2360912 1.3231e+07  274  184 1.3236e+07 1.0596e+07  19.9%  11.1 7821s
+ 8234601 2405085 1.0642e+07  301  190 1.3236e+07 1.0596e+07  19.9%  11.2 7872s
+ 8374509 2406063 infeasible  154      1.3236e+07 1.0596e+07  19.9%  11.1 7900s
+ 8377918 2408094 1.0596e+07  211  203 1.3236e+07 1.0596e+07  19.9%  11.2 7910s
+ 8382202 2409953 infeasible  215      1.3236e+07 1.0596e+07  19.9%  11.2 7926s
+ 8389254 2412232 1.0596e+07  197  168 1.3236e+07 1.0596e+07  19.9%  11.2 7956s
+ 8399849 2452219 1.2243e+07  194  237 1.3236e+07 1.0596e+07  19.9%  11.2 7994s
+ 8404755 2452219 1.3231e+07  252  195 1.3236e+07 1.0596e+07  19.9%  11.2 7995s
+ 8507946 2451720 infeasible  181      1.3236e+07 1.0596e+07  19.9%  11.2 8017s
+ 8511241 2455731 infeasible  493      1.3236e+07 1.0596e+07  19.9%  11.2 8038s
+ 8519927 2463988 1.3231e+07  340  147 1.3236e+07 1.0596e+07  19.9%  11.2 8063s
+ 8536263 2471666 1.3231e+07  331  136 1.3236e+07 1.0596e+07  19.9%  11.2 8092s
+ 8552572 2507313 1.3231e+07  147  188 1.3236e+07 1.0596e+07  19.9%  11.3 8138s
+ 8692427 2506820 infeasible  345      1.3236e+07 1.0596e+07  19.9%  11.2 8163s
+ 8694315 2507705 infeasible  373      1.3236e+07 1.0596e+07  19.9%  11.2 8176s
+ 8697785 2512108 1.3231e+07  166  167 1.3236e+07 1.0596e+07  19.9%  11.3 8195s
+ 8706056 2546533 1.3231e+07  177  175 1.3236e+07 1.0596e+07  19.9%  11.3 8224s
+ 8761914 2546533 1.3231e+07  292  167 1.3236e+07 1.0596e+07  19.9%  11.2 8229s
+ 8819160 2546502 infeasible  331      1.3236e+07 1.0596e+07  19.9%  11.2 8245s
+ 8821728 2547476 infeasible  333      1.3236e+07 1.0596e+07  19.9%  11.2 8258s
+ 8825597 2550952 1.3233e+07  182  128 1.3236e+07 1.0596e+07  19.9%  11.2 8275s
+ 8833386 2557381 1.0950e+07  454  217 1.3236e+07 1.0596e+07  19.9%  11.3 8306s
+ 8847634 2591389 1.3231e+07  301  160 1.3236e+07 1.0596e+07  19.9%  11.3 8342s
+ 8985591 2591338 1.3231e+07  285  162 1.3236e+07 1.0596e+07  19.9%  11.3 8363s
+ 8988437 2592070 1.0950e+07  277  217 1.3236e+07 1.0596e+07  19.9%  11.3 8378s
+ 8991634 2594025 infeasible  206      1.3236e+07 1.0596e+07  19.9%  11.3 8398s
+ 8998980 2597964 infeasible  228      1.3236e+07 1.0596e+07  19.9%  11.3 8424s
+ 9005295 2597964 1.0989e+07  345  219 1.3236e+07 1.0596e+07  19.9%  11.3 8425s
+ 9010831 2629001 1.0596e+07  166  169 1.3236e+07 1.0596e+07  19.9%  11.3 8455s
+ 9150934 2628590 infeasible  180      1.3236e+07 1.0596e+07  19.9%  11.3 8475s
+ 9153495 2628928 infeasible  176      1.3236e+07 1.0596e+07  19.9%  11.3 8487s
+ 9156937 2633002 infeasible  148      1.3236e+07 1.0596e+07  19.9%  11.3 8503s
+ 9165507 2640129 1.2060e+07  189  196 1.3236e+07 1.0596e+07  19.9%  11.3 8525s
+ 9181480 2675340 1.0596e+07  188  175 1.3236e+07 1.0596e+07  19.9%  11.3 8557s
+ 9317749 2675431 1.1996e+07  343  219 1.3236e+07 1.0596e+07  19.9%  11.3 8578s
+ 9320906 2676559 1.3231e+07  308  128 1.3236e+07 1.0596e+07  19.9%  11.3 8591s
+ 9324802 2679597 1.3231e+07  321  128 1.3236e+07 1.0596e+07  19.9%  11.3 8609s
+ 9333133 2711945 1.3235e+07  709    2 1.3236e+07 1.0596e+07  19.9%  11.3 8640s
+ 9449696 2711816 infeasible  305      1.3236e+07 1.0596e+07  19.9%  11.3 8664s
+ 9452571 2713524 infeasible  422      1.3236e+07 1.0596e+07  19.9%  11.3 8678s
+ 9457090 2722556 1.0596e+07  471  201 1.3236e+07 1.0596e+07  19.9%  11.3 8699s
+ 9470896 2731931 infeasible  477      1.3236e+07 1.0596e+07  19.9%  11.3 8724s
+ 9488962 2731931 1.0937e+07  156  244 1.3236e+07 1.0596e+07  19.9%  11.3 8725s
+ 9490644 2755155 1.0596e+07  148  195 1.3236e+07 1.0596e+07  19.9%  11.3 8760s
+ 9559294 2755661 1.2289e+07  177  210 1.3236e+07 1.0596e+07  19.9%  11.3 8779s
+ 9563701 2759866 1.3231e+07  190  143 1.3236e+07 1.0596e+07  19.9%  11.3 8801s
+ 9571315 2803173 1.0755e+07  337  215 1.3236e+07 1.0596e+07  19.9%  11.3 8834s
+ 9685962 2803161 1.3231e+07  208  171 1.3236e+07 1.0596e+07  19.9%  11.2 8855s
+ 9688767 2804569 1.0596e+07  149  184 1.3236e+07 1.0596e+07  19.9%  11.2 8867s
+ 9691999 2810255 1.3231e+07  162  171 1.3236e+07 1.0596e+07  19.9%  11.3 8883s
+ 9701433 2853031 1.0596e+07  344  179 1.3236e+07 1.0596e+07  19.9%  11.3 8907s
+ 9816490 2853081 infeasible  206      1.3236e+07 1.0596e+07  19.9%  11.2 8929s
+ 9819202 2854753 1.0596e+07  412  208 1.3236e+07 1.0596e+07  19.9%  11.2 8942s
+ 9822865 2862068 1.3231e+07  418  186 1.3236e+07 1.0596e+07  19.9%  11.2 8960s
+ 9834239 2900316 1.0596e+07  361  194 1.3236e+07 1.0596e+07  19.9%  11.2 8984s
+ 9935901 2900090 infeasible  217      1.3236e+07 1.0596e+07  19.9%  11.2 9006s
+ 9938396 2901226 1.3231e+07  155  164 1.3236e+07 1.0596e+07  19.9%  11.2 9018s
+ 9941601 2904838 infeasible  270      1.3236e+07 1.0596e+07  19.9%  11.2 9033s
+ 9949442 2913651 infeasible  387      1.3236e+07 1.0596e+07  19.9%  11.2 9055s
+ 9965655 2960885 1.3231e+07  193  166 1.3236e+07 1.0596e+07  19.9%  11.2 9098s
+ 10099990 2960947 infeasible  336      1.3236e+07 1.0596e+07  19.9%  11.2 9119s
+ 10102582 2962291 1.1476e+07  356  236 1.3236e+07 1.0596e+07  19.9%  11.2 9133s
+ 10106066 2968837 1.0596e+07  357  171 1.3236e+07 1.0596e+07  19.9%  11.2 9151s
+ 10116595 3014607 1.3231e+07  361  158 1.3236e+07 1.0596e+07  19.9%  11.2 9178s
+ 10227495 3014893 infeasible  210      1.3236e+07 1.0596e+07  19.9%  11.1 9199s
+ 10230105 3016894 1.0596e+07  332  190 1.3236e+07 1.0596e+07  19.9%  11.1 9212s
+ 10234122 3021666 1.3231e+07  338  186 1.3236e+07 1.0596e+07  19.9%  11.1 9230s
+ 10243789 3066912 1.3231e+07  259  170 1.3236e+07 1.0596e+07  19.9%  11.1 9262s
+ 10356362 3067254 infeasible  295      1.3236e+07 1.0596e+07  19.9%  11.1 9287s
+ 10359392 3068936 1.3231e+07  306  177 1.3236e+07 1.0596e+07  19.9%  11.1 9303s
+ 10363639 3074759 1.3231e+07  401  173 1.3236e+07 1.0596e+07  19.9%  11.1 9323s
+ 10374348 3125042 1.0596e+07  414  171 1.3236e+07 1.0596e+07  19.9%  11.1 9352s
+ 10487985 3125178 1.2648e+07  180  169 1.3236e+07 1.0596e+07  19.9%  11.1 9367s
+ 10490719 3126582 1.3231e+07  199   98 1.3236e+07 1.0596e+07  19.9%  11.1 9381s
+ 10494064 3131193 infeasible  214      1.3236e+07 1.0596e+07  19.9%  11.1 9399s
+ 10503762 3174809 1.3231e+07  214  149 1.3236e+07 1.0596e+07  19.9%  11.1 9426s
+ 10612329 3174859 1.3231e+07  344  150 1.3236e+07 1.0596e+07  19.9%  11.0 9446s
+ 10615003 3176023 infeasible  230      1.3236e+07 1.0596e+07  19.9%  11.1 9459s
+ 10617659 3180389 infeasible  236      1.3236e+07 1.0596e+07  19.9%  11.1 9478s
+ 10626007 3228977 infeasible  350      1.3236e+07 1.0596e+07  19.9%  11.1 9516s
+ 10737264 3229140 infeasible  308      1.3236e+07 1.0596e+07  19.9%  11.0 9547s
+ 10739736 3230802 1.3231e+07  358  205 1.3236e+07 1.0596e+07  19.9%  11.0 9563s
+ 10743300 3236180 1.3231e+07  360  191 1.3236e+07 1.0596e+07  19.9%  11.0 9582s
+ 10752090 3277341 infeasible  186      1.3236e+07 1.0596e+07  19.9%  11.0 9618s
+ 10863968 3277536 1.0596e+07  307  191 1.3236e+07 1.0596e+07  19.9%  11.0 9633s
+ 10866593 3277725 1.1700e+07  310  210 1.3236e+07 1.0596e+07  19.9%  11.0 9635s
+
+Explored 10868068 nodes (119644606 simplex iterations) in 9635.66 seconds (402.72 work units)
+Thread count was 140 (of 144 available processors)
+
+Solution count 10: 1.3236e+07 1.32446e+07 1.53046e+07 ... 2.35578e+07
+
+Solve interrupted
+Best objective 1.323604538172e+07, best bound 1.059616790433e+07, gap 19.9446%
+TP 32.0
+PP 2.0
+DP 2.0
+Shape[0] 32.0
+Shape[1] 2.0
+Shape[2] 2.0
+C6 64.0
+Link_BW[0] 600.0
+Link_BW[1] 25.0
+Link_BW[2] 25.0
+Link_BW_TP 600.0
+Link_BW_PP 25.0
+Link_BW_DP 25.0
+DRAM_BW 2039.0
+tile_size 16.0
+num_tile 128.0
+shard_M[0] 25600.0
+shard_M[1] 25600.0
+shard_M[2] 800.0
+shard_M[3] 800.0
+shard_M[4] 800.0
+shard_M[5] 10240.0
+shard_M[6] 11347.0
+shard_M[7] 10240.0
+shard_M[8] 800.0
+shard_M[9] 25600.0
+shard_M[10] 25600.0
+shard_M[11] 25600.0
+shard_M[12] 25600.0
+shard_M[13] 3200.0
+shard_M[14] 3200.0
+shard_M[15] 25600.0
+shard_M[16] 25600.0
+shard_M[17] 800.0
+shard_M[18] 25664.0
+shard_M[19] 25600.0
+shard_M[20] 3200.0
+shard_M[21] 3200.0
+shard_M[22] 25600.0
+shard_M[23] 25600.0
+shard_M[24] 25600.0
+shard_M[25] 800.0
+shard_M[26] 10240.0
+shard_M[27] 800.0
+shard_M[28] 25600.0
+shard_M[29] 10240.0
+shard_M[30] 10240.0
+shard_M[31] 800.0
+shard_M[32] 800.0
+shard_M[33] 800.0
+shard_M[34] 800.0
+shard_M[35] 3200.0
+shard_M[36] 800.0
+shard_M[37] 800.0
+shard_M[38] 800.0
+shard_M[39] 800.0
+shard_M[40] 800.0
+shard_K[0] 1.0
+shard_K[1] 1.0
+shard_K[2] 25600.0
+shard_K[3] 25600.0
+shard_K[4] 25600.0
+shard_K[5] 160.0
+shard_K[6] 1.0
+shard_K[7] 1.0
+shard_K[8] 2048.0
+shard_K[9] 800.0
+shard_K[10] 1.0
+shard_K[11] 1.0
+shard_K[12] 1.0
+shard_K[13] 25600.0
+shard_K[14] 1.0
+shard_K[15] 3200.0
+shard_K[16] 1.0
+shard_K[17] 1.0
+shard_K[18] 1.0
+shard_K[19] 1.0
+shard_K[20] 25600.0
+shard_K[21] 1.0
+shard_K[22] 3200.0
+shard_K[23] 1.0
+shard_K[24] 1.0
+shard_K[25] 25600.0
+shard_K[26] 160.0
+shard_K[27] 2048.0
+shard_K[28] 800.0
+shard_K[29] 1.0
+shard_K[30] 1.0
+shard_K[31] 2048.0
+shard_K[32] 2048.0
+shard_K[33] 25600.0
+shard_K[34] 25600.0
+shard_K[35] 16.0
+shard_K[36] 16.0
+shard_K[37] 16.0
+shard_K[38] 23.0
+shard_K[39] 16.0
+shard_K[40] 16.0
+shard_N[0] 16.0
+shard_N[1] 16.0
+shard_N[2] 18.0
+shard_N[3] 16.0
+shard_N[4] 18.0
+shard_N[5] 16.0
+shard_N[6] 72.0
+shard_N[7] 16.0
+shard_N[8] 16.0
+shard_N[9] 16.0
+shard_N[10] 16.0
+shard_N[11] 16.0
+shard_N[12] 16.0
+shard_N[13] 16.0
+shard_N[14] 16.0
+shard_N[15] 16.0
+shard_N[16] 16.0
+shard_N[17] 1024.0
+shard_N[18] 20.0
+shard_N[19] 17.0
+shard_N[20] 18.0
+shard_N[21] 16.0
+shard_N[22] 16.0
+shard_N[23] 16.0
+shard_N[24] 43.0
+shard_N[25] 18.0
+shard_N[26] 16.0
+shard_N[27] 16.0
+shard_N[28] 16.0
+shard_N[29] 16.0
+shard_N[30] 160.0
+shard_N[31] 24.0
+shard_N[32] 16.0
+shard_N[33] 16.0
+shard_N[34] 16.0
+shard_N[35] 25600.0
+shard_N[36] 102400.0
+shard_N[37] 25600.0
+shard_N[38] 25600.0
+shard_N[39] 25600.0
+shard_N[40] 25600.0
+shard_intermediate_buffer_size[0] 819200.0
+shard_intermediate_buffer_size[1] 819200.0
+shard_intermediate_buffer_size[2] 819200.0
+shard_intermediate_buffer_size[3] 819200.0
+shard_intermediate_buffer_size[4] 28800.0
+shard_intermediate_buffer_size[5] 25600.0
+shard_intermediate_buffer_size[6] 327680.0
+shard_intermediate_buffer_size[7] 1633968.0
+shard_intermediate_buffer_size[8] 28800.0
+shard_intermediate_buffer_size[9] 327680.0
+shard_intermediate_buffer_size[10] 25600.0
+shard_intermediate_buffer_size[11] 819200.0
+shard_intermediate_buffer_size[12] 819200.0
+shard_intermediate_buffer_size[13] 819200.0
+shard_intermediate_buffer_size[14] 819200.0
+shard_intermediate_buffer_size[15] 819200.0
+shard_intermediate_buffer_size[16] 102400.0
+shard_intermediate_buffer_size[17] 102400.0
+shard_intermediate_buffer_size[18] 819200.0
+shard_intermediate_buffer_size[19] 819200.0
+shard_intermediate_buffer_size[20] 819200.0
+shard_intermediate_buffer_size[21] 1026560.0
+shard_intermediate_buffer_size[22] 870400.0
+shard_intermediate_buffer_size[23] 115200.0
+shard_intermediate_buffer_size[24] 102400.0
+shard_intermediate_buffer_size[25] 819200.0
+shard_intermediate_buffer_size[26] 819200.0
+shard_intermediate_buffer_size[27] 2201600.0
+shard_intermediate_buffer_size[28] 28800.0
+shard_intermediate_buffer_size[29] 28800.0
+shard_intermediate_buffer_size[30] 28800.0
+shard_intermediate_buffer_size[31] 327680.0
+shard_intermediate_buffer_size[32] 327680.0
+shard_intermediate_buffer_size[33] 25600.0
+shard_intermediate_buffer_size[34] 327680.0
+shard_intermediate_buffer_size[35] 3276800.0
+shard_intermediate_buffer_size[36] 3276800.0
+shard_intermediate_buffer_size[37] 25600.0
+shard_intermediate_buffer_size[38] 28800.0
+shard_intermediate_buffer_size[39] 38400.0
+shard_intermediate_buffer_size[40] 25600.0
+shard_intermediate_buffer_size[41] 870400.0
+shard_intermediate_buffer_size[42] 102400.0
+shard_intermediate_buffer_size[43] 102400.0
+shard_intermediate_buffer_size[44] 819200.0
+shard_intermediate_buffer_size[45] 2201600.0
+shard_intermediate_buffer_size[46] 25600.0
+shard_intermediate_buffer_size[47] 25600.0
+shard_intermediate_buffer_size[48] 819200.0
+shard_intermediate_buffer_size[49] 25600.0
+shard_intermediate_buffer_size[50] 819200.0
+shard_intermediate_buffer_size[51] 38400.0
+shard_intermediate_buffer_size[52] 819200.0
+shard_initiation_buffer_size[0] 40959999.99999999
+shard_initiation_buffer_size[1] 40959999.99999999
+shard_initiation_buffer_size[2] 40959999.99999999
+shard_initiation_buffer_size[3] 40959999.99999999
+shard_initiation_buffer_size[4] 163840000.0
+shard_initiation_buffer_size[5] 163839999.99999994
+shard_initiation_buffer_size[6] 163839999.99999994
+shard_initiation_buffer_size[7] 163840000.0
+shard_initiation_buffer_size[8] 40959999.99999997
+shard_initiation_buffer_size[9] 40959999.999999955
+shard_initiation_buffer_size[10] 40959999.99999991
+shard_initiation_buffer_size[11] 40959999.99999994
+ALL_REDUCE_communication_size[0] 0.0
+ALL_REDUCE_communication_size[1] 0.0
+ALL_REDUCE_communication_size[2] 0.0
+ALL_REDUCE_communication_size[3] 0.0
+ALL_REDUCE_communication_size[4] 0.0
+ALL_REDUCE_communication_size[5] 0.0
+ALL_REDUCE_communication_size[6] 0.0
+ALL_REDUCE_communication_size[7] 0.0
+ALL_REDUCE_communication_size[8] 0.0
+ALL_REDUCE_communication_size[9] 819200.0
+ALL_REDUCE_communication_size[10] 0.0
+ALL_REDUCE_communication_size[11] 0.0
+ALL_REDUCE_communication_size[12] 0.0
+ALL_REDUCE_communication_size[13] 0.0
+ALL_REDUCE_communication_size[14] 0.0
+ALL_REDUCE_communication_size[15] 819200.0
+ALL_REDUCE_communication_size[16] 0.0
+ALL_REDUCE_communication_size[17] 0.0
+ALL_REDUCE_communication_size[18] 0.0
+ALL_REDUCE_communication_size[19] 0.0
+ALL_REDUCE_communication_size[20] 0.0
+ALL_REDUCE_communication_size[21] 0.0
+ALL_REDUCE_communication_size[22] 819200.0
+ALL_REDUCE_communication_size[23] 0.0
+ALL_REDUCE_communication_size[24] 0.0
+ALL_REDUCE_communication_size[25] 0.0
+ALL_REDUCE_communication_size[26] 0.0
+ALL_REDUCE_communication_size[27] 0.0
+ALL_REDUCE_communication_size[28] 819200.0
+ALL_REDUCE_communication_size[29] 0.0
+ALL_REDUCE_communication_size[30] 0.0
+ALL_REDUCE_communication_size[31] 0.0
+ALL_REDUCE_communication_size[32] 0.0
+ALL_REDUCE_communication_size[33] 0.0
+ALL_REDUCE_communication_size[34] 0.0
+ALL_REDUCE_communication_size[35] 0.0
+ALL_REDUCE_communication_size[36] 0.0
+ALL_REDUCE_communication_size[37] 0.0
+ALL_REDUCE_communication_size[38] -0.0
+ALL_REDUCE_communication_size[39] -0.0
+ALL_REDUCE_communication_size[40] -3.4924596548080444e-10
+ALL_REDUCE_PERIODIC_communication_size[0] 0.0
+ALL_REDUCE_PERIODIC_communication_size[1] 0.0
+ALL_REDUCE_PERIODIC_communication_size[2] 0.0
+ALL_REDUCE_PERIODIC_communication_size[3] 0.0
+ALL_REDUCE_PERIODIC_communication_size[4] 0.0
+ALL_REDUCE_PERIODIC_communication_size[5] 0.0
+ALL_REDUCE_PERIODIC_communication_size[6] 0.0
+ALL_REDUCE_PERIODIC_communication_size[7] 0.0
+ALL_REDUCE_PERIODIC_communication_size[8] 0.0
+ALL_REDUCE_PERIODIC_communication_size[9] 122606933.33333096
+ALL_REDUCE_PERIODIC_communication_size[10] 0.0
+ALL_REDUCE_PERIODIC_communication_size[11] 0.0
+ALL_REDUCE_PERIODIC_communication_size[12] 0.0
+ALL_REDUCE_PERIODIC_communication_size[13] 0.0
+ALL_REDUCE_PERIODIC_communication_size[14] 0.0
+ALL_REDUCE_PERIODIC_communication_size[15] 122606933.3329991
+ALL_REDUCE_PERIODIC_communication_size[16] 0.0
+ALL_REDUCE_PERIODIC_communication_size[17] 0.0
+ALL_REDUCE_PERIODIC_communication_size[18] 0.0
+ALL_REDUCE_PERIODIC_communication_size[19] 0.0
+ALL_REDUCE_PERIODIC_communication_size[20] 0.0
+ALL_REDUCE_PERIODIC_communication_size[21] 0.0
+ALL_REDUCE_PERIODIC_communication_size[22] 0.0
+ALL_REDUCE_PERIODIC_communication_size[23] 0.0
+ALL_REDUCE_PERIODIC_communication_size[24] 0.0
+ALL_REDUCE_PERIODIC_communication_size[25] 0.0
+ALL_REDUCE_PERIODIC_communication_size[26] 0.0
+ALL_REDUCE_PERIODIC_communication_size[27] 0.0
+ALL_REDUCE_PERIODIC_communication_size[28] 6.958725862205029e-08
+ALL_REDUCE_PERIODIC_communication_size[29] 0.0
+ALL_REDUCE_PERIODIC_communication_size[30] 0.0
+ALL_REDUCE_PERIODIC_communication_size[31] 0.0
+ALL_REDUCE_PERIODIC_communication_size[32] 0.0
+ALL_REDUCE_PERIODIC_communication_size[33] 0.0
+ALL_REDUCE_PERIODIC_communication_size[34] 0.0
+ALL_REDUCE_PERIODIC_communication_size[35] 853333.3333333334
+ALL_REDUCE_PERIODIC_communication_size[36] 251972266.66666168
+ALL_REDUCE_PERIODIC_communication_size[37] 213333.33333333334
+ALL_REDUCE_PERIODIC_communication_size[38] 213333.33333333334
+ALL_REDUCE_PERIODIC_communication_size[39] 213333.33333333334
+ALL_REDUCE_PERIODIC_communication_size[40] 213333.33333333334
+ALL_TO_ALL_communication_size[0] -0.0
+ALL_TO_ALL_communication_size[1] -0.0
+ALL_TO_ALL_communication_size[2] -0.0
+ALL_TO_ALL_communication_size[3] -0.0
+ALL_TO_ALL_communication_size[4] -0.0
+ALL_TO_ALL_communication_size[5] -0.0
+ALL_TO_ALL_communication_size[6] -0.0
+ALL_TO_ALL_communication_size[7] -0.0
+ALL_TO_ALL_communication_size[8] -0.0
+ALL_TO_ALL_communication_size[9] 0.0
+ALL_TO_ALL_communication_size[10] -0.0
+ALL_TO_ALL_communication_size[11] -0.0
+ALL_TO_ALL_communication_size[12] -0.0
+ALL_TO_ALL_communication_size[13] -0.0
+ALL_TO_ALL_communication_size[14] -0.0
+ALL_TO_ALL_communication_size[15] 0.0
+ALL_TO_ALL_communication_size[16] -0.0
+ALL_TO_ALL_communication_size[17] -0.0
+ALL_TO_ALL_communication_size[18] -0.0
+ALL_TO_ALL_communication_size[19] -0.0
+ALL_TO_ALL_communication_size[20] -0.0
+ALL_TO_ALL_communication_size[21] -0.0
+ALL_TO_ALL_communication_size[22] 0.0
+ALL_TO_ALL_communication_size[23] -0.0
+ALL_TO_ALL_communication_size[24] -0.0
+ALL_TO_ALL_communication_size[25] -0.0
+ALL_TO_ALL_communication_size[26] -0.0
+ALL_TO_ALL_communication_size[27] -0.0
+ALL_TO_ALL_communication_size[28] 0.0
+ALL_TO_ALL_communication_size[29] -0.0
+ALL_TO_ALL_communication_size[30] -0.0
+ALL_TO_ALL_communication_size[31] -0.0
+ALL_TO_ALL_communication_size[32] -0.0
+ALL_TO_ALL_communication_size[33] -0.0
+ALL_TO_ALL_communication_size[34] -0.0
+ALL_TO_ALL_communication_size[35] 0.0
+ALL_TO_ALL_communication_size[36] 0.0
+ALL_TO_ALL_communication_size[37] 0.0
+ALL_TO_ALL_communication_size[38] 0.0
+ALL_TO_ALL_communication_size[39] 0.0
+ALL_TO_ALL_communication_size[40] 0.0
+POINT_TO_POINT_communication_size[0] -0.0
+POINT_TO_POINT_communication_size[1] -0.0
+POINT_TO_POINT_communication_size[2] -0.0
+POINT_TO_POINT_communication_size[3] -0.0
+POINT_TO_POINT_communication_size[4] -0.0
+POINT_TO_POINT_communication_size[5] -0.0
+POINT_TO_POINT_communication_size[6] -0.0
+POINT_TO_POINT_communication_size[7] -0.0
+POINT_TO_POINT_communication_size[8] -0.0
+POINT_TO_POINT_communication_size[9] 0.0
+POINT_TO_POINT_communication_size[10] -0.0
+POINT_TO_POINT_communication_size[11] -0.0
+POINT_TO_POINT_communication_size[12] -0.0
+POINT_TO_POINT_communication_size[13] -0.0
+POINT_TO_POINT_communication_size[14] -0.0
+POINT_TO_POINT_communication_size[15] 0.0
+POINT_TO_POINT_communication_size[16] -0.0
+POINT_TO_POINT_communication_size[17] -0.0
+POINT_TO_POINT_communication_size[18] -0.0
+POINT_TO_POINT_communication_size[19] -0.0
+POINT_TO_POINT_communication_size[20] -0.0
+POINT_TO_POINT_communication_size[21] -0.0
+POINT_TO_POINT_communication_size[22] 0.0
+POINT_TO_POINT_communication_size[23] -0.0
+POINT_TO_POINT_communication_size[24] -0.0
+POINT_TO_POINT_communication_size[25] -0.0
+POINT_TO_POINT_communication_size[26] -0.0
+POINT_TO_POINT_communication_size[27] -0.0
+POINT_TO_POINT_communication_size[28] 0.0
+POINT_TO_POINT_communication_size[29] -0.0
+POINT_TO_POINT_communication_size[30] -0.0
+POINT_TO_POINT_communication_size[31] -0.0
+POINT_TO_POINT_communication_size[32] -0.0
+POINT_TO_POINT_communication_size[33] -0.0
+POINT_TO_POINT_communication_size[34] -0.0
+POINT_TO_POINT_communication_size[35] 0.0
+POINT_TO_POINT_communication_size[36] 0.0
+POINT_TO_POINT_communication_size[37] 0.0
+POINT_TO_POINT_communication_size[38] 0.0
+POINT_TO_POINT_communication_size[39] 0.0
+POINT_TO_POINT_communication_size[40] 0.0
+BROADCAST_communication_size[0] -0.0
+BROADCAST_communication_size[1] -0.0
+BROADCAST_communication_size[2] -0.0
+BROADCAST_communication_size[3] -0.0
+BROADCAST_communication_size[4] -0.0
+BROADCAST_communication_size[5] -0.0
+BROADCAST_communication_size[6] -0.0
+BROADCAST_communication_size[7] -0.0
+BROADCAST_communication_size[8] -0.0
+BROADCAST_communication_size[9] 0.0
+BROADCAST_communication_size[10] -0.0
+BROADCAST_communication_size[11] -0.0
+BROADCAST_communication_size[12] -0.0
+BROADCAST_communication_size[13] -0.0
+BROADCAST_communication_size[14] -0.0
+BROADCAST_communication_size[15] 0.0
+BROADCAST_communication_size[16] -0.0
+BROADCAST_communication_size[17] -0.0
+BROADCAST_communication_size[18] -0.0
+BROADCAST_communication_size[19] -0.0
+BROADCAST_communication_size[20] -0.0
+BROADCAST_communication_size[21] -0.0
+BROADCAST_communication_size[22] 0.0
+BROADCAST_communication_size[23] -0.0
+BROADCAST_communication_size[24] -0.0
+BROADCAST_communication_size[25] -0.0
+BROADCAST_communication_size[26] -0.0
+BROADCAST_communication_size[27] -0.0
+BROADCAST_communication_size[28] 0.0
+BROADCAST_communication_size[29] -0.0
+BROADCAST_communication_size[30] -0.0
+BROADCAST_communication_size[31] -0.0
+BROADCAST_communication_size[32] -0.0
+BROADCAST_communication_size[33] -0.0
+BROADCAST_communication_size[34] -0.0
+BROADCAST_communication_size[35] 0.0
+BROADCAST_communication_size[36] 0.0
+BROADCAST_communication_size[37] 0.0
+BROADCAST_communication_size[38] 0.0
+BROADCAST_communication_size[39] 0.0
+BROADCAST_communication_size[40] 0.0
+micro_batch_size 8.0
+num_micro_batch_per_pipeline 192.0
+C411 16.0
+C412 163840000.0
+C413 0.0
+C414 0.0
+C415 163840000.0
+C416 0.0
+C417 0.0
+C418 40960000.0
+C419 0.0
+C420 0.0
+C421 40960000.0
+C422 0.0
+C423 0.0
+C424 40960000.0
+C425 0.0
+C426 0.0
+C427 40960000.0
+C428 0.0
+C429 0.0
+Config[0] 0.0
+Config[1] 0.0
+Config[2] 0.0
+Config[3] 0.0
+Config[4] 0.0
+Config[5] 0.0
+Config[6] 0.0
+Config[7] 0.0
+Config[8] 0.0
+Config[9] 0.0
+Config[10] 0.0
+Config[11] 0.0
+Config[12] 0.0
+Config[13] 1.0
+Config[14] 1.0
+Config[15] 1.0
+Config[16] 1.0
+Config[17] 1.0
+Config[18] 2.0
+Config[19] 2.0
+Config[20] 2.0
+Config[21] 2.0
+Config[22] 2.0
+Config[23] 3.0
+Config[24] 3.0
+Config[25] 3.0
+Config[26] 3.0
+Config[27] 3.0
+Config[28] 3.0
+Config[29] 3.0
+Config[30] 3.0
+Config[31] 3.0
+Config[32] 3.0
+Config[33] 3.0
+Config[34] 3.0
+Config[35] 3.0
+Config[36] 3.0
+Config[37] 3.0
+Config[38] 3.0
+Config[39] 3.0
+Config[40] 3.0
+Ab_onchip[0,0] 1.0
+Ab_onchip[0,1] 0.0
+Ab_onchip[0,2] 0.0
+Ab_onchip[0,3] 0.0
+Ab_onchip[1,0] 1.0
+Ab_onchip[1,1] 0.0
+Ab_onchip[1,2] 0.0
+Ab_onchip[1,3] 0.0
+Ab_onchip[2,0] 1.0
+Ab_onchip[2,1] 0.0
+Ab_onchip[2,2] 0.0
+Ab_onchip[2,3] 0.0
+Ab_onchip[3,0] 1.0
+Ab_onchip[3,1] 0.0
+Ab_onchip[3,2] 0.0
+Ab_onchip[3,3] 0.0
+Ab_onchip[4,0] 1.0
+Ab_onchip[4,1] 0.0
+Ab_onchip[4,2] 0.0
+Ab_onchip[4,3] 0.0
+Ab_onchip[5,0] 1.0
+Ab_onchip[5,1] 0.0
+Ab_onchip[5,2] 0.0
+Ab_onchip[5,3] 0.0
+Ab_onchip[6,0] 1.0
+Ab_onchip[6,1] 0.0
+Ab_onchip[6,2] 0.0
+Ab_onchip[6,3] 0.0
+Ab_onchip[7,0] 1.0
+Ab_onchip[7,1] 0.0
+Ab_onchip[7,2] 0.0
+Ab_onchip[7,3] 0.0
+Ab_onchip[8,0] 1.0
+Ab_onchip[8,1] 0.0
+Ab_onchip[8,2] 0.0
+Ab_onchip[8,3] 0.0
+Ab_onchip[9,0] 1.0
+Ab_onchip[9,1] 0.0
+Ab_onchip[9,2] 0.0
+Ab_onchip[9,3] 0.0
+Ab_onchip[10,0] 1.0
+Ab_onchip[10,1] 0.0
+Ab_onchip[10,2] 0.0
+Ab_onchip[10,3] 0.0
+Ab_onchip[11,0] 1.0
+Ab_onchip[11,1] 0.0
+Ab_onchip[11,2] 0.0
+Ab_onchip[11,3] 0.0
+Ab_onchip[12,0] 1.0
+Ab_onchip[12,1] 0.0
+Ab_onchip[12,2] 0.0
+Ab_onchip[12,3] 0.0
+Ab_onchip[13,0] 1.0
+Ab_onchip[13,1] 0.0
+Ab_onchip[13,2] 0.0
+Ab_onchip[13,3] 0.0
+Ab_onchip[14,0] 1.0
+Ab_onchip[14,1] 0.0
+Ab_onchip[14,2] 0.0
+Ab_onchip[14,3] 0.0
+Ab_onchip[15,0] 0.0
+Ab_onchip[15,1] -0.0
+Ab_onchip[15,2] 0.0
+Ab_onchip[15,3] 0.0
+Ab_onchip[16,0] 0.0
+Ab_onchip[16,1] 1.0
+Ab_onchip[16,2] 0.0
+Ab_onchip[16,3] 0.0
+Ab_onchip[17,0] 0.0
+Ab_onchip[17,1] 1.0
+Ab_onchip[17,2] 0.0
+Ab_onchip[17,3] 0.0
+Ab_onchip[18,0] 0.0
+Ab_onchip[18,1] 1.0
+Ab_onchip[18,2] 0.0
+Ab_onchip[18,3] 0.0
+Ab_onchip[19,0] 0.0
+Ab_onchip[19,1] 1.0
+Ab_onchip[19,2] 0.0
+Ab_onchip[19,3] 0.0
+Ab_onchip[20,0] 0.0
+Ab_onchip[20,1] 0.0
+Ab_onchip[20,2] 0.0
+Ab_onchip[20,3] 0.0
+Ab_onchip[21,0] 0.0
+Ab_onchip[21,1] 0.0
+Ab_onchip[21,2] 1.0
+Ab_onchip[21,3] 0.0
+Ab_onchip[22,0] 0.0
+Ab_onchip[22,1] 0.0
+Ab_onchip[22,2] 1.0
+Ab_onchip[22,3] 0.0
+Ab_onchip[23,0] 0.0
+Ab_onchip[23,1] 0.0
+Ab_onchip[23,2] 1.0
+Ab_onchip[23,3] 0.0
+Ab_onchip[24,0] 0.0
+Ab_onchip[24,1] 0.0
+Ab_onchip[24,2] 1.0
+Ab_onchip[24,3] 0.0
+Ab_onchip[25,0] 0.0
+Ab_onchip[25,1] 0.0
+Ab_onchip[25,2] -0.0
+Ab_onchip[25,3] 0.0
+Ab_onchip[26,0] 0.0
+Ab_onchip[26,1] 0.0
+Ab_onchip[26,2] 0.0
+Ab_onchip[26,3] 1.0
+Ab_onchip[27,0] 0.0
+Ab_onchip[27,1] 0.0
+Ab_onchip[27,2] 0.0
+Ab_onchip[27,3] 1.0
+Ab_onchip[28,0] 0.0
+Ab_onchip[28,1] 0.0
+Ab_onchip[28,2] 0.0
+Ab_onchip[28,3] 1.0
+Ab_onchip[29,0] 0.0
+Ab_onchip[29,1] 0.0
+Ab_onchip[29,2] 0.0
+Ab_onchip[29,3] 0.0
+Ab_onchip[30,0] 0.0
+Ab_onchip[30,1] 0.0
+Ab_onchip[30,2] 0.0
+Ab_onchip[30,3] 1.0
+Ab_onchip[31,0] 0.0
+Ab_onchip[31,1] 0.0
+Ab_onchip[31,2] 0.0
+Ab_onchip[31,3] 0.0
+Ab_onchip[32,0] 0.0
+Ab_onchip[32,1] 0.0
+Ab_onchip[32,2] 0.0
+Ab_onchip[32,3] 1.0
+Ab_onchip[33,0] 0.0
+Ab_onchip[33,1] 0.0
+Ab_onchip[33,2] 0.0
+Ab_onchip[33,3] 1.0
+Ab_onchip[34,0] 0.0
+Ab_onchip[34,1] 0.0
+Ab_onchip[34,2] 0.0
+Ab_onchip[34,3] 1.0
+Ab_onchip[35,0] 0.0
+Ab_onchip[35,1] 0.0
+Ab_onchip[35,2] 0.0
+Ab_onchip[35,3] 1.0
+Ab_onchip[36,0] 0.0
+Ab_onchip[36,1] 0.0
+Ab_onchip[36,2] 0.0
+Ab_onchip[36,3] 1.0
+Ab_onchip[37,0] 0.0
+Ab_onchip[37,1] 0.0
+Ab_onchip[37,2] 0.0
+Ab_onchip[37,3] 0.0
+Ab_onchip[38,0] 0.0
+Ab_onchip[38,1] 0.0
+Ab_onchip[38,2] 0.0
+Ab_onchip[38,3] 0.0
+Ab_onchip[39,0] 0.0
+Ab_onchip[39,1] 0.0
+Ab_onchip[39,2] 0.0
+Ab_onchip[39,3] 1.0
+Ab_onchip[40,0] 0.0
+Ab_onchip[40,1] 0.0
+Ab_onchip[40,2] 0.0
+Ab_onchip[40,3] 1.0
+Ab_onchip[41,0] 0.0
+Ab_onchip[41,1] 0.0
+Ab_onchip[41,2] -0.0
+Ab_onchip[41,3] 0.0
+Ab_onchip[42,0] 0.0
+Ab_onchip[42,1] 0.0
+Ab_onchip[42,2] 0.0
+Ab_onchip[42,3] 0.0
+Ab_onchip[43,0] 0.0
+Ab_onchip[43,1] 0.0
+Ab_onchip[43,2] -0.0
+Ab_onchip[43,3] 0.0
+Ab_onchip[44,0] 0.0
+Ab_onchip[44,1] 0.0
+Ab_onchip[44,2] 0.0
+Ab_onchip[44,3] 0.0
+Ab_onchip[45,0] 0.0
+Ab_onchip[45,1] 0.0
+Ab_onchip[45,2] -0.0
+Ab_onchip[45,3] 1.0
+Ab_onchip[46,0] 0.0
+Ab_onchip[46,1] 0.0
+Ab_onchip[46,2] 0.0
+Ab_onchip[46,3] 0.0
+Ab_onchip[47,0] 0.0
+Ab_onchip[47,1] 0.0
+Ab_onchip[47,2] 0.0
+Ab_onchip[47,3] 1.0
+Ab_onchip[48,0] 0.0
+Ab_onchip[48,1] 0.0
+Ab_onchip[48,2] 0.0
+Ab_onchip[48,3] 0.0
+Ab_onchip[49,0] 0.0
+Ab_onchip[49,1] 0.0
+Ab_onchip[49,2] 0.0
+Ab_onchip[49,3] 1.0
+Ab_onchip[50,0] 0.0
+Ab_onchip[50,1] 0.0
+Ab_onchip[50,2] 0.0
+Ab_onchip[50,3] 0.0
+Ab_onchip[51,0] 0.0
+Ab_onchip[51,1] 0.0
+Ab_onchip[51,2] 0.0
+Ab_onchip[51,3] 1.0
+Ab_onchip[52,0] 0.0
+Ab_onchip[52,1] 0.0
+Ab_onchip[52,2] 0.0
+Ab_onchip[52,3] 0.0
+Ab_dram[0,0] 0.0
+Ab_dram[0,1] 0.0
+Ab_dram[0,2] 0.0
+Ab_dram[0,3] 0.0
+Ab_dram[1,0] 0.0
+Ab_dram[1,1] 0.0
+Ab_dram[1,2] 0.0
+Ab_dram[1,3] 0.0
+Ab_dram[2,0] 0.0
+Ab_dram[2,1] 0.0
+Ab_dram[2,2] 0.0
+Ab_dram[2,3] 0.0
+Ab_dram[3,0] 0.0
+Ab_dram[3,1] 0.0
+Ab_dram[3,2] 0.0
+Ab_dram[3,3] 0.0
+Ab_dram[4,0] 0.0
+Ab_dram[4,1] 0.0
+Ab_dram[4,2] 0.0
+Ab_dram[4,3] 0.0
+Ab_dram[5,0] 0.0
+Ab_dram[5,1] 0.0
+Ab_dram[5,2] 0.0
+Ab_dram[5,3] 0.0
+Ab_dram[6,0] 0.0
+Ab_dram[6,1] 0.0
+Ab_dram[6,2] 0.0
+Ab_dram[6,3] 0.0
+Ab_dram[7,0] 0.0
+Ab_dram[7,1] 0.0
+Ab_dram[7,2] 0.0
+Ab_dram[7,3] 0.0
+Ab_dram[8,0] 0.0
+Ab_dram[8,1] 0.0
+Ab_dram[8,2] 0.0
+Ab_dram[8,3] 0.0
+Ab_dram[9,0] 0.0
+Ab_dram[9,1] 0.0
+Ab_dram[9,2] 0.0
+Ab_dram[9,3] 0.0
+Ab_dram[10,0] 0.0
+Ab_dram[10,1] 0.0
+Ab_dram[10,2] 0.0
+Ab_dram[10,3] 0.0
+Ab_dram[11,0] 0.0
+Ab_dram[11,1] 0.0
+Ab_dram[11,2] 0.0
+Ab_dram[11,3] 0.0
+Ab_dram[12,0] 0.0
+Ab_dram[12,1] 0.0
+Ab_dram[12,2] 0.0
+Ab_dram[12,3] 0.0
+Ab_dram[13,0] -0.0
+Ab_dram[13,1] 0.0
+Ab_dram[13,2] 0.0
+Ab_dram[13,3] 0.0
+Ab_dram[14,0] 0.0
+Ab_dram[14,1] 0.0
+Ab_dram[14,2] 0.0
+Ab_dram[14,3] 0.0
+Ab_dram[15,0] 1.0
+Ab_dram[15,1] 1.0
+Ab_dram[15,2] 0.0
+Ab_dram[15,3] 0.0
+Ab_dram[16,0] -0.0
+Ab_dram[16,1] 0.0
+Ab_dram[16,2] 0.0
+Ab_dram[16,3] 0.0
+Ab_dram[17,0] 0.0
+Ab_dram[17,1] -0.0
+Ab_dram[17,2] 0.0
+Ab_dram[17,3] 0.0
+Ab_dram[18,0] 0.0
+Ab_dram[18,1] 0.0
+Ab_dram[18,2] 0.0
+Ab_dram[18,3] 0.0
+Ab_dram[19,0] 0.0
+Ab_dram[19,1] 0.0
+Ab_dram[19,2] 0.0
+Ab_dram[19,3] 0.0
+Ab_dram[20,0] 1.0
+Ab_dram[20,1] 1.0
+Ab_dram[20,2] 0.0
+Ab_dram[20,3] 0.0
+Ab_dram[21,0] 0.0
+Ab_dram[21,1] 0.0
+Ab_dram[21,2] 0.0
+Ab_dram[21,3] 0.0
+Ab_dram[22,0] 0.0
+Ab_dram[22,1] 0.0
+Ab_dram[22,2] 0.0
+Ab_dram[22,3] 0.0
+Ab_dram[23,0] 0.0
+Ab_dram[23,1] 0.0
+Ab_dram[23,2] -0.0
+Ab_dram[23,3] 0.0
+Ab_dram[24,0] 0.0
+Ab_dram[24,1] 0.0
+Ab_dram[24,2] 0.0
+Ab_dram[24,3] -0.0
+Ab_dram[25,0] 0.0
+Ab_dram[25,1] 0.0
+Ab_dram[25,2] 1.0
+Ab_dram[25,3] 1.0
+Ab_dram[26,0] 0.0
+Ab_dram[26,1] 0.0
+Ab_dram[26,2] -0.0
+Ab_dram[26,3] 0.0
+Ab_dram[27,0] 0.0
+Ab_dram[27,1] 0.0
+Ab_dram[27,2] -0.0
+Ab_dram[27,3] 0.0
+Ab_dram[28,0] 0.0
+Ab_dram[28,1] 0.0
+Ab_dram[28,2] 0.0
+Ab_dram[28,3] 0.0
+Ab_dram[29,0] 1.0
+Ab_dram[29,1] 0.0
+Ab_dram[29,2] 0.0
+Ab_dram[29,3] 1.0
+Ab_dram[30,0] 0.0
+Ab_dram[30,1] 0.0
+Ab_dram[30,2] 0.0
+Ab_dram[30,3] 0.0
+Ab_dram[31,0] 1.0
+Ab_dram[31,1] 0.0
+Ab_dram[31,2] 0.0
+Ab_dram[31,3] 1.0
+Ab_dram[32,0] 0.0
+Ab_dram[32,1] 0.0
+Ab_dram[32,2] 0.0
+Ab_dram[32,3] 0.0
+Ab_dram[33,0] 0.0
+Ab_dram[33,1] 0.0
+Ab_dram[33,2] 0.0
+Ab_dram[33,3] 0.0
+Ab_dram[34,0] 0.0
+Ab_dram[34,1] 0.0
+Ab_dram[34,2] 0.0
+Ab_dram[34,3] 0.0
+Ab_dram[35,0] 0.0
+Ab_dram[35,1] 0.0
+Ab_dram[35,2] 0.0
+Ab_dram[35,3] 0.0
+Ab_dram[36,0] 0.0
+Ab_dram[36,1] 0.0
+Ab_dram[36,2] 0.0
+Ab_dram[36,3] 0.0
+Ab_dram[37,0] 1.0
+Ab_dram[37,1] 0.0
+Ab_dram[37,2] 0.0
+Ab_dram[37,3] 1.0
+Ab_dram[38,0] 1.0
+Ab_dram[38,1] 0.0
+Ab_dram[38,2] 0.0
+Ab_dram[38,3] 1.0
+Ab_dram[39,0] 0.0
+Ab_dram[39,1] 0.0
+Ab_dram[39,2] 0.0
+Ab_dram[39,3] 0.0
+Ab_dram[40,0] 0.0
+Ab_dram[40,1] 0.0
+Ab_dram[40,2] 0.0
+Ab_dram[40,3] 0.0
+Ab_dram[41,0] 0.0
+Ab_dram[41,1] 0.0
+Ab_dram[41,2] 1.0
+Ab_dram[41,3] 1.0
+Ab_dram[42,0] 0.0
+Ab_dram[42,1] 1.0
+Ab_dram[42,2] 0.0
+Ab_dram[42,3] 1.0
+Ab_dram[43,0] 0.0
+Ab_dram[43,1] 0.0
+Ab_dram[43,2] 1.0
+Ab_dram[43,3] 1.0
+Ab_dram[44,0] 1.0
+Ab_dram[44,1] 0.0
+Ab_dram[44,2] 0.0
+Ab_dram[44,3] 1.0
+Ab_dram[45,0] 0.0
+Ab_dram[45,1] 0.0
+Ab_dram[45,2] 0.0
+Ab_dram[45,3] 0.0
+Ab_dram[46,0] 1.0
+Ab_dram[46,1] 0.0
+Ab_dram[46,2] 0.0
+Ab_dram[46,3] 1.0
+Ab_dram[47,0] 0.0
+Ab_dram[47,1] 0.0
+Ab_dram[47,2] 0.0
+Ab_dram[47,3] 0.0
+Ab_dram[48,0] 1.0
+Ab_dram[48,1] 0.0
+Ab_dram[48,2] 0.0
+Ab_dram[48,3] 1.0
+Ab_dram[49,0] 0.0
+Ab_dram[49,1] 0.0
+Ab_dram[49,2] 0.0
+Ab_dram[49,3] 0.0
+Ab_dram[50,0] 1.0
+Ab_dram[50,1] 0.0
+Ab_dram[50,2] 0.0
+Ab_dram[50,3] 1.0
+Ab_dram[51,0] 0.0
+Ab_dram[51,1] 0.0
+Ab_dram[51,2] 0.0
+Ab_dram[51,3] 0.0
+Ab_dram[52,0] 1.0
+Ab_dram[52,1] 0.0
+Ab_dram[52,2] 0.0
+Ab_dram[52,3] 1.0
+Ac[0,0] 1.0
+Ac[0,1] 0.0
+Ac[0,2] 0.0
+Ac[0,3] 0.0
+Ac[1,0] 1.0
+Ac[1,1] 0.0
+Ac[1,2] 0.0
+Ac[1,3] 0.0
+Ac[2,0] 1.0
+Ac[2,1] 0.0
+Ac[2,2] 0.0
+Ac[2,3] 0.0
+Ac[3,0] 1.0
+Ac[3,1] 0.0
+Ac[3,2] 0.0
+Ac[3,3] 0.0
+Ac[4,0] 1.0
+Ac[4,1] 0.0
+Ac[4,2] 0.0
+Ac[4,3] 0.0
+Ac[5,0] 1.0
+Ac[5,1] 0.0
+Ac[5,2] 0.0
+Ac[5,3] 0.0
+Ac[6,0] 1.0
+Ac[6,1] 0.0
+Ac[6,2] 0.0
+Ac[6,3] 0.0
+Ac[7,0] 1.0
+Ac[7,1] 0.0
+Ac[7,2] 0.0
+Ac[7,3] 0.0
+Ac[8,0] 1.0
+Ac[8,1] 0.0
+Ac[8,2] 0.0
+Ac[8,3] 0.0
+Ac[9,0] 1.0
+Ac[9,1] 0.0
+Ac[9,2] 0.0
+Ac[9,3] 0.0
+Ac[10,0] 1.0
+Ac[10,1] -0.0
+Ac[10,2] 0.0
+Ac[10,3] 0.0
+Ac[11,0] 1.0
+Ac[11,1] 0.0
+Ac[11,2] 0.0
+Ac[11,3] 0.0
+Ac[12,0] 1.0
+Ac[12,1] 0.0
+Ac[12,2] 0.0
+Ac[12,3] 0.0
+Ac[13,0] -0.0
+Ac[13,1] 1.0
+Ac[13,2] 0.0
+Ac[13,3] 0.0
+Ac[14,0] 0.0
+Ac[14,1] 1.0
+Ac[14,2] 0.0
+Ac[14,3] 0.0
+Ac[15,0] 0.0
+Ac[15,1] 1.0
+Ac[15,2] 0.0
+Ac[15,3] 0.0
+Ac[16,0] 0.0
+Ac[16,1] 1.0
+Ac[16,2] 0.0
+Ac[16,3] 0.0
+Ac[17,0] 0.0
+Ac[17,1] 1.0
+Ac[17,2] 0.0
+Ac[17,3] 0.0
+Ac[18,0] 0.0
+Ac[18,1] 0.0
+Ac[18,2] 1.0
+Ac[18,3] 0.0
+Ac[19,0] 0.0
+Ac[19,1] 0.0
+Ac[19,2] 1.0
+Ac[19,3] 0.0
+Ac[20,0] 0.0
+Ac[20,1] 0.0
+Ac[20,2] 1.0
+Ac[20,3] 0.0
+Ac[21,0] 0.0
+Ac[21,1] 0.0
+Ac[21,2] 1.0
+Ac[21,3] 0.0
+Ac[22,0] 0.0
+Ac[22,1] 0.0
+Ac[22,2] 1.0
+Ac[22,3] -0.0
+Ac[23,0] 0.0
+Ac[23,1] 0.0
+Ac[23,2] 0.0
+Ac[23,3] 1.0
+Ac[24,0] 0.0
+Ac[24,1] 0.0
+Ac[24,2] 0.0
+Ac[24,3] 1.0
+Ac[25,0] 0.0
+Ac[25,1] 0.0
+Ac[25,2] 0.0
+Ac[25,3] 1.0
+Ac[26,0] 0.0
+Ac[26,1] 0.0
+Ac[26,2] 0.0
+Ac[26,3] 1.0
+Ac[27,0] 0.0
+Ac[27,1] 0.0
+Ac[27,2] 0.0
+Ac[27,3] 1.0
+Ac[28,0] 0.0
+Ac[28,1] 0.0
+Ac[28,2] 0.0
+Ac[28,3] 1.0
+Ac[29,0] 0.0
+Ac[29,1] 0.0
+Ac[29,2] 0.0
+Ac[29,3] 1.0
+Ac[30,0] 0.0
+Ac[30,1] 0.0
+Ac[30,2] 0.0
+Ac[30,3] 1.0
+Ac[31,0] 0.0
+Ac[31,1] 0.0
+Ac[31,2] 0.0
+Ac[31,3] 1.0
+Ac[32,0] 0.0
+Ac[32,1] 0.0
+Ac[32,2] 0.0
+Ac[32,3] 1.0
+Ac[33,0] 0.0
+Ac[33,1] 0.0
+Ac[33,2] 0.0
+Ac[33,3] 1.0
+Ac[34,0] 0.0
+Ac[34,1] 0.0
+Ac[34,2] 0.0
+Ac[34,3] 1.0
+Ac[35,0] 0.0
+Ac[35,1] 0.0
+Ac[35,2] 0.0
+Ac[35,3] 1.0
+Ac[36,0] 0.0
+Ac[36,1] 0.0
+Ac[36,2] 0.0
+Ac[36,3] 1.0
+Ac[37,0] 0.0
+Ac[37,1] 0.0
+Ac[37,2] 0.0
+Ac[37,3] 1.0
+Ac[38,0] 0.0
+Ac[38,1] 0.0
+Ac[38,2] 0.0
+Ac[38,3] 1.0
+Ac[39,0] 0.0
+Ac[39,1] 0.0
+Ac[39,2] 0.0
+Ac[39,3] 1.0
+Ac[40,0] 0.0
+Ac[40,1] 0.0
+Ac[40,2] 0.0
+Ac[40,3] 1.0
+Ad[0,0] 1.0
+Ad[0,1] 0.0
+Ad[0,2] 0.0
+Ad[0,3] 0.0
+Ad[1,0] 1.0
+Ad[1,1] 0.0
+Ad[1,2] 0.0
+Ad[1,3] 0.0
+Ad[2,0] 1.0
+Ad[2,1] 0.0
+Ad[2,2] 0.0
+Ad[2,3] 0.0
+Ad[3,0] 1.0
+Ad[3,1] 0.0
+Ad[3,2] 0.0
+Ad[3,3] 0.0
+Ad[4,0] 0.0
+Ad[4,1] 1.0
+Ad[4,2] 0.0
+Ad[4,3] 0.0
+Ad[5,0] 0.0
+Ad[5,1] 1.0
+Ad[5,2] 0.0
+Ad[5,3] 0.0
+Ad[6,0] 0.0
+Ad[6,1] 0.0
+Ad[6,2] 1.0
+Ad[6,3] 0.0
+Ad[7,0] 0.0
+Ad[7,1] 0.0
+Ad[7,2] 1.0
+Ad[7,3] 0.0
+Ad[8,0] 0.0
+Ad[8,1] 0.0
+Ad[8,2] 0.0
+Ad[8,3] 1.0
+Ad[9,0] 0.0
+Ad[9,1] 0.0
+Ad[9,2] 0.0
+Ad[9,3] 1.0
+Ad[10,0] 0.0
+Ad[10,1] 0.0
+Ad[10,2] 0.0
+Ad[10,3] 1.0
+Ad[11,0] 0.0
+Ad[11,1] 0.0
+Ad[11,2] 0.0
+Ad[11,3] 1.0
+weight_tiling[0] 1.0
+weight_tiling[1] 1.0
+weight_tiling[2] 1.0
+weight_tiling[3] 1.0
+weight_tiling[4] 1.0
+weight_tiling[5] 1.0
+weight_tiling[6] 1.0
+weight_tiling[7] 1.0
+weight_tiling[8] 1.0
+weight_tiling[9] 1.0
+weight_tiling[10] 1.0
+weight_tiling[11] 1.0
+weight_tiling[12] 1.0
+weight_tiling[13] 1.0
+weight_tiling[14] 1.0
+weight_tiling[15] 1.0
+weight_tiling[16] 1.0
+weight_tiling[17] 1.0
+weight_tiling[18] 1.0
+weight_tiling[19] 1.0
+weight_tiling[20] 1.0
+weight_tiling[21] 1.0
+weight_tiling[22] 1.0
+weight_tiling[23] 1.0
+weight_tiling[24] 1.0
+weight_tiling[25] 1.0
+weight_tiling[26] 1.0
+weight_tiling[27] 1.0
+weight_tiling[28] 1.0
+weight_tiling[29] 1.0
+weight_tiling[30] 1.0
+weight_tiling[31] 1.0
+weight_tiling[32] 1.0
+weight_tiling[33] 1.0
+weight_tiling[34] 1.0
+weight_tiling[35] 1.0
+weight_tiling[36] 1.0
+weight_tiling[37] 1.0
+weight_tiling[38] 1.0
+weight_tiling[39] 1.0
+weight_tiling[40] 1.0
+Par_lane[0] 1.0
+Par_lane[1] 1.0
+Par_lane[2] 25.0
+Par_lane[3] 25.0
+Par_lane[4] 25.0
+Par_lane[5] 40.0
+Par_lane[6] 1.0
+Par_lane[7] 1.0
+Par_lane[8] 25.0
+Par_lane[9] 25.0
+Par_lane[10] 1.0
+Par_lane[11] 1.0
+Par_lane[12] 1.0
+Par_lane[13] 100.0
+Par_lane[14] 38.0
+Par_lane[15] 100.0
+Par_lane[16] 1.0
+Par_lane[17] 1.0
+Par_lane[18] 1.0
+Par_lane[19] 1.0
+Par_lane[20] 100.0
+Par_lane[21] 34.0
+Par_lane[22] 101.0
+Par_lane[23] 1.0
+Par_lane[24] 2.0
+Par_lane[25] 13.0
+Par_lane[26] 1.0
+Par_lane[27] 1.0
+Par_lane[28] 39.0
+Par_lane[29] 1.0
+Par_lane[30] 1.0
+Par_lane[31] 2.0
+Par_lane[32] 1.0
+Par_lane[33] 13.0
+Par_lane[34] 25.0
+Par_lane[35] 3.0
+Par_lane[36] 13.0
+Par_lane[37] 13.0
+Par_lane[38] 25.0
+Par_lane[39] 5.0
+Par_lane[40] 1.0
+Par_stage[0] 1.0
+Par_stage[1] 1.0
+Par_stage[2] 3.0
+Par_stage[3] 3.0
+Par_stage[4] 3.0
+Par_stage[5] 1.0
+Par_stage[6] 1.0
+Par_stage[7] 1.0
+Par_stage[8] 2.0
+Par_stage[9] 12.0
+Par_stage[10] 1.0
+Par_stage[11] 1.0
+Par_stage[12] 1.0
+Par_stage[13] 3.0
+Par_stage[14] 1.0
+Par_stage[15] 3.0
+Par_stage[16] 1.0
+Par_stage[17] 1.0
+Par_stage[18] 1.0
+Par_stage[19] 1.0
+Par_stage[20] 3.0
+Par_stage[21] 1.0
+Par_stage[22] 3.0
+Par_stage[23] 1.0
+Par_stage[24] 1.0
+Par_stage[25] 3.0
+Par_stage[26] 3.0
+Par_stage[27] 3.0
+Par_stage[28] 1.0
+Par_stage[29] 1.0
+Par_stage[30] 1.0
+Par_stage[31] 4.0
+Par_stage[32] 3.0
+Par_stage[33] 3.0
+Par_stage[34] 2.0
+Par_stage[35] 50.0
+Par_stage[36] 11.0
+Par_stage[37] 3.0
+Par_stage[38] 2.0
+Par_stage[39] 7.0
+Par_stage[40] 34.0
+Par_total[0] 1.0
+Par_total[1] 1.0
+Par_total[2] 75.0
+Par_total[3] 75.0
+Par_total[4] 75.0
+Par_total[5] 40.0
+Par_total[6] 1.0
+Par_total[7] 1.0
+Par_total[8] 50.0
+Par_total[9] 300.0
+Par_total[10] 1.0
+Par_total[11] 1.0
+Par_total[12] 1.0
+Par_total[13] 300.0
+Par_total[14] 38.0
+Par_total[15] 300.0
+Par_total[16] 1.0
+Par_total[17] 1.0
+Par_total[18] 1.0
+Par_total[19] 1.0
+Par_total[20] 300.0
+Par_total[21] 34.0
+Par_total[22] 303.0
+Par_total[23] 1.0
+Par_total[24] 2.0
+Par_total[25] 39.0
+Par_total[26] 3.0
+Par_total[27] 3.0
+Par_total[28] 39.0
+Par_total[29] 1.0
+Par_total[30] 1.0
+Par_total[31] 8.0
+Par_total[32] 3.0
+Par_total[33] 39.0
+Par_total[34] 50.0
+Par_total[35] 150.0
+Par_total[36] 143.0
+Par_total[37] 39.0
+Par_total[38] 50.0
+Par_total[39] 35.0
+Par_total[40] 34.0
+C1271 1.0
+C1272 1.0
+C1273 0.0
+C1274 0.0
+C1275 0.0
+C1276 0.0
+C1277 1.0
+C1278 0.0
+C1279 0.0
+C1280 0.0
+C1281 1.0
+C1282 0.0
+C1283 0.0
+C1284 0.0
+C1285 1.0
+C1286 0.0
+C1287 1.0
+C1288 1.0
+C1289 0.0
+C1290 0.0
+C1291 0.0
+C1292 0.0
+C1293 1.0
+C1294 0.0
+C1295 0.0
+C1296 0.0
+C1297 1.0
+C1298 0.0
+C1299 0.0
+C1300 0.0
+C1301 1.0
+C1302 0.0
+C1303 1.0
+C1304 1.0
+C1305 0.0
+C1306 0.0
+C1307 0.0
+C1308 0.0
+C1309 1.0
+C1310 0.0
+C1311 0.0
+C1312 0.0
+C1313 1.0
+C1314 0.0
+C1315 0.0
+C1316 0.0
+C1317 1.0
+C1318 0.0
+C1319 1.0
+C1320 1.0
+C1321 0.0
+C1322 0.0
+C1323 0.0
+C1324 0.0
+C1325 1.0
+C1326 0.0
+C1327 0.0
+C1328 0.0
+C1329 1.0
+C1330 0.0
+C1331 0.0
+C1332 0.0
+C1333 1.0
+C1334 0.0
+C1335 1.0
+C1336 1.0
+C1337 0.0
+C1338 0.0
+C1339 0.0
+C1340 0.0
+C1341 1.0
+C1342 0.0
+C1343 0.0
+C1344 0.0
+C1345 1.0
+C1346 0.0
+C1347 0.0
+C1348 0.0
+C1349 1.0
+C1350 0.0
+C1351 1.0
+C1352 1.0
+C1353 0.0
+C1354 0.0
+C1355 0.0
+C1356 0.0
+C1357 1.0
+C1358 0.0
+C1359 0.0
+C1360 0.0
+C1361 1.0
+C1362 0.0
+C1363 0.0
+C1364 0.0
+C1365 1.0
+C1366 0.0
+C1367 1.0
+C1368 1.0
+C1369 0.0
+C1370 0.0
+C1371 0.0
+C1372 0.0
+C1373 1.0
+C1374 0.0
+C1375 0.0
+C1376 0.0
+C1377 1.0
+C1378 0.0
+C1379 0.0
+C1380 0.0
+C1381 1.0
+C1382 0.0
+C1383 1.0
+C1384 1.0
+C1385 0.0
+C1386 0.0
+C1387 0.0
+C1388 0.0
+C1389 1.0
+C1390 0.0
+C1391 0.0
+C1392 0.0
+C1393 1.0
+C1394 0.0
+C1395 0.0
+C1396 0.0
+C1397 1.0
+C1398 0.0
+C1399 1.0
+C1400 1.0
+C1401 0.0
+C1402 0.0
+C1403 0.0
+C1404 0.0
+C1405 1.0
+C1406 0.0
+C1407 0.0
+C1408 0.0
+C1409 1.0
+C1410 0.0
+C1411 0.0
+C1412 0.0
+C1413 1.0
+C1414 0.0
+C1415 1.0
+C1416 1.0
+C1417 0.0
+C1418 0.0
+C1419 0.0
+C1420 0.0
+C1421 1.0
+C1422 0.0
+C1423 0.0
+C1424 0.0
+C1425 1.0
+C1426 0.0
+C1427 0.0
+C1428 0.0
+C1429 1.0
+C1430 0.0
+C1431 1.0
+C1432 1.0
+C1433 0.0
+C1434 0.0
+C1435 0.0
+C1436 0.0
+C1437 1.0
+C1438 0.0
+C1439 0.0
+C1440 0.0
+C1441 1.0
+C1442 0.0
+C1443 0.0
+C1444 0.0
+C1445 1.0
+C1446 0.0
+C1447 1.0
+C1448 1.0
+C1449 0.0
+C1450 0.0
+C1451 0.0
+C1452 0.0
+C1453 1.0
+C1454 0.0
+C1455 0.0
+C1456 0.0
+C1457 1.0
+C1458 0.0
+C1459 0.0
+C1460 0.0
+C1461 1.0
+C1462 0.0
+C1463 1.0
+C1464 1.0
+C1465 0.0
+C1466 0.0
+C1467 0.0
+C1468 0.0
+C1469 1.0
+C1470 0.0
+C1471 0.0
+C1472 0.0
+C1473 1.0
+C1474 0.0
+C1475 0.0
+C1476 0.0
+C1477 1.0
+C1478 0.0
+C1479 1.0
+C1480 1.0
+C1481 0.0
+C1482 0.0
+C1483 0.0
+C1484 0.0
+C1485 1.0
+C1486 0.0
+C1487 0.0
+C1488 0.0
+C1489 1.0
+C1490 0.0
+C1491 0.0
+C1492 0.0
+C1493 1.0
+C1494 0.0
+C1495 1.0
+C1496 1.0
+C1497 0.0
+C1498 0.0
+C1499 0.0
+C1500 0.0
+C1501 1.0
+C1502 0.0
+C1503 0.0
+C1504 0.0
+C1505 1.0
+C1506 0.0
+C1507 0.0
+C1508 0.0
+C1509 1.0
+C1510 0.0
+C1511 0.0
+C1512 1.0
+C1513 1.0
+C1514 1.0
+C1515 0.0
+C1516 1.0
+C1517 1.0
+C1518 1.0
+C1519 0.0
+C1520 0.0
+C1521 1.0
+C1522 0.0
+C1523 0.0
+C1524 0.0
+C1525 1.0
+C1526 0.0
+C1527 0.0
+C1528 0.0
+C1529 1.0
+C1530 0.0
+C1531 1.0
+C1532 1.0
+C1533 0.0
+C1534 0.0
+C1535 0.0
+C1536 0.0
+C1537 1.0
+C1538 0.0
+C1539 0.0
+C1540 0.0
+C1541 1.0
+C1542 0.0
+C1543 0.0
+C1544 0.0
+C1545 1.0
+C1546 0.0
+C1547 1.0
+C1548 1.0
+C1549 0.0
+C1550 0.0
+C1551 0.0
+C1552 0.0
+C1553 1.0
+C1554 0.0
+C1555 0.0
+C1556 0.0
+C1557 1.0
+C1558 0.0
+C1559 0.0
+C1560 0.0
+C1561 1.0
+C1562 0.0
+C1563 1.0
+C1564 1.0
+C1565 0.0
+C1566 0.0
+C1567 0.0
+C1568 0.0
+C1569 1.0
+C1570 0.0
+C1571 0.0
+C1572 0.0
+C1573 1.0
+C1574 0.0
+C1575 0.0
+C1576 0.0
+C1577 1.0
+C1578 0.0
+C1579 1.0
+C1580 1.0
+C1581 0.0
+C1582 0.0
+C1583 0.0
+C1584 0.0
+C1585 1.0
+C1586 0.0
+C1587 0.0
+C1588 0.0
+C1589 1.0
+C1590 0.0
+C1591 0.0
+C1592 1.0
+C1593 1.0
+C1594 1.0
+C1595 0.0
+C1596 1.0
+C1597 1.0
+C1598 1.0
+C1599 0.0
+C1600 0.0
+C1601 1.0
+C1602 0.0
+C1603 0.0
+C1604 0.0
+C1605 1.0
+C1606 0.0
+C1607 0.0
+C1608 0.0
+C1609 1.0
+C1610 0.0
+C1611 0.0
+C1612 0.0
+C1613 1.0
+C1614 0.0
+C1615 1.0
+C1616 1.0
+C1617 0.0
+C1618 0.0
+C1619 0.0
+C1620 0.0
+C1621 1.0
+C1622 0.0
+C1623 0.0
+C1624 0.0
+C1625 1.0
+C1626 0.0
+C1627 0.0
+C1628 0.0
+C1629 1.0
+C1630 0.0
+C1631 1.0
+C1632 1.0
+C1633 0.0
+C1634 0.0
+C1635 0.0
+C1636 0.0
+C1637 1.0
+C1638 0.0
+C1639 0.0
+C1640 0.0
+C1641 1.0
+C1642 0.0
+C1643 0.0
+C1644 0.0
+C1645 1.0
+C1646 0.0
+C1647 1.0
+C1648 1.0
+C1649 0.0
+C1650 0.0
+C1651 0.0
+C1652 0.0
+C1653 1.0
+C1654 0.0
+C1655 0.0
+C1656 0.0
+C1657 1.0
+C1658 0.0
+C1659 0.0
+C1660 0.0
+C1661 1.0
+C1662 0.0
+C1663 1.0
+C1664 1.0
+C1665 0.0
+C1666 0.0
+C1667 0.0
+C1668 0.0
+C1669 1.0
+C1670 0.0
+C1671 0.0
+C1672 0.0
+C1673 1.0
+C1674 0.0
+C1675 0.0
+C1676 0.0
+C1677 1.0
+C1678 0.0
+C1679 0.0
+C1680 1.0
+C1681 1.0
+C1682 1.0
+C1683 0.0
+C1684 1.0
+C1685 1.0
+C1686 1.0
+C1687 0.0
+C1688 0.0
+C1689 1.0
+C1690 0.0
+C1691 0.0
+C1692 0.0
+C1693 1.0
+C1694 0.0
+C1695 0.0
+C1696 0.0
+C1697 1.0
+C1698 0.0
+C1699 1.0
+C1700 1.0
+C1701 0.0
+C1702 0.0
+C1703 0.0
+C1704 0.0
+C1705 1.0
+C1706 0.0
+C1707 0.0
+C1708 0.0
+C1709 1.0
+C1710 0.0
+C1711 0.0
+C1712 -0.0
+C1713 1.0
+C1714 0.0
+C1715 1.0
+C1716 1.0
+C1717 0.0
+C1718 0.0
+C1719 0.0
+C1720 0.0
+C1721 1.0
+C1722 0.0
+C1723 0.0
+C1724 0.0
+C1725 1.0
+C1726 0.0
+C1727 0.0
+C1728 0.0
+C1729 1.0
+C1730 0.0
+C1731 1.0
+C1732 1.0
+C1733 0.0
+C1734 0.0
+C1735 0.0
+C1736 1.0
+C1737 1.0
+C1738 1.0
+C1739 0.0
+C1740 0.0
+C1741 1.0
+C1742 0.0
+C1743 0.0
+C1744 0.0
+C1745 1.0
+C1746 0.0
+C1747 0.0
+C1748 1.0
+C1749 1.0
+C1750 1.0
+C1751 0.0
+C1752 0.0
+C1753 1.0
+C1754 0.0
+C1755 0.0
+C1756 0.0
+C1757 1.0
+C1758 0.0
+C1759 0.0
+C1760 0.0
+C1761 1.0
+C1762 0.0
+C1763 1.0
+C1764 1.0
+C1765 0.0
+C1766 0.0
+C1767 0.0
+C1768 1.0
+C1769 1.0
+C1770 1.0
+C1771 0.0
+C1772 0.0
+C1773 1.0
+C1774 0.0
+C1775 0.0
+C1776 0.0
+C1777 1.0
+C1778 0.0
+C1779 0.0
+C1780 1.0
+C1781 1.0
+C1782 1.0
+C1783 0.0
+C1784 0.0
+C1785 1.0
+C1786 0.0
+C1787 0.0
+C1788 0.0
+C1789 1.0
+C1790 0.0
+C1791 0.0
+C1792 0.0
+C1793 1.0
+C1794 0.0
+C1795 1.0
+C1796 1.0
+C1797 0.0
+C1798 0.0
+C1799 0.0
+C1800 0.0
+C1801 1.0
+C1802 0.0
+C1803 0.0
+C1804 0.0
+C1805 1.0
+C1806 0.0
+C1807 0.0
+C1808 0.0
+C1809 1.0
+C1810 0.0
+C1811 1.0
+C1812 1.0
+C1813 0.0
+C1814 0.0
+C1815 0.0
+C1816 0.0
+C1817 1.0
+C1818 0.0
+C1819 0.0
+C1820 0.0
+C1821 1.0
+C1822 0.0
+C1823 0.0
+C1824 0.0
+C1825 1.0
+C1826 0.0
+C1827 1.0
+C1828 1.0
+C1829 0.0
+C1830 0.0
+C1831 0.0
+C1832 0.0
+C1833 1.0
+C1834 0.0
+C1835 0.0
+C1836 0.0
+C1837 1.0
+C1838 0.0
+C1839 0.0
+C1840 0.0
+C1841 1.0
+C1842 0.0
+C1843 1.0
+C1844 1.0
+C1845 0.0
+C1846 0.0
+C1847 0.0
+C1848 0.0
+C1849 1.0
+C1850 0.0
+C1851 0.0
+C1852 0.0
+C1853 1.0
+C1854 0.0
+C1855 0.0
+C1856 0.0
+C1857 1.0
+C1858 0.0
+C1859 1.0
+C1860 1.0
+C1861 0.0
+C1862 0.0
+C1863 0.0
+C1864 1.0
+C1865 1.0
+C1866 1.0
+C1867 0.0
+C1868 0.0
+C1869 1.0
+C1870 0.0
+C1871 0.0
+C1872 0.0
+C1873 1.0
+C1874 0.0
+C1875 0.0
+C1876 1.0
+C1877 1.0
+C1878 1.0
+C1879 0.0
+C1880 1.0
+C1881 1.0
+C1882 1.0
+C1883 0.0
+C1884 0.0
+C1885 1.0
+C1886 0.0
+C1887 0.0
+C1888 0.0
+C1889 1.0
+C1890 0.0
+C1891 0.0
+C1892 1.0
+C1893 1.0
+C1894 1.0
+C1895 0.0
+C1896 0.0
+C1897 1.0
+C1898 0.0
+C1899 0.0
+C1900 0.0
+C1901 1.0
+C1902 0.0
+C1903 0.0
+C1904 0.0
+C1905 1.0
+C1906 0.0
+C1907 1.0
+C1908 1.0
+C1909 0.0
+C1910 0.0
+C1911 0.0
+C1912 0.0
+C1913 1.0
+C1914 0.0
+C1915 0.0
+C1916 0.0
+C1917 1.0
+C1918 0.0
+C1919 0.0
+C1920 0.0
+C1921 1.0
+C1922 0.0
+C1923 1.0
+C1924 1.0
+C1925 0.0
+C1926 0.0
+C1927 0.0
+C1928 0.0
+C1929 1.0
+C1930 0.0
+C1931 0.0
+C1932 0.0
+C1933 1.0
+C1934 0.0
+C1935 0.0
+C1936 1.0
+C1937 1.0
+C1938 1.0
+C1939 0.0
+C1940 1.0
+C1941 1.0
+C1942 1.0
+C1943 0.0
+C1944 0.0
+C1945 1.0
+C1946 -0.0
+C1947 0.0
+C1948 1.0
+C1949 1.0
+C1950 1.0
+C1951 0.0
+C1952 0.0
+C1953 1.0
+C1954 0.0
+C1955 0.0
+C1956 1.0
+C1957 1.0
+C1958 1.0
+C1959 0.0
+C1960 0.0
+C1961 1.0
+C1962 0.0
+C1963 0.0
+C1964 0.0
+C1965 1.0
+C1966 0.0
+C1967 0.0
+C1968 1.0
+C1969 1.0
+C1970 1.0
+C1971 0.0
+C1972 1.0
+C1973 1.0
+C1974 1.0
+C1975 0.0
+C1976 1.0
+C1977 1.0
+C1978 1.0
+C1979 0.0
+C1980 0.0
+C1981 1.0
+C1982 0.0
+C1983 0.0
+C1984 0.0
+C1985 1.0
+C1986 0.0
+C1987 0.0
+C1988 1.0
+C1989 1.0
+C1990 1.0
+C1991 0.0
+C1992 0.0
+C1993 1.0
+C1994 0.0
+C1995 0.0
+C1996 0.0
+C1997 1.0
+C1998 0.0
+C1999 0.0
+C2000 0.0
+C2001 1.0
+C2002 0.0
+C2003 1.0
+C2004 1.0
+C2005 0.0
+C2006 0.0
+C2007 0.0
+C2008 1.0
+C2009 1.0
+C2010 1.0
+C2011 0.0
+C2012 0.0
+C2013 1.0
+C2014 0.0
+C2015 0.0
+C2016 0.0
+C2017 1.0
+C2018 0.0
+C2019 0.0
+C2020 1.0
+C2021 1.0
+C2022 1.0
+C2023 0.0
+C2024 0.0
+C2025 1.0
+C2026 0.0
+C2027 0.0
+C2028 0.0
+C2029 1.0
+C2030 0.0
+C2031 0.0
+C2032 0.0
+C2033 1.0
+C2034 0.0
+C2035 1.0
+C2036 1.0
+C2037 0.0
+C2038 0.0
+C2039 0.0
+C2040 1.0
+C2041 1.0
+C2042 1.0
+C2043 0.0
+C2044 0.0
+C2045 1.0
+C2046 0.0
+C2047 0.0
+C2048 0.0
+C2049 1.0
+C2050 0.0
+C2051 0.0
+C2052 1.0
+C2053 1.0
+C2054 1.0
+C2055 0.0
+C2056 0.0
+C2057 1.0
+C2058 0.0
+C2059 0.0
+C2060 0.0
+C2061 1.0
+C2062 0.0
+C2063 0.0
+C2064 0.0
+C2065 1.0
+C2066 0.0
+C2067 1.0
+C2068 1.0
+C2069 0.0
+C2070 0.0
+C2071 0.0
+C2072 1.0
+C2073 1.0
+C2074 1.0
+C2075 0.0
+C2076 0.0
+C2077 1.0
+C2078 0.0
+C2079 0.0
+C2080 0.0
+C2081 1.0
+C2082 0.0
+C2083 0.0
+C2084 1.0
+C2085 1.0
+C2086 1.0
+C2087 0.0
+C2088 0.0
+C2089 1.0
+C2090 0.0
+C2091 0.0
+C2092 0.0
+C2093 1.0
+C2094 0.0
+C2095 0.0
+C2096 0.0
+C2097 1.0
+C2098 0.0
+C2099 1.0
+C2100 1.0
+C2101 0.0
+C2102 0.0
+C2103 0.0
+C2104 1.0
+C2105 1.0
+C2106 1.0
+C2107 0.0
+C2108 0.0
+C2109 1.0
+C2110 0.0
+C2111 0.0
+C2112 0.0
+C2113 1.0
+C2114 0.0
+C2115 0.0
+C2116 1.0
+C2117 1.0
+C2118 1.0
+shard_intermediate_buffer_size_depth_original[0] 138095904.0
+shard_intermediate_buffer_size_depth_original[1] 1638400.0
+shard_intermediate_buffer_size_depth_original[2] 1638400.0
+shard_intermediate_buffer_size_depth_original[3] 1638400.0
+shard_intermediate_buffer_size_depth_original[4] 57600.0
+shard_intermediate_buffer_size_depth_original[5] 51200.0
+shard_intermediate_buffer_size_depth_original[6] 655360.0
+shard_intermediate_buffer_size_depth_original[7] 3267936.0
+shard_intermediate_buffer_size_depth_original[8] 144000.0
+shard_intermediate_buffer_size_depth_original[9] 655360.0
+shard_intermediate_buffer_size_depth_original[10] 51200.0
+shard_intermediate_buffer_size_depth_original[11] 1638400.0
+shard_intermediate_buffer_size_depth_original[12] 1638400.0
+shard_intermediate_buffer_size_depth_original[13] 8192000.0
+shard_intermediate_buffer_size_depth_original[14] 1638400.0
+shard_intermediate_buffer_size_depth_original[15] 1638400.0
+shard_intermediate_buffer_size_depth_original[16] 204800.0
+shard_intermediate_buffer_size_depth_original[17] 204800.0
+shard_intermediate_buffer_size_depth_original[18] 2334720.0
+shard_intermediate_buffer_size_depth_original[19] 1638400.0
+shard_intermediate_buffer_size_depth_original[20] 5734400.0
+shard_intermediate_buffer_size_depth_original[21] 2053120.0
+shard_intermediate_buffer_size_depth_original[22] 1740800.0
+shard_intermediate_buffer_size_depth_original[23] 281600.0
+shard_intermediate_buffer_size_depth_original[24] 204800.0
+shard_intermediate_buffer_size_depth_original[25] 1638400.0
+shard_intermediate_buffer_size_depth_original[26] 1638400.0
+shard_intermediate_buffer_size_depth_original[27] 4403200.0
+shard_intermediate_buffer_size_depth_original[28] 135210240.0
+shard_intermediate_buffer_size_depth_original[29] 201600.0
+shard_intermediate_buffer_size_depth_original[30] 57600.0
+shard_intermediate_buffer_size_depth_original[31] 1310720.0
+shard_intermediate_buffer_size_depth_original[32] 655360.0
+shard_intermediate_buffer_size_depth_original[33] 51200.0
+shard_intermediate_buffer_size_depth_original[34] 655360.0
+shard_intermediate_buffer_size_depth_original[35] 6553600.0
+shard_intermediate_buffer_size_depth_original[36] 6553600.0
+shard_intermediate_buffer_size_depth_original[37] 256000.0
+shard_intermediate_buffer_size_depth_original[38] 288000.0
+shard_intermediate_buffer_size_depth_original[39] 76800.0
+shard_intermediate_buffer_size_depth_original[40] 51200.0
+shard_intermediate_buffer_size_depth_original[41] 11315200.0
+shard_intermediate_buffer_size_depth_original[42] 204800.0
+shard_intermediate_buffer_size_depth_original[43] 921600.0
+shard_intermediate_buffer_size_depth_original[44] 1638400.0
+shard_intermediate_buffer_size_depth_original[45] 4403200.0
+shard_intermediate_buffer_size_depth_original[46] 51200.0
+shard_intermediate_buffer_size_depth_original[47] 51200.0
+shard_intermediate_buffer_size_depth_original[48] 7372800.0
+shard_intermediate_buffer_size_depth_original[49] 51200.0
+shard_intermediate_buffer_size_depth_original[50] 9830400.0
+shard_intermediate_buffer_size_depth_original[51] 76800.0
+shard_intermediate_buffer_size_depth_original[52] 9830400.0
+shard_intermediate_buffer_size_depth_two[0] 1638400.0
+shard_intermediate_buffer_size_depth_two[1] 1638400.0
+shard_intermediate_buffer_size_depth_two[2] 1638400.0
+shard_intermediate_buffer_size_depth_two[3] 1638400.0
+shard_intermediate_buffer_size_depth_two[4] 57600.0
+shard_intermediate_buffer_size_depth_two[5] 51200.0
+shard_intermediate_buffer_size_depth_two[6] 655360.0
+shard_intermediate_buffer_size_depth_two[7] 3267936.0
+shard_intermediate_buffer_size_depth_two[8] 68464896.0
+shard_intermediate_buffer_size_depth_two[9] 655360.0
+shard_intermediate_buffer_size_depth_two[10] 51200.0
+shard_intermediate_buffer_size_depth_two[11] 1638400.0
+shard_intermediate_buffer_size_depth_two[12] 1638400.0
+shard_intermediate_buffer_size_depth_two[13] 1638400.0
+shard_intermediate_buffer_size_depth_two[14] 1638400.0
+shard_intermediate_buffer_size_depth_two[15] 1638400.0
+shard_intermediate_buffer_size_depth_two[16] 204800.0
+shard_intermediate_buffer_size_depth_two[17] 204800.0
+shard_intermediate_buffer_size_depth_two[18] 1638400.0
+shard_intermediate_buffer_size_depth_two[19] 1638400.0
+shard_intermediate_buffer_size_depth_two[20] 1638400.0
+shard_intermediate_buffer_size_depth_two[21] 2053120.0
+shard_intermediate_buffer_size_depth_two[22] 1740800.0
+shard_intermediate_buffer_size_depth_two[23] 230400.0
+shard_intermediate_buffer_size_depth_two[24] 204800.0
+shard_intermediate_buffer_size_depth_two[25] 1638400.0
+shard_intermediate_buffer_size_depth_two[26] 1638400.0
+shard_intermediate_buffer_size_depth_two[27] 4403200.0
+shard_intermediate_buffer_size_depth_two[28] 57600.0
+shard_intermediate_buffer_size_depth_two[29] 57600.0
+shard_intermediate_buffer_size_depth_two[30] 57600.0
+shard_intermediate_buffer_size_depth_two[31] 655360.0
+shard_intermediate_buffer_size_depth_two[32] 655360.0
+shard_intermediate_buffer_size_depth_two[33] 51200.0
+shard_intermediate_buffer_size_depth_two[34] 655360.0
+shard_intermediate_buffer_size_depth_two[35] 6553600.0
+shard_intermediate_buffer_size_depth_two[36] 6553600.0
+shard_intermediate_buffer_size_depth_two[37] 51200.0
+shard_intermediate_buffer_size_depth_two[38] 57600.0
+shard_intermediate_buffer_size_depth_two[39] 76800.0
+shard_intermediate_buffer_size_depth_two[40] 51200.0
+shard_intermediate_buffer_size_depth_two[41] 1740800.0
+shard_intermediate_buffer_size_depth_two[42] 204800.0
+shard_intermediate_buffer_size_depth_two[43] 204800.0
+shard_intermediate_buffer_size_depth_two[44] 1638400.0
+shard_intermediate_buffer_size_depth_two[45] 4403200.0
+shard_intermediate_buffer_size_depth_two[46] 51200.0
+shard_intermediate_buffer_size_depth_two[47] 51200.0
+shard_intermediate_buffer_size_depth_two[48] 1638400.0
+shard_intermediate_buffer_size_depth_two[49] 51200.0
+shard_intermediate_buffer_size_depth_two[50] 1638400.0
+shard_intermediate_buffer_size_depth_two[51] 76800.0
+shard_intermediate_buffer_size_depth_two[52] 1638400.0
+shard_intermediate_buffer_size_depth_one[0] 819200.0
+shard_intermediate_buffer_size_depth_one[1] 819200.0
+shard_intermediate_buffer_size_depth_one[2] 819200.0
+shard_intermediate_buffer_size_depth_one[3] 819200.0
+shard_intermediate_buffer_size_depth_one[4] 28800.0
+shard_intermediate_buffer_size_depth_one[5] 25600.0
+shard_intermediate_buffer_size_depth_one[6] 327680.0
+shard_intermediate_buffer_size_depth_one[7] 1633968.0
+shard_intermediate_buffer_size_depth_one[8] 28800.0
+shard_intermediate_buffer_size_depth_one[9] 327680.0
+shard_intermediate_buffer_size_depth_one[10] 25600.0
+shard_intermediate_buffer_size_depth_one[11] 819200.0
+shard_intermediate_buffer_size_depth_one[12] 819200.0
+shard_intermediate_buffer_size_depth_one[13] 819200.0
+shard_intermediate_buffer_size_depth_one[14] 819200.0
+shard_intermediate_buffer_size_depth_one[15] 819200.0
+shard_intermediate_buffer_size_depth_one[16] 102400.0
+shard_intermediate_buffer_size_depth_one[17] 102400.0
+shard_intermediate_buffer_size_depth_one[18] 819200.0
+shard_intermediate_buffer_size_depth_one[19] 819200.0
+shard_intermediate_buffer_size_depth_one[20] 819200.0
+shard_intermediate_buffer_size_depth_one[21] 1026560.0
+shard_intermediate_buffer_size_depth_one[22] 870400.0
+shard_intermediate_buffer_size_depth_one[23] 115200.0
+shard_intermediate_buffer_size_depth_one[24] 102400.0
+shard_intermediate_buffer_size_depth_one[25] 819200.0
+shard_intermediate_buffer_size_depth_one[26] 819200.0
+shard_intermediate_buffer_size_depth_one[27] 2201600.0
+shard_intermediate_buffer_size_depth_one[28] 28800.0
+shard_intermediate_buffer_size_depth_one[29] 28800.0
+shard_intermediate_buffer_size_depth_one[30] 28800.0
+shard_intermediate_buffer_size_depth_one[31] 327680.0
+shard_intermediate_buffer_size_depth_one[32] 327680.0
+shard_intermediate_buffer_size_depth_one[33] 25600.0
+shard_intermediate_buffer_size_depth_one[34] 327680.0
+shard_intermediate_buffer_size_depth_one[35] 3276800.0
+shard_intermediate_buffer_size_depth_one[36] 3276800.0
+shard_intermediate_buffer_size_depth_one[37] 25600.0
+shard_intermediate_buffer_size_depth_one[38] 28800.0
+shard_intermediate_buffer_size_depth_one[39] 38400.0
+shard_intermediate_buffer_size_depth_one[40] 25600.0
+shard_intermediate_buffer_size_depth_one[41] 870400.0
+shard_intermediate_buffer_size_depth_one[42] 102400.0
+shard_intermediate_buffer_size_depth_one[43] 102400.0
+shard_intermediate_buffer_size_depth_one[44] 819200.0
+shard_intermediate_buffer_size_depth_one[45] 2201600.0
+shard_intermediate_buffer_size_depth_one[46] 25600.0
+shard_intermediate_buffer_size_depth_one[47] 25600.0
+shard_intermediate_buffer_size_depth_one[48] 819200.0
+shard_intermediate_buffer_size_depth_one[49] 25600.0
+shard_intermediate_buffer_size_depth_one[50] 819200.0
+shard_intermediate_buffer_size_depth_one[51] 38400.0
+shard_intermediate_buffer_size_depth_one[52] 819200.0
+shard_initiation_buffer_size_depth_one[0] 40960000.0
+shard_initiation_buffer_size_depth_one[1] 40960000.0
+shard_initiation_buffer_size_depth_one[2] 40960000.0
+shard_initiation_buffer_size_depth_one[3] 40960000.0
+shard_initiation_buffer_size_depth_one[4] 163840000.0
+shard_initiation_buffer_size_depth_one[5] 163840000.0
+shard_initiation_buffer_size_depth_one[6] 163840000.0
+shard_initiation_buffer_size_depth_one[7] 163840000.0
+shard_initiation_buffer_size_depth_one[8] 40960000.0
+shard_initiation_buffer_size_depth_one[9] 40960000.0
+shard_initiation_buffer_size_depth_one[10] 40960000.0
+shard_initiation_buffer_size_depth_one[11] 40960000.0
+SRAM_Per_Config_total[0] 335544320.0
+SRAM_Per_Config_total[1] 335544320.0
+SRAM_Per_Config_total[2] 335544320.0
+SRAM_Per_Config_total[3] 335544320.0
+SRAM_Per_Config_intermediate_dram[0] 10703360.0
+SRAM_Per_Config_intermediate_dram[1] 3481600.0
+SRAM_Per_Config_intermediate_dram[2] 3584000.0
+SRAM_Per_Config_intermediate_dram[3] 11215360.0
+SRAM_Per_Config_intermediate_onchip[0] 161000960.0
+SRAM_Per_Config_intermediate_onchip[1] 4382720.0
+SRAM_Per_Config_intermediate_onchip[2] 4280320.0
+SRAM_Per_Config_intermediate_onchip[3] 160488960.0
+SRAM_Per_Config_initiation[0] 163840000.0
+SRAM_Per_Config_initiation[1] 327680000.0
+SRAM_Per_Config_initiation[2] 327680000.0
+SRAM_Per_Config_initiation[3] 163840000.0
+dram_bytes_per_config_intermediate[0] 685015039.9999647
+dram_bytes_per_config_intermediate[1] 222822399.9999922
+dram_bytes_per_config_intermediate[2] 229375999.99999595
+dram_bytes_per_config_intermediate[3] 717783039.9999199
+dram_bytes_per_config_initiation[0] 163839999.99999905
+dram_bytes_per_config_initiation[1] 327679999.9999998
+dram_bytes_per_config_initiation[2] 327679999.99999964
+dram_bytes_per_config_initiation[3] 163839999.99999976
+C2314 5351679.999999724
+C2315 1740799.999999939
+C2316 1791999.9999999683
+C2317 5607679.999999374
+dram_bytes_initiation 983039999.9999983
+dram_bytes_intermediate 1854996479.9998727
+Cycle[0] 25600.0
+Cycle[1] 25600.0
+Cycle[2] 25600.0
+Cycle[3] 25600.0
+Cycle[4] 25600.0
+Cycle[5] 25600.0
+Cycle[6] 25560.0
+Cycle[7] 5120.0
+Cycle[8] 4096.0
+Cycle[9] 25600.0
+Cycle[10] 25600.0
+Cycle[11] 12800.0
+Cycle[12] 12800.0
+Cycle[13] 25600.0
+Cycle[14] 1600.0
+Cycle[15] 25600.0
+Cycle[16] 12800.0
+Cycle[17] 25600.0
+Cycle[18] 25600.0
+Cycle[19] 13600.0
+Cycle[20] 25600.0
+Cycle[21] 48.0
+Cycle[22] 25600.0
+Cycle[23] 51200.0
+Cycle[24] 51170.0
+Cycle[25] 51200.0
+Cycle[26] 51200.0
+Cycle[27] 51200.0
+Cycle[28] 50400.0
+Cycle[29] 51200.0
+Cycle[30] 51200.0
+Cycle[31] 51200.0
+Cycle[32] 51200.0
+Cycle[33] 51200.0
+Cycle[34] 51200.0
+Cycle[35] 50912.0
+Cycle[36] 51200.0
+Cycle[37] 51200.0
+Cycle[38] 49082.0
+Cycle[39] 48800.0
+Cycle[40] 50400.0
+m_factor[0] 1600.0
+m_factor[1] 1600.0
+m_factor[2] 1.0
+m_factor[3] 1.0
+m_factor[4] 1.0
+m_factor[5] 8.0
+m_factor[6] 355.0
+m_factor[7] 320.0
+m_factor[8] 1.0
+m_factor[9] 32.0
+m_factor[10] 1600.0
+m_factor[11] 800.0
+m_factor[12] 800.0
+m_factor[13] 1.0
+m_factor[14] 100.0
+m_factor[15] 8.0
+m_factor[16] 800.0
+m_factor[17] 25.0
+m_factor[18] 1280.0
+m_factor[19] 800.0
+m_factor[20] 1.0
+m_factor[21] 3.0
+m_factor[22] 8.0
+m_factor[23] 3200.0
+m_factor[24] 1190.0
+m_factor[25] 2.0
+m_factor[26] 320.0
+m_factor[27] 25.0
+m_factor[28] 21.0
+m_factor[29] 3200.0
+m_factor[30] 320.0
+m_factor[31] 25.0
+m_factor[32] 25.0
+m_factor[33] 2.0
+m_factor[34] 1.0
+m_factor[35] 37.0
+m_factor[36] 2.0
+m_factor[37] 2.0
+m_factor[38] 1.0
+m_factor[39] 5.0
+m_factor[40] 25.0
+n_factor[0] 1.0
+n_factor[1] 1.0
+n_factor[2] 1.0
+n_factor[3] 1.0
+n_factor[4] 1.0
+n_factor[5] 20.0
+n_factor[6] 1.0
+n_factor[7] 1.0
+n_factor[8] 2.0
+n_factor[9] 1.0
+n_factor[10] 1.0
+n_factor[11] 1.0
+n_factor[12] 1.0
+n_factor[13] 1.0
+n_factor[14] 1.0
+n_factor[15] 1.0
+n_factor[16] 1.0
+n_factor[17] 1.0
+n_factor[18] 1.0
+n_factor[19] 1.0
+n_factor[20] 1.0
+n_factor[21] 1.0
+n_factor[22] 1.0
+n_factor[23] 1.0
+n_factor[24] 1.0
+n_factor[25] 1.0
+n_factor[26] 1.0
+n_factor[27] 1.0
+n_factor[28] 3.0
+n_factor[29] 1.0
+n_factor[30] 1.0
+n_factor[31] 1.0
+n_factor[32] 1.0
+n_factor[33] 1.0
+n_factor[34] 2.0
+n_factor[35] 86.0
+n_factor[36] 1600.0
+n_factor[37] 1600.0
+n_factor[38] 2134.0
+n_factor[39] 610.0
+n_factor[40] 126.0
+C2443 1.0
+C2444 1.0
+C2445 1.0
+C2446 160.0
+C2447 2.0
+C2448 32.0
+C2449 1.0
+C2450 8.0
+C2451 1.0
+C2452 8.0
+C2453 2.0
+C2454 320.0
+C2455 25.0
+C2456 63.0
+C2457 25.0
+C2458 25.0
+C2459 2.0
+C2460 2.0
+C2461 3182.0
+C2462 3200.0
+C2463 3200.0
+C2464 2134.0
+C2465 3050.0
+C2466 3150.0
+Compute_Latency[0] 2621439.9999999986
+Compute_Latency[1] 2621439.9999933243
+Compute_Latency[2] 2621439.9999999986
+Compute_Latency[3] 5242879.999999996
+C2471 25600.0
+C2472 25600.0
+C2473 25600.0
+C2474 25600.0
+C2475 25600.0
+C2476 25600.0
+C2477 25560.0
+C2478 5120.0
+C2479 4096.0
+C2480 25600.0
+C2481 25600.0
+C2482 12800.0
+C2483 12800.0
+C2484 -0.0
+C2485 -0.0
+C2486 0.0
+C2487 0.0
+C2488 0.0
+C2489 0.0
+C2490 0.0
+C2491 0.0
+C2492 0.0
+C2493 0.0
+C2494 0.0
+C2495 0.0
+C2496 0.0
+C2497 0.0
+C2498 0.0
+C2499 0.0
+C2500 0.0
+C2501 0.0
+C2502 0.0
+C2503 0.0
+C2504 0.0
+C2505 0.0
+C2506 0.0
+C2507 0.0
+C2508 0.0
+C2509 0.0
+C2510 0.0
+C2511 0.0
+C2512 25599.999999999985
+C2513 0.0
+C2514 0.0
+C2515 0.0
+C2516 0.0
+C2517 0.0
+C2518 0.0
+C2519 0.0
+C2520 0.0
+C2521 0.0
+C2522 0.0
+C2523 -0.0
+C2524 -0.0
+C2525 -0.0
+C2526 25600.0
+C2527 1600.0
+C2528 25600.0
+C2529 12800.0
+C2530 25600.0
+C2531 0.0
+C2532 0.0
+C2533 0.0
+C2534 0.0
+C2535 0.0
+C2536 0.0
+C2537 0.0
+C2538 0.0
+C2539 0.0
+C2540 0.0
+C2541 0.0
+C2542 0.0
+C2543 0.0
+C2544 0.0
+C2545 0.0
+C2546 0.0
+C2547 0.0
+C2548 0.0
+C2549 0.0
+C2550 0.0
+C2551 0.0
+C2552 0.0
+C2553 0.0
+C2554 25599.99999993667
+C2555 0.0
+C2556 0.0
+C2557 0.0
+C2558 0.0
+C2559 0.0
+C2560 0.0
+C2561 0.0
+C2562 0.0
+C2563 0.0
+C2564 0.0
+C2565 0.0
+C2566 0.0
+C2567 0.0
+C2568 0.0
+C2569 0.0
+C2570 0.0
+C2571 0.0
+C2572 0.0
+C2573 25600.0
+C2574 13600.0
+C2575 25600.0
+C2576 48.0
+C2577 25600.0
+C2578 -0.0
+C2579 -0.0
+C2580 0.0
+C2581 0.0
+C2582 0.0
+C2583 0.0
+C2584 0.0
+C2585 0.0
+C2586 0.0
+C2587 0.0
+C2588 0.0
+C2589 0.0
+C2590 -0.0
+C2591 -0.0
+C2592 -0.0
+C2593 0.0
+C2594 0.0
+C2595 0.0
+C2596 25599.999999999985
+C2597 0.0
+C2598 0.0
+C2599 0.0
+C2600 0.0
+C2601 0.0
+C2602 0.0
+C2603 0.0
+C2604 0.0
+C2605 0.0
+C2606 0.0
+C2607 0.0
+C2608 0.0
+C2609 0.0
+C2610 0.0
+C2611 0.0
+C2612 0.0
+C2613 0.0
+C2614 0.0
+C2615 0.0
+C2616 0.0
+C2617 0.0
+C2618 -0.0
+C2619 -0.0
+C2620 51200.0
+C2621 51170.0
+C2622 51200.0
+C2623 51200.0
+C2624 51200.0
+C2625 50400.0
+C2626 51200.0
+C2627 51200.0
+C2628 51200.0
+C2629 51200.0
+C2630 51200.0
+C2631 51200.0
+C2632 50912.0
+C2633 51200.0
+C2634 51200.0
+C2635 49082.0
+C2636 48800.0
+C2637 50400.0
+C2638 51199.999999999956
+DRAM_bytes[0] 685015039.9999648
+DRAM_bytes[1] 222822399.9999922
+DRAM_bytes[2] 229375999.99999595
+DRAM_bytes[3] 717783039.9999199
+DRAM_Latency[0] 335956.370769968
+DRAM_Latency[1] 109280.23540951064
+DRAM_Latency[2] 112494.35998038056
+DRAM_Latency[3] 352026.9936242864
+C2647 5351679.999999724
+C2648 1740799.999999939
+C2649 1791999.9999999683
+C2650 5607679.999999374
+total_DRAM_bytes 1854996479.999873
+Network_Latency[0] 2621439.9999999516
+Network_Latency[1] 2621439.999993314
+Network_Latency[2] 169301.333332845
+Network_Latency[3] 5242879.9999999
+total_Network_bytes 655769599.9995338
+ALL_REDUCE_ratio 0.0008072916666666667
+C2658 19200.0
+Network_Bytes_ALL_REDUCE[0] 101580799.99999925
+Network_Bytes_ALL_REDUCE[1] 101580799.9999991
+Network_Bytes_ALL_REDUCE[2] 101580799.99970709
+Network_Bytes_ALL_REDUCE[3] 101580799.99999902
+Network_Latency_ALL_REDUCE[0] 169301.3333333321
+Network_Latency_ALL_REDUCE[1] 169301.33333333186
+Network_Latency_ALL_REDUCE[2] 169301.33333284516
+Network_Latency_ALL_REDUCE[3] 169301.3333333317
+C2667 819200.0
+C2668 0.10333333333333239
+C2669 819200.0
+C2670 0.10333333333333239
+C2671 819200.0
+C2672 0.10333333333333239
+C2673 819199.9999999997
+C2674 0.10333333333333239
+ALL_REDUCE_PERIODIC_ratio 0.01
+C2676 50.0
+Network_Bytes_ALL_REDUCE_PERIODIC[0] 61303466.66666548
+Network_Bytes_ALL_REDUCE_PERIODIC[1] 61303466.66649955
+Network_Bytes_ALL_REDUCE_PERIODIC[2] 0.0
+Network_Bytes_ALL_REDUCE_PERIODIC[3] 126839466.66666421
+Network_Latency_ALL_REDUCE_PERIODIC[0] 2452138.666666619
+Network_Latency_ALL_REDUCE_PERIODIC[1] 2452138.666659982
+Network_Latency_ALL_REDUCE_PERIODIC[2] 0.0
+Network_Latency_ALL_REDUCE_PERIODIC[3] 5073578.666666568
+C2685 122606933.33333096
+C2686 0.01
+C2687 122606933.3329991
+C2688 0.01
+C2689 0.0
+C2690 0.01
+C2691 253678933.33332843
+C2692 0.01
+C2693 0.0
+intermediate 104857600.0
+p2p_latency 4194304.0
+Setup_Latency[0] 10044.13928396267
+Setup_Latency[1] 20088.27856792544
+Setup_Latency[2] 20088.27856792543
+Setup_Latency[3] 10044.139283962713
+C2700 16312.0
+C2701 10044.13928396267
+C2702 0.0
+C2703 16312.0
+C2704 20088.27856792544
+C2705 0.0
+C2706 16312.0
+C2707 20088.27856792543
+C2708 0.0
+C2709 16312.0
+C2710 10044.139283962713
+C2711 0.0
+Latency_wo_setup[0] 2621439.9999999516
+Latency_wo_setup[1] 2621439.999993314
+Latency_wo_setup[2] 2621439.9999999865
+Latency_wo_setup[3] 5242879.9999999
+Per_Config_II[0] 2631484.139283914
+Per_Config_II[1] 2641528.2785612396
+Per_Config_II[2] 2641528.278567912
+Per_Config_II[3] 5252924.139283863
+II 13236045.381716045
+C2721 13167464.835696805
+C2722 13167464.835696805
+C2723 0.005208333333333333
+pipeline_factor 1.0052083333333321
+DRAM_cost 260992.0
+C2726 32.0
+C2727 64.0
+C2728 128.0
+Link_Switch_cost[0] 38400.0
+Link_Switch_cost[1] 80000.0
+Link_Switch_cost[2] 166400.0
+total_cost 427392.0
+C2733 166400.0
+****************************************************************************************************
+TP 32.0
+PP 2.0
+DP 2.0
+layers_per_stage 64.0
+micro_batch_size 8.0
+num_micro_batch_per_pipeline 192.0
+II 847106904.4298269
+GFLOPS 307200.0
+FLOP 1.253490366087168e+16
+total_cost 427392.0
+DRAM_BW 2039.0
+Link_BW [600.0, 25.0, 25.0]
+Samples/s 2.360977096918087
+util 0.7526301181893087
+OI Memory 1649.74933757298
+OI network 4666.6988132450415
+
+Interrupt request received
