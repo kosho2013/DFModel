@@ -405,11 +405,15 @@ else:
     raise Exception('Wrong!')
 
 
+
+
+
+
 model = gp.Model()
 model.params.NonConvex = 2
-model.Params.Threads = 24
+model.Params.Threads = 140
 model.params.MIPGap = 1e-200
-model.params.TimeLimit = 3600*2
+model.params.TimeLimit = 3600*10
 
 
 
@@ -745,28 +749,31 @@ model.addConstr(num_micro_batch_per_pipeline * aaa == dse.training.global_batch_
 for i in range(num_kernel):
     if node_communication_type[i] == Communication.ALL_REDUCE.value:
         model.addConstr(ALL_REDUCE_communication_size[i] == shard_M[i] * shard_N[i] * word)
-
-    elif node_communication_type[i] == Communication.ALL_REDUCE_PERIODIC.value:
+    else:
+        model.addConstr(ALL_REDUCE_communication_size[i] == 0)
+    
+    if node_communication_type[i] == Communication.ALL_REDUCE_PERIODIC.value:
         aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
         bbb = model.addVar(vtype=gp.GRB.CONTINUOUS)
         ccc = model.addVar(vtype=gp.GRB.CONTINUOUS)
         model.addConstr(aaa == shard_M[i] * shard_N[i] * word)
         model.addConstr(ALL_REDUCE_PERIODIC_communication_size[i] * num_micro_batch_per_pipeline >= aaa)
-        
-    elif node_communication_type[i] == Communication.ALL_TO_ALL.value:
-        model.addConstr(ALL_TO_ALL_communication_size[i] == node_communication_size[i])
-    
-    elif node_communication_type[i] == Communication.POINT_TO_POINT.value:
-        model.addConstr(POINT_TO_POINT_communication_size[i] == node_communication_size[i])
-    
-    elif node_communication_type[i] == Communication.BROADCAST.value:
-        model.addConstr(BROADCAST_communication_size[i] == node_communication_size[i])
-        
     else:
-        model.addConstr(ALL_REDUCE_communication_size[i] == 0)
         model.addConstr(ALL_REDUCE_PERIODIC_communication_size[i] == 0)
+    
+    if node_communication_type[i] == Communication.ALL_TO_ALL.value:
+        model.addConstr(ALL_TO_ALL_communication_size[i] == node_communication_size[i])
+    else:
         model.addConstr(ALL_TO_ALL_communication_size[i] == 0)
+        
+    if node_communication_type[i] == Communication.POINT_TO_POINT.value:
+        model.addConstr(POINT_TO_POINT_communication_size[i] == node_communication_size[i])
+    else:
         model.addConstr(POINT_TO_POINT_communication_size[i] == 0)
+        
+    if node_communication_type[i] == Communication.BROADCAST.value:
+        model.addConstr(BROADCAST_communication_size[i] == node_communication_size[i])    
+    else:
         model.addConstr(BROADCAST_communication_size[i] == 0)
 
 
