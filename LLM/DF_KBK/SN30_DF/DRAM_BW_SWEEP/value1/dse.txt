@@ -943,23 +943,23 @@ dataflow_graph {
   }
 }
 system {
-  num_chip: 2048
+  num_chip: 3072
   accelerator {
-    core: 640
+    core: 1280
     systolic_width: 32
     systolic_height: 6
-    sram_cap: 335544320.0
+    sram_cap: 671088640.0
     freq: 1.25
-    dram_bw: 100.0
-    dram_cap: 1649267400000.0
+    dram_bw: 200.0
+    dram_cap: 3298535000000.0
   }
   r_r_r {
-    link_bw_x: 9999.0
-    link_bw_y: 25.0
-    link_bw_z: 25.0
-    x: 64
-    y: 16
-    z: 2
+    link_bw_x: 50.0
+    link_bw_y: 50.0
+    link_bw_z: 50.0
+    x: 8
+    y: 64
+    z: 6
   }
 }
 cost {
@@ -974,9 +974,10 @@ training {
     num_head: 160
     seq_len: 2048
     num_layer: 128
+    seq_tile_size: 32
   }
   global_batch_size: 3072
-  num_config: 2
+  num_config: 8
   optimization: FLASHATTENTION
   objective: PERFORMANCE
   training: true

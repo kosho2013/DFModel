@@ -1255,7 +1255,7 @@ dataflow_graph {
   }
 }
 system {
-  num_chip: 1280
+  num_chip: 3072
   accelerator {
     core: 1280
     systolic_width: 32
@@ -1266,12 +1266,12 @@ system {
     dram_cap: 3298535000000.0
   }
   r_r_r {
-    link_bw_x: 900.0
-    link_bw_y: 25.0
-    link_bw_z: 25.0
-    x: 10
-    y: 32
-    z: 4
+    link_bw_x: 50.0
+    link_bw_y: 50.0
+    link_bw_z: 50.0
+    x: 8
+    y: 64
+    z: 6
   }
 }
 cost {
@@ -1286,9 +1286,10 @@ training {
     num_head: 160
     seq_len: 2048
     num_layer: 128
+    seq_tile_size: 32
   }
   global_batch_size: 3072
-  num_config: 6
+  num_config: 8
   optimization: FLASHATTENTION
   objective: PERFORMANCE
   training: true

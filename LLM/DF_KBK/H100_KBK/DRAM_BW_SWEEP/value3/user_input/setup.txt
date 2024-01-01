@@ -946,12 +946,12 @@ connections {
 
 }
 system {
-  num_chip: 1280
+  num_chip: 3072
   
   r_r_r {
-	x: 10
-	y: 32
-	z: 4
+	x: 8
+	y: 64
+	z: 6
 	
 	link_bw_x: 900.0
 	link_bw_y: 25.0

@@ -23,6 +23,7 @@ dataflow_graph {
     name: "MLP_2"
     id: 2
     topological_number: 1
+    config: 1
     fwd_bwd: FWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -47,6 +48,7 @@ dataflow_graph {
     name: "MLP_3"
     id: 3
     topological_number: 2
+    config: 2
     fwd_bwd: FWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -68,6 +70,7 @@ dataflow_graph {
     name: "MLP_4"
     id: 4
     topological_number: 3
+    config: 3
     fwd_bwd: FWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -89,6 +92,7 @@ dataflow_graph {
     name: "MLP_5"
     id: 5
     topological_number: 4
+    config: 4
     fwd_bwd: FWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -110,6 +114,7 @@ dataflow_graph {
     name: "MLP_6"
     id: 6
     topological_number: 5
+    config: 5
     fwd_bwd: FWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -131,6 +136,7 @@ dataflow_graph {
     name: "MLP_7"
     id: 7
     topological_number: 6
+    config: 6
     fwd_bwd: FWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -151,7 +157,7 @@ dataflow_graph {
   kernels {
     name: "MLP_7_bwd"
     id: 8
-    config: 1
+    config: 7
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -173,7 +179,7 @@ dataflow_graph {
     name: "MLP_6_bwd"
     id: 9
     topological_number: 1
-    config: 1
+    config: 8
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -195,7 +201,7 @@ dataflow_graph {
     name: "MLP_5_bwd"
     id: 10
     topological_number: 2
-    config: 1
+    config: 9
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -217,7 +223,7 @@ dataflow_graph {
     name: "MLP_4_bwd"
     id: 11
     topological_number: 3
-    config: 1
+    config: 10
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -239,7 +245,7 @@ dataflow_graph {
     name: "MLP_3_bwd"
     id: 12
     topological_number: 4
-    config: 1
+    config: 11
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -261,7 +267,7 @@ dataflow_graph {
     name: "MLP_2_bwd"
     id: 13
     topological_number: 5
-    config: 1
+    config: 12
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -286,7 +292,7 @@ dataflow_graph {
     name: "MLP_1_bwd"
     id: 14
     topological_number: 6
-    config: 1
+    config: 13
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_weight {
@@ -308,6 +314,7 @@ dataflow_graph {
     name: "MLP_7_bwd_weight_update"
     id: 15
     topological_number: 6
+    config: 14
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_input2 {
@@ -331,7 +338,7 @@ dataflow_graph {
     name: "MLP_6_bwd_weight_update"
     id: 16
     topological_number: 5
-    config: 1
+    config: 15
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_input2 {
@@ -355,7 +362,7 @@ dataflow_graph {
     name: "MLP_5_bwd_weight_update"
     id: 17
     topological_number: 4
-    config: 1
+    config: 16
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_input2 {
@@ -379,7 +386,7 @@ dataflow_graph {
     name: "MLP_4_bwd_weight_update"
     id: 18
     topological_number: 3
-    config: 1
+    config: 17
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_input2 {
@@ -403,7 +410,7 @@ dataflow_graph {
     name: "MLP_3_bwd_weight_update"
     id: 19
     topological_number: 4
-    config: 1
+    config: 18
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_input2 {
@@ -427,7 +434,7 @@ dataflow_graph {
     name: "MLP_2_bwd_weight_update"
     id: 20
     topological_number: 5
-    config: 1
+    config: 19
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_input2 {
@@ -451,7 +458,7 @@ dataflow_graph {
     name: "MLP_1_bwd_weight_update"
     id: 21
     topological_number: 6
-    config: 1
+    config: 20
     fwd_bwd: BWD
     type: SYSTOLIC
     gemm_input1_input2 {
@@ -713,10 +720,8 @@ dataflow_graph {
   }
 }
 system {
-  name: "128_Chip_GPU"
   num_chip: 128
   accelerator {
-    name: "A100_GPU"
     core: 432
     systolic_width: 16
     systolic_height: 16
@@ -738,7 +743,6 @@ cost {
   dram_unit_price: 1.0
 }
 training {
-  optimization: FLASHATTENTION
   dlrm {
     mlp_dim: 490
     bottom_num_mlp: 2
@@ -747,9 +751,12 @@ training {
     num_table: 100
     emb: 256
   }
-  num_config: 2
   global_batch_size: 65536
-  objective: PERFORMANCE
-  skip_inter_chip: true
   micro_batch_size: 512
+  optimization: KERNEL_BY_KERNEL
+  objective: PERFORMANCE
+  training: true
+  skip_inter_chip: true
+  pydot: true
+  word: 2
 }

@@ -6,10 +6,10 @@ kernels {
   type: SIMD
   elementwise_input1 {
     outer: 1
-    M: 25600
+    M: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -21,10 +21,10 @@ kernels {
   type: SIMD
   elementwise_input1 {
     outer: 1
-    M: 25600
+    M: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -36,12 +36,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 160
-    M: 160
-    K: 25600
+    M: 256
+    K: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    weight_tensor_size: 1310720000.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    weight_tensor_size: 3355443200.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -53,12 +53,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 160
-    M: 160
-    K: 25600
+    M: 256
+    K: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    weight_tensor_size: 1310720000.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    weight_tensor_size: 3355443200.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -70,12 +70,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 160
-    M: 160
-    K: 25600
+    M: 256
+    K: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    weight_tensor_size: 1310720000.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    weight_tensor_size: 3355443200.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -88,10 +88,10 @@ kernels {
   gemm_input1_input2 {
     outer: 160
     M: 2048
-    K: 160
+    K: 256
     N: 2048
-    input_tensor_1_size: 104857600.0
-    input_tensor_2_size: 104857600.0
+    input_tensor_1_size: 167772160.0
+    input_tensor_2_size: 167772160.0
     output_tensor_size: 1342177300.0
     tiling: N_TILING
   }
@@ -134,12 +134,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_input2 {
     outer: 160
-    M: 160
+    M: 256
     K: 2048
     N: 2048
-    input_tensor_1_size: 104857600.0
+    input_tensor_1_size: 167772160.0
     input_tensor_2_size: 1342177300.0
-    output_tensor_size: 104857600.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -151,12 +151,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 25600
-    K: 25600
+    M: 40960
+    K: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    weight_tensor_size: 1310720000.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    weight_tensor_size: 3355443200.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -168,10 +168,10 @@ kernels {
   type: SIMD
   elementwise_input1 {
     outer: 1
-    M: 25600
+    M: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -183,12 +183,12 @@ kernels {
   type: SIMD
   elementwise_input1_input2 {
     outer: 1
-    M: 25600
+    M: 40960
     N: 2048
-    input_tensor_1_size: 104857600.0
-    output_tensor_size: 104857600.0
+    input_tensor_1_size: 167772160.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
-    input_tensor_2_size: 104857600.0
+    input_tensor_2_size: 167772160.0
   }
 }
 kernels {
@@ -199,10 +199,10 @@ kernels {
   type: SIMD
   elementwise_input1 {
     outer: 1
-    M: 25600
+    M: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -214,12 +214,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 102400
-    K: 25600
+    M: 163840
+    K: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    weight_tensor_size: 5242880000.0
-    output_tensor_size: 419430400.0
+    input_tensor_size: 167772160.0
+    weight_tensor_size: 13421773000.0
+    output_tensor_size: 671088640.0
     tiling: N_TILING
   }
 }
@@ -231,10 +231,10 @@ kernels {
   type: SIMD
   elementwise_input1 {
     outer: 1
-    M: 102400
+    M: 163840
     N: 2048
-    input_tensor_size: 419430400.0
-    output_tensor_size: 419430400.0
+    input_tensor_size: 671088640.0
+    output_tensor_size: 671088640.0
     tiling: N_TILING
   }
 }
@@ -246,12 +246,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 25600
-    K: 102400
+    M: 40960
+    K: 163840
     N: 2048
-    input_tensor_size: 419430400.0
-    weight_tensor_size: 5242880000.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 671088640.0
+    weight_tensor_size: 13421773000.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -263,10 +263,10 @@ kernels {
   type: SIMD
   elementwise_input1 {
     outer: 1
-    M: 25600
+    M: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -278,12 +278,12 @@ kernels {
   type: SIMD
   elementwise_input1_input2 {
     outer: 1
-    M: 25600
+    M: 40960
     N: 2048
-    input_tensor_1_size: 104857600.0
-    output_tensor_size: 104857600.0
+    input_tensor_1_size: 167772160.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
-    input_tensor_2_size: 104857600.0
+    input_tensor_2_size: 167772160.0
   }
 }
 kernels {
@@ -294,10 +294,10 @@ kernels {
   type: SIMD
   elementwise_input1 {
     outer: 1
-    M: 25600
+    M: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -309,10 +309,10 @@ kernels {
   type: SIMD
   elementwise_input1 {
     outer: 1
-    M: 25600
+    M: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -324,12 +324,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 102400
-    K: 25600
+    M: 163840
+    K: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    weight_tensor_size: 5242880000.0
-    output_tensor_size: 419430400.0
+    input_tensor_size: 167772160.0
+    weight_tensor_size: 13421773000.0
+    output_tensor_size: 671088640.0
     tiling: N_TILING
   }
 }
@@ -341,10 +341,10 @@ kernels {
   type: SIMD
   elementwise_input1 {
     outer: 1
-    M: 102400
+    M: 163840
     N: 2048
-    input_tensor_size: 419430400.0
-    output_tensor_size: 419430400.0
+    input_tensor_size: 671088640.0
+    output_tensor_size: 671088640.0
     tiling: N_TILING
   }
 }
@@ -356,12 +356,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 25600
-    K: 102400
+    M: 40960
+    K: 163840
     N: 2048
-    input_tensor_size: 419430400.0
-    weight_tensor_size: 5242880000.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 671088640.0
+    weight_tensor_size: 13421773000.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -373,10 +373,10 @@ kernels {
   type: SIMD
   elementwise_input1 {
     outer: 1
-    M: 25600
+    M: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -388,10 +388,10 @@ kernels {
   type: SIMD
   elementwise_input1 {
     outer: 1
-    M: 25600
+    M: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -403,12 +403,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 25600
-    K: 25600
+    M: 40960
+    K: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    weight_tensor_size: 1310720000.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    weight_tensor_size: 3355443200.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -421,10 +421,10 @@ kernels {
   gemm_input1_input2 {
     outer: 160
     M: 2048
-    K: 160
+    K: 256
     N: 2048
-    input_tensor_1_size: 104857600.0
-    input_tensor_2_size: 104857600.0
+    input_tensor_1_size: 167772160.0
+    input_tensor_2_size: 167772160.0
     output_tensor_size: 1342177300.0
     tiling: N_TILING
   }
@@ -437,12 +437,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_input2 {
     outer: 160
-    M: 160
+    M: 256
     K: 2048
     N: 2048
-    input_tensor_1_size: 104857600.0
+    input_tensor_1_size: 167772160.0
     input_tensor_2_size: 1342177300.0
-    output_tensor_size: 104857600.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -454,12 +454,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 1
-    M: 25600
-    K: 25600
+    M: 40960
+    K: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    weight_tensor_size: 1310720000.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    weight_tensor_size: 3355443200.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -501,12 +501,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_input2 {
     outer: 160
-    M: 160
+    M: 256
     K: 2048
     N: 2048
     input_tensor_1_size: 1342177300.0
-    input_tensor_2_size: 104857600.0
-    output_tensor_size: 104857600.0
+    input_tensor_2_size: 167772160.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -518,12 +518,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_input2 {
     outer: 160
-    M: 160
+    M: 256
     K: 2048
     N: 2048
     input_tensor_1_size: 1342177300.0
-    input_tensor_2_size: 104857600.0
-    output_tensor_size: 104857600.0
+    input_tensor_2_size: 167772160.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -535,12 +535,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 160
-    M: 160
-    K: 25600
+    M: 256
+    K: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    weight_tensor_size: 1310720000.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    weight_tensor_size: 3355443200.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -552,12 +552,12 @@ kernels {
   type: SYSTOLIC
   gemm_input1_weight {
     outer: 160
-    M: 160
-    K: 25600
+    M: 256
+    K: 40960
     N: 2048
-    input_tensor_size: 104857600.0
-    weight_tensor_size: 1310720000.0
-    output_tensor_size: 104857600.0
+    input_tensor_size: 167772160.0
+    weight_tensor_size: 3355443200.0
+    output_tensor_size: 167772160.0
     tiling: N_TILING
   }
 }
@@ -569,14 +569,14 @@ kernels {
   type: SYSTOLIC
   gemm_input1_input2 {
     outer: 1
-    M: 102400
+    M: 163840
     K: 2048
-    N: 25600
-    input_tensor_1_size: 104857600.0
-    input_tensor_2_size: 419430400.0
-    output_tensor_size: 5242880000.0
+    N: 40960
+    input_tensor_1_size: 167772160.0
+    input_tensor_2_size: 671088640.0
+    output_tensor_size: 13421773000.0
     communication_type: ALL_REDUCE_PERIODIC
-    communication_size: 5242880000.0
+    communication_size: 13421773000.0
     tiling: K_TILING
   }
 }
@@ -588,14 +588,14 @@ kernels {
   type: SYSTOLIC
   gemm_input1_input2 {
     outer: 1
-    M: 25600
+    M: 40960
     K: 2048
-    N: 102400
-    input_tensor_1_size: 419430400.0
-    input_tensor_2_size: 104857600.0
-    output_tensor_size: 5242880000.0
+    N: 163840
+    input_tensor_1_size: 671088640.0
+    input_tensor_2_size: 167772160.0
+    output_tensor_size: 13421773000.0
     communication_type: ALL_REDUCE_PERIODIC
-    communication_size: 5242880000.0
+    communication_size: 13421773000.0
     tiling: K_TILING
   }
 }
@@ -607,14 +607,14 @@ kernels {
   type: SYSTOLIC
   gemm_input1_input2 {
     outer: 1
-    M: 25600
+    M: 40960
     K: 2048
-    N: 25600
-    input_tensor_1_size: 104857600.0
-    input_tensor_2_size: 104857600.0
-    output_tensor_size: 1310720000.0
+    N: 40960
+    input_tensor_1_size: 167772160.0
+    input_tensor_2_size: 167772160.0
+    output_tensor_size: 3355443200.0
     communication_type: ALL_REDUCE_PERIODIC
-    communication_size: 1310720000.0
+    communication_size: 3355443200.0
     tiling: K_TILING
   }
 }
@@ -626,14 +626,14 @@ kernels {
   type: SYSTOLIC
   gemm_input1_input2 {
     outer: 1
-    M: 25600
+    M: 40960
     K: 2048
-    N: 25600
-    input_tensor_1_size: 104857600.0
-    input_tensor_2_size: 104857600.0
-    output_tensor_size: 1310720000.0
+    N: 40960
+    input_tensor_1_size: 167772160.0
+    input_tensor_2_size: 167772160.0
+    output_tensor_size: 3355443200.0
     communication_type: ALL_REDUCE_PERIODIC
-    communication_size: 1310720000.0
+    communication_size: 3355443200.0
     tiling: K_TILING
   }
 }
@@ -645,14 +645,14 @@ kernels {
   type: SYSTOLIC
   gemm_input1_input2 {
     outer: 1
-    M: 25600
+    M: 40960
     K: 2048
-    N: 25600
-    input_tensor_1_size: 104857600.0
-    input_tensor_2_size: 104857600.0
-    output_tensor_size: 1310720000.0
+    N: 40960
+    input_tensor_1_size: 167772160.0
+    input_tensor_2_size: 167772160.0
+    output_tensor_size: 3355443200.0
     communication_type: ALL_REDUCE_PERIODIC
-    communication_size: 1310720000.0
+    communication_size: 3355443200.0
     tiling: K_TILING
   }
 }
@@ -664,14 +664,14 @@ kernels {
   type: SYSTOLIC
   gemm_input1_input2 {
     outer: 1
-    M: 25600
+    M: 40960
     K: 2048
-    N: 25600
-    input_tensor_1_size: 104857600.0
-    input_tensor_2_size: 104857600.0
-    output_tensor_size: 1310720000.0
+    N: 40960
+    input_tensor_1_size: 167772160.0
+    input_tensor_2_size: 167772160.0
+    output_tensor_size: 3355443200.0
     communication_type: ALL_REDUCE_PERIODIC
-    communication_size: 1310720000.0
+    communication_size: 3355443200.0
     tiling: K_TILING
   }
 }

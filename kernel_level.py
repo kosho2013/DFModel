@@ -398,7 +398,7 @@ elif dse.system.WhichOneof('topology_variant') == 'r_r_r': # 3D Torus
     link_bw = [dse.system.r_r_r.link_bw_x, dse.system.r_r_r.link_bw_y, dse.system.r_r_r.link_bw_z]
     dimension = [dse.system.r_r_r.x, dse.system.r_r_r.y, dse.system.r_r_r.z]
     
-    a2a_bw_factor = [dse.system.r_r_r.x, dse.system.r_r_r.y, dse.system.r_r_r.z]
+    a2a_bw_factor = [dse.system.r_r_r.x * dse.system.r_r_r.y, dse.system.r_r_r.x * dse.system.r_r_r.z, dse.system.r_r_r.y * dse.system.r_r_r.z]
     a2a_msg_factor = [num_chip**2 / 4, num_chip**2 / 4, num_chip**2 / 4]
     
 else:
@@ -803,7 +803,7 @@ elif optimization == Optimization.FLASHATTENTION.value:
             pass
         else:
             model.addConstr(Config[i] == configs[i])
-
+            
 else:
     raise Exception('Wrong!')
 
@@ -842,9 +842,8 @@ if optimization == Optimization.KERNEL_BY_KERNEL.value:
     model.addConstr(C == num_kernel)
         
 elif optimization == Optimization.FLASHATTENTION.value:
-    for i in range(num_kernel):
-        model.addConstr(weight_tiling[i] == 1)
-
+    pass
+    
 else:
     raise Exception('Wrong!')
 
@@ -911,10 +910,24 @@ for i in range(num_edge):
     model.addConstr(shard_intermediate_buffer_size_depth_two[i] >= shard_intermediate_buffer_size[i] * 2)
     model.addConstr(shard_intermediate_buffer_size_depth_one[i] >= shard_intermediate_buffer_size[i] * 1)
 
+
+mylist = []
 for i in range(num_weight):
     node_idx = node_dict[weight_dict[i]]
+    mylist.append(node_idx)
     
     model.addConstr(shard_initiation_buffer_size_depth_one[i] * weight_tiling[node_idx] >= shard_initiation_buffer_size[i] * 1)
+
+for i in range(num_kernel):
+    if i not in mylist:
+        model.addConstr(weight_tiling[i] == 1)
+
+for i in range(num_kernel):
+    aaa = model.addVar(vtype=gp.GRB.BINARY)
+    model.addConstr((aaa == 1) >> (weight_tiling[i] >= 2))
+    model.addConstr((aaa == 0) >> (weight_tiling[i] == 1))
+    model.addConstr((aaa == 1) >> (Par_total[i] == Core))  # enforce the kernel takes an entire config
+
 
 
 SRAM_Per_Config_total = model.addMVar(C, name='SRAM_Per_Config_total', vtype=gp.GRB.CONTINUOUS, lb=0)
@@ -923,7 +936,7 @@ SRAM_Per_Config_intermediate_onchip = model.addMVar(C, name='SRAM_Per_Config_int
 SRAM_Per_Config_initiation = model.addMVar(C, name='SRAM_Per_Config_initiation', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
     if optimization == Optimization.KERNEL_BY_KERNEL.value:
-        model.addConstr(SRAM_Per_Config_intermediate_dram[i] == shard_intermediate_buffer_size_depth_two @ Ab_dram[:, i])
+        model.addConstr(SRAM_Per_Config_intermediate_dram[i] == shard_intermediate_buffer_size_depth_one @ Ab_dram[:, i])
         
     elif optimization == Optimization.FLASHATTENTION.value:
         model.addConstr(SRAM_Per_Config_intermediate_dram[i] == shard_intermediate_buffer_size_depth_two @ Ab_dram[:, i])
@@ -968,13 +981,6 @@ else:
 
 
 
-# record the weight tiling factor for kernel-by-kernel
-if optimization == Optimization.KERNEL_BY_KERNEL.value:
-    weight_tiling_per_config = model.addMVar(C, name='weight_tiling_per_config', vtype=gp.GRB.INTEGER, lb=1)
-    for i in range(C):
-        model.addConstr(weight_tiling_per_config[i] == Ac[:, i] @ weight_tiling)
-        
-
 
 
 # compute cycle
@@ -1015,19 +1021,9 @@ DRAM_Latency = model.addMVar(C, name='DRAM_Latency', vtype=gp.GRB.CONTINUOUS, lb
 for i in range(C):
     t1 = model.addVar(vtype=gp.GRB.CONTINUOUS)
     model.addConstr(t1 == shard_intermediate_buffer_size @ Ab_dram[:, i])
-    
-    if optimization == Optimization.KERNEL_BY_KERNEL.value:
-        aaa = model.addVar(vtype=gp.GRB.INTEGER)
-        model.addConstr(aaa == num_tile * weight_tiling_per_config[i])
-        model.addConstr(DRAM_Latency[i] * DRAM_BW == t1 * aaa)
-        model.addConstr(DRAM_bytes[i] == t1 * aaa)
-    
-    elif optimization == Optimization.FLASHATTENTION.value:
-        model.addConstr(DRAM_Latency[i] * DRAM_BW == t1 * num_tile)
-        model.addConstr(DRAM_bytes[i] == t1 * num_tile)
-        
-    else:
-        raise Exception('Wrong!')
+
+    model.addConstr(DRAM_Latency[i] * DRAM_BW == t1 * num_tile)
+    model.addConstr(DRAM_bytes[i] == DRAM_Latency[i] * DRAM_BW)
     
     
 total_DRAM_bytes = model.addVar(name='total_DRAM_bytes', vtype=gp.GRB.CONTINUOUS)  
@@ -1214,11 +1210,17 @@ else:
 # weight loading overheads
 Setup_Latency = model.addMVar(C, name='Setup_Latency', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(C):
-    aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
     time_1 = model.addVar(vtype=gp.GRB.CONTINUOUS)
-    time_2 = model.addVar(vtype=gp.GRB.CONTINUOUS)
-    model.addConstr(aaa == DRAM_BW * micro_batch_size)
+    aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
+    if dse.training.WhichOneof('workload_variant') == 'llm':
+         model.addConstr(aaa == DRAM_BW * micro_batch_size)
+    elif dse.training.WhichOneof('workload_variant') == 'dlrm' or dse.training.WhichOneof('workload_variant') == 'hpl':
+         model.addConstr(aaa == DRAM_BW * 1)
+    else:
+        raise Exception('Wrong!')
     model.addConstr(time_1 * aaa == shard_initiation_buffer_size @ Ad[:, i])
+    
+    time_2 = model.addVar(vtype=gp.GRB.CONTINUOUS)
     model.addConstr(time_2 * DRAM_BW == memory_size @ Ac[:, i])
     model.addConstr(Setup_Latency[i] == time_1 + time_2)
 

@@ -4054,10 +4054,8 @@ dataflow_graph {
   }
 }
 system {
-  name: "128_Chip_GPU"
   num_chip: 128
   accelerator {
-    name: "A100_GPU"
     core: 432
     systolic_width: 16
     systolic_height: 16
@@ -4079,7 +4077,6 @@ cost {
   dram_unit_price: 1.0
 }
 training {
-  optimization: KERNEL_BY_KERNEL
   dlrm {
     mlp_dim: 682
     bottom_num_mlp: 13
@@ -4089,7 +4086,11 @@ training {
     emb: 92
   }
   global_batch_size: 262144
-  objective: PERFORMANCE
-  skip_inter_chip: true
   micro_batch_size: 2048
+  optimization: KERNEL_BY_KERNEL
+  objective: PERFORMANCE
+  training: true
+  skip_inter_chip: true
+  pydot: true
+  word: 2
 }
