@@ -119,7 +119,11 @@ for connection in dse.dataflow_graph.connections:
 # assign edge tensor size
 tensor_size = []
 for connection in dse.dataflow_graph.connections:
-    connection.tensor_size = output_tensor_size[node_dict[connection.startIdx]]
+    if dse.training.skip_intermediate_buffer:
+        connection.tensor_size = 0
+    else:
+        connection.tensor_size = output_tensor_size[node_dict[connection.startIdx]]
+    
     tensor_size.append(connection.tensor_size)
 
 num_kernel = len(kernel_name)

@@ -1,0 +1,137 @@
+MLP_1 0
+MLP_2 1
+MLP_3 2
+MLP_4 3
+MLP_5 4
+MLP_6 5
+MLP_7 6
+MLP_8 7
+MLP_9 8
+MLP_10 9
+MLP_11 10
+MLP_12 11
+MLP_13 12
+MLP_14 13
+MLP_15 14
+MLP_16 15
+MLP_17 16
+MLP_18 17
+MLP_19 18
+MLP_20 19
+MLP_20_bwd 20
+MLP_19_bwd 21
+MLP_18_bwd 22
+MLP_17_bwd 23
+MLP_16_bwd 24
+MLP_15_bwd 25
+MLP_14_bwd 26
+MLP_13_bwd 27
+MLP_12_bwd 28
+MLP_11_bwd 29
+MLP_10_bwd 30
+MLP_9_bwd 31
+MLP_8_bwd 32
+MLP_7_bwd 33
+MLP_6_bwd 34
+MLP_5_bwd 35
+MLP_4_bwd 36
+MLP_3_bwd 37
+MLP_2_bwd 38
+MLP_1_bwd 39
+MLP_20_bwd_weight_update 40
+MLP_19_bwd_weight_update 41
+MLP_18_bwd_weight_update 42
+MLP_17_bwd_weight_update 43
+MLP_16_bwd_weight_update 44
+MLP_15_bwd_weight_update 45
+MLP_14_bwd_weight_update 46
+MLP_13_bwd_weight_update 47
+MLP_12_bwd_weight_update 48
+MLP_11_bwd_weight_update 49
+MLP_10_bwd_weight_update 50
+MLP_9_bwd_weight_update 51
+MLP_8_bwd_weight_update 52
+MLP_7_bwd_weight_update 53
+MLP_6_bwd_weight_update 54
+MLP_5_bwd_weight_update 55
+MLP_4_bwd_weight_update 56
+MLP_3_bwd_weight_update 57
+MLP_2_bwd_weight_update 58
+MLP_1_bwd_weight_update 59
+MLP_1 MLP_2 0
+MLP_2 MLP_3 1
+MLP_3 MLP_4 2
+MLP_4 MLP_5 3
+MLP_5 MLP_6 4
+MLP_6 MLP_7 5
+MLP_7 MLP_8 6
+MLP_8 MLP_9 7
+MLP_9 MLP_10 8
+MLP_10 MLP_11 9
+MLP_11 MLP_12 10
+MLP_12 MLP_13 11
+MLP_13 MLP_14 12
+MLP_14 MLP_15 13
+MLP_15 MLP_16 14
+MLP_16 MLP_17 15
+MLP_17 MLP_18 16
+MLP_18 MLP_19 17
+MLP_19 MLP_20 18
+MLP_20_bwd MLP_19_bwd 19
+MLP_19_bwd MLP_18_bwd 20
+MLP_18_bwd MLP_17_bwd 21
+MLP_17_bwd MLP_16_bwd 22
+MLP_16_bwd MLP_15_bwd 23
+MLP_15_bwd MLP_14_bwd 24
+MLP_14_bwd MLP_13_bwd 25
+MLP_13_bwd MLP_12_bwd 26
+MLP_12_bwd MLP_11_bwd 27
+MLP_11_bwd MLP_10_bwd 28
+MLP_10_bwd MLP_9_bwd 29
+MLP_9_bwd MLP_8_bwd 30
+MLP_8_bwd MLP_7_bwd 31
+MLP_7_bwd MLP_6_bwd 32
+MLP_6_bwd MLP_5_bwd 33
+MLP_5_bwd MLP_4_bwd 34
+MLP_4_bwd MLP_3_bwd 35
+MLP_3_bwd MLP_2_bwd 36
+MLP_2_bwd MLP_1_bwd 37
+MLP_1 MLP_2_bwd_weight_update 38
+MLP_2 MLP_3_bwd_weight_update 39
+MLP_3 MLP_4_bwd_weight_update 40
+MLP_4 MLP_5_bwd_weight_update 41
+MLP_5 MLP_6_bwd_weight_update 42
+MLP_6 MLP_7_bwd_weight_update 43
+MLP_7 MLP_8_bwd_weight_update 44
+MLP_8 MLP_9_bwd_weight_update 45
+MLP_9 MLP_10_bwd_weight_update 46
+MLP_10 MLP_11_bwd_weight_update 47
+MLP_11 MLP_12_bwd_weight_update 48
+MLP_12 MLP_13_bwd_weight_update 49
+MLP_13 MLP_14_bwd_weight_update 50
+MLP_14 MLP_15_bwd_weight_update 51
+MLP_15 MLP_16_bwd_weight_update 52
+MLP_16 MLP_17_bwd_weight_update 53
+MLP_17 MLP_18_bwd_weight_update 54
+MLP_18 MLP_19_bwd_weight_update 55
+MLP_19 MLP_20_bwd_weight_update 56
+MLP_20_bwd MLP_19_bwd_weight_update 57
+MLP_19_bwd MLP_18_bwd_weight_update 58
+MLP_18_bwd MLP_17_bwd_weight_update 59
+MLP_17_bwd MLP_16_bwd_weight_update 60
+MLP_16_bwd MLP_15_bwd_weight_update 61
+MLP_15_bwd MLP_14_bwd_weight_update 62
+MLP_14_bwd MLP_13_bwd_weight_update 63
+MLP_13_bwd MLP_12_bwd_weight_update 64
+MLP_12_bwd MLP_11_bwd_weight_update 65
+MLP_11_bwd MLP_10_bwd_weight_update 66
+MLP_10_bwd MLP_9_bwd_weight_update 67
+MLP_9_bwd MLP_8_bwd_weight_update 68
+MLP_8_bwd MLP_7_bwd_weight_update 69
+MLP_7_bwd MLP_6_bwd_weight_update 70
+MLP_6_bwd MLP_5_bwd_weight_update 71
+MLP_5_bwd MLP_4_bwd_weight_update 72
+MLP_4_bwd MLP_3_bwd_weight_update 73
+MLP_3_bwd MLP_2_bwd_weight_update 74
+MLP_2_bwd MLP_1_bwd_weight_update 75
+total table size 255998893713198

@@ -2,9 +2,9 @@ syntax = "proto3";
 
 message Kernel {
 	string name = 1;
-	int32 id = 2;
-	int32 topological_number = 3;
-	int32 config = 4;
+	int64 id = 2;
+	int64 topological_number = 3;
+	int64 config = 4;
 	FWD_BWD fwd_bwd = 5;
 	KernelType type = 6;
 	
@@ -32,10 +32,10 @@ message Kernel {
 
 
 message GEMM_Input1_Weight {
-	int32 outer = 1;
-	int32 M = 2;
-	int32 K = 3;
-	int32 N = 4;
+	int64 outer = 1;
+	int64 M = 2;
+	int64 K = 3;
+	int64 N = 4;
 	
 	float input_tensor_size = 6;
 	float weight_tensor_size = 8;
@@ -46,9 +46,9 @@ message GEMM_Input1_Weight {
 	Communication_Type communication_type = 13;
 	float communication_size = 14;
 
-	int32 shard_outer_M = 16;
-	int32 shard_K = 17;
-	int32 shard_N = 18;
+	int64 shard_outer_M = 16;
+	int64 shard_K = 17;
+	int64 shard_N = 18;
 	
 	float memory_size = 100;
 
@@ -85,10 +85,10 @@ message GEMM_Input1_Weight {
 
 
 message GEMM_Input1_Input2 {
-	int32 outer = 1;
-	int32 M = 2;
-	int32 K = 3;
-	int32 N = 4;
+	int64 outer = 1;
+	int64 M = 2;
+	int64 K = 3;
+	int64 N = 4;
 	
 	float input_tensor_1_size = 6;
 	float input_tensor_2_size = 8;
@@ -99,9 +99,9 @@ message GEMM_Input1_Input2 {
 	Communication_Type communication_type = 13;
 	float communication_size = 14;
 
-	int32 shard_outer_M = 16;
-	int32 shard_K = 17;
-	int32 shard_N = 18;
+	int64 shard_outer_M = 16;
+	int64 shard_K = 17;
+	int64 shard_N = 18;
 	
 	float memory_size = 100;
 
@@ -137,9 +137,9 @@ message GEMM_Input1_Input2 {
 
 
 message ElementWise_Input1 {
-	int32 outer = 1;
-	int32 M = 2;
-	int32 N = 4;
+	int64 outer = 1;
+	int64 M = 2;
+	int64 N = 4;
 	
 	float input_tensor_size = 6;
 	float output_tensor_size = 9;
@@ -149,8 +149,8 @@ message ElementWise_Input1 {
 	Communication_Type communication_type = 13;
 	float communication_size = 14;
 
-	int32 shard_outer_M = 16;
-	int32 shard_N = 18;
+	int64 shard_outer_M = 16;
+	int64 shard_N = 18;
 	
 	float memory_size = 100;
 
@@ -186,9 +186,9 @@ message ElementWise_Input1 {
 
 
 message ElementWise_Input1_Input2 {
-	int32 outer = 1;
-	int32 M = 2;
-	int32 N = 4;
+	int64 outer = 1;
+	int64 M = 2;
+	int64 N = 4;
 	
 	float input_tensor_1_size = 6;
 	float input_tensor_2_size = 30;
@@ -199,8 +199,8 @@ message ElementWise_Input1_Input2 {
 	Communication_Type communication_type = 13;
 	float communication_size = 14;
 
-	int32 shard_outer_M = 16;
-	int32 shard_N = 18;
+	int64 shard_outer_M = 16;
+	int64 shard_N = 18;
 	
 	float memory_size = 100;
 
@@ -234,9 +234,9 @@ message ElementWise_Input1_Input2 {
 }
 
 message Connection {
-	int32 id = 10;
-	int32 startIdx = 1;
-	int32 endIdx = 2;
+	int64 id = 10;
+	int64 startIdx = 1;
+	int64 endIdx = 2;
 
 	Communication_Type communication_type = 4;
 	float communication_size = 5;
@@ -249,7 +249,7 @@ message Connection {
 		ALL_REDUCE_PERIODIC = 4;
 	}
 
-	int32 buffer_depth = 6;
+	int64 buffer_depth = 6;
 	float tensor_size = 7;
 	float shard_tensor_size = 8;
 	
@@ -264,9 +264,9 @@ message Dataflow_Graph {
 }
 
 message Accelerator {
-	int32 core = 2;
-	int32 systolic_width = 3;
-	int32 systolic_height = 4;
+	int64 core = 2;
+	int64 systolic_width = 3;
+	int64 systolic_height = 4;
 	float sram_cap = 5;
 	float freq = 6;
 	float dram_bw = 7;
@@ -274,7 +274,7 @@ message Accelerator {
 }
 
 message System {
-    int32 num_chip = 3;
+    int64 num_chip = 3;
 	Accelerator accelerator = 7;
 
 	oneof topology_variant {
@@ -298,67 +298,67 @@ message SINGLE_CHIP {
 }
 
 message R {
-	int32 x = 8;
+	int64 x = 8;
 	
 	float link_bw_x = 4;
 }
 
 message SW {
-	int32 x = 8;
+	int64 x = 8;
 	
 	float link_bw_x = 4;
 }
 
 message FC {
-	int32 x = 8;
+	int64 x = 8;
 	
 	float link_bw_x = 4;
 }
 
 message R_R {
-	int32 x = 8;
-	int32 y = 9;
+	int64 x = 8;
+	int64 y = 9;
 	
 	float link_bw_x = 4;
 	float link_bw_y = 5;
 }
 
 message R_FC {
-	int32 x = 8;
-	int32 y = 9;
+	int64 x = 8;
+	int64 y = 9;
 	
 	float link_bw_x = 4;
 	float link_bw_y = 5;
 }
 
 message FC_FC {
-	int32 x = 8;
-	int32 y = 9;
+	int64 x = 8;
+	int64 y = 9;
 	
 	float link_bw_x = 4;
 	float link_bw_y = 5;
 }
 
 message R_SW {
-	int32 x = 8;
-	int32 y = 9;
+	int64 x = 8;
+	int64 y = 9;
 	
 	float link_bw_x = 4;
 	float link_bw_y = 5;
 }
 
 message SW_SW {
-	int32 x = 8;
-	int32 y = 9;
+	int64 x = 8;
+	int64 y = 9;
 	
 	float link_bw_x = 4;
 	float link_bw_y = 5;
 }
 
 message R_R_R {
-	int32 x = 8;
-	int32 y = 9;
-	int32 z = 10;
+	int64 x = 8;
+	int64 y = 9;
+	int64 z = 10;
 	
 	float link_bw_x = 4;
 	float link_bw_y = 5;
@@ -391,11 +391,11 @@ message Training {
 		Other other = 10;
 	}
 		
-	int32 global_batch_size = 11;
-	int32 micro_batch_size = 12;
+	int64 global_batch_size = 11;
+	int64 micro_batch_size = 12;
 	
 	
-	int32 num_config = 13;
+	int64 num_config = 13;
 	Optimization optimization = 14;
 	Objective objective = 15;
 	float util_threshold = 16;
@@ -404,31 +404,35 @@ message Training {
 	bool training = 17;
 	bool skip_inter_chip = 18;
 	bool pydot = 19;
-	int32 word = 20;
+	int64 word = 20;
+	
+	bool skip_intermediate_buffer = 21;
+	bool skip_initiation_buffer = 22;
 }
 
 
 message LLM {
-	int32 hidden_dim = 1;
-	int32 head_dim = 2;
-	int32 num_head = 3;
-	int32 seq_len = 4;
-	int32 num_layer = 5;
-	int32 seq_tile_size = 6;
+	int64 hidden_dim = 1;
+	int64 head_dim = 2;
+	int64 num_head = 3;
+	int64 seq_len = 4;
+	int64 num_layer = 5;
+	int64 seq_tile_size = 6;
 }
 
 message DLRM {
-	int32 mlp_dim = 1;
-	int32 bottom_num_mlp = 2;
-	int32 top_num_mlp = 4;
-	int32 pooled_row = 5;
-	int32 num_table = 6;
-	int32 emb = 7;
+	int64 mlp_dim = 1;
+	int64 bottom_num_mlp = 2;
+	int64 top_num_mlp = 4;
+	int64 pooled_row = 5;
+	int64 num_table = 6;
+	int64 emb = 7;
+	int64 row = 8;
 }
 
 message HPL {
-	int32 n = 1;
-	int32 b = 2;
+	int64 n = 1;
+	int64 b = 2;
 }
 
 
@@ -439,6 +443,5 @@ message DSE {
 	Dataflow_Graph dataflow_graph = 1;
 	System system = 2;
 	Cost cost = 3;
-	Training training = 4;
-	
+	Training training = 4;	
 }

@@ -855,7 +855,7 @@ dataflow_graph {
       output_tensor_size: 3456000.0
       sharding: NO_SHARDING
       shard_outer_M: 3375
-      shard_K: 3374
+      shard_K: 3375
       shard_N: 512
       tiling: NO_TILING
     }
@@ -1045,7 +1045,7 @@ dataflow_graph {
       communication_type: ALL_REDUCE_PERIODIC
       communication_size: 22781250.0
       shard_outer_M: 3375
-      shard_K: 511
+      shard_K: 512
       shard_N: 3375
       tiling: NO_TILING
     }
@@ -1069,7 +1069,7 @@ dataflow_graph {
       communication_type: ALL_REDUCE_PERIODIC
       communication_size: 22781250.0
       shard_outer_M: 3375
-      shard_K: 511
+      shard_K: 512
       shard_N: 3375
       tiling: NO_TILING
     }
@@ -1165,7 +1165,7 @@ dataflow_graph {
       communication_type: ALL_REDUCE_PERIODIC
       communication_size: 22781250.0
       shard_outer_M: 3375
-      shard_K: 511
+      shard_K: 512
       shard_N: 3375
       tiling: NO_TILING
     }
@@ -1189,7 +1189,7 @@ dataflow_graph {
       communication_type: ALL_REDUCE_PERIODIC
       communication_size: 22781250.0
       shard_outer_M: 3375
-      shard_K: 511
+      shard_K: 512
       shard_N: 3375
       tiling: NO_TILING
     }
@@ -1261,7 +1261,7 @@ dataflow_graph {
       communication_type: ALL_REDUCE_PERIODIC
       communication_size: 22781250.0
       shard_outer_M: 3375
-      shard_K: 511
+      shard_K: 512
       shard_N: 3375
       tiling: NO_TILING
     }
@@ -1309,7 +1309,7 @@ dataflow_graph {
       communication_type: ALL_REDUCE_PERIODIC
       communication_size: 22781250.0
       shard_outer_M: 3375
-      shard_K: 511
+      shard_K: 512
       shard_N: 3375
       tiling: NO_TILING
     }
@@ -1333,7 +1333,7 @@ dataflow_graph {
       communication_type: ALL_REDUCE_PERIODIC
       communication_size: 22781250.0
       shard_outer_M: 3375
-      shard_K: 511
+      shard_K: 512
       shard_N: 3375
       tiling: NO_TILING
     }
@@ -1357,7 +1357,7 @@ dataflow_graph {
       communication_type: ALL_REDUCE_PERIODIC
       communication_size: 22781250.0
       shard_outer_M: 3375
-      shard_K: 511
+      shard_K: 512
       shard_N: 3375
       tiling: NO_TILING
     }
@@ -2124,10 +2124,8 @@ dataflow_graph {
   }
 }
 system {
-  name: "128_Chip_GPU"
   num_chip: 128
   accelerator {
-    name: "A100_GPU"
     core: 432
     systolic_width: 16
     systolic_height: 16
@@ -2137,7 +2135,7 @@ system {
     dram_cap: 42949673000.0
   }
   sw_sw {
-    link_bw_x: 600.0
+    link_bw_x: 25.0
     link_bw_y: 25.0
     x: 8
     y: 16
@@ -2149,7 +2147,6 @@ cost {
   dram_unit_price: 1.0
 }
 training {
-  optimization: KERNEL_BY_KERNEL
   dlrm {
     mlp_dim: 3375
     bottom_num_mlp: 5
@@ -2159,7 +2156,11 @@ training {
     emb: 93
   }
   global_batch_size: 65536
-  objective: PERFORMANCE
-  skip_inter_chip: true
   micro_batch_size: 512
+  optimization: KERNEL_BY_KERNEL
+  objective: PERFORMANCE
+  training: true
+  skip_inter_chip: true
+  pydot: true
+  word: 2
 }

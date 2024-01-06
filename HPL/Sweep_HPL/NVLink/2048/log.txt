@@ -1,0 +1,23 @@
+Iteration_1_FACT 0
+Iteration_1_BCAST 1
+Iteration_1_SWAP 2
+Iteration_1_UPDATE 3
+Iteration_2_FACT 4
+Iteration_2_BCAST 5
+Iteration_2_SWAP 6
+Iteration_2_UPDATE 7
+Iteration_1_FACT Iteration_1_BCAST 0
+Iteration_1_FACT Iteration_1_SWAP 1
+Iteration_1_FACT Iteration_1_UPDATE 2
+Iteration_2_FACT Iteration_2_BCAST 3
+Iteration_2_FACT Iteration_2_SWAP 4
+Iteration_2_FACT Iteration_2_UPDATE 5
+Iteration_1_BCAST Iteration_2_FACT 6
+Iteration_1_SWAP Iteration_2_FACT 7
+Iteration_1_UPDATE Iteration_2_FACT 8
+Set parameter Username
+Academic license - for non-commercial use only - expires 2024-11-05
+Set parameter NonConvex to value 2
+Set parameter Threads to value 140
+Set parameter MIPGap to value 1e-200
+Set parameter TimeLimit to value 36000

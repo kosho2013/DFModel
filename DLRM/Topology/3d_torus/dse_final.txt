@@ -2135,7 +2135,7 @@ system {
     dram_cap: 42949673000.0
   }
   r_r_r {
-    link_bw_x: 600.0
+    link_bw_x: 25.0
     link_bw_y: 25.0
     link_bw_z: 25.0
     x: 4

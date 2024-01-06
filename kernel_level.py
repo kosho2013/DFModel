@@ -218,6 +218,7 @@ elif dse.training.WhichOneof('workload_variant') == 'dlrm':
     pooled_row = dse.training.dlrm.pooled_row
     num_table = dse.training.dlrm.num_table
     emb = dse.training.dlrm.emb
+    row = dse.training.dlrm.row
     num_layer = 1
 
 elif dse.training.WhichOneof('workload_variant') == 'hpl':
@@ -300,33 +301,21 @@ if dse.system.WhichOneof('topology_variant') == 'single_chip': # single chip
     topology = []
     link_bw = []
     dimension = []
-    
-    a2a_bw_factor = []
-    a2a_msg_factor = []
 
 elif dse.system.WhichOneof('topology_variant') == 'sw': # 1D SW
     topology = [BasicTopology.SW.value]
     link_bw = [dse.system.sw.link_bw_x]
     dimension = [dse.system.sw.x]
     
-    a2a_bw_factor = [dse.system.sw.x]
-    a2a_msg_factor = [dse.system.sw.x**2 / 4]
-    
 elif dse.system.WhichOneof('topology_variant') == 'fc': # 1D FC
     topology = [BasicTopology.FC.value]
     link_bw = [dse.system.fc.link_bw_x]
     dimension = [dse.system.fc.x]
-    
-    a2a_bw_factor = [dse.system.fc.x**2 / 4]
-    a2a_msg_factor = [dse.system.fc.x**2 / 4]
   
 elif dse.system.WhichOneof('topology_variant') == 'r': # 1D Ring
     topology = [BasicTopology.R.value]
     link_bw = [dse.system.r.link_bw_x]
     dimension = [dse.system.r.x]    
-    
-    a2a_bw_factor = [2]
-    a2a_msg_factor = [dse.system.r.x**2 / 4]
   
 elif dse.system.WhichOneof('topology_variant') == 'r_r': # 2D Torus
     topology = [BasicTopology.R.value, BasicTopology.R.value]
@@ -406,6 +395,18 @@ else:
 
 
 
+if dse.training.WhichOneof('workload_variant') == 'dlrm':
+    table_size = num_table*row*emb*word
+    print('total table size', table_size)
+    
+    if table_size / num_chip > DRAM_Cap:
+        raise Exception('DRAM too small for DLRM!')
+
+
+
+
+
+
 
 
 
@@ -458,8 +459,13 @@ elif dse.training.WhichOneof('workload_variant') == 'dlrm':
             model.addConstr(Link_BW[i] <= link_bw[i])
     else:
         for i in range(len(topology)):
-            model.addConstr(Link_BW[i] == link_bw[i])        
-
+            model.addConstr(Link_BW[i] == link_bw[i])      
+            
+    Link_BW_DP = model.addVar(name='Link_BW_DP', vtype=gp.GRB.CONTINUOUS, lb=0)
+    model.addConstr(Link_BW_DP == gp.min_(Link_BW[i] for i in range(len(topology))))
+    
+    
+    
 elif dse.training.WhichOneof('workload_variant') == 'llm':
     if len(topology) == 0: # single chip
         model.addConstr(TP == 1)
@@ -468,7 +474,7 @@ elif dse.training.WhichOneof('workload_variant') == 'llm':
         
         Link_BW_TP = model.addVar(name='Link_BW_TP', vtype=gp.GRB.CONTINUOUS, lb=0)
         Link_BW_PP = model.addVar(name='Link_BW_PP', vtype=gp.GRB.CONTINUOUS, lb=0)
-        Link_BW_DP = model.addVar(name='Link_BW_PP', vtype=gp.GRB.CONTINUOUS, lb=0)
+        Link_BW_DP = model.addVar(name='Link_BW_DP', vtype=gp.GRB.CONTINUOUS, lb=0)
         Link_BW = model.addVar(name='Link_BW', vtype=gp.GRB.CONTINUOUS, lb=0)
         model.addConstr(Link_BW == sys.maxsize)
         
@@ -711,14 +717,20 @@ for i in range(num_kernel):
 # sharding intermediate buffers
 shard_intermediate_buffer_size = model.addMVar(num_edge, name='shard_intermediate_buffer_size', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(num_edge):
-    upstream_node_idx = node_dict[startIdx[i]]
-    model.addConstr(shard_intermediate_buffer_size[i] == shard_M[upstream_node_idx] * shard_N[upstream_node_idx] * word)
+    if dse.training.skip_intermediate_buffer:
+        model.addConstr(shard_intermediate_buffer_size[i] == 0)
+    else:
+        upstream_node_idx = node_dict[startIdx[i]]
+        model.addConstr(shard_intermediate_buffer_size[i] == shard_M[upstream_node_idx] * shard_N[upstream_node_idx] * word)
 
 # sharding initiation buffers (weights)
 shard_initiation_buffer_size = model.addMVar(num_weight, name='shard_initiation_buffer_size', vtype=gp.GRB.CONTINUOUS, lb=0)
 for i in range(num_weight):
-    node_idx = node_dict[weight_dict[i]]
-    model.addConstr(shard_initiation_buffer_size[i] == shard_M[node_idx] * shard_K[node_idx] * word)
+    if dse.training.skip_initiation_buffer:
+        model.addConstr(shard_initiation_buffer_size[i] == 0)
+    else:
+        node_idx = node_dict[weight_dict[i]]
+        model.addConstr(shard_initiation_buffer_size[i] == shard_M[node_idx] * shard_K[node_idx] * word)
 
 
 
@@ -969,10 +981,10 @@ model.addConstr(dram_bytes_intermediate == np.ones((C)) @ dram_bytes_per_config_
 
 if dse.training.WhichOneof('workload_variant') == 'llm':
     model.addConstr((dram_bytes_initiation + dram_bytes_intermediate * micro_batch_size) * num_layer <= DRAM_Cap * PP)
-
+    
 elif dse.training.WhichOneof('workload_variant') == 'dlrm' or dse.training.WhichOneof('workload_variant') == 'hpl':
     model.addConstr((dram_bytes_initiation + dram_bytes_intermediate * 1) * num_layer <= DRAM_Cap * PP)
-
+    
 else:
     raise Exception('Wrong!')
 
@@ -1040,6 +1052,7 @@ Network_Latency = model.addMVar(C, name='Network_Latency', vtype=gp.GRB.CONTINUO
 total_Network_bytes = model.addVar(name='total_Network_bytes', vtype=gp.GRB.CONTINUOUS)
 
 if dse.training.WhichOneof('workload_variant') == 'llm':
+
     # tensor parallelism all-reduce
     ALL_REDUCE_ratio = model.addVar(name='ALL_REDUCE_ratio', vtype=gp.GRB.CONTINUOUS) 
     if len(topology) == 0: # single chip
@@ -1082,11 +1095,11 @@ if dse.training.WhichOneof('workload_variant') == 'llm':
     elif len(topology) == 3: # 3D
         aaa = model.addVar(vtype=gp.GRB.CONTINUOUS)
         model.addConstr(aaa == DP * Link_BW_DP)
-        if topology[0] == BasicTopology.R.value:
+        if topology[-1] == BasicTopology.R.value:
             model.addConstr(ALL_REDUCE_PERIODIC_ratio * aaa * 2 == DP - 1)
-        elif topology[0] == BasicTopology.FC.value:
+        elif topology[-1] == BasicTopology.FC.value:
             model.addConstr(ALL_REDUCE_PERIODIC_ratio * aaa == 1)
-        elif topology[0] == BasicTopology.SW.value:
+        elif topology[-1] == BasicTopology.SW.value:
             model.addConstr(ALL_REDUCE_PERIODIC_ratio * aaa * 2 == DP - 1)
         else:
             raise Exception('Wrong!')
@@ -1144,7 +1157,7 @@ elif dse.training.WhichOneof('workload_variant') == 'dlrm':
             model.addConstr(accumulated_shape[i] == accumulated_shape[i-1] * Shape[i])
     
     
-    
+    # A2A
     Network_Latency_ALL_TO_ALL_tmp = model.addMVar((C, len(topology)), name='Network_Latency_ALL_TO_ALL_tmp', vtype=gp.GRB.CONTINUOUS, lb=0)
     Network_Latency_ALL_TO_ALL = model.addMVar(C, name='Network_Latency_ALL_TO_ALL', vtype=gp.GRB.CONTINUOUS, lb=0)
     Network_Bytes_ALL_TO_ALL_tmp = model.addMVar((C, len(topology)), name='Network_Bytes_ALL_TO_ALL_tmp', vtype=gp.GRB.CONTINUOUS, lb=0)
@@ -1162,10 +1175,26 @@ elif dse.training.WhichOneof('workload_variant') == 'dlrm':
     for i in range(C):
         model.addConstr(Network_Latency_ALL_TO_ALL[i] == gp.max_(Network_Latency_ALL_TO_ALL_tmp[i, j] for j in range(len(topology))))
         model.addConstr(Network_Bytes_ALL_TO_ALL[i] == gp.max_(Network_Bytes_ALL_TO_ALL_tmp[i, j] for j in range(len(topology))))
+    
+
+
+
         
+
+
+    # data parallelism all-reduce
+    Network_Bytes_ALL_REDUCE_PERIODIC = model.addMVar(C, name='Network_Bytes_ALL_REDUCE_PERIODIC', vtype=gp.GRB.CONTINUOUS, lb=0)
+    Network_Latency_ALL_REDUCE_PERIODIC = model.addMVar(C, name='Network_Latency_ALL_REDUCE_PERIODIC', vtype=gp.GRB.CONTINUOUS, lb=0)
     for i in range(C):
-        model.addConstr(Network_Latency[i] == Network_Latency_ALL_TO_ALL[i])
-    model.addConstr(total_Network_bytes == np.ones((C)) @ Network_Bytes_ALL_TO_ALL)
+        model.addConstr(Network_Latency_ALL_REDUCE_PERIODIC[i] == 2 * Ac[:, i] @ ALL_REDUCE_PERIODIC_communication_size) # reduce-scatter/all-gather
+        model.addConstr(Network_Bytes_ALL_REDUCE_PERIODIC[i] == Network_Latency_ALL_REDUCE_PERIODIC[i] * Link_BW_DP)
+        
+        
+
+    # total network latency
+    for i in range(C):
+        model.addConstr(Network_Latency[i] == Network_Latency_ALL_TO_ALL[i] + Network_Latency_ALL_REDUCE_PERIODIC[i])
+    model.addConstr(total_Network_bytes == np.ones((C)) @ Network_Bytes_ALL_TO_ALL + np.ones((C)) @ Network_Bytes_ALL_REDUCE_PERIODIC)
         
     
     

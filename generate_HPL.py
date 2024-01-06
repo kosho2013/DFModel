@@ -60,13 +60,13 @@ for i in range(iterations):
     kernel.id = i*4+2
     kernel.config = i
     kernel.type = 1
-    kernel.gemm_input1_weight.outer = 1
-    kernel.gemm_input1_weight.M = 1
-    kernel.gemm_input1_weight.K = 1
-    kernel.gemm_input1_weight.N = 1
-    kernel.gemm_input1_weight.input_tensor_size = word
-    kernel.gemm_input1_weight.weight_tensor_size = word
-    kernel.gemm_input1_weight.output_tensor_size = word
+    kernel.gemm_input1_weight.outer = 0
+    kernel.gemm_input1_weight.M = 0
+    kernel.gemm_input1_weight.K = 0
+    kernel.gemm_input1_weight.N = 0
+    kernel.gemm_input1_weight.input_tensor_size = 0
+    kernel.gemm_input1_weight.weight_tensor_size = 0
+    kernel.gemm_input1_weight.output_tensor_size = 0
     kernel.gemm_input1_weight.tiling = 5
     
     if Y == 1:
@@ -81,13 +81,13 @@ for i in range(iterations):
     kernel.id = i*4+3
     kernel.config = i
     kernel.type = 1
-    kernel.gemm_input1_weight.outer = 1
-    kernel.gemm_input1_weight.M = 1
-    kernel.gemm_input1_weight.K = 1
-    kernel.gemm_input1_weight.N = 1
-    kernel.gemm_input1_weight.input_tensor_size = word
-    kernel.gemm_input1_weight.weight_tensor_size = word
-    kernel.gemm_input1_weight.output_tensor_size = word
+    kernel.gemm_input1_weight.outer = 0
+    kernel.gemm_input1_weight.M = 0
+    kernel.gemm_input1_weight.K = 0
+    kernel.gemm_input1_weight.N = 0
+    kernel.gemm_input1_weight.input_tensor_size = 0
+    kernel.gemm_input1_weight.weight_tensor_size = 0
+    kernel.gemm_input1_weight.output_tensor_size = 0
     kernel.gemm_input1_weight.tiling = 5
     
     if X == 1:

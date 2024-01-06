@@ -1,0 +1,190 @@
+dataflow_graph {
+  kernels {
+    name: "Iteration_1_FACT"
+    id: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 512
+      K: 1024
+      N: 1024
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 4194304.0
+      output_tensor_size: 4194304.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_1_BCAST"
+    id: 2
+    type: SYSTOLIC
+    gemm_input1_weight {
+      communication_type: BROADCAST
+      communication_size: 4194304.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_1_SWAP"
+    id: 3
+    type: SYSTOLIC
+    gemm_input1_weight {
+      communication_type: POINT_TO_POINT
+      communication_size: 4194304.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_1_UPDATE"
+    id: 4
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 512
+      K: 1024
+      N: 512
+      input_tensor_size: 4194304.0
+      weight_tensor_size: 4194304.0
+      output_tensor_size: 2097152.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_2_FACT"
+    id: 5
+    config: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 256
+      K: 1024
+      N: 1024
+      input_tensor_size: 8388608.0
+      weight_tensor_size: 2097152.0
+      output_tensor_size: 2097152.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_2_BCAST"
+    id: 6
+    config: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      communication_type: BROADCAST
+      communication_size: 2097152.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_2_SWAP"
+    id: 7
+    config: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      communication_type: POINT_TO_POINT
+      communication_size: 2097152.0
+      tiling: NO_TILING
+    }
+  }
+  kernels {
+    name: "Iteration_2_UPDATE"
+    id: 8
+    config: 1
+    type: SYSTOLIC
+    gemm_input1_weight {
+      outer: 1
+      M: 256
+      K: 1024
+      N: 256
+      input_tensor_size: 2097152.0
+      weight_tensor_size: 2097152.0
+      output_tensor_size: 524288.0
+      tiling: NO_TILING
+    }
+  }
+  connections {
+    startIdx: 1
+    endIdx: 2
+    id: 1
+  }
+  connections {
+    startIdx: 1
+    endIdx: 3
+    id: 2
+  }
+  connections {
+    startIdx: 1
+    endIdx: 4
+    id: 3
+  }
+  connections {
+    startIdx: 5
+    endIdx: 6
+    id: 4
+  }
+  connections {
+    startIdx: 5
+    endIdx: 7
+    id: 5
+  }
+  connections {
+    startIdx: 5
+    endIdx: 8
+    id: 6
+  }
+  connections {
+    startIdx: 2
+    endIdx: 5
+    id: 7
+  }
+  connections {
+    startIdx: 3
+    endIdx: 5
+    id: 8
+  }
+  connections {
+    startIdx: 4
+    endIdx: 5
+    id: 9
+  }
+}
+system {
+  num_chip: 16
+  accelerator {
+    core: 8448
+    systolic_width: 1
+    systolic_height: 1
+    sram_cap: 118489090.0
+    freq: 1.837
+    dram_bw: 3000.0
+    dram_cap: 103079215000.0
+  }
+  r_r {
+    link_bw_x: 25.0
+    link_bw_y: 25.0
+    x: 4
+    y: 4
+  }
+}
+cost {
+  link_unit_price: 2.0
+  switch_unit_price: 24.0
+  dram_unit_price: 1.0
+}
+training {
+  hpl {
+    n: 2048
+    b: 1024
+  }
+  global_batch_size: 1
+  micro_batch_size: 1
+  num_config: 2
+  optimization: FLASHATTENTION
+  objective: PERFORMANCE
+  skip_inter_chip: true
+  pydot: true
+  word: 8
+  skip_intermediate_buffer: true
+  skip_initiation_buffer: true
+}
